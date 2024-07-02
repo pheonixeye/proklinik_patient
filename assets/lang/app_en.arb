@@ -1,0 +1,21 @@
+{
+    "homepage" : "HomePage",
+    "srcPage" : "Search Results Page",
+    "bookPage" : "Book Appointment Page",
+    "signup" : "Sign Up",
+    "login" : "Login",
+    "forProviders" : "For Service Providers",
+    "contactUs" : "contact Us",
+    "slogan" : "Clinic, Lab, Radiology & Pharmacy.",
+    "subSlogan" : "Book Online Or Call Us",
+    "hotline" : "18888",
+    "clinic" : "Book Appointment",
+    "lab" : "Request Lab",
+    "rad" : "Book Radiology",
+    "pharma" : "Request Drugs",
+    "selectSpecValidator" : "Kindly Select Speciality.",
+    "pickSpec" : "Select Speciality.",
+    "pickGov" : "Select Governorate.",
+    "pickArea" : "Select Area.",
+    "search" : "Search"
+}

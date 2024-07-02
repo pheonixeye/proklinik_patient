@@ -1,0 +1,71 @@
+name: patient
+description: "patient web reservation portal"
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  provider: ^6.1.2
+  go_router: ^14.2.0
+  http: ^1.2.1
+  uuid: ^4.4.0
+  intl: any 
+  equatable: ^2.0.5
+  email_validator: ^3.0.0
+  appwrite: ^12.0.4 
+  flutter_easyloading: ^3.0.5 
+  font_awesome_flutter: ^10.7.0
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/fonts/IBM/
+    - assets/lang/
+
+
+  fonts:
+    - family: IBM
+      fonts:
+        - asset: assets/fonts/IBM/font-Thin-100.ttf
+          style: normal
+          weight: 100
+        - asset: assets/fonts/IBM/font-ExtraLight-200.ttf
+          style: normal
+          weight: 200
+        - asset: assets/fonts/IBM/font-Light-300.ttf
+          style: normal
+          weight: 300
+        - asset: assets/fonts/IBM/font-Regular-400.ttf
+          style: normal
+          weight: 400
+        - asset: assets/fonts/IBM/font-Medium-500.ttf
+          style: normal
+          weight: 500
+        - asset: assets/fonts/IBM/font-SemiBold-600.ttf
+          style: normal
+          weight: 600
+        - asset: assets/fonts/IBM/font-Bold-700.ttf
+          style: normal
+          weight: 700
