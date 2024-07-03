@@ -34,6 +34,22 @@
     "medicalLibrary" : "Medical Library",
     "termsOfUse" : "Terms Of Use",
     "privacyPolicy" : "Privacy Policy",
-    "privacyPolicyDoctors" : "Privacy Policy For Doctors"
+    "privacyPolicyDoctors" : "Privacy Policy For Doctors",
+    "weHappySuggestions" : "We will be happy to receive your inquiries and suggestions.",
+    "yourName" : "Your Name",
+    "validateName" : "Kindly Enter Your Name.",
+    "firstLastName" : "First And Last Name.",
+    "mobileNumber" : "Mobile Number",
+    "validateNumber" : "Kindly Enter Your Mobile Number.",
+    "email" : "Email",
+    "validateEmail" : "Kindly Enter Your Email.",
+    "message" : "Message",
+    "validateMessage" : "Kindly Enter Your Message.",
+    "send" : "Send",
+    "costRegular" : "18888 Cost Of Regular Call",
+    "address" : "Address",
+    "addressString" : "Zahraa El Maadi - El Nada Tower - First Floor",
+    "mailUs" : "Mail Us",
+    "social" : "Social"
 
  }

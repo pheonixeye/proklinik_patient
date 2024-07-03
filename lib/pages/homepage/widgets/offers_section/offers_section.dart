@@ -64,7 +64,7 @@ const List<_Offer> _offers = [
   ),
   _Offer(
     titleEn: "Vitamin D",
-    titleAr: "فيتامين دال",
+    titleAr: "فيتامين د",
     pricePre: "950",
     pricePost: "150",
   ),

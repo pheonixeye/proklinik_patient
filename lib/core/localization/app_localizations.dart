@@ -308,6 +308,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy Policy For Doctors'**
   String get privacyPolicyDoctors;
+
+  /// No description provided for @weHappySuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'We will be happy to receive your inquiries and suggestions.'**
+  String get weHappySuggestions;
+
+  /// No description provided for @yourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Name'**
+  String get yourName;
+
+  /// No description provided for @validateName.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter Your Name.'**
+  String get validateName;
+
+  /// No description provided for @firstLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'First And Last Name.'**
+  String get firstLastName;
+
+  /// No description provided for @mobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get mobileNumber;
+
+  /// No description provided for @validateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter Your Mobile Number.'**
+  String get validateNumber;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @validateEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter Your Email.'**
+  String get validateEmail;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @validateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter Your Message.'**
+  String get validateMessage;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @costRegular.
+  ///
+  /// In en, this message translates to:
+  /// **'18888 Cost Of Regular Call'**
+  String get costRegular;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @addressString.
+  ///
+  /// In en, this message translates to:
+  /// **'Zahraa El Maadi - El Nada Tower - First Floor'**
+  String get addressString;
+
+  /// No description provided for @mailUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail Us'**
+  String get mailUs;
+
+  /// No description provided for @social.
+  ///
+  /// In en, this message translates to:
+  /// **'Social'**
+  String get social;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

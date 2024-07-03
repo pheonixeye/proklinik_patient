@@ -111,4 +111,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get privacyPolicyDoctors => 'اتفاقية الخصوصية للاطباء';
+
+  @override
+  String get weHappySuggestions => 'سنكون سعداء لتلقي استفساراتكم واقتراحاتكم.';
+
+  @override
+  String get yourName => 'الاسم';
+
+  @override
+  String get validateName => 'يرجى ادخال الاسم';
+
+  @override
+  String get firstLastName => 'الاسم بالكامل';
+
+  @override
+  String get mobileNumber => 'رقم الموبايل';
+
+  @override
+  String get validateNumber => 'يرجى ادخال رقم الموبايل';
+
+  @override
+  String get email => 'البريد الالكتروني';
+
+  @override
+  String get validateEmail => 'يرجى ادخال البريد الالكتروني';
+
+  @override
+  String get message => 'رسالتك';
+
+  @override
+  String get validateMessage => 'يرجى ادخال رسالتك';
+
+  @override
+  String get send => 'ارسال';
+
+  @override
+  String get costRegular => '18888 بسعر المكالمة العادية';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get addressString => 'زهراء المعادي - برج الندي - الدور الاول';
+
+  @override
+  String get mailUs => 'راسلنا علي';
+
+  @override
+  String get social => 'التواصل الاجتماعي';
 }

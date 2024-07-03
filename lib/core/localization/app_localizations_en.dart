@@ -111,4 +111,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyPolicyDoctors => 'Privacy Policy For Doctors';
+
+  @override
+  String get weHappySuggestions => 'We will be happy to receive your inquiries and suggestions.';
+
+  @override
+  String get yourName => 'Your Name';
+
+  @override
+  String get validateName => 'Kindly Enter Your Name.';
+
+  @override
+  String get firstLastName => 'First And Last Name.';
+
+  @override
+  String get mobileNumber => 'Mobile Number';
+
+  @override
+  String get validateNumber => 'Kindly Enter Your Mobile Number.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get validateEmail => 'Kindly Enter Your Email.';
+
+  @override
+  String get message => 'Message';
+
+  @override
+  String get validateMessage => 'Kindly Enter Your Message.';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get costRegular => '18888 Cost Of Regular Call';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get addressString => 'Zahraa El Maadi - El Nada Tower - First Floor';
+
+  @override
+  String get mailUs => 'Mail Us';
+
+  @override
+  String get social => 'Social';
 }

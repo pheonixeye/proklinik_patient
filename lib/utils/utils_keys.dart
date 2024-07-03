@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UtilsKeys {
-  const UtilsKeys();
+  UtilsKeys();
 
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 

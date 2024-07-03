@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
@@ -18,7 +19,7 @@ const _langs = ["en", "ar"];
 /// GoRouter configuration
 ///
 class AppRouter {
-  const AppRouter();
+  AppRouter();
   static const String loading = "/";
   static const String home = ":lang";
   static const String src = "src";
@@ -59,12 +60,15 @@ class AppRouter {
         },
         routes: [
           ShellRoute(
-            builder: (context, state, child) {
-              return ShellPage(
-                key: state.pageKey,
-                child: child,
+            pageBuilder: (context, state, child) {
+              return MaterialPage(
+                child: ShellPage(
+                  key: state.pageKey,
+                  child: child,
+                ),
               );
             },
+            // builder: (context, state, child) {},
             routes: [
               GoRoute(
                 name: home,

@@ -34,5 +34,21 @@
     "medicalLibrary" : "مكتبة طبية",
     "termsOfUse" : "شروط الاستخدام",
     "privacyPolicy" : "اتفاقية الخصوصية",
-    "privacyPolicyDoctors" : "اتفاقية الخصوصية للاطباء"
+    "privacyPolicyDoctors" : "اتفاقية الخصوصية للاطباء",
+    "weHappySuggestions" : "سنكون سعداء لتلقي استفساراتكم واقتراحاتكم.",
+    "yourName" : "الاسم",
+    "validateName" : "يرجى ادخال الاسم",
+    "firstLastName" : "الاسم بالكامل",
+    "mobileNumber" : "رقم الموبايل",
+    "validateNumber" : "يرجى ادخال رقم الموبايل",
+    "email" : "البريد الالكتروني",
+    "validateEmail" : "يرجى ادخال البريد الالكتروني",
+    "message" : "رسالتك",
+    "validateMessage" : "يرجى ادخال رسالتك",
+    "send" : "ارسال",
+    "costRegular" : "18888 بسعر المكالمة العادية",
+    "address" : "العنوان",
+    "addressString" : "زهراء المعادي - برج الندي - الدور الاول",
+    "mailUs" : "راسلنا علي",
+    "social" : "التواصل الاجتماعي"
 }

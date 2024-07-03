@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/shell_page/widgets/footer_section/footer_btn.dart';
+import 'package:patient/widgets/footer_section/footer_btn.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 

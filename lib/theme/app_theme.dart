@@ -40,6 +40,15 @@ class AppTheme {
         ),
       ),
     ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.fuchsia: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+      },
+    ),
   );
 
   static get theme => _theme;
