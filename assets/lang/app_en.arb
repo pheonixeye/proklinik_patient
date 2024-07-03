@@ -5,7 +5,7 @@
     "signup" : "Sign Up",
     "login" : "Login",
     "forProviders" : "For Service Providers",
-    "contactUs" : "contact Us",
+    "contactUs" : "Contact Us",
     "slogan" : "Clinic, Lab, Radiology & Pharmacy.",
     "subSlogan" : "Book Online Or Call Us",
     "hotline" : "18888",
@@ -14,8 +14,26 @@
     "rad" : "Book Radiology",
     "pharma" : "Request Drugs",
     "selectSpecValidator" : "Kindly Select Speciality.",
+    "selectGovValidator" : "Kindly Select Governorate.",
+    "selectAreaValidator" : "Kindly Select Area.",
     "pickSpec" : "Select Speciality.",
     "pickGov" : "Select Governorate.",
     "pickArea" : "Select Area.",
-    "search" : "Search"
-}
+    "search" : "Search",
+    "bookBySpeciality" : "Book Appointment By Speciality",
+    "allOffers" : "All Offers",
+    "pickFromOffers" : "Pick from top offers",
+    "pound" : "EGP",
+    "aboutUs" : "About Us",
+    "ourTeam" : "Our Team",
+    "careers" : "Careers",
+    "press" : "Press",
+    "ourServices" : "Our Services",
+    "joinNetwork" : "Join ProKliniK Network",
+    "needHelp" : "Need Help ?",
+    "medicalLibrary" : "Medical Library",
+    "termsOfUse" : "Terms Of Use",
+    "privacyPolicy" : "Privacy Policy",
+    "privacyPolicyDoctors" : "Privacy Policy For Doctors"
+
+ }

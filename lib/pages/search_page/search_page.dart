@@ -11,10 +11,12 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(context.loc.srcPage),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: Text(context.loc.srcPage),
+        ),
+      ],
     );
   }
 }

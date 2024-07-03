@@ -6,10 +6,12 @@ class ContactUsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(context.loc.contactUs),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: Text(context.loc.contactUs),
+        ),
+      ],
     );
   }
 }

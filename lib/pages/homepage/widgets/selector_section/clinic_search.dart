@@ -12,6 +12,8 @@ class ClinicSearchSection extends StatefulWidget {
 
 class _ClinicSearchSectionState extends State<ClinicSearchSection> {
   final formKey = GlobalKey<FormState>();
+  //TODO: implement selection
+  //TODO: navigate to appropriate search page with results
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
@@ -23,12 +25,8 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 3,
-          color: Colors.green.shade800,
-        ),
-      ),
+      alignment: Alignment.center,
+      decoration: AppTheme.searchContainerDecoration,
       child: Form(
         key: formKey,
         child: Flex(
@@ -44,6 +42,10 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
+                      icon: Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: Colors.green.shade500,
+                      ),
                       alignment: Alignment.center,
                       validator: _validator,
                       hint: Text(context.loc.pickSpec),
@@ -64,6 +66,10 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
+                      icon: Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: Colors.green.shade500,
+                      ),
                       alignment: Alignment.center,
                       hint: Text(context.loc.pickGov),
                       isExpanded: true,
@@ -85,6 +91,10 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                     child: DropdownButtonFormField<String>(
                       hint: Text(context.loc.pickArea),
                       isExpanded: true,
+                      icon: Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: Colors.green.shade500,
+                      ),
                       alignment: Alignment.center,
                       items: [],
                       onChanged: (val) {},
@@ -104,7 +114,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                         : AppTheme.localizedCardBorder(context, 3),
                     fixedSize:
                         context.isMobile ? null : const Size.fromHeight(64),
-                    backgroundColor: Colors.orange.shade500,
+                    backgroundColor: Colors.green.shade500,
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {

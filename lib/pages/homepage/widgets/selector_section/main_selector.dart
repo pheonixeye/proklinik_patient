@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/homepage/widgets/clinic_search.dart';
-import 'package:patient/pages/homepage/widgets/selector_tab.dart';
+import 'package:patient/pages/homepage/widgets/selector_section/clinic_search.dart';
+import 'package:patient/pages/homepage/widgets/selector_section/common_search.dart';
+import 'package:patient/pages/homepage/widgets/selector_section/selector_tab.dart';
 
 class MainAppSelector extends StatefulWidget {
   const MainAppSelector({super.key});
@@ -38,7 +39,7 @@ class _MainAppSelectorState extends State<MainAppSelector>
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: context.isMobile ? 10 : 100),
       child: SizedBox(
-        height: context.isMobile ? 400 : 200,
+        height: context.isMobile ? 500 : 200,
         child: Card.outlined(
           elevation: 6,
           shape: RoundedRectangleBorder(
@@ -93,11 +94,17 @@ class _MainAppSelectorState extends State<MainAppSelector>
             body: TabBarView(
               controller: _controller,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: const [
                 ClinicSearchSection(),
-                Text("Lab"),
-                Text("Radiology"),
-                Text("Pharmacy"),
+                CommonSearchSection(
+                  type: CommonSearchType.lab,
+                ),
+                CommonSearchSection(
+                  type: CommonSearchType.rad,
+                ),
+                CommonSearchSection(
+                  type: CommonSearchType.pharm,
+                ),
               ],
             ),
           ),

@@ -5,6 +5,8 @@ import 'package:patient/extensions/loc_ext.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
+import 'package:patient/theme/app_theme.dart';
+
 class Slogan extends StatelessWidget {
   const Slogan({super.key});
 
@@ -23,7 +25,7 @@ class Slogan extends StatelessWidget {
                 style: TextStyle(
                   fontSize: context.isMobile ? 24 : 42,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey.shade500,
+                  color: AppTheme.mainFontColor,
                 ),
               ),
             ),
@@ -54,7 +56,7 @@ class Slogan extends StatelessWidget {
               style: TextStyle(
                 fontSize: context.isMobile ? 18 : 32,
                 fontWeight: FontWeight.normal,
-                color: Colors.blueGrey.shade500,
+                color: AppTheme.mainFontColor,
               ),
             ),
           ],

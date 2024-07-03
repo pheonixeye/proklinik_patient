@@ -6,10 +6,12 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(context.loc.bookPage),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: Text(context.loc.bookPage),
+        ),
+      ],
     );
   }
 }

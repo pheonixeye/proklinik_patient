@@ -85,4 +85,15 @@ class AppTheme {
       );
     }
   }
+
+  static BoxDecoration searchContainerDecoration = BoxDecoration(
+    border: Border.all(
+      width: 3,
+      color: Colors.green.shade800,
+    ),
+  );
+
+  static Color mainFontColor = Colors.blueGrey.shade500;
+
+  static const Color greyBackgroundColor = Color(0xffEEF0F2);
 }

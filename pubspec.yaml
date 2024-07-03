@@ -24,6 +24,8 @@ dependencies:
   appwrite: ^12.0.4 
   flutter_easyloading: ^3.0.5 
   font_awesome_flutter: ^10.7.0
+  flutter_svg: ^2.0.10+1
+  gap: ^3.0.1
 
 
 
@@ -40,6 +42,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/speciality_row/
+    - assets/images/offers_row/
     - assets/fonts/
     - assets/fonts/IBM/
     - assets/lang/

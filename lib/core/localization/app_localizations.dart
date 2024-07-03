@@ -132,7 +132,7 @@ abstract class AppLocalizations {
   /// No description provided for @contactUs.
   ///
   /// In en, this message translates to:
-  /// **'contact Us'**
+  /// **'Contact Us'**
   String get contactUs;
 
   /// No description provided for @slogan.
@@ -183,6 +183,18 @@ abstract class AppLocalizations {
   /// **'Kindly Select Speciality.'**
   String get selectSpecValidator;
 
+  /// No description provided for @selectGovValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Select Governorate.'**
+  String get selectGovValidator;
+
+  /// No description provided for @selectAreaValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Select Area.'**
+  String get selectAreaValidator;
+
   /// No description provided for @pickSpec.
   ///
   /// In en, this message translates to:
@@ -206,6 +218,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
+
+  /// No description provided for @bookBySpeciality.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Appointment By Speciality'**
+  String get bookBySpeciality;
+
+  /// No description provided for @allOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'All Offers'**
+  String get allOffers;
+
+  /// No description provided for @pickFromOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick from top offers'**
+  String get pickFromOffers;
+
+  /// No description provided for @pound.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get pound;
+
+  /// No description provided for @aboutUs.
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// No description provided for @ourTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Team'**
+  String get ourTeam;
+
+  /// No description provided for @careers.
+  ///
+  /// In en, this message translates to:
+  /// **'Careers'**
+  String get careers;
+
+  /// No description provided for @press.
+  ///
+  /// In en, this message translates to:
+  /// **'Press'**
+  String get press;
+
+  /// No description provided for @ourServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Services'**
+  String get ourServices;
+
+  /// No description provided for @joinNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Join ProKliniK Network'**
+  String get joinNetwork;
+
+  /// No description provided for @needHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Need Help ?'**
+  String get needHelp;
+
+  /// No description provided for @medicalLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical Library'**
+  String get medicalLibrary;
+
+  /// No description provided for @termsOfUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms Of Use'**
+  String get termsOfUse;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @privacyPolicyDoctors.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy For Doctors'**
+  String get privacyPolicyDoctors;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

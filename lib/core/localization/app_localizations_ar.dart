@@ -50,6 +50,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectSpecValidator => 'برجاء اختيار التخصص.';
 
   @override
+  String get selectGovValidator => 'برجاء اختيار المحافظة.';
+
+  @override
+  String get selectAreaValidator => 'برجاء اختيار المنطقة.';
+
+  @override
   String get pickSpec => 'اختر التخصص.';
 
   @override
@@ -60,4 +66,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search => 'ابحث';
+
+  @override
+  String get bookBySpeciality => 'احجز كشف حسب التخصص';
+
+  @override
+  String get allOffers => 'كل العروض';
+
+  @override
+  String get pickFromOffers => 'اختار من أحسن العروض';
+
+  @override
+  String get pound => 'جنيه';
+
+  @override
+  String get aboutUs => 'من نحن';
+
+  @override
+  String get ourTeam => 'فريق بروكلينك';
+
+  @override
+  String get careers => 'وظائف';
+
+  @override
+  String get press => 'الصحافة';
+
+  @override
+  String get ourServices => 'خدماتنا';
+
+  @override
+  String get joinNetwork => 'انضم لشبكة بروكلينك';
+
+  @override
+  String get needHelp => 'تحتاج للمساعدة ؟';
+
+  @override
+  String get medicalLibrary => 'مكتبة طبية';
+
+  @override
+  String get termsOfUse => 'شروط الاستخدام';
+
+  @override
+  String get privacyPolicy => 'اتفاقية الخصوصية';
+
+  @override
+  String get privacyPolicyDoctors => 'اتفاقية الخصوصية للاطباء';
 }

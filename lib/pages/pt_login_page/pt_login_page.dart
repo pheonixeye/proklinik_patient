@@ -6,10 +6,12 @@ class PatientLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(context.loc.login),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: Text(context.loc.login),
+        ),
+      ],
     );
   }
 }

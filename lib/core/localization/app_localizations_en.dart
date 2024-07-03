@@ -23,7 +23,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forProviders => 'For Service Providers';
 
   @override
-  String get contactUs => 'contact Us';
+  String get contactUs => 'Contact Us';
 
   @override
   String get slogan => 'Clinic, Lab, Radiology & Pharmacy.';
@@ -50,6 +50,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectSpecValidator => 'Kindly Select Speciality.';
 
   @override
+  String get selectGovValidator => 'Kindly Select Governorate.';
+
+  @override
+  String get selectAreaValidator => 'Kindly Select Area.';
+
+  @override
   String get pickSpec => 'Select Speciality.';
 
   @override
@@ -60,4 +66,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search => 'Search';
+
+  @override
+  String get bookBySpeciality => 'Book Appointment By Speciality';
+
+  @override
+  String get allOffers => 'All Offers';
+
+  @override
+  String get pickFromOffers => 'Pick from top offers';
+
+  @override
+  String get pound => 'EGP';
+
+  @override
+  String get aboutUs => 'About Us';
+
+  @override
+  String get ourTeam => 'Our Team';
+
+  @override
+  String get careers => 'Careers';
+
+  @override
+  String get press => 'Press';
+
+  @override
+  String get ourServices => 'Our Services';
+
+  @override
+  String get joinNetwork => 'Join ProKliniK Network';
+
+  @override
+  String get needHelp => 'Need Help ?';
+
+  @override
+  String get medicalLibrary => 'Medical Library';
+
+  @override
+  String get termsOfUse => 'Terms Of Use';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get privacyPolicyDoctors => 'Privacy Policy For Doctors';
 }
