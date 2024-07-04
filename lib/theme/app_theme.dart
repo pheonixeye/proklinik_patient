@@ -5,7 +5,11 @@ import 'package:provider/provider.dart';
 class AppTheme {
   const AppTheme();
 
+  static final appBarColor = Colors.green.shade500.withOpacity(0.9);
+  static final secondaryOrangeColor = Colors.orange.shade500.withOpacity(0.9);
+
   static final _theme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
     useMaterial3: true,
     fontFamily: "IBM",
     textButtonTheme: TextButtonThemeData(
@@ -30,7 +34,7 @@ class AppTheme {
       endIndent: 20,
     ),
     appBarTheme: AppBarTheme(
-      color: Colors.green.shade500.withOpacity(0.9),
+      color: appBarColor,
       elevation: 8,
       centerTitle: false,
       shape: const RoundedRectangleBorder(

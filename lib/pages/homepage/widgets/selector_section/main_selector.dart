@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/search_type.dart';
 import 'package:patient/pages/homepage/widgets/selector_section/clinic_search.dart';
 import 'package:patient/pages/homepage/widgets/selector_section/common_search.dart';
 import 'package:patient/pages/homepage/widgets/selector_section/selector_tab.dart';
@@ -97,13 +98,13 @@ class _MainAppSelectorState extends State<MainAppSelector>
               children: const [
                 ClinicSearchSection(),
                 CommonSearchSection(
-                  type: CommonSearchType.lab,
+                  type: SearchType.lab,
                 ),
                 CommonSearchSection(
-                  type: CommonSearchType.rad,
+                  type: SearchType.rad,
                 ),
                 CommonSearchSection(
-                  type: CommonSearchType.pharm,
+                  type: SearchType.pharm,
                 ),
               ],
             ),

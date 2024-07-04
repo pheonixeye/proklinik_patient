@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/models/query_object.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/for_provider_page/for_provider_page.dart';
@@ -11,6 +12,7 @@ import 'package:patient/pages/pt_signup_page/pt_signup_page.dart';
 import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/search_px.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +32,16 @@ class AppRouter {
   static const String contactus = "contactus";
 
   static final router = GoRouter(
-    refreshListenable: PxLocale(),
+    refreshListenable: Listenable.merge(
+      [
+        PxLocale(),
+        PxSearchController(
+          query: QueryObject.fromJson(
+            const {},
+          ),
+        ),
+      ],
+    ),
     navigatorKey: UtilsKeys.navigatorKey,
     initialLocation: loading,
     redirect: (context, state) {
@@ -68,7 +79,6 @@ class AppRouter {
                 ),
               );
             },
-            // builder: (context, state, child) {},
             routes: [
               GoRoute(
                 name: home,
@@ -119,8 +129,22 @@ class AppRouter {
                     name: src,
                     path: src,
                     builder: (context, state) {
-                      return SearchPage(
-                        key: state.pageKey,
+                      final query = state.uri.queryParameters;
+                      final obj = QueryObject.fromJson(query);
+                      final key = ValueKey((obj, state.pageKey));
+                      if (kDebugMode) {
+                        print("GoRoute($src)=$key");
+                      }
+                      return ChangeNotifierProvider(
+                        key: key,
+                        create: (context) => PxSearchController(
+                          query: QueryObject.fromJson(query),
+                        ),
+                        builder: (context, child) {
+                          return SearchPage(
+                            key: key,
+                          );
+                        },
                       );
                     },
                     routes: [

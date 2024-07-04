@@ -11,12 +11,11 @@ extension SwitchLanguage on BuildContext {
         .routerDelegate
         .currentConfiguration
         .pathParameters['lang'] as String;
-    final currentPath =
-        GoRouter.of(this).routerDelegate.currentConfiguration.uri.path;
+    final currentPath = GoRouter.of(this).routeInformationProvider.value.uri;
     if (lang == 'en') {
-      newPath = currentPath.replaceAll('/en', '/ar');
+      newPath = currentPath.toString().replaceAll('/en', '/ar');
     } else {
-      newPath = currentPath.replaceAll('/ar', '/en');
+      newPath = currentPath.toString().replaceAll('/ar', '/en');
     }
     read<PxLocale>().setLang(lang.switchLang());
     read<PxLocale>().setLocale();

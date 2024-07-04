@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/search_type.dart';
 import 'package:patient/theme/app_theme.dart';
-
-enum CommonSearchType {
-  lab,
-  rad,
-  pharm,
-}
 
 class CommonSearchSection extends StatefulWidget {
   const CommonSearchSection({super.key, required this.type});
-  final CommonSearchType type;
+  final SearchType type;
 
   @override
   State<CommonSearchSection> createState() => _CommonSearchSectionState();

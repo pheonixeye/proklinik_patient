@@ -42,8 +42,10 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/json/
     - assets/images/speciality_row/
     - assets/images/offers_row/
+    - assets/images/icons_svg/
     - assets/fonts/
     - assets/fonts/IBM/
     - assets/lang/
