@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:patient/providers/booking_px.dart';
+import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class ScheduleCardXl extends StatefulWidget {
   const ScheduleCardXl({super.key, this.isAvailable = true});
@@ -16,7 +20,11 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
     return widget.isAvailable
         ? () {
             //TODO: nav to book app page directly
-            print("TODO: Nav to book app page");
+            context.read<PxBooking>().setBookingData("Booking data");
+            GoRouter.of(context).goNamed(
+              AppRouter.book,
+              pathParameters: defaultPathParameters(context),
+            );
           }
         : null;
   }

@@ -18,6 +18,13 @@ import 'package:provider/provider.dart';
 
 const _langs = ["en", "ar"];
 
+Map<String, String> defaultPathParameters(BuildContext context) {
+  final lang = context.read<PxLocale>().lang;
+  return {
+    "lang": lang,
+  };
+}
+
 /// GoRouter configuration
 ///
 class AppRouter {
@@ -126,6 +133,15 @@ class AppRouter {
                     },
                   ),
                   GoRoute(
+                    name: book,
+                    path: book,
+                    builder: (context, state) {
+                      return BookPage(
+                        key: state.pageKey,
+                      );
+                    },
+                  ),
+                  GoRoute(
                     name: src,
                     path: src,
                     builder: (context, state) {
@@ -147,17 +163,6 @@ class AppRouter {
                         },
                       );
                     },
-                    routes: [
-                      GoRoute(
-                        name: book,
-                        path: book,
-                        builder: (context, state) {
-                          return BookPage(
-                            key: state.pageKey,
-                          );
-                        },
-                      )
-                    ],
                   ),
                 ],
               ),

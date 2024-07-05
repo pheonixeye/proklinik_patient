@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:patient/pages/search_page/widgets/filter_column/filter_column_sm.dart';
+import 'package:patient/pages/search_page/widgets/sorting_modal.dart/sorting_modal_sm.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class SortingRowSm extends StatelessWidget {
@@ -7,7 +9,7 @@ class SortingRowSm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
         title: Row(
           children: [
@@ -42,7 +44,19 @@ class SortingRowSm extends StatelessWidget {
                   backgroundColor: Colors.white,
                 ),
                 onPressed: () {
-                  //TODO: show sort modal
+                  //todo: show sort modal
+                  Scaffold.of(context).showBottomSheet(
+                    (context) {
+                      return const SortingModalSm();
+                    },
+                    showDragHandle: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                  );
                 },
                 label: const Text("Sort By"),
                 icon: const Icon(Icons.sort),
@@ -56,7 +70,19 @@ class SortingRowSm extends StatelessWidget {
                   backgroundColor: Colors.white,
                 ),
                 onPressed: () {
-                  //TODO: show filter modal
+                  //todo: show filter modal
+                  Scaffold.of(context).showBottomSheet(
+                    (context) {
+                      return const FilterColumnSm();
+                    },
+                    showDragHandle: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                  );
                 },
                 label: const Text("Filter"),
                 icon: const Icon(Icons.filter_alt),

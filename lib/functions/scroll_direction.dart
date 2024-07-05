@@ -10,18 +10,18 @@ void scrollHorizontally({
   required ScrollController controller,
   required HorizontalScrollDirecion direction,
 }) {
-  double _offset = controller.offset;
-  _offset = switch (direction) {
+  double offset = controller.offset;
+  offset = switch (direction) {
     HorizontalScrollDirecion.previous =>
-      _offset <= controller.position.minScrollExtent ? 0 : _offset - 100,
+      offset <= controller.position.minScrollExtent ? 0 : offset - 100,
     HorizontalScrollDirecion.next =>
-      _offset >= controller.position.maxScrollExtent ? _offset : _offset + 100,
+      offset >= controller.position.maxScrollExtent ? offset : offset + 100,
   };
   if (kDebugMode) {
-    print(_offset);
+    print(offset);
   }
   controller.animateTo(
-    _offset,
+    offset,
     duration: const Duration(milliseconds: 300),
     curve: Curves.easeIn,
   );

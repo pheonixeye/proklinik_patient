@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 class QueryObject extends Equatable {
@@ -6,6 +7,10 @@ class QueryObject extends Equatable {
   final String gov;
   final String city;
   final String page;
+  final String availability;
+  final String fees;
+  final String location;
+  final String sort;
 
   const QueryObject({
     required this.type,
@@ -13,6 +18,10 @@ class QueryObject extends Equatable {
     required this.gov,
     required this.city,
     required this.page,
+    required this.availability,
+    required this.fees,
+    required this.location,
+    required this.sort,
   });
 
   QueryObject copyWith({
@@ -21,6 +30,10 @@ class QueryObject extends Equatable {
     String? gov,
     String? city,
     String? page,
+    String? availability,
+    String? fees,
+    String? location,
+    String? sort,
   }) {
     return QueryObject(
       type: type ?? this.type,
@@ -28,6 +41,10 @@ class QueryObject extends Equatable {
       gov: gov ?? this.gov,
       city: city ?? this.city,
       page: page ?? this.page,
+      availability: availability ?? this.availability,
+      fees: fees ?? this.fees,
+      location: location ?? this.location,
+      sort: sort ?? this.sort,
     );
   }
 
@@ -38,9 +55,14 @@ class QueryObject extends Equatable {
       'gov': gov,
       'city': city,
       'page': page,
+      'av': availability,
+      'fe': fees,
+      'lo': location,
+      'so': sort,
     };
   }
 
+  // ignore: non_constant_identifier_names
   factory QueryObject._Empty() {
     return const QueryObject(
       type: '',
@@ -48,6 +70,10 @@ class QueryObject extends Equatable {
       gov: '',
       city: '',
       page: '',
+      availability: '',
+      fees: '',
+      location: '',
+      sort: '',
     );
   }
 
@@ -61,6 +87,10 @@ class QueryObject extends Equatable {
       gov: map['gov'] as String,
       city: map['city'] as String,
       page: map['page'] as String,
+      availability: map['av'] as String,
+      fees: map['fe'] as String,
+      location: map['lo'] as String,
+      sort: map['so'] as String,
     );
   }
 

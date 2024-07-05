@@ -34,8 +34,8 @@ const List<_TagRowData> _dummyData = [
   ),
 ];
 
-class TagsRowSm extends StatelessWidget {
-  const TagsRowSm({super.key});
+class TagsRowXlSm extends StatelessWidget {
+  const TagsRowXlSm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +58,10 @@ class TagsRowSm extends StatelessWidget {
 class TagRowCard extends StatelessWidget {
   const TagRowCard({
     super.key,
+    // ignore: library_private_types_in_public_api
     required this.data,
   });
+  // ignore: library_private_types_in_public_api
   final _TagRowData data;
 
   @override

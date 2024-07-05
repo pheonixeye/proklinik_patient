@@ -3,9 +3,9 @@ import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/pages/search_page/pagination_row.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_info_card_sm.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
-import 'package:patient/pages/search_page/widgets/filter_column.dart';
-import 'package:patient/pages/search_page/widgets/sorting_row_sm.dart';
-import 'package:patient/pages/search_page/widgets/sorting_row_xl.dart';
+import 'package:patient/pages/search_page/widgets/filter_column/filter_column_xl.dart';
+import 'package:patient/pages/search_page/widgets/sorting_row/sorting_row_sm.dart';
+import 'package:patient/pages/search_page/widgets/sorting_row/sorting_row_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/theme/app_theme.dart';
@@ -45,20 +45,22 @@ class _SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Spacer(flex: context.isMobile ? 1 : 100),
-                    const FilterColumn(),
+                    const FilterColumnXl(),
                     SizedBox(width: context.isMobile ? 0 : 20),
                     Expanded(
                       flex: 950,
                       child: Column(
                         //TODO: generate by iteration
                         children: [
-                          //TODO: replace according to size
+                          //todo: replace according to size
                           context.isMobile
                               ? const SortingRowSm()
                               : const SortingRowXl(),
-                          context.isMobile
-                              ? const DocInfoCardSm()
-                              : const DocInfoCardXl(),
+                          ...List.generate(10, (index) {
+                            return context.isMobile
+                                ? const DocInfoCardSm()
+                                : const DocInfoCardXl();
+                          }),
                         ],
                       ),
                     ),

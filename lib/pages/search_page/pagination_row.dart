@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/functions/scroll_direction.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
+import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +61,7 @@ class _PaginationRowState extends State<PaginationRow> {
                     scrollDirection: Axis.horizontal,
                     itemExtent: 40,
                     children: [
+                      //TODO: generate from data
                       ...List.generate(20, (index) => (index + 1).toString())
                           .map((x) {
                         return ClickablePageNumber(
@@ -111,25 +115,44 @@ class _ClickablePageNumberState extends State<ClickablePageNumber> {
         });
       },
       cursor: SystemMouseCursors.click,
-      child: Card(
-        elevation: (isHovering || widget.isSelected) ? 1 : 6,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(
-              widget.pageNumber,
-              style: TextStyle(
-                color: (isHovering || widget.isSelected)
-                    ? AppTheme.secondaryOrangeColor
-                    : AppTheme.mainFontColor,
-                fontWeight: (isHovering || widget.isSelected)
-                    ? FontWeight.bold
-                    : FontWeight.w300,
+      child: Consumer2<PxSearchController, PxLocale>(
+        builder: (context, sc, l, _) {
+          return GestureDetector(
+            onTap: () {
+              /// navigation is linked to data brought by the api depending on
+              /// the search paramenters(QueryObject)
+              GoRouter.of(context).goNamed(
+                AppRouter.src,
+                pathParameters: {"lang": l.lang},
+                queryParameters: sc.query
+                    .copyWith(
+                      page: widget.pageNumber,
+                    )
+                    .toJson(),
+              );
+            },
+            child: Card(
+              elevation: (isHovering || widget.isSelected) ? 1 : 6,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    widget.pageNumber,
+                    style: TextStyle(
+                      color: (isHovering || widget.isSelected)
+                          ? AppTheme.secondaryOrangeColor
+                          : AppTheme.mainFontColor,
+                      fontWeight: (isHovering || widget.isSelected)
+                          ? FontWeight.bold
+                          : FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

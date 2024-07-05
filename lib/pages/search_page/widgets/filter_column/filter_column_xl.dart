@@ -3,14 +3,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/theme/app_theme.dart';
 
-class FilterColumn extends StatefulWidget {
-  const FilterColumn({super.key});
+class FilterColumnXl extends StatefulWidget {
+  const FilterColumnXl({super.key});
 
   @override
-  State<FilterColumn> createState() => _FilterColumnState();
+  State<FilterColumnXl> createState() => _FilterColumnXlState();
 }
 
-class _FilterColumnState extends State<FilterColumn> {
+class _FilterColumnXlState extends State<FilterColumnXl> {
   final TextStyle _filterTitleStyle = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w600,
@@ -121,7 +121,7 @@ class _FilterColumnState extends State<FilterColumn> {
                     },
                   ),
                   RadioListTile(
-                    title: Text("Less Than 300 EGP"),
+                    title: const Text("Less Than 300 EGP"),
                     value: "lessThan300",
                     groupValue: null,
                     onChanged: (value) {
@@ -129,7 +129,7 @@ class _FilterColumnState extends State<FilterColumn> {
                     },
                   ),
                   RadioListTile(
-                    title: Text("More Than 300 EGP"),
+                    title: const Text("More Than 300 EGP"),
                     value: "moreThan300",
                     groupValue: null,
                     onChanged: (value) {
@@ -160,7 +160,7 @@ class _FilterColumnState extends State<FilterColumn> {
                     },
                   ),
                   RadioListTile(
-                    title: Text("Nearest First"),
+                    title: const Text("Nearest First"),
                     value: "nearestFirst",
                     groupValue: null,
                     onChanged: (value) {

@@ -13,21 +13,21 @@ class PxSpecGov extends ChangeNotifier {
   }
 
   Future<void> _init() async {
-    final _specData = rootBundle.loadString(Assets.specialities);
-    final _govData = rootBundle.loadString(Assets.governorates);
+    final specData = rootBundle.loadString(Assets.specialities);
+    final govData = rootBundle.loadString(Assets.governorates);
 
-    final List<String> _collectedData = await Future.wait([
-      _specData,
-      _govData,
+    final List<String> collectedData = await Future.wait([
+      specData,
+      govData,
     ]);
 
     // print(_collectedDate);
 
-    final String _specs = _collectedData[0];
-    final String _govs = _collectedData[1];
+    final String specs = collectedData[0];
+    final String govs = collectedData[1];
 
-    final List<dynamic> specStructure = json.decode(_specs);
-    final List<dynamic> govStructure = json.decode(_govs);
+    final List<dynamic> specStructure = json.decode(specs);
+    final List<dynamic> govStructure = json.decode(govs);
 
     // print(specStructure);
 

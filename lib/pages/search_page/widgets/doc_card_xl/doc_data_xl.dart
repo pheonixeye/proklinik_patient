@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class DocDataXl extends StatelessWidget {
@@ -12,7 +13,7 @@ class DocDataXl extends StatelessWidget {
       flex: 400,
       child: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 38),
           ListTile(
             contentPadding: const EdgeInsets.all(0),
             title: Text.rich(
@@ -90,6 +91,7 @@ class DocDataXl extends StatelessWidget {
             title: "18888 : ",
             data: "Cost Of Regular Call",
           ),
+          const TagsRowXlSm(),
         ],
       ),
     );
@@ -112,6 +114,7 @@ class SecondaryDataItemXl extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.5),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(iconData, size: 16),
           const SizedBox(width: 10),

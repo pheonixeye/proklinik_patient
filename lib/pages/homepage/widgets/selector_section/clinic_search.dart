@@ -71,15 +71,16 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               alignment: Alignment.center,
                               value: e,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(l.isEnglish ? e.en : e.ar),
-                                  const SizedBox(width: 10),
+                                  const SizedBox(width: 20),
                                   SvgPicture.asset(
                                     Assets.specialityImage(e.en),
                                     width: 50,
                                     height: 50,
                                   ),
+                                  const SizedBox(width: 10),
+                                  Text(l.isEnglish ? e.en : e.ar),
                                 ],
                               ),
                             );
@@ -188,12 +189,22 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             pathParameters: {
                               "lang": l.lang,
                             },
+
+                            ///symbols :
+                            ///av => availability
+                            ///fe => fees
+                            ///lo => location
+                            ///so => sort
                             queryParameters: {
                               "type": SearchType.clinic.name,
                               "spec": sg.speciality?.en,
                               "gov": sg.governorate?.governorate_name_en,
                               "city": sg.city?.city_name_en,
                               "page": "1",
+                              "av": "any",
+                              "fe": "any",
+                              "lo": "any",
+                              "so": "best-match",
                             },
                           );
                         }

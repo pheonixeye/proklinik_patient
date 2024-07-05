@@ -47,7 +47,7 @@ class DocInfoCardSm extends StatelessWidget {
                     ),
 
                     ///tag filer chips
-                    TagsRowSm(),
+                    TagsRowXlSm(),
                   ],
                 ),
               ),
