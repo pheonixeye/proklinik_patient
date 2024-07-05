@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/pages/search_page/pagination_row.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/pages/search_page/widgets/filter_column.dart';
 import 'package:patient/pages/search_page/widgets/sorting_row_xl.dart';
@@ -55,6 +56,12 @@ class _SearchPageState extends State<SearchPage> {
                           DocInfoCardXl(),
                           DocInfoCardXl(),
                           DocInfoCardXl(),
+                          DocInfoCardXl(),
+                          DocInfoCardXl(),
+                          DocInfoCardXl(),
+                          DocInfoCardXl(),
+                          DocInfoCardXl(),
+                          DocInfoCardXl(),
                         ],
                       ),
                     ),
@@ -62,6 +69,7 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
+              const PaginationRow(),
               const FooterSection(),
             ],
           ),

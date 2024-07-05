@@ -46,21 +46,21 @@ class _FilterColumnState extends State<FilterColumn> {
                   color: AppTheme.appBarColor,
                 ),
                 child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(width: 20),
+                    Icon(
+                      Icons.filter_alt_outlined,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 10),
                     Text(
-                      "Filter",
+                      "Filters",
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(width: 20),
-                    Icon(
-                      Icons.filter_alt_rounded,
-                      color: Colors.white,
-                    )
                   ],
                 ),
               ),
