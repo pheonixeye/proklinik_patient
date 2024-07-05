@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/functions/scroll_direction.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-class PaginationRow extends StatelessWidget {
+class PaginationRow extends StatefulWidget {
   const PaginationRow({super.key});
+
+  @override
+  State<PaginationRow> createState() => _PaginationRowState();
+}
+
+class _PaginationRowState extends State<PaginationRow> {
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void scrollNext() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.next,
+      );
+  void scrollPrevious() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.previous,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +48,13 @@ class PaginationRow extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton.outlined(
-                  onPressed: () {},
+                  onPressed: scrollPrevious,
                   icon: const Icon(Icons.arrow_back),
                 ),
                 Expanded(
+                  flex: context.isMobile ? 4 : 1,
                   child: ListView(
+                    controller: _controller,
                     scrollDirection: Axis.horizontal,
                     itemExtent: 40,
                     children: [
@@ -37,7 +69,7 @@ class PaginationRow extends StatelessWidget {
                   ),
                 ),
                 IconButton.outlined(
-                  onPressed: () {},
+                  onPressed: scrollNext,
                   icon: const Icon(Icons.arrow_forward),
                 ),
                 const Spacer(),

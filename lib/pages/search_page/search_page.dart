@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/pages/search_page/pagination_row.dart';
+import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_info_card_sm.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/pages/search_page/widgets/filter_column.dart';
+import 'package:patient/pages/search_page/widgets/sorting_row_sm.dart';
 import 'package:patient/pages/search_page/widgets/sorting_row_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
@@ -36,36 +38,31 @@ class _SearchPageState extends State<SearchPage> {
           child: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24.0,
+                padding: EdgeInsets.symmetric(
+                  vertical: context.isMobile ? 8.0 : 24.0,
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Spacer(flex: 100),
+                    Spacer(flex: context.isMobile ? 1 : 100),
                     const FilterColumn(),
                     SizedBox(width: context.isMobile ? 0 : 20),
-                    const Expanded(
+                    Expanded(
                       flex: 950,
                       child: Column(
+                        //TODO: generate by iteration
                         children: [
-                          SortingRowXl(),
-                          //TODO: generate by iteration
                           //TODO: replace according to size
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
-                          DocInfoCardXl(),
+                          context.isMobile
+                              ? const SortingRowSm()
+                              : const SortingRowXl(),
+                          context.isMobile
+                              ? const DocInfoCardSm()
+                              : const DocInfoCardXl(),
                         ],
                       ),
                     ),
-                    const Spacer(flex: 100),
+                    Spacer(flex: context.isMobile ? 1 : 100),
                   ],
                 ),
               ),

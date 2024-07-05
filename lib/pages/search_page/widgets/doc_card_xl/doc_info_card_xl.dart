@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patient/functions/scroll_direction.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_image_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
@@ -15,6 +16,29 @@ class DocInfoCardXl extends StatefulWidget {
 
 class _DocInfoCardXlState extends State<DocInfoCardXl> {
   bool isHovering = false;
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void scrollNext() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.next,
+      );
+  void scrollPrevious() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.previous,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -65,9 +89,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                         children: [
                           const SizedBox(width: 10),
                           IconButton.outlined(
-                            onPressed: () {
-                              //TODO: scroll && generate schedule
-                            },
+                            onPressed: scrollPrevious,
                             icon: const Icon(Icons.arrow_back),
                           ),
                           const SizedBox(width: 10),
@@ -77,6 +99,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                             child: ListView(
                               //TODO: replace with schedule generator
                               scrollDirection: Axis.horizontal,
+                              controller: _controller,
                               children: const [
                                 ///one times card
                                 ScheduleCardXl(
@@ -89,9 +112,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                           ),
                           const SizedBox(width: 10),
                           IconButton.outlined(
-                            onPressed: () {
-                              //TODO: scroll && generate schedule
-                            },
+                            onPressed: scrollNext,
                             icon: const Icon(Icons.arrow_forward),
                           ),
                           const SizedBox(width: 10),

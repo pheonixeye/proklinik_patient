@@ -115,20 +115,22 @@ class SecondaryDataItemXl extends StatelessWidget {
         children: [
           Icon(iconData, size: 16),
           const SizedBox(width: 10),
-          Text.rich(
-            TextSpan(
-              text: title,
-              style: TextStyle(
-                color: AppTheme.mainFontColor,
-              ),
-              children: [
-                TextSpan(
-                  text: data,
-                  style: TextStyle(
-                    color: Colors.green.shade500,
-                  ),
+          Expanded(
+            child: Text.rich(
+              TextSpan(
+                text: title,
+                style: TextStyle(
+                  color: AppTheme.mainFontColor,
                 ),
-              ],
+                children: [
+                  TextSpan(
+                    text: data,
+                    style: TextStyle(
+                      color: Colors.green.shade500,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
