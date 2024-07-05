@@ -9,6 +9,7 @@ import 'package:patient/pages/search_page/widgets/sorting_row/sorting_row_xl.dar
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,9 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Consumer2<PxSearchController, PxLocale>(
       builder: (context, sc, l, _) {
+        while (sc.doctors == null) {
+          return const CentralLoading();
+        }
         return Container(
           decoration: const BoxDecoration(
             color: AppTheme.greyBackgroundColor,

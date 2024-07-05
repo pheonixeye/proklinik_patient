@@ -159,4 +159,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get social => 'التواصل الاجتماعي';
+
+  @override
+  String get loading => 'جاري التحميل...';
 }

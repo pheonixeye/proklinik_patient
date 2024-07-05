@@ -14,6 +14,8 @@ class BookAppForm extends StatefulWidget {
 }
 
 class _BookAppFormState extends State<BookAppForm> {
+  //TODO: translate component
+  //TODO: recieve and validate booking info
   final formKey = GlobalKey<FormState>();
 
   String? _nameValidator(String? value) {

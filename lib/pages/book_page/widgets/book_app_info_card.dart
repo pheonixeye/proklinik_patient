@@ -8,6 +8,9 @@ class BookAppInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: translate component
+    //TODO: accept booking details
+
     return Expanded(
       flex: context.isMobile ? 245 : 585,
       child: Column(

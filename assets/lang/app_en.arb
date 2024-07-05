@@ -50,6 +50,6 @@
     "address" : "Address",
     "addressString" : "Zahraa El Maadi - El Nada Tower - First Floor",
     "mailUs" : "Mail Us",
-    "social" : "Social"
-
+    "social" : "Social",
+    "loading" : "Loading..."
  }

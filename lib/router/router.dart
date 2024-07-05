@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/models/query_object.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
+import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
+import 'package:patient/pages/error_page/error_page.dart';
 import 'package:patient/pages/for_provider_page/for_provider_page.dart';
 import 'package:patient/pages/homepage/homepage.dart';
 import 'package:patient/pages/loading_root_page/loading_root_page.dart';
@@ -11,6 +13,7 @@ import 'package:patient/pages/pt_login_page/pt_login_page.dart';
 import 'package:patient/pages/pt_signup_page/pt_signup_page.dart';
 import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
+import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/utils/utils_keys.dart';
@@ -37,6 +40,7 @@ class AppRouter {
   static const String login = "login";
   static const String forproviders = "forproviders";
   static const String contactus = "contactus";
+  static const String doc = "doc/:docid";
 
   static final router = GoRouter(
     refreshListenable: Listenable.merge(
@@ -66,6 +70,14 @@ class AppRouter {
         context.read<PxLocale>().setLang(lang);
         return null;
       }
+    },
+    errorPageBuilder: (context, state) {
+      return MaterialPage(
+        key: state.pageKey,
+        child: ErrorPage(
+          key: state.pageKey,
+        ),
+      );
     },
     routes: [
       GoRoute(
@@ -138,6 +150,25 @@ class AppRouter {
                     builder: (context, state) {
                       return BookPage(
                         key: state.pageKey,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    name: doc,
+                    path: doc,
+                    builder: (context, state) {
+                      final query = state.pathParameters;
+                      final docId = query["docid"];
+                      if (docId == null || docId.isEmpty) {
+                        throw Exception("Invalid Doctor Id.");
+                      }
+                      final key = ValueKey((docId, state.pageKey));
+                      return ChangeNotifierProvider(
+                        key: key,
+                        create: (context) => PxDocProfile(docId: docId),
+                        child: DocProfilePage(
+                          key: key,
+                        ),
                       );
                     },
                   ),

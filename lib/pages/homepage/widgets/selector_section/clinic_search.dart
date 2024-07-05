@@ -62,6 +62,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             color: Colors.green.shade500,
                           ),
                           alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
                           validator:
                               _specValidator(context.loc.selectSpecValidator),
                           hint: Text(context.loc.pickSpec),
@@ -73,11 +74,11 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 5),
                                   SvgPicture.asset(
                                     Assets.specialityImage(e.en),
-                                    width: 50,
-                                    height: 50,
+                                    width: 35,
+                                    height: 35,
                                   ),
                                   const SizedBox(width: 10),
                                   Text(l.isEnglish ? e.en : e.ar),
