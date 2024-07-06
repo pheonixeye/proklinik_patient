@@ -16,6 +16,18 @@ class AboutCardXl extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: ExpansionTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          collapsedShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
           initiallyExpanded: true,
           title: Text(
             "About The Doctor",
@@ -31,7 +43,10 @@ class AboutCardXl extends StatelessWidget {
           ),
           children: const [
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16,
+              ),
               child: Row(
                 children: [
                   Flexible(

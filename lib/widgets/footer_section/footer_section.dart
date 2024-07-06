@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -70,27 +71,23 @@ class FooterSection extends StatelessWidget {
                         },
                   child: Row(
                     children: [
-                      SizedBox(width: context.isMobile ? 10 : 50),
+                      SizedBox(width: context.isMobile ? 16 : 50),
                       Image.asset(
                         Assets.icon,
                         width: 40,
                         height: 40,
                       ),
-                      const SizedBox(width: 20),
-                      const Text(
+                      SizedBox(width: context.isMobile ? 10 : 20),
+                      Text(
                         "ProKliniK",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: _titleStyle,
                       ),
                     ],
                   ),
                 ),
                 subtitle: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: context.isMobile ? 10 : 50),
+                      horizontal: context.isMobile ? 16 : 50),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -169,10 +166,6 @@ class FooterSection extends StatelessWidget {
                   children: [
                     const Gap(10),
                     FooterBtn(
-                      title: context.loc.medicalLibrary,
-                      onTap: () {},
-                    ),
-                    FooterBtn(
                       title: context.loc.contactUs,
                       onTap: () {},
                     ),
@@ -207,7 +200,7 @@ class FooterSection extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(5),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -215,7 +208,7 @@ class FooterSection extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(5),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -223,7 +216,7 @@ class FooterSection extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const Gap(10),
+                    const Gap(5),
                   ],
                 ),
               ),

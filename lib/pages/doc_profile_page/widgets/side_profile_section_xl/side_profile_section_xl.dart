@@ -10,7 +10,7 @@ class SideProfileSectionXl extends StatelessWidget {
     return Expanded(
       flex: 465,
       child: SizedBox(
-        height: MediaQuery.sizeOf(context).height - 100,
+        height: MediaQuery.sizeOf(context).height,
         child: Column(
           children: [
             ///white upper margin
@@ -126,6 +126,34 @@ class SideProfileSectionXl extends StatelessWidget {
                             ),
                           )
                         ],
+                      ),
+                    ),
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: AppTheme.appBarColor,
+                    ),
+                    SizedBox(
+                      height: 80,
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.pin_drop,
+                          color: Colors.green,
+                        ),
+                        isThreeLine: true,
+                        title: Text(
+                          "Maadi : Carfour St.",
+                          style: TextStyle(
+                            color: AppTheme.mainFontColor,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "Book now to receive the clinic’s address details and phone number",
+                          style: TextStyle(
+                            color: AppTheme.mainFontColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
                     Divider(
