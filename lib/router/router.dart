@@ -17,6 +17,7 @@ import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/utils/utils_keys.dart';
+import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
 
 const _langs = ["en", "ar"];
@@ -40,7 +41,10 @@ class AppRouter {
   static const String login = "login";
   static const String forproviders = "forproviders";
   static const String contactus = "contactus";
-  static const String doc = "doc/:docid";
+  static const String docquery = "doc/:docid";
+  static const String doc = "doc";
+  // ignore: constant_identifier_names
+  static const String _404 = "404";
 
   static final router = GoRouter(
     refreshListenable: Listenable.merge(
@@ -109,6 +113,15 @@ class AppRouter {
                 },
                 routes: [
                   GoRoute(
+                    name: _404,
+                    path: _404,
+                    builder: (context, state) {
+                      return ErrorPage(
+                        key: state.pageKey,
+                      );
+                    },
+                  ),
+                  GoRoute(
                     path: signup,
                     name: signup,
                     builder: (context, state) {
@@ -154,13 +167,25 @@ class AppRouter {
                     },
                   ),
                   GoRoute(
-                    name: doc,
                     path: doc,
+                    name: doc,
+                    builder: (context, state) {
+                      return const CentralLoading();
+                    },
+                    redirect: (context, state) {
+                      final lang = state.pathParameters["lang"];
+                      return "/$lang/$_404";
+                    },
+                  ),
+                  GoRoute(
+                    name: docquery,
+                    path: docquery,
                     builder: (context, state) {
                       final query = state.pathParameters;
                       final docId = query["docid"];
                       if (docId == null || docId.isEmpty) {
-                        throw Exception("Invalid Doctor Id.");
+                        throw Exception(
+                            "Invalid Doctor Id.(from docquery route)");
                       }
                       final key = ValueKey((docId, state.pageKey));
                       return ChangeNotifierProvider(

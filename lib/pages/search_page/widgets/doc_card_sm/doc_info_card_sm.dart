@@ -17,7 +17,7 @@ class DocInfoCardSm extends StatelessWidget {
         onTap: () {
           //TODO: navigate to doctor profile page by id
           GoRouter.of(context).goNamed(
-            AppRouter.doc,
+            AppRouter.docquery,
             pathParameters: {
               ...defaultPathParameters(context),
               "docid": "ifAbsent"
