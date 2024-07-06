@@ -95,9 +95,11 @@ class AppRouter {
         routes: [
           ShellRoute(
             pageBuilder: (context, state, child) {
+              final lang = state.pathParameters["lang"]!;
+              final key = ValueKey((lang, state.pageKey));
               return MaterialPage(
                 child: ShellPage(
-                  key: state.pageKey,
+                  key: key,
                   child: child,
                 ),
               );
@@ -107,6 +109,8 @@ class AppRouter {
                 name: home,
                 path: home,
                 builder: (context, state) {
+                  // final lang = state.pathParameters["lang"]!;
+                  // final key = ValueKey((lang, state.pageKey));
                   return HomePage(
                     key: state.pageKey,
                   );
