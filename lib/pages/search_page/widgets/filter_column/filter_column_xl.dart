@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class FilterColumnXl extends StatefulWidget {
@@ -45,17 +46,17 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                   ),
                   color: AppTheme.appBarColor,
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    SizedBox(width: 20),
-                    Icon(
+                    const SizedBox(width: 20),
+                    const Icon(
                       Icons.filter_alt_outlined,
                       color: Colors.white,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text(
-                      "Filters",
-                      style: TextStyle(
+                      context.loc.filter,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                         color: Colors.white,
@@ -70,28 +71,28 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                     const Icon(Icons.calendar_month_outlined),
                     const SizedBox(width: 10),
                     Text(
-                      "Availability",
+                      context.loc.avalability,
                       style: _filterTitleStyle,
                     ),
                   ],
                 ),
                 children: [
                   CheckboxListTile(
-                    title: const Text("Any Date"),
+                    title: Text(context.loc.anyDate),
                     value: true,
                     onChanged: (value) {
                       //TODO: implement filtering
                     },
                   ),
                   CheckboxListTile(
-                    title: const Text("Today"),
+                    title: Text(context.loc.today),
                     value: true,
                     onChanged: (value) {
                       //TODO: implement filtering
                     },
                   ),
                   CheckboxListTile(
-                    title: const Text("Tomorrow"),
+                    title: Text(context.loc.tomorrow),
                     value: true,
                     onChanged: (value) {
                       //TODO: implement filtering
@@ -106,22 +107,22 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                     const Icon(FontAwesomeIcons.dollarSign),
                     const SizedBox(width: 10),
                     Text(
-                      "Fees",
+                      context.loc.fees,
                       style: _filterTitleStyle,
                     ),
                   ],
                 ),
                 children: [
                   RadioListTile(
-                    title: const Text("Any"),
-                    value: "any",
+                    title: Text(context.loc.all),
+                    value: "all",
                     groupValue: null,
                     onChanged: (value) {
                       //TODO: implement filtering
                     },
                   ),
                   RadioListTile(
-                    title: const Text("Less Than 300 EGP"),
+                    title: Text(context.loc.lessThan300),
                     value: "lessThan300",
                     groupValue: null,
                     onChanged: (value) {
@@ -129,7 +130,7 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                     },
                   ),
                   RadioListTile(
-                    title: const Text("More Than 300 EGP"),
+                    title: Text(context.loc.moreThan300),
                     value: "moreThan300",
                     groupValue: null,
                     onChanged: (value) {
@@ -145,14 +146,14 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                     const Icon(Icons.navigation_outlined),
                     const SizedBox(width: 10),
                     Text(
-                      "Location",
+                      context.loc.location,
                       style: _filterTitleStyle,
                     ),
                   ],
                 ),
                 children: [
                   RadioListTile(
-                    title: const Text("Any"),
+                    title: Text(context.loc.any),
                     value: "any",
                     groupValue: null,
                     onChanged: (value) {
@@ -160,7 +161,7 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                     },
                   ),
                   RadioListTile(
-                    title: const Text("Nearest First"),
+                    title: Text(context.loc.nearestFirst),
                     value: "nearestFirst",
                     groupValue: null,
                     onChanged: (value) {

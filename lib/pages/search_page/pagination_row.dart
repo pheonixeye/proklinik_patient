@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
@@ -137,7 +138,7 @@ class _ClickablePageNumberState extends State<ClickablePageNumber> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    widget.pageNumber,
+                    ArabicNumbers.convert(widget.pageNumber),
                     style: TextStyle(
                       color: (isHovering || widget.isSelected)
                           ? AppTheme.secondaryOrangeColor

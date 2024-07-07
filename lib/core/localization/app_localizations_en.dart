@@ -162,4 +162,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => 'Loading...';
+
+  @override
+  String get doctor => 'Doctor';
+
+  @override
+  String get specTitle => 'Speciality : ';
+
+  @override
+  String get feesTitle => 'Fees : ';
+
+  @override
+  String get waitingTimeTitle => 'Waiting Time : ';
+
+  @override
+  String get ourHotlineTitle => '18888 : ';
+
+  @override
+  String get costRegularSubtitle => 'Cost Of Regular Call';
+
+  @override
+  String get book => 'Book';
+
+  @override
+  String get minutes => 'Minutes';
+
+  @override
+  String get sortBy => 'Sort By';
+
+  @override
+  String get sorting => 'Sorting : ';
+
+  @override
+  String get bestMatch => 'Best Match';
+
+  @override
+  String get priceL => 'Price : Low To High';
+
+  @override
+  String get priceH => 'Price : High To Low';
+
+  @override
+  String get waitingTime => 'Waiting Time';
+
+  @override
+  String get topRated => 'Top Rated';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get avalability => 'Availability';
+
+  @override
+  String get anyDate => 'Any Date';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get tomorrow => 'Tomorrow';
+
+  @override
+  String get fees => 'Fees';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get lessThan300 => 'Less Than 300 EGP';
+
+  @override
+  String get moreThan300 => 'More Than 300 EGP';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get any => 'Any';
+
+  @override
+  String get nearestFirst => 'From Near To Far';
+
+  @override
+  String get noResults => 'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.';
 }

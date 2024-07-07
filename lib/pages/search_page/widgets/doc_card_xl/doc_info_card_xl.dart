@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/functions/scroll_direction.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_image_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/router/router.dart';
 
 class DocInfoCardXl extends StatefulWidget {
-  const DocInfoCardXl({super.key});
+  const DocInfoCardXl({super.key, required this.doctor});
+  final Doctor doctor;
 
   //TODO: accept doctor info
   //TODO: translate component
@@ -80,11 +82,15 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
             child: Row(
               children: [
                 ///doctor image section
-                const DocImageXl(),
+                DocImageXl(
+                  doctor: widget.doctor,
+                ),
                 const SizedBox(width: 10),
 
                 ///doctor data section
-                const DocDataXl(),
+                DocDataXl(
+                  doctor: widget.doctor,
+                ),
                 const SizedBox(width: 10),
 
                 ///Times Section

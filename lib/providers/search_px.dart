@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:patient/constants/dummy_doctors.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/models/query_object.dart';
 
 class PxSearchController extends ChangeNotifier {
@@ -10,8 +12,8 @@ class PxSearchController extends ChangeNotifier {
     init();
   }
 
-  List<String>? _doctors;
-  List<String>? get doctors => _doctors;
+  List<Doctor>? _doctors;
+  List<Doctor>? get doctors => _doctors;
 
   Future<void> init() async {
     //TODO: perform base search query
@@ -19,11 +21,11 @@ class PxSearchController extends ChangeNotifier {
       print("PxSearchController().init($query)");
     }
     await Future.delayed(const Duration(seconds: 1), () {
-      final data = <String>[];
+      final data = DOCTORS.where((e) => e.speciality_en == query.spec).toList();
       _doctors = data;
       notifyListeners();
       if (kDebugMode) {
-        print("PxSearchController().init($_doctors)");
+        print("PxSearchController().init(${_doctors?.map((x) => x.name_en)})");
       }
     });
   }

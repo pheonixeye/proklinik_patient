@@ -410,6 +410,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading...'**
   String get loading;
+
+  /// No description provided for @doctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor'**
+  String get doctor;
+
+  /// No description provided for @specTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Speciality : '**
+  String get specTitle;
+
+  /// No description provided for @feesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fees : '**
+  String get feesTitle;
+
+  /// No description provided for @waitingTimeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting Time : '**
+  String get waitingTimeTitle;
+
+  /// No description provided for @ourHotlineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'18888 : '**
+  String get ourHotlineTitle;
+
+  /// No description provided for @costRegularSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost Of Regular Call'**
+  String get costRegularSubtitle;
+
+  /// No description provided for @book.
+  ///
+  /// In en, this message translates to:
+  /// **'Book'**
+  String get book;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Minutes'**
+  String get minutes;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort By'**
+  String get sortBy;
+
+  /// No description provided for @sorting.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorting : '**
+  String get sorting;
+
+  /// No description provided for @bestMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Match'**
+  String get bestMatch;
+
+  /// No description provided for @priceL.
+  ///
+  /// In en, this message translates to:
+  /// **'Price : Low To High'**
+  String get priceL;
+
+  /// No description provided for @priceH.
+  ///
+  /// In en, this message translates to:
+  /// **'Price : High To Low'**
+  String get priceH;
+
+  /// No description provided for @waitingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting Time'**
+  String get waitingTime;
+
+  /// No description provided for @topRated.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Rated'**
+  String get topRated;
+
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @avalability.
+  ///
+  /// In en, this message translates to:
+  /// **'Availability'**
+  String get avalability;
+
+  /// No description provided for @anyDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Any Date'**
+  String get anyDate;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @tomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow'**
+  String get tomorrow;
+
+  /// No description provided for @fees.
+  ///
+  /// In en, this message translates to:
+  /// **'Fees'**
+  String get fees;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @lessThan300.
+  ///
+  /// In en, this message translates to:
+  /// **'Less Than 300 EGP'**
+  String get lessThan300;
+
+  /// No description provided for @moreThan300.
+  ///
+  /// In en, this message translates to:
+  /// **'More Than 300 EGP'**
+  String get moreThan300;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @any.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get any;
+
+  /// No description provided for @nearestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'From Near To Far'**
+  String get nearestFirst;
+
+  /// No description provided for @noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.'**
+  String get noResults;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

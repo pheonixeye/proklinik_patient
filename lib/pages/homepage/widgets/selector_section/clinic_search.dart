@@ -74,6 +74,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  if (context.isMobile) const Spacer(),
                                   const SizedBox(width: 5),
                                   SvgPicture.asset(
                                     Assets.specialityImage(e.en),
@@ -82,6 +83,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                                   ),
                                   const SizedBox(width: 10),
                                   Text(l.isEnglish ? e.en : e.ar),
+                                  if (context.isMobile) const Spacer(),
                                 ],
                               ),
                             );

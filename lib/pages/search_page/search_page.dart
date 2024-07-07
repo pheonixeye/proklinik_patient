@@ -11,6 +11,7 @@ import 'package:patient/providers/search_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:patient/widgets/no_results_found/no_results_found.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
@@ -35,6 +36,10 @@ class _SearchPageState extends State<SearchPage> {
         while (sc.doctors == null) {
           return const CentralLoading();
         }
+        // while (sc.doctors != null && sc.doctors!.isEmpty) {
+        //   return const NoResultsFound();
+        // }
+
         return Container(
           decoration: const BoxDecoration(
             color: AppTheme.greyBackgroundColor,
@@ -60,11 +65,22 @@ class _SearchPageState extends State<SearchPage> {
                           context.isMobile
                               ? const SortingRowSm()
                               : const SortingRowXl(),
-                          ...List.generate(10, (index) {
-                            return context.isMobile
-                                ? const DocInfoCardSm()
-                                : const DocInfoCardXl();
-                          }),
+                          if (sc.doctors!.isEmpty)
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: context.isMobile ? 0 : 50.0),
+                              child: const NoResultsFound(),
+                            )
+                          else
+                            ...sc.doctors!.map((doctor) {
+                              return context.isMobile
+                                  ? DocInfoCardSm(
+                                      doctor: doctor,
+                                    )
+                                  : DocInfoCardXl(
+                                      doctor: doctor,
+                                    );
+                            }),
                         ],
                       ),
                     ),

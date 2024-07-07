@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_lower.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_upper.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_image_sm.dart';
@@ -7,7 +8,8 @@ import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/router/router.dart';
 
 class DocInfoCardSm extends StatelessWidget {
-  const DocInfoCardSm({super.key});
+  const DocInfoCardSm({super.key, required this.doctor});
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -39,35 +41,43 @@ class DocInfoCardSm extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.green.shade100,
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Expanded(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
 
                             ///image avatar
-                            DocImageSm(),
-                            SizedBox(width: 10),
+                            DocImageSm(
+                              doctor: doctor,
+                            ),
+                            const SizedBox(width: 10),
 
                             ///doctor data
-                            DocDataSmUpper(),
-                            SizedBox(width: 10),
+                            DocDataSmUpper(
+                              doctor: doctor,
+                            ),
+                            const SizedBox(width: 10),
                           ],
                         ),
                       ),
 
                       ///tag filer chips
-                      TagsRowXlSm(),
+                      TagsRowXlSm(
+                        doctor: doctor,
+                      ),
                     ],
                   ),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 flex: 220,
-                child: DocDataSmLower(),
+                child: DocDataSmLower(
+                  doctor: doctor,
+                ),
               ),
             ],
           ),

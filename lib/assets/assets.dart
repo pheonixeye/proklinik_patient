@@ -13,4 +13,8 @@ class Assets {
   static String specialityImage(String specEnName) {
     return "assets/images/icons_svg/$specEnName-color.svg";
   }
+
+  static String doctorAvatar(int syndId) {
+    return "assets/images/doc_avatars/av${syndId}_.jpeg";
+  }
 }

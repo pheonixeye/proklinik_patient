@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -170,7 +171,7 @@ class OffersSection extends StatelessWidget {
                                                                 100)
                                                             .round();
                                                     return Text(
-                                                      "$discount %",
+                                                      "${discount.toString().toArabicNumber(context)} %",
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       ),
@@ -199,7 +200,8 @@ class OffersSection extends StatelessWidget {
                                           ),
                                           subtitle: Text.rich(
                                             TextSpan(
-                                              text: x.pricePre,
+                                              text: x.pricePre
+                                                  .toArabicNumber(context),
                                               children: [
                                                 const TextSpan(text: " "),
                                                 TextSpan(
@@ -212,7 +214,8 @@ class OffersSection extends StatelessWidget {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: x.pricePost,
+                                                  text: x.pricePost
+                                                      .toArabicNumber(context),
                                                   children: [
                                                     const TextSpan(text: " "),
                                                     TextSpan(

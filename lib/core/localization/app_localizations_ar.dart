@@ -162,4 +162,88 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get loading => 'جاري التحميل...';
+
+  @override
+  String get doctor => 'دكتور';
+
+  @override
+  String get specTitle => 'التخصص : ';
+
+  @override
+  String get feesTitle => 'الكشف : ';
+
+  @override
+  String get waitingTimeTitle => 'وقت الانتظار : ';
+
+  @override
+  String get ourHotlineTitle => '18888 : ';
+
+  @override
+  String get costRegularSubtitle => 'بسعر المكالمة العادية';
+
+  @override
+  String get book => 'احجز الان';
+
+  @override
+  String get minutes => 'دقيقة';
+
+  @override
+  String get sortBy => 'اختر الترتيب';
+
+  @override
+  String get sorting => 'ترتيب : ';
+
+  @override
+  String get bestMatch => 'الاكثر تطابقا';
+
+  @override
+  String get priceL => 'الاقل سعرا';
+
+  @override
+  String get priceH => 'الاعلي سعرا';
+
+  @override
+  String get waitingTime => 'وقت الانتظار';
+
+  @override
+  String get topRated => 'اعلي تقييمات';
+
+  @override
+  String get filter => 'حدد بحثك';
+
+  @override
+  String get avalability => 'المواعيد المتاحة';
+
+  @override
+  String get anyDate => 'اي تاريخ';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get tomorrow => 'غدا';
+
+  @override
+  String get fees => 'سعر الكشف';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get lessThan300 => 'اقل من ٣٠٠ جنيه';
+
+  @override
+  String get moreThan300 => 'اكثر من ٣٠٠ جنيه';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get any => 'كل المواقع';
+
+  @override
+  String get nearestFirst => 'من الاقرب للابعد';
+
+  @override
+  String get noResults => 'لم يتم العثور على نتائج مطابقة لمعايير البحث، يرجى تعديل البحث والمحاولة مرة أخرى.';
 }

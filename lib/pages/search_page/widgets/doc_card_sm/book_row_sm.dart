@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
@@ -22,6 +23,7 @@ class BookRowSm extends StatelessWidget {
               ),
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
+                //TODO: fetch from clinic
                 child: Text(
                   "Available Today From 09:00 P.M.",
                   style: TextStyle(
@@ -48,9 +50,9 @@ class BookRowSm extends StatelessWidget {
                 pathParameters: defaultPathParameters(context),
               );
             },
-            child: const Text(
-              "Book",
-              style: TextStyle(
+            child: Text(
+              context.loc.book,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

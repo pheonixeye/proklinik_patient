@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
+import 'package:patient/models/doctor.dart';
 
 class DocImageSm extends StatelessWidget {
-  const DocImageSm({super.key});
+  const DocImageSm({super.key, required this.doctor});
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,9 @@ class DocImageSm extends StatelessWidget {
             width: 0.5,
           ),
           shape: BoxShape.circle,
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage(
-              Assets.icon,
+              Assets.doctorAvatar(doctor.synd_id),
             ),
             fit: BoxFit.cover,
           ),

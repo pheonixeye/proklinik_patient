@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
+import 'package:patient/models/doctor.dart';
 
 class DocImageXl extends StatelessWidget {
-  const DocImageXl({super.key});
+  const DocImageXl({super.key, required this.doctor});
+  final Doctor doctor;
 
   //TODO: accept doctor image
 
@@ -21,9 +23,9 @@ class DocImageXl extends StatelessWidget {
                 width: 0.5,
               ),
               shape: BoxShape.circle,
-              image: const DecorationImage(
+              image: DecorationImage(
                 image: AssetImage(
-                  Assets.icon,
+                  Assets.doctorAvatar(doctor.synd_id),
                 ),
                 fit: BoxFit.cover,
               ),

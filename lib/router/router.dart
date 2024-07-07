@@ -109,8 +109,6 @@ class AppRouter {
                 name: home,
                 path: home,
                 builder: (context, state) {
-                  // final lang = state.pathParameters["lang"]!;
-                  // final key = ValueKey((lang, state.pageKey));
                   return HomePage(
                     key: state.pageKey,
                   );

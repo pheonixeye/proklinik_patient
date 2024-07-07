@@ -1,41 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/models/doctor.dart';
+import 'package:patient/models/tags.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-class _TagRowData {
-  final String titleEn;
-  final String titleAr;
-  final IconData iconData;
-
-  const _TagRowData({
-    required this.titleEn,
-    required this.titleAr,
-    required this.iconData,
-  });
-}
-
-const List<_TagRowData> _dummyData = [
-  _TagRowData(
-    titleEn: "Friendly",
-    titleAr: "ودود",
-    iconData: Icons.eco,
-  ),
-  _TagRowData(
-    titleEn: "Good Listener",
-    titleAr: "مستمع جيد",
-    iconData: FontAwesomeIcons.earListen,
-  ),
-  _TagRowData(
-    titleEn: "Informative",
-    titleAr: "شرحه مفصل",
-    iconData: Icons.message,
-  ),
-];
-
 class TagsRowXlSm extends StatelessWidget {
-  const TagsRowXlSm({super.key});
+  const TagsRowXlSm({super.key, required this.doctor});
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +17,8 @@ class TagsRowXlSm extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: Row(
           children: [
-            ..._dummyData.map(
-              (e) => TagRowCard(data: e),
+            ...doctor.tags.map(
+              (e) => TagRowCard(data: tagFromString(e)),
             ),
           ],
         ),
@@ -62,7 +34,7 @@ class TagRowCard extends StatelessWidget {
     required this.data,
   });
   // ignore: library_private_types_in_public_api
-  final _TagRowData data;
+  final TagRowData data;
 
   @override
   Widget build(BuildContext context) {
