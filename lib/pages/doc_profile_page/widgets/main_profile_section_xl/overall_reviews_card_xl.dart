@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class OverallReviewsCardXl extends StatelessWidget {
-  const OverallReviewsCardXl({super.key});
+  const OverallReviewsCardXl({super.key, required this.model});
+  final ServerResponseModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class OverallReviewsCardXl extends StatelessWidget {
         child: ListTile(
           isThreeLine: true,
           title: Text(
-            "Patient Reviews",
+            context.loc.patientReviews,
             style: TextStyle(
               color: AppTheme.mainFontColor,
               fontWeight: FontWeight.bold,
@@ -38,16 +43,8 @@ class OverallReviewsCardXl extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ...List.generate(5, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: Icon(
-                          index == 4 ? Icons.star_half : Icons.star,
-                          color: Colors.amber,
-                          size: 32,
-                        ),
-                      );
-                    }),
+                    ...model.doctor.rating
+                        .toStars(size: 32, padding: const EdgeInsets.all(4)),
                   ],
                 ),
               ),
@@ -57,7 +54,7 @@ class OverallReviewsCardXl extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Overall Rating",
+                      context.loc.overallRating,
                       style: TextStyle(
                         color: AppTheme.mainFontColor,
                         fontSize: 16,
@@ -70,11 +67,11 @@ class OverallReviewsCardXl extends StatelessWidget {
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "4.3 / 5",
-                          style: TextStyle(
+                          "${model.doctor.rating} / 5",
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
@@ -86,7 +83,7 @@ class OverallReviewsCardXl extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "From 124 Visitors",
+                  "${context.loc.from} ${model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                     fontSize: 14,

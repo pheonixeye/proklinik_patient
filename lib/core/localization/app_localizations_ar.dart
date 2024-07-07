@@ -246,4 +246,82 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noResults => 'لم يتم العثور على نتائج مطابقة لمعايير البحث، يرجى تعديل البحث والمحاولة مرة أخرى.';
+
+  @override
+  String get overallRating => 'التقييم العام';
+
+  @override
+  String get from => 'من';
+
+  @override
+  String get visitors => 'زائر للدكتور';
+
+  @override
+  String get to => 'حتي';
+
+  @override
+  String get am => 'صباجا';
+
+  @override
+  String get pm => 'مساء';
+
+  @override
+  String get noAppointments => 'لا يوجد مواعيد متاحة.';
+
+  @override
+  String get chooseYourApp => 'اخـتار ميعاد الحجز';
+
+  @override
+  String get bookAndPay => 'احجز أونلاين، ادفع في العيادة!';
+
+  @override
+  String get doctorRequiresReservation => 'الدكتور يشترط الحجز المسبق!';
+
+  @override
+  String get doctorBookingDetails => 'تفاصيل الحجز';
+
+  @override
+  String get doctorRating => 'تقييم الطبيب';
+
+  @override
+  String get views => 'مشاهدة';
+
+  @override
+  String get showAllReviews => 'اظهر التقييمات';
+
+  @override
+  String get loadMore => 'المزيد';
+
+  @override
+  String get aboutTheDoctor => 'معلومات عن الدكتور';
+
+  @override
+  String get patientReviews => 'تقييم المرضي';
+
+  @override
+  String get bookingInformation => 'معلومات الحجز';
+
+  @override
+  String get examination => 'كشف طبي';
+
+  @override
+  String get bookToRecieveInfo => 'احجز الان وسيتم ارسال تفاصيل العنوان بالكامل ورقم العيادة';
+
+  @override
+  String get cancel => 'الغاء';
+
+  @override
+  String get enterYourInfo => 'ادخل بيانات الحجز';
+
+  @override
+  String get ptNameForm => 'اسم المريض الذي سيقوم بالكشف';
+
+  @override
+  String get optional => 'اختياري';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ اثناء البحث';
+
+  @override
+  String get errorText => 'يبدو أن هذه الصفحة قد تم نقلها أو أنها غير متوفرة في الوقت الحالي، يرجى المحاولة مرة أخرى لاحقًا.';
 }

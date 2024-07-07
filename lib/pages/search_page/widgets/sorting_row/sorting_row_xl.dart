@@ -36,7 +36,7 @@ class SortingRowXl extends StatelessWidget {
               const SizedBox(width: 10),
               //TODO: number of results
               Text(
-                "(${ArabicNumbers.convert("${sc.doctors?.length}")} ${context.loc.doctor})",
+                "(${ArabicNumbers.convert("${sc.responseModel?.length}")} ${context.loc.doctor})",
                 style: TextStyle(
                   fontSize: 14,
                   color: AppTheme.mainFontColor,

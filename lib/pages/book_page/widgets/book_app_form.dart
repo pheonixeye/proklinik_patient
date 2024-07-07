@@ -14,7 +14,7 @@ class BookAppForm extends StatefulWidget {
 }
 
 class _BookAppFormState extends State<BookAppForm> {
-  //TODO: translate component
+  //todo: translate component
   //TODO: recieve and validate booking info
   final formKey = GlobalKey<FormState>();
 
@@ -62,9 +62,9 @@ class _BookAppFormState extends State<BookAppForm> {
                         color: Colors.green,
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
-                        "Enter Your Info.",
-                        style: TextStyle(
+                      child: Text(
+                        context.loc.enterYourInfo,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
@@ -77,7 +77,7 @@ class _BookAppFormState extends State<BookAppForm> {
                       child: TextFormField(
                         validator: _nameValidator,
                         decoration: InputDecoration(
-                          hintText: "Patient Name (Going To The Doctor)",
+                          hintText: context.loc.ptNameForm,
                           icon: const Icon(Icons.person),
                           iconColor: AppTheme.appBarColor,
                         ),
@@ -89,7 +89,7 @@ class _BookAppFormState extends State<BookAppForm> {
                       child: TextFormField(
                         validator: _phoneNumberValidator,
                         decoration: InputDecoration(
-                          hintText: "Mobile Number",
+                          hintText: context.loc.mobileNumber,
                           icon: const Icon(Icons.phone),
                           iconColor: AppTheme.appBarColor,
                         ),
@@ -100,7 +100,8 @@ class _BookAppFormState extends State<BookAppForm> {
                       padding: const EdgeInsets.all(24.0),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          hintText: "Email (Optional)",
+                          hintText:
+                              "${context.loc.email} (${context.loc.optional})",
                           icon: const Icon(Icons.mail),
                           iconColor: AppTheme.appBarColor,
                         ),
@@ -110,7 +111,7 @@ class _BookAppFormState extends State<BookAppForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Book now to receive the clinic’s address details and phone number",
+                        context.loc.bookToRecieveInfo,
                         style: TextStyle(
                           color: AppTheme.mainFontColor,
                         ),
@@ -140,14 +141,14 @@ class _BookAppFormState extends State<BookAppForm> {
                             }
                             //TODO: navigate to post booking info page
                           },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
                               vertical: 12.0,
                               horizontal: 48,
                             ),
                             child: Text(
-                              "Book",
-                              style: TextStyle(
+                              context.loc.book,
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),
@@ -168,7 +169,7 @@ class _BookAppFormState extends State<BookAppForm> {
                               AppRouter.home,
                               pathParameters: defaultPathParameters(context),
                             );
-                            //todo: nullify booking data
+                            //TODO: nullify booking data
                             context.read<PxBooking>().setBookingData(null);
                           },
                           child: Padding(
@@ -177,7 +178,7 @@ class _BookAppFormState extends State<BookAppForm> {
                               horizontal: 24,
                             ),
                             child: Text(
-                              "Cancel",
+                              context.loc.cancel,
                               style: TextStyle(
                                 color: AppTheme.mainFontColor,
                               ),

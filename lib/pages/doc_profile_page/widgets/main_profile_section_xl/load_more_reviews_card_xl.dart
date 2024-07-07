@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class LoadMoreReviewsCardXl extends StatelessWidget {
@@ -13,7 +14,7 @@ class LoadMoreReviewsCardXl extends StatelessWidget {
       color: Colors.white,
       child: Text.rich(
         TextSpan(
-          text: "Load More",
+          text: context.loc.loadMore,
           recognizer: TapGestureRecognizer()
             ..onTap = () {
               //TODO: load more reviews

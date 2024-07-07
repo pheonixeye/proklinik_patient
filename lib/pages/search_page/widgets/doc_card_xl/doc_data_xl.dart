@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/doctor.dart';
+import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class DocDataXl extends StatelessWidget {
-  const DocDataXl({super.key, required this.doctor});
-  final Doctor doctor;
+  const DocDataXl({super.key, required this.responseModel});
+  final ServerResponseModel responseModel;
 
-  //TODO: accept doctor data and rating overall
+  //todo: accept doctor data and rating overall
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,9 @@ class DocDataXl extends StatelessWidget {
                     children: [
                       const TextSpan(text: " "),
                       TextSpan(
-                        text: l.isEnglish ? doctor.name_en : doctor.name_ar,
+                        text: l.isEnglish
+                            ? responseModel.doctor.name_en
+                            : responseModel.doctor.name_ar,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -46,7 +49,9 @@ class DocDataXl extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  l.isEnglish ? doctor.title_en : doctor.title_ar,
+                  l.isEnglish
+                      ? responseModel.doctor.title_en
+                      : responseModel.doctor.title_ar,
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                   ),
@@ -57,19 +62,22 @@ class DocDataXl extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0),
                 title: Row(
                   children: [
-                    //TODO: generate star row from double rating
-                    ...List.generate(
-                      5,
-                      (index) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                    ),
+                    //todo: generate star row from double rating
+
+                    // ...List.generate(
+                    //   5,
+                    //   (index) => const Icon(
+                    //     Icons.star,
+                    //     color: Colors.amber,
+                    //   ),
+                    // ),
+
+                    ...responseModel.doctor.rating.toStars(),
                   ],
                 ),
-                //TODO: fetch from ratings
+                //todo: fetch from ratings
                 subtitle: Text(
-                  "Overall Rating From 129 Visitors",
+                  "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
                   style: TextStyle(
                     fontSize: 10,
                     color: AppTheme.mainFontColor,
@@ -80,29 +88,34 @@ class DocDataXl extends StatelessWidget {
               SecondaryDataItemXl(
                 iconData: Icons.medical_services,
                 title: context.loc.specTitle,
-                data: l.isEnglish ? doctor.speciality_en : doctor.speciality_ar,
+                data: l.isEnglish
+                    ? responseModel.doctor.speciality_en
+                    : responseModel.doctor.speciality_ar,
               ),
-              //TODO: fetch from selected clinic
+              //todo: fetch from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.pin_drop,
                 title: l.isEnglish
-                    ? doctor.destinations[0].areaEn
-                    : doctor.destinations[0].areaAr + " : ",
+                    ? responseModel.clinic.destination.areaEn
+                    // ignore: prefer_interpolation_to_compose_strings
+                    : responseModel.clinic.destination.areaAr + " : ",
                 data: l.isEnglish
-                    ? doctor.destinations[0].addressEn
-                    : doctor.destinations[0].addressAr,
+                    ? responseModel.clinic.destination.addressEn
+                    : responseModel.clinic.destination.addressAr,
               ),
-              //TODO: fetch fees from selected clinic
+              //todo: fetch fees from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.monetization_on,
                 title: context.loc.feesTitle,
-                data: "${"250".toArabicNumber(context)} ${context.loc.pound}",
+                data:
+                    "${responseModel.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
               ),
-              //TODO: fetch from selected clinic
+              //todo: fetch from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.timer,
                 title: context.loc.waitingTimeTitle,
-                data: "${"30".toArabicNumber(context)} ${context.loc.minutes}",
+                data:
+                    "${responseModel.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
               ),
               SecondaryDataItemXl(
                 iconData: Icons.phone,
@@ -110,7 +123,7 @@ class DocDataXl extends StatelessWidget {
                 data: context.loc.costRegularSubtitle,
               ),
               TagsRowXlSm(
-                doctor: doctor,
+                doctor: responseModel.doctor,
               ),
             ],
           );

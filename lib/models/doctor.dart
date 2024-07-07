@@ -93,7 +93,7 @@ class Doctor extends Equatable {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'id': id,
+      '_id': id,
       'synd_id': synd_id,
       'joined_at': joined_at,
       'name_en': name_en,
@@ -117,7 +117,7 @@ class Doctor extends Equatable {
 
   factory Doctor.fromJson(Map<String, dynamic> map) {
     return Doctor(
-      id: map['id'] as String,
+      id: map['_id'] as String,
       synd_id: map['synd_id'] as int,
       joined_at: map['joined_at'] as String,
       name_en: map['name_en'] as String,

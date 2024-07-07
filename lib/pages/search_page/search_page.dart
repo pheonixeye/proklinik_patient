@@ -33,7 +33,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Consumer2<PxSearchController, PxLocale>(
       builder: (context, sc, l, _) {
-        while (sc.doctors == null) {
+        while (sc.responseModel == null) {
           return const CentralLoading();
         }
         // while (sc.doctors != null && sc.doctors!.isEmpty) {
@@ -65,20 +65,20 @@ class _SearchPageState extends State<SearchPage> {
                           context.isMobile
                               ? const SortingRowSm()
                               : const SortingRowXl(),
-                          if (sc.doctors!.isEmpty)
+                          if (sc.responseModel!.isEmpty)
                             Padding(
                               padding: EdgeInsets.only(
                                   top: context.isMobile ? 0 : 50.0),
                               child: const NoResultsFound(),
                             )
                           else
-                            ...sc.doctors!.map((doctor) {
+                            ...sc.responseModel!.map((response) {
                               return context.isMobile
                                   ? DocInfoCardSm(
-                                      doctor: doctor,
+                                      responseModel: response,
                                     )
                                   : DocInfoCardXl(
-                                      doctor: doctor,
+                                      responseModel: response,
                                     );
                             }),
                         ],

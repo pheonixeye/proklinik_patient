@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class BookRowSm extends StatelessWidget {
-  const BookRowSm({super.key});
+  const BookRowSm({super.key, required this.responseModel});
+  final ServerResponseModel responseModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class BookRowSm extends StatelessWidget {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 //TODO: fetch from clinic
+                //TODO: calculate first available date
                 child: Text(
                   "Available Today From 09:00 P.M.",
                   style: TextStyle(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/doctor.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/book_row_sm.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
 class DocDataSmLower extends StatelessWidget {
-  const DocDataSmLower({super.key, required this.doctor});
-  final Doctor doctor;
+  const DocDataSmLower({super.key, required this.responseModel});
+  final ServerResponseModel responseModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,29 +23,34 @@ class DocDataSmLower extends StatelessWidget {
               SecondaryDataItemXl(
                 iconData: Icons.medical_services,
                 title: context.loc.specTitle,
-                data: l.isEnglish ? doctor.speciality_en : doctor.speciality_ar,
+                data: l.isEnglish
+                    ? responseModel.doctor.speciality_en
+                    : responseModel.doctor.speciality_ar,
               ),
-              //TODO: fetch from selected clinic
+              //todo: fetch from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.pin_drop,
                 title: l.isEnglish
-                    ? doctor.destinations[0].areaEn
-                    : doctor.destinations[0].areaAr + " : ",
+                    ? responseModel.clinic.destination.areaEn
+                    // ignore: prefer_interpolation_to_compose_strings
+                    : responseModel.clinic.destination.areaAr + " : ",
                 data: l.isEnglish
-                    ? doctor.destinations[0].addressEn
-                    : doctor.destinations[0].addressAr,
+                    ? responseModel.clinic.destination.addressEn
+                    : responseModel.clinic.destination.addressAr,
               ),
-              //TODO: fetch fees from selected clinic
+              //todo: fetch fees from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.monetization_on,
                 title: context.loc.feesTitle,
-                data: "${"250".toArabicNumber(context)} ${context.loc.pound}",
+                data:
+                    "${responseModel.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
               ),
-              //TODO: fetch from selected clinic
+              //todo: fetch from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.timer,
                 title: context.loc.waitingTimeTitle,
-                data: "${"30".toArabicNumber(context)} ${context.loc.minutes}",
+                data:
+                    "${responseModel.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
               ),
               SecondaryDataItemXl(
                 iconData: Icons.phone,
@@ -56,7 +61,9 @@ class DocDataSmLower extends StatelessWidget {
               const Spacer(),
 
               ///reserve now row
-              const BookRowSm(),
+              BookRowSm(
+                responseModel: responseModel,
+              ),
               const SizedBox(height: 10),
             ],
           );

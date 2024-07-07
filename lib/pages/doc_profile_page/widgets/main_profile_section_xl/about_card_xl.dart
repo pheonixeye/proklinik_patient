@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/server_response_model.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class AboutCardXl extends StatelessWidget {
-  const AboutCardXl({super.key});
+  const AboutCardXl({super.key, required this.model});
+  final ServerResponseModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,7 @@ class AboutCardXl extends StatelessWidget {
           ),
           initiallyExpanded: true,
           title: Text(
-            "About The Doctor",
+            context.loc.aboutTheDoctor,
             style: TextStyle(
               color: AppTheme.mainFontColor,
               fontWeight: FontWeight.bold,
@@ -41,19 +46,26 @@ class AboutCardXl extends StatelessWidget {
             color: Colors.green,
             size: 16,
           ),
-          children: const [
+          children: [
             Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
                 vertical: 16,
               ),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                        "- MD Pediatric and Neonatology. - Pediatric and Neonatology Consultant. - Consultant of Pulmonology, Asthma, Allergy, Immunology and Vaccinology. - Member of Scientific Council of Egyptian board of Pediatric. - Member of American Academy of Pediatric. - Consultant at Police Hospitals. - Consultant at Wadi Elneel Hospital. - Consultant at Air Force Specialized Hospital."),
-                  ),
-                ],
+              child: Consumer<PxLocale>(
+                builder: (context, l, _) {
+                  return Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          l.isEnglish
+                              ? model.doctor.about_en
+                              : model.doctor.about_ar,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],

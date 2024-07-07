@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/functions/am_pm.dart';
+import 'package:patient/models/schedule.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleCardXl extends StatefulWidget {
-  const ScheduleCardXl({super.key, this.isAvailable = true});
+  const ScheduleCardXl({
+    super.key,
+    this.isAvailable = true,
+    required this.schedule,
+  });
   final bool isAvailable;
+  final Schedule schedule;
 
   @override
   State<ScheduleCardXl> createState() => _ScheduleCardXlState();
@@ -35,10 +43,10 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
           ? 0.7
           : 1.0;
 
-  //TODO: accept clinic schedule object
+  //todo: accept clinic schedule object
   @override
   Widget build(BuildContext context) {
-    //TODO: translate component
+    //todo: translate component
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: MouseRegion(
@@ -95,7 +103,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                       children: widget.isAvailable
                           ? [
                               Text(
-                                "From 07:00 P.M.",
+                                "${context.loc.from} ${widget.schedule.startHour.normalizeHour.toString().padLeft(1, "0")}:${widget.schedule.startMin.toString().padLeft(1, "0")} ${widget.schedule.startHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,
@@ -104,7 +112,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                "To 09:00 P.M.",
+                                "${context.loc.to} ${widget.schedule.endHour.normalizeHour.toString().padLeft(1, "0")}:${widget.schedule.endMin.toString().padLeft(1, "0")} ${widget.schedule.endHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,
@@ -116,7 +124,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                               SizedBox(
                                 width: 100,
                                 child: Text(
-                                  "No Available Appointments",
+                                  context.loc.noAppointments,
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: AppTheme.mainFontColor,
@@ -140,11 +148,11 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                         bottomRight: Radius.circular(8),
                       ),
                     ),
-                    child: const Text.rich(
+                    child: Text.rich(
                       TextSpan(
-                        text: "Book",
+                        text: context.loc.book,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                       ),

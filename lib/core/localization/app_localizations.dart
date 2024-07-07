@@ -578,6 +578,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.'**
   String get noResults;
+
+  /// No description provided for @overallRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Overall Rating'**
+  String get overallRating;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// No description provided for @visitors.
+  ///
+  /// In en, this message translates to:
+  /// **'Visitors'**
+  String get visitors;
+
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get to;
+
+  /// No description provided for @am.
+  ///
+  /// In en, this message translates to:
+  /// **'A.M.'**
+  String get am;
+
+  /// No description provided for @pm.
+  ///
+  /// In en, this message translates to:
+  /// **'P.M.'**
+  String get pm;
+
+  /// No description provided for @noAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'No Available Appointments.'**
+  String get noAppointments;
+
+  /// No description provided for @chooseYourApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Appointment'**
+  String get chooseYourApp;
+
+  /// No description provided for @bookAndPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Book online, Pay at the clinic!'**
+  String get bookAndPay;
+
+  /// No description provided for @doctorRequiresReservation.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor requires reservation!'**
+  String get doctorRequiresReservation;
+
+  /// No description provided for @doctorBookingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Booking Details'**
+  String get doctorBookingDetails;
+
+  /// No description provided for @doctorRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Rating'**
+  String get doctorRating;
+
+  /// No description provided for @views.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get views;
+
+  /// No description provided for @showAllReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Show All Reviews'**
+  String get showAllReviews;
+
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More'**
+  String get loadMore;
+
+  /// No description provided for @aboutTheDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'About The Doctor'**
+  String get aboutTheDoctor;
+
+  /// No description provided for @patientReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient Reviews'**
+  String get patientReviews;
+
+  /// No description provided for @bookingInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Information'**
+  String get bookingInformation;
+
+  /// No description provided for @examination.
+  ///
+  /// In en, this message translates to:
+  /// **'Examination'**
+  String get examination;
+
+  /// No description provided for @bookToRecieveInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Book now to receive the clinic’s address details and phone number.'**
+  String get bookToRecieveInfo;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @enterYourInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Info'**
+  String get enterYourInfo;
+
+  /// No description provided for @ptNameForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient Name (Going To The Doctor)'**
+  String get ptNameForm;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something Went Wrong'**
+  String get somethingWentWrong;
+
+  /// No description provided for @errorText.
+  ///
+  /// In en, this message translates to:
+  /// **'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.'**
+  String get errorText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

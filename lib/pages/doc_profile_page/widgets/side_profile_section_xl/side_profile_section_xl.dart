@@ -1,10 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/functions/scroll_direction.dart';
+import 'package:patient/models/server_response_model.dart';
+import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
-class SideProfileSectionXl extends StatelessWidget {
-  const SideProfileSectionXl({super.key});
+class SideProfileSectionXl extends StatefulWidget {
+  const SideProfileSectionXl({super.key, required this.model});
+  final ServerResponseModel model;
 
+  @override
+  State<SideProfileSectionXl> createState() => _SideProfileSectionXlState();
+}
+
+class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void scrollNext() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.next,
+      );
+  void scrollPrevious() => scrollHorizontally(
+        controller: _controller,
+        direction: HorizontalScrollDirecion.previous,
+      );
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -34,9 +69,9 @@ class SideProfileSectionXl extends StatelessWidget {
                           topRight: Radius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Booking Information",
-                        style: TextStyle(
+                      child: Text(
+                        context.loc.bookingInformation,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
@@ -47,14 +82,14 @@ class SideProfileSectionXl extends StatelessWidget {
                       height: 60,
                       child: ListTile(
                         title: Text(
-                          "Book",
+                          context.loc.book,
                           style: TextStyle(
                             color: AppTheme.mainFontColor,
                           ),
                           textAlign: TextAlign.center,
                         ),
                         subtitle: Text(
-                          "Examination",
+                          context.loc.examination,
                           style: TextStyle(
                             color: AppTheme.appBarColor,
                           ),
@@ -81,15 +116,16 @@ class SideProfileSectionXl extends StatelessWidget {
                               ),
                               subtitle: Text.rich(
                                 TextSpan(
-                                  text: "Fees",
+                                  text: context.loc.fees,
                                   style: TextStyle(
                                     color: AppTheme.mainFontColor,
                                   ),
-                                  children: const [
-                                    TextSpan(text: " "),
+                                  children: [
+                                    const TextSpan(text: " "),
                                     TextSpan(
-                                      text: "700 EGP",
-                                      style: TextStyle(
+                                      text:
+                                          "${widget.model.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -107,15 +143,16 @@ class SideProfileSectionXl extends StatelessWidget {
                               ),
                               subtitle: Text.rich(
                                 TextSpan(
-                                  text: "Waiting Time",
+                                  text: context.loc.waitingTime,
                                   style: TextStyle(
                                     color: AppTheme.mainFontColor,
                                   ),
-                                  children: const [
-                                    TextSpan(text: " : "),
+                                  children: [
+                                    const TextSpan(text: " : "),
                                     TextSpan(
-                                      text: "30 Minutes",
-                                      style: TextStyle(
+                                      text:
+                                          "${widget.model.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -141,14 +178,26 @@ class SideProfileSectionXl extends StatelessWidget {
                           color: Colors.green,
                         ),
                         isThreeLine: true,
-                        title: Text(
-                          "Maadi : Carfour St.",
-                          style: TextStyle(
-                            color: AppTheme.mainFontColor,
-                          ),
+                        title: Consumer<PxLocale>(
+                          builder: (context, l, _) {
+                            final area = l.isEnglish
+                                ? widget.model.clinic.destination.areaEn
+                                : widget.model.clinic.destination.areaAr;
+
+                            final address = l.isEnglish
+                                ? widget.model.clinic.destination.addressEn
+                                : widget.model.clinic.destination.addressAr;
+
+                            return Text(
+                              "$area : $address",
+                              style: TextStyle(
+                                color: AppTheme.mainFontColor,
+                              ),
+                            );
+                          },
                         ),
                         subtitle: Text(
-                          "Book now to receive the clinic’s address details and phone number",
+                          context.loc.bookToRecieveInfo,
                           style: TextStyle(
                             color: AppTheme.mainFontColor,
                             fontWeight: FontWeight.w600,
@@ -161,11 +210,11 @@ class SideProfileSectionXl extends StatelessWidget {
                       thickness: 1,
                       color: AppTheme.appBarColor,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Text(
-                        "Choose Your Appointment",
-                        style: TextStyle(
+                        context.loc.chooseYourApp,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -180,32 +229,30 @@ class SideProfileSectionXl extends StatelessWidget {
                         child: Row(
                           children: [
                             const SizedBox(width: 10),
-                            const IconButton.outlined(
-                              onPressed: null,
-                              icon: Icon(Icons.arrow_back),
+                            IconButton.outlined(
+                              onPressed: scrollPrevious,
+                              icon: const Icon(Icons.arrow_back),
                             ),
                             const SizedBox(width: 10),
 
                             ///times cards
                             Expanded(
-                              child: ListView(
+                              child: ListView.builder(
                                 //TODO: replace with schedule generator
                                 scrollDirection: Axis.horizontal,
-                                // controller: _controller,
-                                children: const [
-                                  ///one times card
-                                  ScheduleCardXl(
-                                    isAvailable: false,
-                                  ),
-                                  ScheduleCardXl(),
-                                  ScheduleCardXl(),
-                                ],
+                                controller: _controller,
+                                itemCount: widget.model.clinic.schedule.length,
+                                itemBuilder: (context, index) {
+                                  final schedule =
+                                      widget.model.clinic.schedule[index];
+                                  return ScheduleCardXl(schedule: schedule);
+                                },
                               ),
                             ),
                             const SizedBox(width: 10),
-                            const IconButton.outlined(
-                              onPressed: null,
-                              icon: Icon(Icons.arrow_forward),
+                            IconButton.outlined(
+                              onPressed: scrollNext,
+                              icon: const Icon(Icons.arrow_forward),
                             ),
                             const SizedBox(width: 10),
                           ],
@@ -221,7 +268,8 @@ class SideProfileSectionXl extends StatelessWidget {
                       height: 50,
                       child: Center(
                         child: Text(
-                          "Reservation required, first-come, first-served",
+                          attendanceFromBool(
+                              context, widget.model.clinic.attendance),
                           style: TextStyle(
                             color: AppTheme.mainFontColor,
                           ),
@@ -233,18 +281,18 @@ class SideProfileSectionXl extends StatelessWidget {
                       thickness: 1,
                       color: AppTheme.appBarColor,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 75,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 70.0),
+                        padding: const EdgeInsets.only(left: 70.0),
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.edit_calendar_outlined,
                             color: Colors.green,
                             size: 48,
                           ),
-                          title: Text("Book online, Pay at the clinic!"),
-                          subtitle: Text("Doctor requires reservation!"),
+                          title: Text(context.loc.bookAndPay),
+                          subtitle: Text(context.loc.doctorRequiresReservation),
                         ),
                       ),
                     ),

@@ -246,4 +246,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noResults => 'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.';
+
+  @override
+  String get overallRating => 'Overall Rating';
+
+  @override
+  String get from => 'From';
+
+  @override
+  String get visitors => 'Visitors';
+
+  @override
+  String get to => 'To';
+
+  @override
+  String get am => 'A.M.';
+
+  @override
+  String get pm => 'P.M.';
+
+  @override
+  String get noAppointments => 'No Available Appointments.';
+
+  @override
+  String get chooseYourApp => 'Choose Your Appointment';
+
+  @override
+  String get bookAndPay => 'Book online, Pay at the clinic!';
+
+  @override
+  String get doctorRequiresReservation => 'Doctor requires reservation!';
+
+  @override
+  String get doctorBookingDetails => 'Doctor Booking Details';
+
+  @override
+  String get doctorRating => 'Doctor Rating';
+
+  @override
+  String get views => 'Views';
+
+  @override
+  String get showAllReviews => 'Show All Reviews';
+
+  @override
+  String get loadMore => 'Load More';
+
+  @override
+  String get aboutTheDoctor => 'About The Doctor';
+
+  @override
+  String get patientReviews => 'Patient Reviews';
+
+  @override
+  String get bookingInformation => 'Booking Information';
+
+  @override
+  String get examination => 'Examination';
+
+  @override
+  String get bookToRecieveInfo => 'Book now to receive the clinic’s address details and phone number.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get enterYourInfo => 'Enter Your Info';
+
+  @override
+  String get ptNameForm => 'Patient Name (Going To The Doctor)';
+
+  @override
+  String get optional => 'Optional';
+
+  @override
+  String get somethingWentWrong => 'Something Went Wrong';
+
+  @override
+  String get errorText => 'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.';
 }

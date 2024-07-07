@@ -63,7 +63,7 @@ class QueryObject extends Equatable {
   }
 
   // ignore: non_constant_identifier_names
-  factory QueryObject._Empty() {
+  factory QueryObject.empty() {
     return const QueryObject(
       type: '',
       spec: '',
@@ -79,7 +79,7 @@ class QueryObject extends Equatable {
 
   factory QueryObject.fromJson(Map<String, dynamic> map) {
     if (map.isEmpty) {
-      return QueryObject._Empty();
+      return QueryObject.empty();
     }
     return QueryObject(
       type: map['type'] as String,

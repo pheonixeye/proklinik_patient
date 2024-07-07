@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 // ignore: non_constant_identifier_names
 List<Doctor> DOCTORS = [
   Doctor(
-    id: const Uuid().v4(),
+    id: "1",
     synd_id: 1,
     joined_at: DateTime.now()
         .subtract(Duration(days: Random().nextInt(365)))
@@ -31,12 +31,15 @@ List<Doctor> DOCTORS = [
     views: 6954,
     destinations: const [
       Destination(
+        id: "1",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "Maadi",
         areaAr: "المعادي",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -65,12 +68,15 @@ List<Doctor> DOCTORS = [
     views: 174401,
     destinations: const [
       Destination(
+        id: "2",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "New Cairo",
         areaAr: "القاهرة الجديدة",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -97,12 +103,15 @@ List<Doctor> DOCTORS = [
     views: 50737,
     destinations: const [
       Destination(
+        id: "3",
         govEn: "Giza",
         govAr: "الجيزة",
         areaEn: "Haram",
         areaAr: "الهرم",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -130,12 +139,15 @@ List<Doctor> DOCTORS = [
     views: 28954,
     destinations: const [
       Destination(
+        id: "4",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "El-Zaytoun",
         areaAr: "الزيتون",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -164,12 +176,15 @@ List<Doctor> DOCTORS = [
     views: 37257,
     destinations: const [
       Destination(
+        id: "5",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "Maadi",
         areaAr: "المعادي",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -196,12 +211,15 @@ List<Doctor> DOCTORS = [
     views: 25847,
     destinations: const [
       Destination(
+        id: "6",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "Rehab",
         areaAr: "الرحاب",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -228,12 +246,15 @@ List<Doctor> DOCTORS = [
     views: 56847,
     destinations: const [
       Destination(
+        id: "7",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "New Cairo",
         areaAr: "القاهرة الجديدة",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -261,12 +282,15 @@ List<Doctor> DOCTORS = [
     views: 36847,
     destinations: const [
       Destination(
+        id: "8",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "Mokattam",
         areaAr: "المقطم",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -296,12 +320,15 @@ List<Doctor> DOCTORS = [
     views: 22847,
     destinations: const [
       Destination(
+        id: "9",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "New Heliopolis",
         areaAr: "مصر الجديدة",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),
@@ -328,12 +355,15 @@ List<Doctor> DOCTORS = [
     views: 2,
     destinations: const [
       Destination(
+        id: "10",
         govEn: "Cairo",
         govAr: "القاهرة",
         areaEn: "Maadi",
         areaAr: "المعادي",
         addressEn: "Zahraa El-Maadi, El Nada Tower",
         addressAr: "زهراء المعادي - برج الندي",
+        lon: 0.4,
+        lat: 0.8,
       ),
     ],
   ),

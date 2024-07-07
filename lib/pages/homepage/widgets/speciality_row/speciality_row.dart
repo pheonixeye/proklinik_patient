@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/query_object.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +65,15 @@ class SpecialityRow extends StatelessWidget {
                             child: InkWell(
                               mouseCursor: SystemMouseCursors.click,
                               onTap: () {
-                                //TODO: search by spec
+                                //todo: search by spec
+                                GoRouter.of(context).goNamed(
+                                  AppRouter.src,
+                                  pathParameters:
+                                      defaultPathParameters(context),
+                                  queryParameters: QueryObject.empty()
+                                      .copyWith(spec: x["en"])
+                                      .toJson(),
+                                );
                               },
                               child: Container(
                                 width: 300,

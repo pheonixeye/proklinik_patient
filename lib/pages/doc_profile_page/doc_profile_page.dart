@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_info_card_sm/main_info_card_sm.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
@@ -21,49 +22,51 @@ class DocProfilePage extends StatefulWidget {
 }
 
 class _DocProfilePageState extends State<DocProfilePage> {
-  static const List<Widget> _desktop = [
-    SizedBox(height: 20),
-    Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Spacer(
-          flex: 90,
+  static List<Widget> _desktop(ServerResponseModel model) => [
+        const SizedBox(height: 20),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Spacer(
+              flex: 90,
+            ),
+
+            ///main doctor profile info section
+            MainProfileSectionXl(
+              model: model,
+            ),
+
+            ///central space
+            const SizedBox(width: 15),
+
+            ///booking info section
+            SideProfileSectionXl(model: model),
+            const Spacer(
+              flex: 90,
+            ),
+          ],
         ),
+        const SizedBox(height: 10),
+        const FooterSection()
+      ];
 
-        ///main doctor profile info section
-        MainProfileSectionXl(),
-
-        ///central space
-        SizedBox(width: 15),
-
-        ///booking info section
-        SideProfileSectionXl(),
-        Spacer(
-          flex: 90,
-        ),
-      ],
-    ),
-    SizedBox(height: 10),
-    FooterSection()
-  ];
-
-  static final List<Widget> _mobile = [
-    const SizedBox(height: 10),
-    //TODO: put new info && reservation section
-    const MainInfoCardSm(),
-    const AboutCardXl(),
-    const OverallReviewsCardXl(),
-    ...List.generate(10, (index) => const RatingCardXl()),
-    const LoadMoreReviewsCardXl(),
-    const SizedBox(height: 10),
-    const FooterSection(),
-  ];
+  static List<Widget> _mobile(ServerResponseModel model) => [
+        const SizedBox(height: 10),
+        //todo: put new info && reservation section
+        MainInfoCardSm(model: model),
+        AboutCardXl(model: model),
+        OverallReviewsCardXl(model: model),
+        ...model.reviews.map((review) => RatingCardXl(review: review)),
+        const LoadMoreReviewsCardXl(),
+        const SizedBox(height: 10),
+        const FooterSection(),
+      ];
   @override
   Widget build(BuildContext context) {
     return Consumer<PxDocProfile>(
       builder: (context, d, _) {
-        final _profileData = d.doctor;
-        while (_profileData == null) {
+        final res = d.responseModel;
+        while (res == null) {
           return const CentralLoading();
         }
         return Container(
@@ -72,7 +75,7 @@ class _DocProfilePageState extends State<DocProfilePage> {
           ),
           child: ListView(
             shrinkWrap: true,
-            children: context.isMobile ? _mobile : _desktop,
+            children: context.isMobile ? _mobile(res) : _desktop(res),
           ),
         );
       },

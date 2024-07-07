@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/models/review.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class RatingCardXl extends StatelessWidget {
-  const RatingCardXl({super.key});
+  const RatingCardXl({
+    super.key,
+    required this.review,
+  });
+  final Review review;
 
   @override
   Widget build(BuildContext context) {
@@ -23,34 +30,28 @@ class RatingCardXl extends StatelessWidget {
                 ListTile(
                   title: Row(
                     children: [
-                      ...List.generate(
-                        5,
-                        (index) => const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                      //todo: better control padding
+                      ...review.stars.toDouble().toStars(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
                           ),
-                        ),
-                      ),
                     ],
                   ),
-                  subtitle: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Overall Rating"),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(context.loc.overallRating),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Row(
                       children: [
                         Expanded(
                           child: Text(
-                            "Professor of endocrinology, diabetes and internal diseases at Nile Valley and Air Specialized Hospital. - Member of the Egyptian, British and European Endocrinology and Diabetes Societies. Lecturer at Ain Shams University. - Organizing and chairing a medical conference and many medical symposia for diabetes and endocrinology at Wadi El-Nile Hospital – Organizing and presenting educational medical symposia for diabetics at Wadi El-Nile Hospital – Participating in medical conferences for diabetes",
+                            review.body,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                             ),
                           ),
@@ -63,14 +64,15 @@ class RatingCardXl extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: ListTile(
                     title: Text(
-                      "reviewer name",
+                      review.user_name,
                       style: TextStyle(
                         fontSize: 14,
                         color: AppTheme.mainFontColor,
                       ),
                     ),
                     subtitle: Text(
-                      "Tuesday, 16-05-2024",
+                      //TODO: modify date format
+                      review.date_time,
                       style: TextStyle(
                         fontSize: 10,
                         color: AppTheme.mainFontColor,
@@ -95,12 +97,12 @@ class RatingCardXl extends StatelessWidget {
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8.0),
                     child: Text(
-                      "4",
-                      style: TextStyle(
+                      review.stars.toString(),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -110,7 +112,7 @@ class RatingCardXl extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "Doctor Rating",
+                  context.loc.doctorRating,
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                     fontSize: 12,

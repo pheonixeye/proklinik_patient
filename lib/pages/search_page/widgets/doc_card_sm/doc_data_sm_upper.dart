@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/doctor.dart';
+import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class DocDataSmUpper extends StatelessWidget {
-  const DocDataSmUpper({super.key, required this.doctor});
-  final Doctor doctor;
+  const DocDataSmUpper({super.key, required this.responseModel});
+  final ServerResponseModel responseModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,9 @@ class DocDataSmUpper extends StatelessWidget {
                     children: [
                       const TextSpan(text: " "),
                       TextSpan(
-                        text: l.isEnglish ? doctor.name_en : doctor.name_ar,
+                        text: l.isEnglish
+                            ? responseModel.doctor.name_en
+                            : responseModel.doctor.name_ar,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -42,7 +46,9 @@ class DocDataSmUpper extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  l.isEnglish ? doctor.title_en : doctor.title_ar,
+                  l.isEnglish
+                      ? responseModel.doctor.title_en
+                      : responseModel.doctor.title_ar,
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                   ),
@@ -53,18 +59,21 @@ class DocDataSmUpper extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0),
                 title: Row(
                   children: [
-                    ...List.generate(
-                      5,
-                      (index) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                    ),
+                    //todo: generate icons from rating
+
+                    // ...List.generate(
+                    //   5,
+                    //   (index) => const Icon(
+                    //     Icons.star,
+                    //     color: Colors.amber,
+                    //   ),
+                    // ),
+                    ...responseModel.doctor.rating.toStars(),
                   ],
                 ),
-                //TODO: Fetch from somewhere
+                //todo: Fetch from somewhere
                 subtitle: Text(
-                  "Overall Rating From 129 Visitors",
+                  "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
                   style: TextStyle(
                     fontSize: 10,
                     color: AppTheme.mainFontColor,
