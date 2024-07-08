@@ -1,7 +1,7 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/scroll_direction.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
@@ -138,7 +138,7 @@ class _ClickablePageNumberState extends State<ClickablePageNumber> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    ArabicNumbers.convert(widget.pageNumber),
+                    widget.pageNumber.toArabicNumber(context),
                     style: TextStyle(
                       color: (isHovering || widget.isSelected)
                           ? AppTheme.secondaryOrangeColor

@@ -1,6 +1,6 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/pages/search_page/widgets/filter_column/filter_column_sm.dart';
 import 'package:patient/pages/search_page/widgets/sorting_modal.dart/sorting_modal_sm.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -37,7 +37,7 @@ class SortingRowSm extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  "(${ArabicNumbers.convert("${sc.responseModel?.length}")} ${context.loc.doctor})",
+                  "(${"${sc.responseModel?.length.toString().toArabicNumber(context)}"} ${context.loc.doctor})",
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                     fontSize: 12,
