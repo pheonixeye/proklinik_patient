@@ -324,4 +324,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorText => 'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.';
+
+  @override
+  String get available => 'Availabile';
 }

@@ -39,7 +39,7 @@ class Schedule extends Equatable {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
       '_id': id,
       'weekday': weekday,
@@ -51,7 +51,7 @@ class Schedule extends Equatable {
     };
   }
 
-  factory Schedule.fromMap(Map<String, dynamic> map) {
+  factory Schedule.fromJson(Map<String, dynamic> map) {
     return Schedule(
       id: map['_id'] as String,
       weekday: map['weekday'] as String,

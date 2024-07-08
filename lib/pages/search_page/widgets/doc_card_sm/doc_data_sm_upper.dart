@@ -61,13 +61,6 @@ class DocDataSmUpper extends StatelessWidget {
                   children: [
                     //todo: generate icons from rating
 
-                    // ...List.generate(
-                    //   5,
-                    //   (index) => const Icon(
-                    //     Icons.star,
-                    //     color: Colors.amber,
-                    //   ),
-                    // ),
                     ...responseModel.doctor.rating.toStars(),
                   ],
                 ),

@@ -1,21 +1,29 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/constants/now.dart';
+import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/am_pm.dart';
+import 'package:patient/models/booking_data.dart';
 import 'package:patient/models/schedule.dart';
+import 'package:patient/models/server_response_model.dart';
 import 'package:patient/providers/booking_px.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class ScheduleCardXl extends StatefulWidget {
   const ScheduleCardXl({
     super.key,
-    this.isAvailable = true,
-    required this.schedule,
+    required this.model,
+    required this.index,
   });
-  final bool isAvailable;
-  final Schedule schedule;
+  final ServerResponseModel model;
+  final int index;
 
   @override
   State<ScheduleCardXl> createState() => _ScheduleCardXlState();
@@ -23,12 +31,48 @@ class ScheduleCardXl extends StatefulWidget {
 
 class _ScheduleCardXlState extends State<ScheduleCardXl> {
   bool isHovering = false;
+  bool isAvailable = true;
+
+  static final now = DateTime.now();
+
+  final today = DateTime(now.year, now.month, now.day);
+
+  late final DateTime data;
+
+  Schedule? _schedule;
+
+  @override
+  void initState() {
+    data = today.copyWith(day: today.day + widget.index);
+    try {
+      _schedule = widget.model.clinic.schedule
+          .singleWhere((sch) => sch.intday == data.weekday);
+    } catch (e) {
+      _schedule = null;
+    }
+
+    isAvailable = _schedule != null && _schedule!.intday == data.weekday;
+    super.initState();
+    if (kDebugMode) {
+      print(_schedule?.toJson().toString());
+      print(data.toString());
+      print(isAvailable.toString());
+    }
+  }
 
   void Function()? get _onTap {
-    return widget.isAvailable
+    return isAvailable
         ? () {
-            //TODO: nav to book app page directly
-            context.read<PxBooking>().setBookingData("Booking data");
+            //todo: nav to book app page directly
+            context
+                .read<PxBooking>()
+                .setBookingData(BookingData.empty().copyWith(
+                  id: const Uuid().v4(),
+                  date_time: data.toIso8601String(),
+                  doc_id: widget.model.doctor.id,
+                  clinic_id: widget.model.clinic.id,
+                  model: widget.model,
+                ));
             GoRouter.of(context).goNamed(
               AppRouter.book,
               pathParameters: defaultPathParameters(context),
@@ -37,7 +81,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
         : null;
   }
 
-  double get _opacity => !widget.isAvailable
+  double get _opacity => !isAvailable
       ? 1.0
       : isHovering
           ? 0.7
@@ -80,7 +124,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                     height: 30,
                     width: 100,
                     decoration: BoxDecoration(
-                      color: widget.isAvailable
+                      color: isAvailable
                           ? AppTheme.appBarColor
                           : AppTheme.appBarColor.withOpacity(0.3),
                       borderRadius: const BorderRadius.only(
@@ -89,21 +133,36 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                       ),
                     ),
                     alignment: Alignment.center,
-                    child: const Text(
-                      "Today",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                    child: Consumer<PxLocale>(
+                      builder: (context, l, _) {
+                        final wkDay = l.isEnglish
+                            ? WEEKDAYS[data.weekday]?.en
+                            : WEEKDAYS[data.weekday]?.ar;
+                        // ignore: no_leading_underscores_for_local_identifiers
+                        final _data = data == NOWDAY
+                            ? "${context.loc.today} - $wkDay"
+                            : data == NOWDAY.add(const Duration(days: 1))
+                                ? "${context.loc.tomorrow} - $wkDay"
+                                : "${data.day}/${data.month} - $wkDay"
+                                    .toArabicNumber(context);
+                        return Text(
+                          _data,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            letterSpacing: 0.2,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: widget.isAvailable
+                      children: isAvailable
                           ? [
                               Text(
-                                "${context.loc.from} ${widget.schedule.startHour.normalizeHour.toString().padLeft(1, "0")}:${widget.schedule.startMin.toString().padLeft(1, "0")} ${widget.schedule.startHour.amPm(context)}",
+                                "${context.loc.from} ${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0")}:${_schedule?.startMin.toString().padLeft(1, "0")} ${_schedule?.startHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,
@@ -112,7 +171,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                "${context.loc.to} ${widget.schedule.endHour.normalizeHour.toString().padLeft(1, "0")}:${widget.schedule.endMin.toString().padLeft(1, "0")} ${widget.schedule.endHour.amPm(context)}",
+                                "${context.loc.to} ${_schedule?.endHour.normalizeHour.toString().padLeft(1, "0")}:${_schedule?.endMin.toString().padLeft(1, "0")} ${_schedule?.endHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,
@@ -140,7 +199,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                     width: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: widget.isAvailable
+                      color: isAvailable
                           ? AppTheme.secondaryOrangeColor
                           : AppTheme.secondaryOrangeColor.withOpacity(0.3),
                       borderRadius: const BorderRadius.only(

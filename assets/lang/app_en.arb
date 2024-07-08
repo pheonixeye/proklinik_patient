@@ -105,5 +105,7 @@
     "ptNameForm" : "Patient Name (Going To The Doctor)",
     "optional" : "Optional",
     "somethingWentWrong" : "Something Went Wrong",
-    "errorText" : "This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later."
+    "errorText" : "This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.",
+    "available" : "Availabile"
+    
  }

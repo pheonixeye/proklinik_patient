@@ -734,6 +734,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.'**
   String get errorText;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Availabile'**
+  String get available;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

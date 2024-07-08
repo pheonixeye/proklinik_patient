@@ -96,7 +96,7 @@ class Clinic extends Equatable {
       'followup_duration': followup_duration,
       'off_dates': off_dates,
       'destination': destination.toJson(),
-      'schedule': schedule.map((x) => x.toMap()).toList(),
+      'schedule': schedule.map((x) => x.toJson()).toList(),
     };
   }
 
@@ -120,7 +120,7 @@ class Clinic extends Equatable {
           Destination.fromJson(map['destination'] as Map<String, dynamic>),
       schedule: List<Schedule>.from(
         (map['schedule'] as List<dynamic>).map<Schedule>(
-          (x) => Schedule.fromMap(x as Map<String, dynamic>),
+          (x) => Schedule.fromJson(x as Map<String, dynamic>),
         ),
       ),
     );

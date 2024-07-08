@@ -31,9 +31,9 @@ class RatingCardXl extends StatelessWidget {
                   title: Row(
                     children: [
                       //todo: better control padding
-                      ...review.stars.toDouble().toStars(
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
-                          ),
+                      ...review.stars.toStarsFromInt(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                      ),
                     ],
                   ),
                   subtitle: Padding(

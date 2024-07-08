@@ -121,12 +121,12 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                                 //todo: replace with schedule generator
                                 scrollDirection: Axis.horizontal,
                                 controller: _controller,
-                                itemCount:
-                                    widget.responseModel.clinic.schedule.length,
+                                itemCount: 365,
                                 itemBuilder: (context, index) {
-                                  final schedule = widget
-                                      .responseModel.clinic.schedule[index];
-                                  return ScheduleCardXl(schedule: schedule);
+                                  return ScheduleCardXl(
+                                    index: index,
+                                    model: widget.responseModel,
+                                  );
                                 },
                               ),
                             ),

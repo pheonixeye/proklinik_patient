@@ -169,6 +169,7 @@ class SecondaryDataItemXl extends StatelessWidget {
                   ),
                 ],
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

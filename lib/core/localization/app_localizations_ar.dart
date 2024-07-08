@@ -324,4 +324,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errorText => 'يبدو أن هذه الصفحة قد تم نقلها أو أنها غير متوفرة في الوقت الحالي، يرجى المحاولة مرة أخرى لاحقًا.';
+
+  @override
+  String get available => 'متاح';
 }

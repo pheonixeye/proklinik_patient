@@ -8,7 +8,10 @@ import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/router/router.dart';
 
 class DocInfoCardSm extends StatelessWidget {
-  const DocInfoCardSm({super.key, required this.responseModel});
+  const DocInfoCardSm({
+    super.key,
+    required this.responseModel,
+  });
   final ServerResponseModel responseModel;
 
   @override
@@ -22,7 +25,7 @@ class DocInfoCardSm extends StatelessWidget {
             AppRouter.docquery,
             pathParameters: {
               ...defaultPathParameters(context),
-              "docid": responseModel.doctor.id,
+              "docid": responseModel.doctor.synd_id.toString(),
             },
           );
         },

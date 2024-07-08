@@ -299,11 +299,11 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                         //TODO: replace with schedule generator
                         scrollDirection: Axis.horizontal,
                         controller: _controller,
-                        itemCount: widget.model.clinic.schedule.length,
+                        itemCount: 365,
                         itemBuilder: (context, index) {
-                          final schedule = widget.model.clinic.schedule[index];
                           return ScheduleCardXl(
-                            schedule: schedule,
+                            model: widget.model,
+                            index: index,
                           );
                         },
                       ),

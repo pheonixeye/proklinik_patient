@@ -169,7 +169,7 @@ class _BookAppFormState extends State<BookAppForm> {
                               AppRouter.home,
                               pathParameters: defaultPathParameters(context),
                             );
-                            //TODO: nullify booking data
+                            //todo: nullify booking data
                             context.read<PxBooking>().setBookingData(null);
                           },
                           child: Padding(

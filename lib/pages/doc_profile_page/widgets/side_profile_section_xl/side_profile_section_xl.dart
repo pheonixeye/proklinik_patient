@@ -193,6 +193,7 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                               style: TextStyle(
                                 color: AppTheme.mainFontColor,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             );
                           },
                         ),
@@ -238,14 +239,15 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                             ///times cards
                             Expanded(
                               child: ListView.builder(
-                                //TODO: replace with schedule generator
+                                //todo: replace with schedule generator
                                 scrollDirection: Axis.horizontal,
                                 controller: _controller,
-                                itemCount: widget.model.clinic.schedule.length,
+                                itemCount: 365,
                                 itemBuilder: (context, index) {
-                                  final schedule =
-                                      widget.model.clinic.schedule[index];
-                                  return ScheduleCardXl(schedule: schedule);
+                                  return ScheduleCardXl(
+                                    index: index,
+                                    model: widget.model,
+                                  );
                                 },
                               ),
                             ),

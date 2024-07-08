@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:patient/models/booking_data.dart';
 
 class PxBooking extends ChangeNotifier {
-  String? _data;
-  String? get data => _data;
+  BookingData? _data;
+  BookingData? get data => _data;
 
-  void setBookingData(String? value) {
+  void setBookingData(BookingData? value) {
     _data = value;
     notifyListeners();
   }

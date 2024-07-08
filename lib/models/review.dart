@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 class Review extends Equatable {
@@ -73,7 +74,7 @@ class Review extends Equatable {
       1000,
       (index) => Review(
           id: index.toString(),
-          doc_id: "${Random().nextInt(9) + 1}",
+          doc_id: "${Random().nextInt(10) + 1}",
           user_name: const Uuid().v1().split("-").first,
           body: lorem(paragraphs: 1, words: Random().nextInt(50) + 1),
           date_time: DateTime(
