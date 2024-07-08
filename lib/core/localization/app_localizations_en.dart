@@ -327,4 +327,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get available => 'Availabile';
+
+  @override
+  String get validateEmailOrLeaveEmpty => 'Kindly Enter A Valid Email Address Or Leave The Email Field Empty.';
+
+  @override
+  String get validateMobileDigits => 'Kindly Enter A Valid Mobile Number Consisting of 11 Digits.';
+
+  @override
+  String get thankYouForBooking => 'Thank You For Using ProKliniK.';
+
+  @override
+  String get appConfirmed => 'Your Appointment Has Been Confirmed.';
+
+  @override
+  String get willBeNotified => 'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.';
 }

@@ -296,7 +296,7 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                     ///times cards
                     Expanded(
                       child: ListView.builder(
-                        //TODO: replace with schedule generator
+                        //todo: replace with schedule generator
                         scrollDirection: Axis.horizontal,
                         controller: _controller,
                         itemCount: 365,

@@ -37,6 +37,19 @@ class BookingData extends Equatable {
     );
   }
 
+  factory BookingData.withoutModel(BookingData value) {
+    return BookingData(
+      id: value.id,
+      user_name: value.user_name,
+      user_phone: value.user_phone,
+      doc_id: value.doc_id,
+      clinic_id: value.clinic_id,
+      date_time: value.date_time,
+      user_email: value.user_email,
+      model: null,
+    );
+  }
+
   BookingData copyWith({
     String? id,
     String? user_name,
@@ -59,7 +72,7 @@ class BookingData extends Equatable {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
       '_id': id,
       'user_name': user_name,
@@ -72,7 +85,7 @@ class BookingData extends Equatable {
     };
   }
 
-  factory BookingData.fromMap(Map<String, dynamic> map) {
+  factory BookingData.fromJson(Map<String, dynamic> map) {
     return BookingData(
       id: map['_id'] as String,
       user_name: map['user_name'] as String,
@@ -99,6 +112,7 @@ class BookingData extends Equatable {
       doc_id,
       clinic_id,
       date_time,
+      // model,
     ];
   }
 }

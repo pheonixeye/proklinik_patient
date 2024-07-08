@@ -45,10 +45,12 @@ class BookAppInfoCard extends StatelessWidget {
                           leading: Container(
                             width: 70,
                             height: 70,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: AssetImage(Assets.icon),
+                                //TODO: recieve image via link
+                                image: AssetImage(Assets.doctorAvatar(
+                                    b.data!.model!.doctor.synd_id)),
                               ),
                             ),
                           ),
@@ -79,8 +81,8 @@ class BookAppInfoCard extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               l.isEnglish
-                                  ? b.data!.model!.doctor.speciality_en
-                                  : b.data!.model!.doctor.speciality_ar,
+                                  ? b.data!.model!.doctor.title_en
+                                  : b.data!.model!.doctor.title_ar,
                             ),
                           ),
                         ),
@@ -111,7 +113,7 @@ class BookAppInfoCard extends StatelessWidget {
                                     ? WEEKDAYS[date.weekday]!.en
                                     : WEEKDAYS[date.weekday]!.ar;
                                 return Text(
-                                    "$wkday - ${bookingDate.format(date)}  - $bookingTime ,\n ${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
+                                    "$wkday - (${bookingDate.format(date)})  - $bookingTime,\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
                               },
                             ),
                           ),

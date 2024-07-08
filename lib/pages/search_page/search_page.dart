@@ -59,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
                     Expanded(
                       flex: 950,
                       child: Column(
-                        //TODO: generate by iteration
+                        //todo: generate by iteration
                         children: [
                           //todo: replace according to size
                           context.isMobile

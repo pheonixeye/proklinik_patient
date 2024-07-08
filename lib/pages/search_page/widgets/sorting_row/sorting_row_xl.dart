@@ -24,7 +24,7 @@ class SortingRowXl extends StatelessWidget {
               : sg.specialities!.firstWhere((e) => e.en == sc.query.spec).ar;
           return Row(
             children: [
-              //TODO: search speciality
+              //todo: search speciality
               Text(
                 searchSpec,
                 style: TextStyle(
@@ -34,7 +34,7 @@ class SortingRowXl extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              //TODO: number of results
+              //todo: number of results
               Text(
                 "(${ArabicNumbers.convert("${sc.responseModel?.length}")} ${context.loc.doctor})",
                 style: TextStyle(

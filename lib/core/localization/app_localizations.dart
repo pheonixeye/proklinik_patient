@@ -740,6 +740,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Availabile'**
   String get available;
+
+  /// No description provided for @validateEmailOrLeaveEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter A Valid Email Address Or Leave The Email Field Empty.'**
+  String get validateEmailOrLeaveEmpty;
+
+  /// No description provided for @validateMobileDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter A Valid Mobile Number Consisting of 11 Digits.'**
+  String get validateMobileDigits;
+
+  /// No description provided for @thankYouForBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank You For Using ProKliniK.'**
+  String get thankYouForBooking;
+
+  /// No description provided for @appConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Appointment Has Been Confirmed.'**
+  String get appConfirmed;
+
+  /// No description provided for @willBeNotified.
+  ///
+  /// In en, this message translates to:
+  /// **'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.'**
+  String get willBeNotified;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

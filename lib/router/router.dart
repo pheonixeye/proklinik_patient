@@ -13,6 +13,7 @@ import 'package:patient/pages/pt_login_page/pt_login_page.dart';
 import 'package:patient/pages/pt_signup_page/pt_signup_page.dart';
 import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
+import 'package:patient/pages/thank_you_page/thank_you_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
@@ -45,6 +46,10 @@ class AppRouter {
   static const String doc = "doc";
   // ignore: constant_identifier_names
   static const String _404 = "404";
+  //todo: thankyou page
+  static const String thankyou = "thankyou";
+  //TODO: visit change / delete page
+  static const String visit = "visit/:id";
 
   static final router = GoRouter(
     refreshListenable: Listenable.merge(
@@ -164,6 +169,15 @@ class AppRouter {
                     path: book,
                     builder: (context, state) {
                       return BookPage(
+                        key: state.pageKey,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    name: thankyou,
+                    path: thankyou,
+                    builder: (context, state) {
+                      return ThankYouPage(
                         key: state.pageKey,
                       );
                     },

@@ -327,4 +327,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get available => 'متاح';
+
+  @override
+  String get validateEmailOrLeaveEmpty => 'يرجى إدخال عنوان بريد إلكتروني صحيح أو ترك حقل البريد الإلكتروني فارغًا.';
+
+  @override
+  String get validateMobileDigits => 'يرجى إدخال رقم جوال صحيح مكون من ۱۱ رقم.';
+
+  @override
+  String get thankYouForBooking => 'شكرا لاستخدام بروكلينك لحجز موعد.';
+
+  @override
+  String get appConfirmed => 'تم تأكيد موعد زيارة العيادة.';
+
+  @override
+  String get willBeNotified => 'سيتم ارسال بيانات الحجز و عنوان و موقع العيادة عن طريق رسالة نصية.';
 }

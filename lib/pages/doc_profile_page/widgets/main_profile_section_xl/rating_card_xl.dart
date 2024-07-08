@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/functions/stars_from_double.dart';
 import 'package:patient/models/review.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class RatingCardXl extends StatelessWidget {
   const RatingCardXl({
@@ -70,14 +73,19 @@ class RatingCardXl extends StatelessWidget {
                         color: AppTheme.mainFontColor,
                       ),
                     ),
-                    subtitle: Text(
-                      //TODO: modify date format
-                      review.date_time,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: AppTheme.mainFontColor,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    subtitle: Consumer<PxLocale>(
+                      builder: (context, l, _) {
+                        return Text(
+                          //todo: modify date format
+                          DateFormat("dd/MM/yyyy", l.lang)
+                              .format(DateTime.parse(review.date_time)),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: AppTheme.mainFontColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

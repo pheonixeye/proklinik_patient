@@ -3,6 +3,8 @@ class Assets {
 
   ///image files
   static const String icon = 'assets/images/icon.png';
+  static const String bg = 'assets/images/bg.webp';
+  static const String bgSvg = 'assets/images/bg-svg.svg';
 
   ///json files
   static const String governorates = "assets/json/governorates.json";

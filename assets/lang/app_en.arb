@@ -106,6 +106,11 @@
     "optional" : "Optional",
     "somethingWentWrong" : "Something Went Wrong",
     "errorText" : "This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.",
-    "available" : "Availabile"
+    "available" : "Availabile",
+    "validateEmailOrLeaveEmpty" : "Kindly Enter A Valid Email Address Or Leave The Email Field Empty.",
+    "validateMobileDigits" : "Kindly Enter A Valid Mobile Number Consisting of 11 Digits.",
+    "thankYouForBooking" : "Thank You For Using ProKliniK.",
+    "appConfirmed" : "Your Appointment Has Been Confirmed.",
+    "willBeNotified" : "You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location."
     
  }
