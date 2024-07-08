@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class Schedule extends Equatable {
@@ -49,6 +51,11 @@ class Schedule extends Equatable {
       'endMin': endMin,
       'endHour': endHour,
     };
+  }
+
+  static List<Schedule> listFromPocketbase(String data) {
+    final List json = jsonDecode(data);
+    return json.map((e) => Schedule.fromJson(e)).toList();
   }
 
   factory Schedule.fromJson(Map<String, dynamic> map) {

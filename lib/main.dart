@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 // ignore: depend_on_referenced_packages
 // import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:patient/core/localization/app_localizations.dart';
+// import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/providers/_main.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
@@ -14,6 +15,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // usePathUrlStrategy();
   runApp(const AppProvider());
+
+  // final pb = PocketbaseHelper();
 }
 
 class AppProvider extends StatelessWidget {

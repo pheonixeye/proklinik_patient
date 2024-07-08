@@ -93,7 +93,7 @@ class Doctor extends Equatable {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      '_id': id,
+      'id': id,
       'synd_id': synd_id,
       'joined_at': joined_at,
       'name_en': name_en,
@@ -115,9 +115,16 @@ class Doctor extends Equatable {
     };
   }
 
+  factory Doctor.fromPocketBase(String id, Map<String, dynamic> map) {
+    return Doctor.fromJson({
+      "id": id,
+      ...map,
+    });
+  }
+
   factory Doctor.fromJson(Map<String, dynamic> map) {
     return Doctor(
-      id: map['_id'] as String,
+      id: map['id'] as String,
       synd_id: map['synd_id'] as int,
       joined_at: map['joined_at'] as String,
       name_en: map['name_en'] as String,
@@ -132,9 +139,9 @@ class Doctor extends Equatable {
       about_ar: map['about_ar'] as String,
       degree_en: map['degree_en'] as String,
       degree_ar: map['degree_ar'] as String,
-      rating: map['rating'] as double,
-      tags: List<String>.from((map['tags'] as List<String>)),
-      views: map['views'] as int,
+      rating: map['rating'],
+      tags: List<String>.from((map['tags'] as List<dynamic>? ?? [])),
+      views: map['views'],
       destinations: (map['destinations'] as List)
           .map((e) => Destination.fromJson(e))
           .toList(),

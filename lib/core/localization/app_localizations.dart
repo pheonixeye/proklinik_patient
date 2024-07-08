@@ -770,6 +770,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.'**
   String get willBeNotified;
+
+  /// No description provided for @pageUnderConst.
+  ///
+  /// In en, this message translates to:
+  /// **'This Page is Under Construction.'**
+  String get pageUnderConst;
+
+  /// No description provided for @sryMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.'**
+  String get sryMsg;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

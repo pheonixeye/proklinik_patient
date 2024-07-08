@@ -177,13 +177,13 @@ class _BookAppFormState extends State<BookAppForm> {
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
                                   //todo: validate form
-                                  final _bookingData = b.data?.copyWith(
+                                  b.setBookingData(b.data?.copyWith(
                                     user_name: _nameController.text.trim(),
                                     user_phone: _phoneController.text.trim(),
                                     user_email: _emailController.text.trim(),
-                                  );
+                                  ));
                                   if (kDebugMode) {
-                                    print(_bookingData);
+                                    print(b.data);
                                   }
                                   showDialog(
                                     context: context,
@@ -193,8 +193,7 @@ class _BookAppFormState extends State<BookAppForm> {
                                   );
 
                                   //TODO: send booking request
-                                  await Future.delayed(
-                                      const Duration(seconds: 2), () {
+                                  await b.createAppointment().then((_) {
                                     Navigator.pop(context);
                                   });
                                   //todo: navigate to post booking info page

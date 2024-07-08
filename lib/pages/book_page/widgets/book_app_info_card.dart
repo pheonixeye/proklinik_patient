@@ -42,6 +42,7 @@ class BookAppInfoCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListTile(
+                          isThreeLine: true,
                           leading: Container(
                             width: 70,
                             height: 70,

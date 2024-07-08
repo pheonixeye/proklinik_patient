@@ -70,9 +70,9 @@ class SpecialityRow extends StatelessWidget {
                                   AppRouter.src,
                                   pathParameters:
                                       defaultPathParameters(context),
-                                  queryParameters: QueryObject.empty()
-                                      .copyWith(spec: x["en"])
-                                      .toJson(),
+                                  queryParameters:
+                                      QueryObject.nonFiltered(spec: x["en"]!)
+                                          .toJson(),
                                 );
                               },
                               child: Container(

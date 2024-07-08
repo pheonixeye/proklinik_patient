@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class Destination extends Equatable {
@@ -61,7 +63,13 @@ class Destination extends Equatable {
     };
   }
 
+  factory Destination.fromPocketbase(String data) {
+    final json = jsonDecode(data);
+    return Destination.fromJson(json);
+  }
+
   factory Destination.fromJson(Map<String, dynamic> map) {
+    // final map = jsonDecode(data);
     return Destination(
       id: map["_id"] as String,
       govEn: map['govEn'] as String,
@@ -71,7 +79,7 @@ class Destination extends Equatable {
       addressEn: map['addressEn'] as String,
       addressAr: map['addressAr'] as String,
       lon: map["lon"] as double,
-      lat: ["lat"] as double,
+      lat: map["lat"] as double,
     );
   }
 

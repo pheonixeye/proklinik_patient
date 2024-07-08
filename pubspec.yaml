@@ -27,6 +27,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
   arabic_numbers: ^1.0.0
+  pocketbase: ^0.18.1
 
 
 

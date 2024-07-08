@@ -14,6 +14,7 @@ import 'package:patient/pages/pt_signup_page/pt_signup_page.dart';
 import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
 import 'package:patient/pages/thank_you_page/thank_you_page.dart';
+import 'package:patient/pages/under_construction/under_construction_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
@@ -44,12 +45,12 @@ class AppRouter {
   static const String contactus = "contactus";
   static const String docquery = "doc/:docid";
   static const String doc = "doc";
-  // ignore: constant_identifier_names
-  static const String _404 = "404";
+  static const String err = "404";
   //todo: thankyou page
   static const String thankyou = "thankyou";
-  //TODO: visit change / delete page
+  //TODO: visit update / delete page
   static const String visit = "visit/:id";
+  static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
     refreshListenable: Listenable.merge(
@@ -120,10 +121,19 @@ class AppRouter {
                 },
                 routes: [
                   GoRoute(
-                    name: _404,
-                    path: _404,
+                    name: err,
+                    path: err,
                     builder: (context, state) {
                       return ErrorPage(
+                        key: state.pageKey,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    name: underconstruction,
+                    path: underconstruction,
+                    builder: (context, state) {
+                      return UnderConstructionPage(
                         key: state.pageKey,
                       );
                     },
@@ -136,6 +146,10 @@ class AppRouter {
                         key: state.pageKey,
                       );
                     },
+                    redirect: (context, state) {
+                      final lang = state.pathParameters["lang"];
+                      return "/$lang/$underconstruction";
+                    },
                   ),
                   GoRoute(
                     path: login,
@@ -145,6 +159,10 @@ class AppRouter {
                         key: state.pageKey,
                       );
                     },
+                    redirect: (context, state) {
+                      final lang = state.pathParameters["lang"];
+                      return "/$lang/$underconstruction";
+                    },
                   ),
                   GoRoute(
                     path: forproviders,
@@ -153,6 +171,10 @@ class AppRouter {
                       return ForProvidersPage(
                         key: state.pageKey,
                       );
+                    },
+                    redirect: (context, state) {
+                      final lang = state.pathParameters["lang"];
+                      return "/$lang/$underconstruction";
                     },
                   ),
                   GoRoute(
@@ -190,7 +212,7 @@ class AppRouter {
                     },
                     redirect: (context, state) {
                       final lang = state.pathParameters["lang"];
-                      return "/$lang/$_404";
+                      return "/$lang/$err";
                     },
                   ),
                   GoRoute(

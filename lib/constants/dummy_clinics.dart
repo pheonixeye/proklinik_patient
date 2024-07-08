@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:patient/models/clinic.dart';
 import 'package:patient/models/destination.dart';
 import 'package:patient/models/schedule.dart';
+import 'package:patient/models/schedule_object.dart';
 import 'package:uuid/uuid.dart';
 
 // ignore: non_constant_identifier_names
@@ -68,6 +69,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -130,6 +132,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -193,6 +196,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -255,6 +259,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -317,6 +322,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -379,6 +385,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -441,6 +448,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -504,6 +512,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -566,6 +575,7 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
   Clinic(
     id: const Uuid().v4(),
@@ -628,5 +638,6 @@ List<Clinic> CLINICS = [
         endHour: 21,
       ),
     ],
+    scheduleobject: ScheduleObject.initialScheduleObjectList,
   ),
 ];

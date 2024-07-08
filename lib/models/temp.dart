@@ -1,11 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:patient/models/destination.dart';
 import 'package:patient/models/schedule.dart';
-import 'package:patient/models/schedule_object.dart';
 
-class Clinic extends Equatable {
+class Tempo extends Equatable {
   final String id;
   final String doc_id;
   final String name_en;
@@ -22,9 +23,8 @@ class Clinic extends Equatable {
   final List<String> off_dates;
   final Destination destination;
   final List<Schedule> schedule;
-  final Map<String, ScheduleObject>? scheduleobject;
 
-  const Clinic({
+  const Tempo({
     required this.id,
     required this.doc_id,
     required this.name_en,
@@ -41,10 +41,9 @@ class Clinic extends Equatable {
     required this.off_dates,
     required this.destination,
     required this.schedule,
-    required this.scheduleobject,
   });
 
-  Clinic copyWith({
+  Tempo copyWith({
     String? id,
     String? doc_id,
     String? name_en,
@@ -61,9 +60,8 @@ class Clinic extends Equatable {
     List<String>? off_dates,
     Destination? destination,
     List<Schedule>? schedule,
-    Map<String, ScheduleObject>? scheduleobject,
   }) {
-    return Clinic(
+    return Tempo(
       id: id ?? this.id,
       doc_id: doc_id ?? this.doc_id,
       name_en: name_en ?? this.name_en,
@@ -80,7 +78,6 @@ class Clinic extends Equatable {
       off_dates: off_dates ?? this.off_dates,
       destination: destination ?? this.destination,
       schedule: schedule ?? this.schedule,
-      scheduleobject: scheduleobject ?? this.scheduleobject,
     );
   }
 
@@ -102,47 +99,44 @@ class Clinic extends Equatable {
       'off_dates': off_dates,
       'destination': destination.toJson(),
       'schedule': schedule.map((x) => x.toJson()).toList(),
-      'scheduleobject':
-          scheduleobject?.entries.map((e) => {e.key: e.value.toJson()})
     };
   }
 
-  factory Clinic.fromJson(Map<String, dynamic> map) {
-    return Clinic(
-        id: map['id'] as String,
-        doc_id: map['doc_id'] as String,
-        name_en: map['name_en'] as String,
-        name_ar: map['name_ar'] as String,
-        mobile: map['mobile'] as String,
-        landline: map['landline'] as String,
-        attendance: map['attendance'] as bool,
-        published: map['published'] as bool,
-        consultation_fees: map['consultation_fees'] as int,
-        followup_fees: map['followup_fees'] as int,
-        discount: map['discount'] as int,
-        waiting_time: map['waiting_time'] as int,
-        followup_duration: map['followup_duration'] as int,
-        off_dates: (map['off_dates'] as List<dynamic>)
-            .map((e) => e.toString())
-            .toList(),
-        destination: Destination.fromJson(map['destination']),
-        schedule: (map['schedule'] as List<dynamic>)
-            .map((e) => Schedule.fromJson(e))
-            .toList(),
-        scheduleobject: map['scheduleobject'] != null
-            ? Map.fromIterable(
-                (map['scheduleobject'] as Map<String, dynamic>)
-                    .entries
-                    .map((x) => {x.key: ScheduleObject.fromJson(x.value)}),
-              )
-            : {});
+  factory Tempo.fromJson(Map<String, dynamic> map) {
+    return Tempo(
+      id: map['id'] as String,
+      doc_id: map['doc_id'] as String,
+      name_en: map['name_en'] as String,
+      name_ar: map['name_ar'] as String,
+      mobile: map['mobile'] as String,
+      landline: map['landline'] as String,
+      attendance: map['attendance'] as bool,
+      published: map['published'] as bool,
+      consultation_fees: map['consultation_fees'] as int,
+      followup_fees: map['followup_fees'] as int,
+      discount: map['discount'] as int,
+      waiting_time: map['waiting_time'] as int,
+      followup_duration: map['followup_duration'] as int,
+      off_dates:
+          (map['off_dates'] as List<dynamic>).map((e) => e.toString()).toList(),
+      destination:
+          Destination.fromJson(map['destination'] as Map<String, dynamic>),
+      schedule: (map['schedule'] as List<dynamic>)
+          .map((e) => Schedule.fromJson(e))
+          .toList(),
+    );
+  }
+
+  static List<String> fromString(String data) {
+    final List json = jsonDecode(data);
+    return json.map((e) => e.toString()).toList();
   }
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object?> get props {
+  List<Object> get props {
     return [
       id,
       doc_id,
@@ -160,7 +154,6 @@ class Clinic extends Equatable {
       off_dates,
       destination,
       schedule,
-      scheduleobject
     ];
   }
 }

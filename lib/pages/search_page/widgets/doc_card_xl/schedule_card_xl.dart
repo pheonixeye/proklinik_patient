@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/constants/now.dart';
@@ -53,11 +52,11 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
 
     isAvailable = _schedule != null && _schedule!.intday == data.weekday;
     super.initState();
-    if (kDebugMode) {
-      print(_schedule?.toJson().toString());
-      print(data.toString());
-      print(isAvailable.toString());
-    }
+    // if (kDebugMode) {
+    //   print(_schedule?.toJson().toString());
+    //   print(data.toString());
+    //   print(isAvailable.toString());
+    // }
   }
 
   void Function()? get _onTap {
@@ -152,6 +151,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                             fontSize: 10,
                             letterSpacing: 0.2,
                           ),
+                          textAlign: TextAlign.center,
                         );
                       },
                     ),

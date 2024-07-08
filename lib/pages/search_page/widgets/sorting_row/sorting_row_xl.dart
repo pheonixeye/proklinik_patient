@@ -1,6 +1,6 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/spec_gov_px.dart';
@@ -36,7 +36,7 @@ class SortingRowXl extends StatelessWidget {
               const SizedBox(width: 10),
               //todo: number of results
               Text(
-                "(${ArabicNumbers.convert("${sc.responseModel?.length}")} ${context.loc.doctor})",
+                "(${"${sc.responseModel?.length.toString().toArabicNumber(context)}"} ${context.loc.doctor})",
                 style: TextStyle(
                   fontSize: 14,
                   color: AppTheme.mainFontColor,

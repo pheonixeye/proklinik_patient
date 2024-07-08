@@ -68,7 +68,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
               AppRouter.docquery,
               pathParameters: {
                 ...defaultPathParameters(context),
-                "docid": widget.responseModel.doctor.synd_id.toString(),
+                "docid": widget.responseModel.doctor.id.toString(),
               },
             );
           },

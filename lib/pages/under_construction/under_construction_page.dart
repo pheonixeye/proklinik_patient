@@ -8,12 +8,11 @@ import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 
-class ErrorPage extends StatelessWidget {
-  const ErrorPage({super.key});
+class UnderConstructionPage extends StatelessWidget {
+  const UnderConstructionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //todo: rebuild UI
     return ListView(
       children: [
         Container(
@@ -39,14 +38,14 @@ class ErrorPage extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 child: SvgPicture.asset(
-                  Assets.err,
+                  Assets.construction,
                   fit: BoxFit.contain,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  context.loc.somethingWentWrong,
+                  context.loc.pageUnderConst,
                   style: TextStyle(
                     fontSize: context.isMobile ? 18 : 36,
                     fontWeight: FontWeight.w700,
@@ -56,7 +55,7 @@ class ErrorPage extends StatelessWidget {
                 ),
               ),
               Text(
-                context.loc.errorText,
+                context.loc.sryMsg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,

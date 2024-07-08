@@ -342,4 +342,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get willBeNotified => 'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.';
+
+  @override
+  String get pageUnderConst => 'This Page is Under Construction.';
+
+  @override
+  String get sryMsg => 'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.';
 }

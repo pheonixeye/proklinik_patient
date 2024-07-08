@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:patient/constants/dummy_clinics.dart';
-import 'package:patient/constants/dummy_doctors.dart';
-import 'package:patient/constants/dummy_reviews.dart';
+// import 'package:patient/constants/dummy_clinics.dart';
+// import 'package:patient/constants/dummy_doctors.dart';
+// import 'package:patient/constants/dummy_reviews.dart';
+import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/query_object.dart';
 import 'package:patient/models/server_response_model.dart';
 
@@ -22,24 +23,27 @@ class PxSearchController extends ChangeNotifier {
     if (kDebugMode) {
       print("PxSearchController().init($query)");
     }
-    await Future.delayed(const Duration(seconds: 1), () {
-      _responseModel = DOCTORS.map((doctor) {
-        final clinic = CLINICS.firstWhere(
-            (clinic) => doctor.destinations.contains(clinic.destination));
-        final reviews = REVIEWS
-            .where((review) => review.doc_id == doctor.synd_id.toString())
-            .toList();
-        return ServerResponseModel(
-          doctor: doctor,
-          clinic: clinic,
-          reviews: reviews,
-        );
-      }).toList();
-      notifyListeners();
-      if (kDebugMode) {
-        print(
-            "PxSearchController().init(${_responseModel?.map((x) => x.doctor.name_en)})");
-      }
-    });
+
+    _responseModel = await PocketbaseHelper.mainQuery(query);
+    notifyListeners();
+    // await Future.delayed(const Duration(seconds: 1), () {
+    //   _responseModel = DOCTORS.map((doctor) {
+    //     final clinic = CLINICS.firstWhere(
+    //         (clinic) => doctor.destinations.contains(clinic.destination));
+    //     final reviews = REVIEWS
+    //         .where((review) => review.doc_id == doctor.synd_id.toString())
+    //         .toList();
+    //     return ServerResponseModel(
+    //       doctor: doctor,
+    //       clinic: clinic,
+    //       reviews: reviews,
+    //     );
+    //   }).toList();
+    //   notifyListeners();
+    //   if (kDebugMode) {
+    //     print(
+    //         "PxSearchController().init(${_responseModel?.map((x) => x.doctor.name_en)})");
+    //   }
+    // });
   }
 }

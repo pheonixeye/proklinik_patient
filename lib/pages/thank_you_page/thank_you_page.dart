@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/assets/assets.dart';
+import 'package:patient/extensions/after_layout.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/providers/booking_px.dart';
@@ -11,8 +14,24 @@ import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
-class ThankYouPage extends StatelessWidget {
+class ThankYouPage extends StatefulWidget {
   const ThankYouPage({super.key});
+
+  @override
+  State<ThankYouPage> createState() => _ThankYouPageState();
+}
+
+class _ThankYouPageState extends State<ThankYouPage> with AfterLayoutMixin {
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    final isFromOutsideNavigation = context.read<PxBooking>().data == null;
+    if (isFromOutsideNavigation) {
+      GoRouter.of(context).goNamed(
+        AppRouter.err,
+        pathParameters: defaultPathParameters(context),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

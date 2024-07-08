@@ -342,4 +342,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get willBeNotified => 'سيتم ارسال بيانات الحجز و عنوان و موقع العيادة عن طريق رسالة نصية.';
+
+  @override
+  String get pageUnderConst => 'هذه الصفحة تحت الإنشاء.';
+
+  @override
+  String get sryMsg => 'نأسف على أي إزعاج، ولكن هذه الصفحة لا تزال قيد الإنشاء والاختبار. وفي هذه الأثناء، لا يزال بإمكانك تصفح الصفحات الأخرى.';
 }

@@ -25,7 +25,7 @@ class DocInfoCardSm extends StatelessWidget {
             AppRouter.docquery,
             pathParameters: {
               ...defaultPathParameters(context),
-              "docid": responseModel.doctor.synd_id.toString(),
+              "docid": responseModel.doctor.id.toString(),
             },
           );
         },

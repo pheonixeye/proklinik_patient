@@ -77,6 +77,20 @@ class QueryObject extends Equatable {
     );
   }
 
+  factory QueryObject.nonFiltered({required String spec}) {
+    return QueryObject(
+      type: 'clinic',
+      spec: spec,
+      gov: '',
+      city: '',
+      page: '1',
+      availability: 'any',
+      fees: 'any',
+      location: 'any',
+      sort: 'best-match',
+    );
+  }
+
   factory QueryObject.fromJson(Map<String, dynamic> map) {
     if (map.isEmpty) {
       return QueryObject.empty();
@@ -106,5 +120,12 @@ class QueryObject extends Equatable {
       city,
       page,
     ];
+  }
+
+  String toPocketbaseQuery() {
+    final buffer = StringBuffer();
+    final _q = this;
+    _q.availability;
+    return "";
   }
 }
