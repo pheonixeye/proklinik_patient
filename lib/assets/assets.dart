@@ -23,6 +23,6 @@ class Assets {
   }
 
   static String offerItemImage(String id) {
-    return "assets/assets/images/offers_row/$id.jpeg";
+    return "images/offers_row/$id.jpeg";
   }
 }
