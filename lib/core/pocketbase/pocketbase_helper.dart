@@ -11,7 +11,9 @@ import 'package:patient/models/server_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class PocketbaseHelper {
-  static final pb = PocketBase(const String.fromEnvironment("PB_SERVER"));
+  static final pb = PocketBase(const String.fromEnvironment("PB_SERVER").isEmpty
+      ? "http://127.0.0.1:8090/"
+      : const String.fromEnvironment("PB_SERVER"));
 
   PocketbaseHelper() {
     // addDoctors();

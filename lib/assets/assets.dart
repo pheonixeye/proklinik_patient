@@ -21,4 +21,8 @@ class Assets {
   static String doctorAvatar(int syndId) {
     return "assets/images/doc_avatars/av${syndId}_.jpeg";
   }
+
+  static String offerItemImage(String id) {
+    return "assets/images/Offers_row/$id.jpeg";
+  }
 }
