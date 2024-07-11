@@ -9,9 +9,26 @@ import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-class MainInfoCardXl extends StatelessWidget {
+class MainInfoCardXl extends StatefulWidget {
   const MainInfoCardXl({super.key, required this.model});
   final ServerResponseModel model;
+
+  @override
+  State<MainInfoCardXl> createState() => _MainInfoCardXlState();
+}
+
+class _MainInfoCardXlState extends State<MainInfoCardXl> {
+  late final ImageProvider image;
+
+  @override
+  void initState() {
+    if (widget.model.doctor.avatarUrl == null) {
+      image = AssetImage(Assets.doctorEmptyAvatar());
+    } else {
+      image = NetworkImage(widget.model.doctor.avatarUrl!);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +61,7 @@ class MainInfoCardXl extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage(
-                            //TODO: fetch data from link
-                            Assets.doctorAvatar(model.doctor.synd_id),
-                          ),
+                          image: image,
                         ),
                       ),
                     ),
@@ -82,8 +96,8 @@ class MainInfoCardXl extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text: l.isEnglish
-                                          ? model.doctor.name_en
-                                          : model.doctor.name_ar,
+                                          ? widget.model.doctor.name_en
+                                          : widget.model.doctor.name_ar,
                                       style: TextStyle(
                                         color: AppTheme.mainFontColor,
                                         fontSize: 16,
@@ -95,7 +109,7 @@ class MainInfoCardXl extends StatelessWidget {
                               ),
                               const Spacer(),
                               Text(
-                                "${model.doctor.views.toString().toArabicNumber(context)} ${context.loc.views}",
+                                "${widget.model.doctor.views.toString().toArabicNumber(context)} ${context.loc.views}",
                                 style: TextStyle(
                                   color: AppTheme.mainFontColor,
                                   fontSize: 14,
@@ -112,8 +126,8 @@ class MainInfoCardXl extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   l.isEnglish
-                                      ? model.doctor.title_en
-                                      : model.doctor.title_ar,
+                                      ? widget.model.doctor.title_en
+                                      : widget.model.doctor.title_ar,
                                   style: TextStyle(
                                     color: AppTheme.mainFontColor,
                                     fontSize: 14,
@@ -134,8 +148,8 @@ class MainInfoCardXl extends StatelessWidget {
                           child: Text.rich(
                             TextSpan(
                               text: l.isEnglish
-                                  ? model.doctor.speciality_en
-                                  : model.doctor.speciality_ar,
+                                  ? widget.model.doctor.speciality_en
+                                  : widget.model.doctor.speciality_ar,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -145,8 +159,8 @@ class MainInfoCardXl extends StatelessWidget {
                                 const TextSpan(text: " - "),
                                 TextSpan(
                                   text: l.isEnglish
-                                      ? model.doctor.degree_en
-                                      : model.doctor.degree_ar,
+                                      ? widget.model.doctor.degree_en
+                                      : widget.model.doctor.degree_ar,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -161,12 +175,17 @@ class MainInfoCardXl extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              ...model.doctor.rating.toStars(
-                                  size: 32,
-                                  padding: const EdgeInsets.only(left: 5)),
+                              if (widget.model.doctor.rating == 0)
+                                ...5.0.toStars(
+                                    size: 32,
+                                    padding: const EdgeInsets.only(left: 5))
+                              else
+                                ...widget.model.doctor.rating.toStars(
+                                    size: 32,
+                                    padding: const EdgeInsets.only(left: 5)),
                               const SizedBox(width: 10),
                               Text(
-                                "${context.loc.overallRating} ${context.loc.from} ${model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                                "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
                                 style: TextStyle(
                                   color: AppTheme.mainFontColor,
                                   fontSize: 10,

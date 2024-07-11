@@ -34,7 +34,7 @@ class ServerResponseModel extends Equatable {
     };
   }
 
-  factory ServerResponseModel.fromMap(Map<String, dynamic> map) {
+  factory ServerResponseModel.fromJson(Map<String, dynamic> map) {
     return ServerResponseModel(
       doctor: Doctor.fromJson(map['doctor'] as Map<String, dynamic>),
       clinic: Clinic.fromJson(map['clinic'] as Map<String, dynamic>),

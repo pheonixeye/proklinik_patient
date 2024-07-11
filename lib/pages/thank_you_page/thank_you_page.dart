@@ -11,6 +11,7 @@ import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
@@ -23,20 +24,24 @@ class ThankYouPage extends StatefulWidget {
 
 class _ThankYouPageState extends State<ThankYouPage> with AfterLayoutMixin {
   @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {
-    final isFromOutsideNavigation = context.read<PxBooking>().data == null;
-    if (isFromOutsideNavigation) {
-      GoRouter.of(context).goNamed(
-        AppRouter.err,
-        pathParameters: defaultPathParameters(context),
-      );
-    }
+  FutureOr<void> afterFirstLayout(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      if (context.read<PxBooking>().data == null) {
+        GoRouter.of(context).goNamed(
+          AppRouter.err,
+          pathParameters: defaultPathParameters(context),
+        );
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer2<PxBooking, PxLocale>(
       builder: (context, b, l, _) {
+        while (b.isFetching) {
+          return const CentralLoading();
+        }
         return ListView(
           children: [
             Container(

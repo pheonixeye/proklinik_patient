@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Schedule extends Equatable {
+  //TODO: add available
   final String id;
   final String weekday;
   final int intday;
@@ -10,6 +11,7 @@ class Schedule extends Equatable {
   final int startHour;
   final int endMin;
   final int endHour;
+  final bool available;
 
   const Schedule({
     required this.id,
@@ -19,6 +21,7 @@ class Schedule extends Equatable {
     required this.startHour,
     required this.endMin,
     required this.endHour,
+    required this.available,
   });
 
   Schedule copyWith({
@@ -29,6 +32,7 @@ class Schedule extends Equatable {
     int? startHour,
     int? endMin,
     int? endHour,
+    bool? available,
   }) {
     return Schedule(
       id: id ?? this.id,
@@ -38,6 +42,7 @@ class Schedule extends Equatable {
       startHour: startHour ?? this.startHour,
       endMin: endMin ?? this.endMin,
       endHour: endHour ?? this.endHour,
+      available: available ?? this.available,
     );
   }
 
@@ -50,6 +55,7 @@ class Schedule extends Equatable {
       'startHour': startHour,
       'endMin': endMin,
       'endHour': endHour,
+      'available': available,
     };
   }
 
@@ -67,6 +73,7 @@ class Schedule extends Equatable {
       startHour: map['startHour'] as int,
       endMin: map['endMin'] as int,
       endHour: map['endHour'] as int,
+      available: map['available'] as bool,
     );
   }
 
@@ -83,6 +90,7 @@ class Schedule extends Equatable {
       startHour,
       endMin,
       endHour,
+      available,
     ];
   }
 }

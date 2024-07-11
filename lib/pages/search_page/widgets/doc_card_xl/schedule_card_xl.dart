@@ -31,26 +31,30 @@ class ScheduleCardXl extends StatefulWidget {
 class _ScheduleCardXlState extends State<ScheduleCardXl> {
   bool isHovering = false;
   bool isAvailable = true;
+  //todo: change model to include available boolean
+  //TODO: change availability algorhithm
 
   static final now = DateTime.now();
 
-  final today = DateTime(now.year, now.month, now.day);
+  late final DateTime today;
 
-  late final DateTime data;
+  late final DateTime cardDate;
 
   Schedule? _schedule;
 
   @override
   void initState() {
-    data = today.copyWith(day: today.day + widget.index);
+    today = DateTime(now.year, now.month, now.day);
+
+    cardDate = today.add(Duration(days: widget.index));
     try {
       _schedule = widget.model.clinic.schedule
-          .singleWhere((sch) => sch.intday == data.weekday);
+          .singleWhere((sch) => sch.intday == cardDate.weekday);
     } catch (e) {
       _schedule = null;
     }
 
-    isAvailable = _schedule != null && _schedule!.intday == data.weekday;
+    isAvailable = _schedule != null && _schedule!.available;
     super.initState();
     // if (kDebugMode) {
     //   print(_schedule?.toJson().toString());
@@ -67,7 +71,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                 .read<PxBooking>()
                 .setBookingData(BookingData.empty().copyWith(
                   id: const Uuid().v4(),
-                  date_time: data.toIso8601String(),
+                  date_time: cardDate.toIso8601String(),
                   doc_id: widget.model.doctor.id,
                   clinic_id: widget.model.clinic.id,
                   model: widget.model,
@@ -75,6 +79,8 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
             GoRouter.of(context).goNamed(
               AppRouter.book,
               pathParameters: defaultPathParameters(context),
+              //HACK:
+              extra: widget.model.doctor,
             );
           }
         : null;
@@ -135,14 +141,14 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                     child: Consumer<PxLocale>(
                       builder: (context, l, _) {
                         final wkDay = l.isEnglish
-                            ? WEEKDAYS[data.weekday]?.en
-                            : WEEKDAYS[data.weekday]?.ar;
+                            ? WEEKDAYS[cardDate.weekday]?.en
+                            : WEEKDAYS[cardDate.weekday]?.ar;
                         // ignore: no_leading_underscores_for_local_identifiers
-                        final _data = data == NOWDAY
+                        final _data = cardDate == NOWDAY
                             ? "${context.loc.today} - $wkDay"
-                            : data == NOWDAY.add(const Duration(days: 1))
+                            : cardDate == NOWDAY.add(const Duration(days: 1))
                                 ? "${context.loc.tomorrow} - $wkDay"
-                                : "${data.day}/${data.month} - $wkDay"
+                                : "${cardDate.day}/${cardDate.month} - $wkDay"
                                     .toArabicNumber(context);
                         return Text(
                           _data,
@@ -162,7 +168,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                       children: isAvailable
                           ? [
                               Text(
-                                "${context.loc.from} ${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0")}:${_schedule?.startMin.toString().padLeft(1, "0")} ${_schedule?.startHour.amPm(context)}",
+                                "${context.loc.from} ${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)}:${_schedule?.startMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.startHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,
@@ -171,7 +177,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                "${context.loc.to} ${_schedule?.endHour.normalizeHour.toString().padLeft(1, "0")}:${_schedule?.endMin.toString().padLeft(1, "0")} ${_schedule?.endHour.amPm(context)}",
+                                "${context.loc.to} ${_schedule?.endHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)}:${_schedule?.endMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.endHour.amPm(context)}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: AppTheme.appBarColor,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Assets {
   const Assets();
 
@@ -18,11 +20,16 @@ class Assets {
     return "assets/images/icons_svg/$specEnName-color.svg";
   }
 
-  static String doctorAvatar(int syndId) {
-    return "assets/images/doc_avatars/av${syndId}_.jpeg";
+  // static String doctorAvatar(int syndId) {
+  //   return "assets/images/doc_avatars/av${syndId}_.jpeg";
+  // }
+
+  static String doctorEmptyAvatar() {
+    final randomInt = Random().nextInt(0) + 1;
+    return "assets/images/doc_avatars/av${randomInt}_.jpeg";
   }
 
   static String offerItemImage(String id) {
-    return "images/offers_row/$id.jpeg";
+    return "assets/images/offers_row/$id.jpeg";
   }
 }

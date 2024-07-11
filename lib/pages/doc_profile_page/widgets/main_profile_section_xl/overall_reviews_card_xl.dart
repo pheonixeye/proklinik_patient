@@ -70,7 +70,7 @@ class OverallReviewsCardXl extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${model.doctor.rating} / 5",
+                          "${model.doctor.rating.toString().toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
                           style: const TextStyle(
                             color: Colors.white,
                           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_double.dart';
 import 'package:patient/models/review.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -109,7 +110,7 @@ class RatingCardXl extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12.0, vertical: 8.0),
                     child: Text(
-                      review.stars.toString(),
+                      review.stars.toString().toArabicNumber(context),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

@@ -1,9 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
+import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/destination.dart';
 
 class Doctor extends Equatable {
+  //TODO: refactor - need to add avatar
   final String id;
   final int synd_id;
   final String joined_at;
@@ -23,6 +25,7 @@ class Doctor extends Equatable {
   final List<String> tags;
   final int views;
   final List<Destination> destinations;
+  final String? avatar;
 
   const Doctor({
     required this.id,
@@ -44,30 +47,31 @@ class Doctor extends Equatable {
     required this.tags,
     required this.views,
     required this.destinations,
+    this.avatar,
   });
 
-  Doctor copyWith({
-    String? id,
-    int? synd_id,
-    String? joined_at,
-    String? name_en,
-    String? name_ar,
-    String? personal_phone,
-    String? assistant_phone,
-    String? speciality_en,
-    String? speciality_ar,
-    bool? published,
-    String? title_en,
-    String? title_ar,
-    String? about_en,
-    String? about_ar,
-    String? degree_en,
-    String? degree_ar,
-    double? rating,
-    List<String>? tags,
-    int? views,
-    List<Destination>? destinations,
-  }) {
+  Doctor copyWith(
+      {String? id,
+      int? synd_id,
+      String? joined_at,
+      String? name_en,
+      String? name_ar,
+      String? personal_phone,
+      String? assistant_phone,
+      String? speciality_en,
+      String? speciality_ar,
+      bool? published,
+      String? title_en,
+      String? title_ar,
+      String? about_en,
+      String? about_ar,
+      String? degree_en,
+      String? degree_ar,
+      double? rating,
+      List<String>? tags,
+      int? views,
+      List<Destination>? destinations,
+      String? avatar}) {
     return Doctor(
       id: id ?? this.id,
       synd_id: synd_id ?? this.synd_id,
@@ -88,6 +92,7 @@ class Doctor extends Equatable {
       tags: tags ?? this.tags,
       views: views ?? this.views,
       destinations: destinations ?? this.destinations,
+      avatar: avatar ?? this.avatar,
     );
   }
 
@@ -112,6 +117,7 @@ class Doctor extends Equatable {
       'tags': tags,
       'views': views,
       'destinations': destinations.map((e) => e.toJson()).toList(),
+      'avatar': avatar,
     };
   }
 
@@ -145,6 +151,7 @@ class Doctor extends Equatable {
       destinations: (map['destinations'] as List)
           .map((e) => Destination.fromJson(e))
           .toList(),
+      avatar: map['avatar'] as String?,
     );
   }
 
@@ -152,7 +159,7 @@ class Doctor extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       synd_id,
@@ -173,6 +180,11 @@ class Doctor extends Equatable {
       tags,
       views,
       destinations,
+      avatar,
     ];
   }
+
+  String? get avatarUrl => avatar == null
+      ? null
+      : "${PocketbaseHelper.pb.baseUrl}api/files/doctors/$id/$avatar?thumb=200x200";
 }

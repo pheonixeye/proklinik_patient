@@ -8,6 +8,8 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 class Review extends Equatable {
+  //TODO: add doc_rel
+  //TODO: add clinic_rel
   final String id;
   final String doc_id;
   final String user_name;

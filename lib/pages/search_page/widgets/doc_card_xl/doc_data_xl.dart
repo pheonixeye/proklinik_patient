@@ -64,15 +64,10 @@ class DocDataXl extends StatelessWidget {
                   children: [
                     //todo: generate star row from double rating
 
-                    // ...List.generate(
-                    //   5,
-                    //   (index) => const Icon(
-                    //     Icons.star,
-                    //     color: Colors.amber,
-                    //   ),
-                    // ),
-
-                    ...responseModel.doctor.rating.toStars(),
+                    if (responseModel.doctor.rating == 0)
+                      ...5.0.toStars()
+                    else
+                      ...responseModel.doctor.rating.toStars(),
                   ],
                 ),
                 //todo: fetch from ratings

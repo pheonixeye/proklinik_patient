@@ -22,10 +22,16 @@ class MainInfoCardSm extends StatefulWidget {
 
 class _MainInfoCardSmState extends State<MainInfoCardSm> {
   late final ScrollController _controller;
+  late final ImageProvider image;
 
   @override
   void initState() {
     _controller = ScrollController();
+    if (widget.model.doctor.avatarUrl == null) {
+      image = AssetImage(Assets.doctorEmptyAvatar());
+    } else {
+      image = NetworkImage(widget.model.doctor.avatarUrl!);
+    }
     super.initState();
   }
 
@@ -76,10 +82,7 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage(
-                              //TODO: Replace by image link
-                              Assets.doctorAvatar(widget.model.doctor.synd_id),
-                            ),
+                            image: image,
                           ),
                         ),
                       ),
@@ -91,6 +94,9 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                   Expanded(
                     flex: 210,
                     child: ExpansionTile(
+                      expandedAlignment: l.isEnglish
+                          ? Alignment.centerLeft
+                          : Alignment.centerRight,
                       tilePadding: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -166,6 +172,7 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                             fontSize: 14,
                             color: AppTheme.mainFontColor,
                           ),
+                          textAlign: TextAlign.start,
                         ),
                       ],
                     ),
@@ -215,10 +222,10 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                               color: AppTheme.mainFontColor,
                             ),
                             children: [
-                              const TextSpan(text: " "),
+                              const TextSpan(text: " : "),
                               TextSpan(
                                 text:
-                                    "${widget.model.clinic.consultation_fees} ${context.loc.pound}",
+                                    "${widget.model.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                 ),

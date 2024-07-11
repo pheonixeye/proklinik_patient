@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/pages/book_page/widgets/book_app_form.dart';
 import 'package:patient/pages/book_page/widgets/book_app_info_card.dart';
 import 'package:patient/pages/book_page/widgets/page_error_card.dart';
@@ -9,7 +10,11 @@ import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class BookPage extends StatelessWidget {
-  const BookPage({super.key});
+  const BookPage({
+    super.key,
+    required this.doctor,
+  });
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,9 @@ class BookPage extends StatelessWidget {
                         Spacer(flex: context.isMobile ? 1 : 100),
 
                         ///doctor identification card && booking date and time.
-                        const BookAppInfoCard(),
+                        BookAppInfoCard(
+                          doctor: doctor,
+                        ),
                         const Gap(30),
 
                         ///booking form input && submit button

@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:patient/constants/dummy_clinics.dart';
 import 'package:patient/constants/dummy_doctors.dart';
 import 'package:patient/constants/dummy_reviews.dart';
+import 'package:patient/models/booking_data.dart';
 import 'package:patient/models/clinic.dart';
 import 'package:patient/models/doctor.dart';
 import 'package:patient/models/query_object.dart';
@@ -15,17 +17,177 @@ class PocketbaseHelper {
       ? "http://127.0.0.1:8090/"
       : const String.fromEnvironment("PB_SERVER"));
 
-  PocketbaseHelper() {
-    // addDoctors();
-    // addClinics();
-    // addReviews();
-    // fetchAllDoctors();
-    // testJsonQuery();
-    // testNormalQuery();
-    // updateReviewsRelation(); //#success
-    // updateClinicDoctorRelation();
-    // updateDoctorClinicReviewsRelation();
-    // mainQuery(QueryObject.empty()); //#placeholder
+  PocketbaseHelper();
+
+  static String _dateBookingCollectionFormat(String date) {
+    final d = DateTime.parse(date);
+    return "visits_${d.month}_${d.year}";
+  }
+
+  static ({String userName, String password}) get _adminUserCredentials {
+    return (
+      userName: const String.fromEnvironment("ADMIN_USERNAME"),
+      password: const String.fromEnvironment("ADMIN_PASSWORD")
+    );
+  }
+
+  static Future<Map<String, dynamic>> _bookingCollectionSchema(
+      String date) async {
+    // final d = DateTime.parse(date);
+    final doctors = await pb.collections.getOne("doctors");
+    final clinics = await pb.collections.getOne("clinics");
+    return {
+      'name': _dateBookingCollectionFormat(date),
+      'type': 'base',
+      'schema': [
+        {
+          'name': 'user_name',
+          'type': 'text',
+          'required': true,
+          'options': {},
+        },
+        {
+          'name': 'user_phone',
+          'type': 'text',
+          'required': true,
+          'options': {
+            'min': 11,
+          },
+        },
+        {
+          'name': 'user_email',
+          'type': 'text',
+          'required': false,
+          'options': {},
+        },
+        {
+          'name': 'date_time',
+          'type': 'text',
+          'required': true,
+          'options': {},
+        },
+        {
+          'name': 'doc_id',
+          'type': 'relation',
+          'required': true,
+          'options': {
+            'collectionId': doctors.id,
+            "maxSelect": 1,
+          },
+        },
+        {
+          'name': 'clinic_id',
+          'type': 'relation',
+          'required': true,
+          'options': {
+            'collectionId': clinics.id,
+            "maxSelect": 1,
+          },
+        },
+        {
+          'name': 'attended',
+          'type': 'bool',
+          'required': false,
+          'options': {},
+        },
+        {
+          'name': 'type',
+          'type': 'select',
+          'required': false,
+          'options': {
+            "maxSelect": 1,
+            "values": [
+              "Consultation",
+              "Followup",
+            ],
+          }
+        },
+        {
+          'name': 'year',
+          'type': 'number',
+          'required': true,
+          'options': {"noDecimal": true},
+        },
+        {
+          'name': 'month',
+          'type': 'number',
+          'required': true,
+          'options': {
+            "noDecimal": true,
+            "min": 1,
+            "max": 12,
+          },
+        },
+        {
+          'name': 'day',
+          'type': 'number',
+          'required': true,
+          'options': {
+            "noDecimal": true,
+            "min": 1,
+            "max": 31,
+          },
+        },
+      ],
+      "listRule": "",
+      "viewRule": "",
+      "createRule": "",
+      "updateRule": "",
+      "deleteRule": null,
+    };
+  }
+
+  static Future<BookingData?> sendBookingRequest(BookingData data) async {
+    try {
+      final bookResult = await pb
+          .collection(_dateBookingCollectionFormat(data.date_time))
+          .create(body: data.toPocketbaseJson());
+      final bookingData = BookingData.fromPocketbaseJson(
+        bookResult.toJson(),
+        data.model,
+      );
+      return bookingData;
+    } catch (e) {
+      if (kDebugMode) {
+        print("First Request Exception : ${e.toString()}");
+      }
+      try {
+        //TODO: remove in production
+        final admin = await pb.admins
+            .authWithPassword("collection@admin.com", "admin.collection");
+        // final admin = await pb.admins.authWithPassword(
+        //   _adminUserCredentials.userName,
+        //   _adminUserCredentials.password,
+        // );
+        final adminToken = admin.token;
+
+        final collectionSchema = await _bookingCollectionSchema(data.date_time);
+
+        await pb.collections.create(
+          headers: {
+            "Authorization": "Bearer $adminToken",
+            "Content-Type": "application/json"
+          },
+          body: collectionSchema,
+        );
+
+        final bookingResult = await pb
+            .collection(_dateBookingCollectionFormat(data.date_time))
+            .create(body: data.toPocketbaseJson());
+
+        final bookingData = BookingData.fromPocketbaseJson(
+          bookingResult.toJson(),
+          data.model,
+        );
+
+        return bookingData;
+      } catch (e) {
+        if (kDebugMode) {
+          print("Second Request Exception : ${e.toString()}");
+        }
+        return null;
+      }
+    }
   }
 
   static Future<ServerResponseModel> doctorProfileQuery(String id) async {
@@ -34,11 +196,15 @@ class PocketbaseHelper {
           expand: "clinic_rel, review_rel",
         );
     final doctor = Doctor.fromJson(doctorData.toJson());
+    //TODO: Show multiple doctor clinics with queried clinic selected
     final clinic =
         Clinic.fromJson(doctorData.expand["clinic_rel"]!.first.toJson());
-    final reviews = doctorData.expand["review_rel"]!
-        .map((r) => Review.fromJson(r.toJson()))
-        .toList();
+    final reviews = (doctorData.expand["review_rel"] == null ||
+            doctorData.expand["review_rel"]!.isEmpty)
+        ? <Review>[]
+        : doctorData.expand["review_rel"]!
+            .map((r) => Review.fromJson(r.toJson()))
+            .toList();
     return ServerResponseModel(
       doctor: doctor,
       clinic: clinic,
@@ -54,9 +220,12 @@ class PocketbaseHelper {
     doctorsData.items.map((d) {
       final doctor = Doctor.fromJson(d.toJson());
       final clinic = Clinic.fromJson(d.expand["clinic_rel"]!.first.toJson());
-      final reviews = d.expand["review_rel"]!
-          .map((r) => Review.fromJson(r.toJson()))
-          .toList();
+      final reviews =
+          (d.expand["review_rel"] == null || d.expand["review_rel"]!.isEmpty)
+              ? <Review>[]
+              : d.expand["review_rel"]!
+                  .map((r) => Review.fromJson(r.toJson()))
+                  .toList();
       final model = ServerResponseModel(
         doctor: doctor,
         clinic: clinic,

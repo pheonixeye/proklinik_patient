@@ -61,7 +61,10 @@ class DocDataSmUpper extends StatelessWidget {
                   children: [
                     //todo: generate icons from rating
 
-                    ...responseModel.doctor.rating.toStars(),
+                    if (responseModel.doctor.rating == 0)
+                      ...5.0.toStars()
+                    else
+                      ...responseModel.doctor.rating.toStars(),
                   ],
                 ),
                 //todo: Fetch from somewhere

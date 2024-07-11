@@ -20,7 +20,7 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: translate component
+    //todo: translate component
 
     if (context.isMobile) {
       return const SizedBox();

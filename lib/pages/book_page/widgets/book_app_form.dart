@@ -4,10 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/providers/booking_px.dart';
+import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
+
+const _visitTypes = {
+  "C": (en: "Consultation", ar: "كشف"),
+  "F": (en: "Followup", ar: "استشارة"),
+};
 
 class BookAppForm extends StatefulWidget {
   const BookAppForm({super.key});
@@ -18,7 +24,7 @@ class BookAppForm extends StatefulWidget {
 
 class _BookAppFormState extends State<BookAppForm> {
   //todo: translate component
-  //TODO: recieve and validate booking info
+  //todo: recieve and validate booking info
   final formKey = GlobalKey<FormState>();
 
   late final TextEditingController _nameController;
@@ -65,12 +71,14 @@ class _BookAppFormState extends State<BookAppForm> {
     return null;
   }
 
+  String? _type;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 545,
-      child: Consumer<PxBooking>(
-        builder: (context, b, _) {
+      child: Consumer2<PxBooking, PxLocale>(
+        builder: (context, b, l, _) {
           return Form(
             key: formKey,
             child: Column(
@@ -135,15 +143,53 @@ class _BookAppFormState extends State<BookAppForm> {
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.all(24.0),
-                          child: TextFormField(
-                            validator: _emailValidator,
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                              hintText:
-                                  "${context.loc.email} (${context.loc.optional})",
-                              icon: const Icon(Icons.mail),
-                              iconColor: AppTheme.appBarColor,
-                            ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  validator: _emailValidator,
+                                  controller: _emailController,
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        "${context.loc.email} (${context.loc.optional})",
+                                    icon: const Icon(Icons.mail),
+                                    iconColor: AppTheme.appBarColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButtonFormField<String>(
+                                    isExpanded: true,
+                                    value: _type,
+                                    elevation: 6,
+                                    alignment: Alignment.center,
+                                    decoration: InputDecoration(
+                                      hintText: l.isEnglish
+                                          ? "Select Visit Type."
+                                          : "اختر نوع الزيارة",
+                                    ),
+                                    items: _visitTypes.entries.map((e) {
+                                      return DropdownMenuItem<String>(
+                                        value: e.value.en,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          l.isEnglish ? e.value.en : e.value.ar,
+                                        ),
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      if (value != null) {
+                                        b.setBookingData(b.data?.copyWith(
+                                          type: value,
+                                        ));
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -192,8 +238,8 @@ class _BookAppFormState extends State<BookAppForm> {
                                         const CentralLoading(),
                                   );
 
-                                  //TODO: send booking request
-                                  await b.createAppointment().then((_) {
+                                  //todo: send booking request
+                                  await b.createAppointment().whenComplete(() {
                                     Navigator.pop(context);
                                   });
                                   //todo: navigate to post booking info page

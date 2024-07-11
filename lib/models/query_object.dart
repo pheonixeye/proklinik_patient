@@ -123,6 +123,7 @@ class QueryObject extends Equatable {
   }
 
   String toPocketbaseQuery() {
+    //TODO:
     final buffer = StringBuffer();
     final _q = this;
     _q.availability;

@@ -172,8 +172,8 @@ String attendanceFromBool(BuildContext context, bool attendance) {
   final isEnglish = context.read<PxLocale>().isEnglish;
   return switch ((isEnglish, attendance)) {
     (true, true) => "Reservation required, first-come, first-served.",
-    (false, true) => "الدكتور يتطلب الحجز, الدخول باسبقية الحضور.",
+    (false, true) => "الدكتور يتطلب الحجز، الدخول باسبقية الحضور.",
     (true, false) => "Reservation required, On Appointment.",
-    (false, false) => "الدكتور يتطلب الحجز, الدخول بموعد مسبق.",
+    (false, false) => "الدكتور يتطلب الحجز، الدخول بموعد مسبق.",
   };
 }

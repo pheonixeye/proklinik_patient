@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/models/query_object.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
@@ -190,9 +191,15 @@ class AppRouter {
                     name: book,
                     path: book,
                     builder: (context, state) {
-                      return BookPage(
-                        key: state.pageKey,
-                      );
+                      try {
+                        final doctor = state.extra as Doctor?;
+                        return BookPage(
+                          key: state.pageKey,
+                          doctor: doctor!,
+                        );
+                      } catch (e) {
+                        return const ErrorPage();
+                      }
                     },
                   ),
                   GoRoute(

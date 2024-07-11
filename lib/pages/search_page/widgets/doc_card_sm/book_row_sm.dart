@@ -48,7 +48,8 @@ class _BookRowSmState extends State<BookRowSm> {
       final date = DateTime(baseDate.year, baseDate.month, baseDate.day + i);
 
       try {
-        _schedule = _sorted.firstWhere((x) => x.intday == date.weekday);
+        _schedule =
+            _sorted.firstWhere((x) => x.intday == date.weekday && x.available);
         firstAvailableDate = date;
         break;
       } catch (e) {
@@ -78,7 +79,7 @@ class _BookRowSmState extends State<BookRowSm> {
                 child: Consumer<PxLocale>(
                   builder: (context, l, _) {
                     final time =
-                        "${_schedule?.startHour.normalizeHour.toString().toArabicNumber(context)}:${_schedule?.startMin.toString().toArabicNumber(context)} ${_schedule?.startHour.amPm(context)}";
+                        "${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)} : ${_schedule?.startMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.startHour.amPm(context)}";
                     String? day;
                     if (firstAvailableDate ==
                         DateTime(now.year, now.month, now.day)) {
@@ -91,7 +92,7 @@ class _BookRowSmState extends State<BookRowSm> {
                           "${l.isEnglish ? WEEKDAYS[firstAvailableDate?.weekday]?.en : WEEKDAYS[firstAvailableDate?.weekday]?.ar} - ${firstAvailableDate?.day.toString().toArabicNumber(context)}/${firstAvailableDate?.month.toString().toArabicNumber(context)}";
                     }
                     return Text(
-                      "${context.loc.available} ${context.loc.from} $day-$time",
+                      "${context.loc.available} ${context.loc.from} $day - $time",
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -124,6 +125,7 @@ class _BookRowSmState extends State<BookRowSm> {
               GoRouter.of(context).goNamed(
                 AppRouter.book,
                 pathParameters: defaultPathParameters(context),
+                extra: widget.responseModel.doctor,
               );
             },
             child: Text(

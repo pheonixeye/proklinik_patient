@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/booking_data.dart';
 
 class PxBooking extends ChangeNotifier {
@@ -10,24 +11,19 @@ class PxBooking extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<BookingData> _dummyVisits = [];
-  List<BookingData> get dummyVisits => _dummyVisits;
-  //TODO: send booking request
+  bool _isFetching = false;
+  bool get isFetching => _isFetching;
 
+  //todo: send booking request
+  //TODO: Send notification sms
+  //TODO: Send fcm notification
+  //TODO: formulate message (doctor, assisstant, patient)
+  //TODO: include a link to update or delete booking
   Future<void> createAppointment() async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        final visit = BookingData.withoutModel(_data!);
-        _dummyVisits.add(visit);
-        notifyListeners();
-        if (kDebugMode) {
-          print("PxBooking().createAppointment(${_dummyVisits.map((x) => (
-                x.user_name,
-                x.user_phone
-              )).toList()})");
-        }
-      },
-    );
+    _isFetching = true;
+    notifyListeners();
+    _data = await PocketbaseHelper.sendBookingRequest(data!);
+    _isFetching = false;
+    notifyListeners();
   }
 }

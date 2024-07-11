@@ -121,7 +121,7 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                                     color: AppTheme.mainFontColor,
                                   ),
                                   children: [
-                                    const TextSpan(text: " "),
+                                    const TextSpan(text: " : "),
                                     TextSpan(
                                       text:
                                           "${widget.model.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",

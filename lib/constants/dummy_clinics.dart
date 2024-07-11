@@ -49,6 +49,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -58,6 +59,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -67,6 +69,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -112,6 +115,7 @@ List<Clinic> CLINICS = [
         startHour: 20,
         endMin: 0,
         endHour: 23,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -121,6 +125,7 @@ List<Clinic> CLINICS = [
         startHour: 15,
         endMin: 0,
         endHour: 18,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -130,6 +135,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -176,6 +182,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -185,6 +192,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -194,6 +202,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -239,6 +248,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -248,6 +258,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -257,6 +268,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -302,6 +314,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -311,6 +324,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -320,6 +334,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -365,6 +380,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -374,6 +390,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -383,6 +400,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -428,6 +446,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -437,6 +456,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -446,6 +466,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -492,6 +513,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -501,6 +523,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -510,6 +533,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -555,6 +579,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -564,6 +589,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -573,6 +599,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,
@@ -618,6 +645,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "2",
@@ -627,6 +655,7 @@ List<Clinic> CLINICS = [
         startHour: 19,
         endMin: 0,
         endHour: 22,
+        available: true,
       ),
       Schedule(
         id: "3",
@@ -636,6 +665,7 @@ List<Clinic> CLINICS = [
         startHour: 18,
         endMin: 30,
         endHour: 21,
+        available: true,
       ),
     ],
     scheduleobject: ScheduleObject.initialScheduleObjectList,

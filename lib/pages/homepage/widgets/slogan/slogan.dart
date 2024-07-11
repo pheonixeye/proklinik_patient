@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
@@ -45,7 +46,8 @@ class Slogan extends StatelessWidget {
                       ..onTap = () {
                         html.window.open("tel:+2018888", "Call Us", "_blank");
                       },
-                    text: context.loc.hotline,
+                    //todo: Check style
+                    text: context.loc.hotline.toArabicNumber(context),
                     style: TextStyle(
                       color: Colors.green.shade500,
                       fontWeight: FontWeight.w500,

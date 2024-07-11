@@ -5,6 +5,7 @@ import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/schedule_to_localized_string.dart';
+import 'package:patient/models/doctor.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -12,8 +13,26 @@ import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
 
-class BookAppInfoCard extends StatelessWidget {
-  const BookAppInfoCard({super.key});
+class BookAppInfoCard extends StatefulWidget {
+  const BookAppInfoCard({super.key, required this.doctor});
+  final Doctor doctor;
+
+  @override
+  State<BookAppInfoCard> createState() => _BookAppInfoCardState();
+}
+
+class _BookAppInfoCardState extends State<BookAppInfoCard> {
+  late final ImageProvider image;
+
+  @override
+  void initState() {
+    if (widget.doctor.avatar == null) {
+      image = AssetImage(Assets.doctorEmptyAvatar());
+    } else {
+      image = NetworkImage("${widget.doctor.avatarUrl}");
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +68,7 @@ class BookAppInfoCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                //TODO: recieve image via link
-                                image: AssetImage(Assets.doctorAvatar(
-                                    b.data!.model!.doctor.synd_id)),
+                                image: image,
                               ),
                             ),
                           ),
@@ -114,7 +131,7 @@ class BookAppInfoCard extends StatelessWidget {
                                     ? WEEKDAYS[date.weekday]!.en
                                     : WEEKDAYS[date.weekday]!.ar;
                                 return Text(
-                                    "$wkday - (${bookingDate.format(date)})  - $bookingTime,\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
+                                    "$wkday - (${bookingDate.format(date)})  - $bookingTime\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
                               },
                             ),
                           ),
