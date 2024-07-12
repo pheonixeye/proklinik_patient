@@ -68,13 +68,21 @@ class DocDataSmUpper extends StatelessWidget {
                   ],
                 ),
                 //todo: Fetch from somewhere
-                subtitle: Text(
-                  "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: AppTheme.mainFontColor,
-                  ),
-                ),
+                subtitle: responseModel.reviews.isNotEmpty
+                    ? Text(
+                        "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.mainFontColor,
+                        ),
+                      )
+                    : Text(
+                        context.loc.joinedRecently,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.mainFontColor,
+                        ),
+                      ),
               ),
             ],
           );

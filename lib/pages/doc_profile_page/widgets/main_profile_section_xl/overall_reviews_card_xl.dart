@@ -43,8 +43,13 @@ class OverallReviewsCardXl extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ...model.doctor.rating
-                        .toStars(size: 32, padding: const EdgeInsets.all(4)),
+                    if (model.doctor.rating == 0)
+                      ...5.0.toStars(size: 32, padding: const EdgeInsets.all(4))
+                    else
+                      ...model.doctor.rating
+                          .toStars(size: 32, padding: const EdgeInsets.all(4)),
+                    // ...model.doctor.rating
+                    //     .toStars(size: 32, padding: const EdgeInsets.all(4)),
                   ],
                 ),
               ),
@@ -70,7 +75,9 @@ class OverallReviewsCardXl extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${model.doctor.rating.toString().toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
+                          model.doctor.rating == 0
+                              ? "../.."
+                              : "${model.doctor.rating.toString().toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
                           style: const TextStyle(
                             color: Colors.white,
                           ),

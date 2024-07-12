@@ -348,4 +348,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sryMsg => 'نأسف على أي إزعاج، ولكن هذه الصفحة لا تزال قيد الإنشاء والاختبار. وفي هذه الأثناء، لا يزال بإمكانك تصفح الصفحات الأخرى.';
+
+  @override
+  String get comingSoon => 'قريبا . . .';
+
+  @override
+  String get joinedRecently => 'انضم حديثا.';
 }

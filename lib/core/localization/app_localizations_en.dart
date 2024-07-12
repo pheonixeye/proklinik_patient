@@ -348,4 +348,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sryMsg => 'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.';
+
+  @override
+  String get comingSoon => 'Coming Soon...';
+
+  @override
+  String get joinedRecently => 'Joined Recently.';
 }

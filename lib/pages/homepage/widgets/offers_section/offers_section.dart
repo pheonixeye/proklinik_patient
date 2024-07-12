@@ -161,10 +161,16 @@ class OffersSection extends StatelessWidget {
                                         child: Stack(
                                           fit: StackFit.expand,
                                           children: [
-                                            Image.asset(
-                                              Assets.offerItemImage(x.id),
-                                              matchTextDirection: true,
-                                              fit: BoxFit.fitWidth,
+                                            //TODO: image not showing in deployment
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                    Assets.offerItemImage(x.id),
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
                                             Positioned(
                                               top: 20,

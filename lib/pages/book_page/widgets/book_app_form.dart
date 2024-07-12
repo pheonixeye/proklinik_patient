@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -146,12 +147,13 @@ class _BookAppFormState extends State<BookAppForm> {
                           child: Row(
                             children: [
                               Expanded(
+                                flex: 3,
                                 child: TextFormField(
                                   validator: _emailValidator,
                                   controller: _emailController,
                                   decoration: InputDecoration(
                                     hintText:
-                                        "${context.loc.email} (${context.loc.optional})",
+                                        "${context.loc.email}(${context.loc.optional})",
                                     icon: const Icon(Icons.mail),
                                     iconColor: AppTheme.appBarColor,
                                   ),
@@ -159,16 +161,31 @@ class _BookAppFormState extends State<BookAppForm> {
                               ),
                               const SizedBox(width: 5),
                               Expanded(
+                                flex: 2,
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButtonFormField<String>(
+                                    borderRadius: BorderRadius.circular(8),
                                     isExpanded: true,
                                     value: _type,
                                     elevation: 6,
                                     alignment: Alignment.center,
-                                    decoration: InputDecoration(
-                                      hintText: l.isEnglish
-                                          ? "Select Visit Type."
-                                          : "اختر نوع الزيارة",
+                                    icon: Icon(
+                                      Icons.arrow_drop_down_circle,
+                                      color: AppTheme.appBarColor,
+                                    ),
+                                    hint: Text(
+                                      l.isEnglish
+                                          ? "Visit Type."
+                                          : "نوع الزيارة",
+                                      style: TextStyle(
+                                        fontSize: context.isMobile ? 10 : 14,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0))),
                                     ),
                                     items: _visitTypes.entries.map((e) {
                                       return DropdownMenuItem<String>(

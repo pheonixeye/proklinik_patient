@@ -137,28 +137,44 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                         children: [
                           Row(
                             children: [
-                              ...widget.model.doctor.rating.toStars(
-                                size: 18,
-                                padding: const EdgeInsets.all(4),
-                              ),
+                              if (widget.model.doctor.rating == 0)
+                                ...5.0.toStars(
+                                  size: 18,
+                                  padding: const EdgeInsets.all(4),
+                                )
+                              else
+                                ...widget.model.doctor.rating.toStars(
+                                  size: 18,
+                                  padding: const EdgeInsets.all(4),
+                                ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text.rich(
-                                TextSpan(
-                                  text:
-                                      "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      //TODO: Scroll to ratings
-                                    },
-                                ),
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: AppTheme.appBarColor,
-                                ),
-                              ),
+                              widget.model.reviews.isNotEmpty
+                                  ? Text.rich(
+                                      TextSpan(
+                                        text:
+                                            "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            //TODO: Scroll to ratings
+                                          },
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: AppTheme.appBarColor,
+                                      ),
+                                    )
+                                  : Text.rich(
+                                      TextSpan(
+                                        text: context.loc.joinedRecently,
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: AppTheme.appBarColor,
+                                      ),
+                                    )
                             ],
                           ),
                         ],

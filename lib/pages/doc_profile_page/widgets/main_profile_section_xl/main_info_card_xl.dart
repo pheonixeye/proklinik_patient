@@ -184,13 +184,21 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                                     size: 32,
                                     padding: const EdgeInsets.only(left: 5)),
                               const SizedBox(width: 10),
-                              Text(
-                                "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
-                                style: TextStyle(
-                                  color: AppTheme.mainFontColor,
-                                  fontSize: 10,
-                                ),
-                              ),
+                              widget.model.reviews.isNotEmpty
+                                  ? Text(
+                                      "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                                      style: TextStyle(
+                                        color: AppTheme.mainFontColor,
+                                        fontSize: 10,
+                                      ),
+                                    )
+                                  : Text(
+                                      context.loc.joinedRecently,
+                                      style: TextStyle(
+                                        color: AppTheme.mainFontColor,
+                                        fontSize: 10,
+                                      ),
+                                    ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Text.rich(

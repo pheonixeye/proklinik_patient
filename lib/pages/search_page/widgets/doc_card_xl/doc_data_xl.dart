@@ -71,13 +71,21 @@ class DocDataXl extends StatelessWidget {
                   ],
                 ),
                 //todo: fetch from ratings
-                subtitle: Text(
-                  "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: AppTheme.mainFontColor,
-                  ),
-                ),
+                subtitle: responseModel.reviews.isNotEmpty
+                    ? Text(
+                        "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.mainFontColor,
+                        ),
+                      )
+                    : Text(
+                        context.loc.joinedRecently,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.mainFontColor,
+                        ),
+                      ),
               ),
               const SizedBox(height: 10),
               SecondaryDataItemXl(

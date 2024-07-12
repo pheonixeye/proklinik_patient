@@ -192,6 +192,7 @@ class AppRouter {
                     path: book,
                     builder: (context, state) {
                       try {
+                        //HACK:
                         final doctor = state.extra as Doctor?;
                         return BookPage(
                           key: state.pageKey,

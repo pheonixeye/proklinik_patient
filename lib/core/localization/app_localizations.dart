@@ -782,6 +782,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.'**
   String get sryMsg;
+
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon...'**
+  String get comingSoon;
+
+  /// No description provided for @joinedRecently.
+  ///
+  /// In en, this message translates to:
+  /// **'Joined Recently.'**
+  String get joinedRecently;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
