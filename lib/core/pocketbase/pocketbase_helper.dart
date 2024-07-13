@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:patient/constants/dummy_clinics.dart';
-import 'package:patient/constants/dummy_doctors.dart';
-import 'package:patient/constants/dummy_reviews.dart';
+import 'package:patient/functions/debug_print.dart';
 import 'package:patient/models/booking_data.dart';
 import 'package:patient/models/clinic.dart';
 import 'package:patient/models/doctor.dart';
@@ -164,7 +162,7 @@ class PocketbaseHelper {
         print("First Request Exception : ${e.toString()}");
       }
       try {
-        //TODO: remove in production
+        //TODO: replace in production
         final admin = await pb.admins
             .authWithPassword("collection@admin.com", "admin.collection");
         // final admin = await pb.admins.authWithPassword(
@@ -221,181 +219,136 @@ class PocketbaseHelper {
       doctor: doctor,
       clinic: clinic,
       reviews: reviews,
+      total: 1,
     );
   }
 
   static Future<List<ServerResponseModel>> mainQuery(QueryObject query) async {
+    //TODO: missing sorting && filter params
+    //TODO: filter by price(l300, m300), sort by price(l->h, h->l)
+    //TODO: sort by waiting time
     final List<ServerResponseModel> models = [];
+
+    final queryString = query.toPocketbaseQuery();
+
+    dprint(queryString);
+
     final doctorsData = await pb.collection("doctors").getList(
+          page: int.parse(query.page),
+          perPage: 10,
           expand: "clinic_rel, review_rel",
+          filter: queryString.filter,
+          sort: queryString.sort,
         );
+
+    late final _WhichLocQuery _whichLocQuery;
+
     doctorsData.items.map((d) {
+      Clinic? clinic;
       final doctor = Doctor.fromJson(d.toJson());
-      final clinic = Clinic.fromJson(d.expand["clinic_rel"]!.first.toJson());
+      // print(d.e)
+      final clinicList = (d.expand["clinic_rel"] as List<RecordModel>)
+          .map((e) => Clinic.fromJson(e.toJson()))
+          .toList();
+      //#filtering by area && gov
+      if (query.city.isEmpty && query.gov.isEmpty) {
+        _whichLocQuery = _WhichLocQuery.noLocation;
+
+        dprint("city & gov => empty");
+
+        clinic = clinicList.first;
+      } else if (query.gov.isNotEmpty && query.city.isEmpty) {
+        _whichLocQuery = _WhichLocQuery.govOnly;
+
+        dprint("gov => not Empty, city => empty");
+
+        clinic = clinicList.firstWhere((cl) => cl.matchGov(query.gov));
+      } else if (query.gov.isNotEmpty && query.city.isNotEmpty) {
+        _whichLocQuery = _WhichLocQuery.fullLocation;
+
+        dprint("gov & city => not Empty");
+
+        clinic = clinicList.firstWhere(
+            (cl) => cl.matchGov(query.gov) && cl.matchArea(query.city));
+      }
       final reviews =
           (d.expand["review_rel"] == null || d.expand["review_rel"]!.isEmpty)
               ? <Review>[]
               : d.expand["review_rel"]!
                   .map((r) => Review.fromJson(r.toJson()))
                   .toList();
-      final model = ServerResponseModel(
-        doctor: doctor,
-        clinic: clinic,
-        reviews: reviews,
-      );
-      models.add(model);
+
+      //#filter by availability
+      if (query.availability != "any") {
+        //TODO: find which query was performed(noLocation, fullLocation, govOnly )
+        switch (query.availability) {
+          case "today":
+            try {
+              switch (_whichLocQuery) {
+                case _WhichLocQuery.noLocation:
+                  clinic = clinicList
+                      .firstWhere((cl) => cl.hasTodayAvailable == true);
+                  break;
+                case _WhichLocQuery.fullLocation:
+                  clinic = clinicList.firstWhere((cl) =>
+                      cl.hasTodayAvailable == true &&
+                      cl.matchGov(query.gov) &&
+                      cl.matchArea(query.city));
+                  break;
+                case _WhichLocQuery.govOnly:
+                  clinic = clinicList.firstWhere((cl) =>
+                      cl.hasTodayAvailable == true && cl.matchGov(query.gov));
+                  break;
+              }
+
+              // dprint(clinic);
+            } catch (e) {
+              clinic = null;
+            }
+            break;
+          case "tomorrow":
+            try {
+              switch (_whichLocQuery) {
+                case _WhichLocQuery.noLocation:
+                  clinic = clinicList
+                      .firstWhere((cl) => cl.hasTomorrowAvailable == true);
+                  break;
+                case _WhichLocQuery.fullLocation:
+                  clinic = clinicList.firstWhere((cl) =>
+                      cl.hasTomorrowAvailable == true &&
+                      cl.matchGov(query.gov) &&
+                      cl.matchArea(query.city));
+                  break;
+                case _WhichLocQuery.govOnly:
+                  clinic = clinicList.firstWhere((cl) =>
+                      cl.hasTomorrowAvailable == true &&
+                      cl.matchGov(query.gov));
+                  break;
+              }
+            } catch (e) {
+              clinic = null;
+            }
+            break;
+        }
+      }
+
+      if (clinic != null) {
+        final model = ServerResponseModel(
+          doctor: doctor,
+          clinic: clinic,
+          reviews: reviews,
+          total: doctorsData.totalItems,
+        );
+        models.add(model);
+      }
     }).toList();
+
     return models;
   }
+}
 
-  Future<void> updateDoctorClinicReviewsRelation() async {
-    final doctorsData = await pb.collection("doctors").getList();
-    final doctors =
-        doctorsData.items.map((d) => Doctor.fromJson(d.toJson())).toList();
-    doctors.map((doc) async {
-      // final reviewsData = await pb.collection("reviews").getFullList(
-      //       batch: 1000,
-      //       filter: "field = '${doc.id}'",
-      //     );
-
-      // final reviews =
-      //     reviewsData.map((e) => Review.fromJson(e.toJson())).toList();
-      // await pb.collection('doctors').update(
-      //   doc.id,
-      //   body: {
-      //     "review_rel": [...reviews.map((e) => e.id)],
-      //   },
-      // );
-
-      final clinicData = await pb.collection("clinics").getList();
-      final clinics =
-          clinicData.items.map((e) => Clinic.fromJson(e.toJson())).toList();
-
-      await pb.collection('doctors').update(
-        doc.id,
-        body: {
-          "clinic_rel": [
-            clinics.firstWhere((e) => (e.doc_id == doc.synd_id.toString())).id,
-          ],
-        },
-      );
-    }).toList();
-  }
-
-  Future<void> updateReviewsRelation() async {
-    final doctorsData = await pb.collection("doctors").getList();
-    final doctors =
-        doctorsData.items.map((d) => Doctor.fromJson(d.toJson())).toList();
-    print(doctors);
-    final reviewsData = await pb.collection("reviews").getFullList(
-          batch: 1500,
-          filter: "field = ''",
-        );
-    final reviews =
-        reviewsData.map((e) => Review.fromJson(e.toJson())).toList();
-    reviews.map((x) async {
-      final doctor =
-          doctors.firstWhere((doc) => doc.synd_id == int.tryParse(x.doc_id));
-      await pb.collection("reviews").update(
-        x.id,
-        body: {
-          "field": doctor.id,
-        },
-      );
-    }).toList();
-  }
-
-  Future<void> updateClinicDoctorRelation() async {
-    final doctorsData = await pb.collection("doctors").getList();
-    final doctors =
-        doctorsData.items.map((d) => Doctor.fromJson(d.toJson())).toList();
-    final clinicData = await pb.collection("clinics").getList();
-    final clinics =
-        clinicData.items.map((e) => Clinic.fromJson(e.toJson())).toList();
-    clinics.map((c) async {
-      final doctor =
-          doctors.firstWhere((doc) => doc.synd_id.toString() == c.doc_id);
-      await pb.collection("clinics").update(
-        c.id,
-        body: {
-          "doc_rel": doctor.id,
-        },
-      );
-    }).toList();
-  }
-
-  static Future<void> addDoctors() async {
-    for (Doctor doctor in DOCTORS) {
-      try {
-        await pb.collection('doctors').create(body: doctor.toJson());
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
-
-  static Future<void> addClinics() async {
-    for (final clinic in CLINICS) {
-      await pb.collection('clinics').create(body: clinic.toJson());
-    }
-  }
-
-  static Future<void> addReviews() async {
-    for (final review in REVIEWS) {
-      try {
-        await pb.collection('reviews').create(body: review.toJson());
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
-
-  static Future<void> fetchAllDoctors() async {
-    late final ResultList<RecordModel> results;
-    late final List<Doctor> doctors;
-    try {
-      await pb.collection("doctors").getList().then((res) {
-        // doctors =
-        res.items.map((x) => Doctor.fromJson(x.toJson())).toList();
-        // print(res.items.map((e) => e.toJson()).toList().first.entries.toList());
-        // doctors.map((e) {
-        //   print(e.name_en);
-        // }).toList();
-      });
-    } catch (e, s) {
-      print(s.toString());
-      print(e);
-    }
-    try {
-      // print(results);
-      // doctors = results.items.map((x)=> x.data).toList();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> testJsonQuery() async {
-    final result = await pb.collection("doctors").getList(
-          filter: "destinations ~ 'Giza' && destinations ~ 'Haram'",
-        );
-
-    print(result);
-  }
-
-  Future<void> testNormalQuery() async {
-    final result = await pb.collection("doctors").getList(
-          filter:
-              "(destinations.0.govEn = 'Giza' && destinations.0.areaEn = 'Haram') || (destinations.1.govEn = 'Giza' && destinations.1.areaEn = 'Haram')",
-        );
-
-    final result2 = await pb.collection("clinics").getList(
-        // filter: "destination ~ 'Cairo' && destination ~ 'Rehab'",
-        // sort: "-waiting_time",
-        );
-    // final waitingTimeList = result.items
-    //     .map((e) => Clinic.fromJson(e.toJson()).waiting_time)
-    //     .toList();
-    // print(waitingTimeList);
-    print(result);
-  }
+enum _WhichLocQuery {
+  noLocation,
+  fullLocation,
+  govOnly;
 }

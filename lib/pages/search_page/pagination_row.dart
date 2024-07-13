@@ -57,20 +57,35 @@ class _PaginationRowState extends State<PaginationRow> {
                 ),
                 Expanded(
                   flex: context.isMobile ? 4 : 1,
-                  child: ListView(
-                    controller: _controller,
+                  child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    itemExtent: 40,
-                    children: [
-                      //TODO: generate from data
-                      ...List.generate(20, (index) => (index + 1).toString())
-                          .map((x) {
-                        return ClickablePageNumber(
-                          pageNumber: x,
-                          isSelected: int.parse(x) == int.parse(sc.query.page),
-                        );
-                      })
-                    ],
+                    controller: _controller,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // controller: _controller,
+                      // scrollDirection: Axis.horizontal,
+                      // itemExtent: 40,
+                      children: [
+                        //todo: generate from data
+                        //TODO: Center page numbers in middle of list
+                        ...List.generate(
+                            (sc.responseModel == null ||
+                                    sc.responseModel!.isEmpty ||
+                                    sc.responseModel!.first.total / 10 < 1)
+                                ? 1
+                                : (sc.responseModel!.first.total ~/ 10),
+                            (index) => (index + 1).toString()).map((x) {
+                          return SizedBox(
+                            width: 40,
+                            child: ClickablePageNumber(
+                              pageNumber: x,
+                              isSelected:
+                                  int.parse(x) == int.parse(sc.query.page),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
                   ),
                 ),
                 IconButton.outlined(

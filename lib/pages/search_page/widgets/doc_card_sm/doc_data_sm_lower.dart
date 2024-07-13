@@ -31,9 +31,8 @@ class DocDataSmLower extends StatelessWidget {
               SecondaryDataItemXl(
                 iconData: Icons.pin_drop,
                 title: l.isEnglish
-                    ? responseModel.clinic.destination.areaEn
-                    // ignore: prefer_interpolation_to_compose_strings
-                    : responseModel.clinic.destination.areaAr + " : ",
+                    ? "${responseModel.clinic.destination.areaEn} : "
+                    : "${responseModel.clinic.destination.areaAr} : ",
                 data: l.isEnglish
                     ? responseModel.clinic.destination.addressEn
                     : responseModel.clinic.destination.addressAr,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/sorting_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +13,8 @@ class SortingModalSm extends StatefulWidget {
 }
 
 class _SortingModalSmState extends State<SortingModalSm> {
-  String? _state;
+  // ignore: unused_field
+  SortingModel? _state;
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +44,30 @@ class _SortingModalSmState extends State<SortingModalSm> {
                   icon: const Icon(Icons.close),
                 ),
               ),
-              ...<String, String>{
-                "Best Match": "الاكثر تطابقا",
-                "Price : Low To High": "الاقل سعرا",
-                "Price : High To Low": "الاكثر سعرا",
-                "Waiting Time": "اقل وقت انتظار",
-                "Top Rated": "اعلي التقييمات",
-              }.entries.map((e) {
+              ...sortingParameters.map((e) {
                 return RadioListTile<String>(
-                  title: Text(l.isEnglish ? e.key : e.value),
-                  value: e.key,
-                  groupValue: _state,
+                  title: Text(l.isEnglish ? e.en : e.ar),
+                  value: e.value,
+                  groupValue: GoRouter.of(context)
+                      .routeInformationProvider
+                      .value
+                      .uri
+                      .queryParameters['so'],
                   onChanged: (value) {
                     setState(() {
-                      _state = value;
+                      _state = e;
                     });
-                    //TODO: change group value
-                    //TODO: apply sort filter by GoRoute Navigation
+                    final currentUri =
+                        GoRouter.of(context).routeInformationProvider.value.uri;
+                    final newUri = currentUri.replace(
+                      queryParameters: {
+                        ...currentUri.queryParameters,
+                        'so': value,
+                      },
+                    );
+                    GoRouter.of(context).go(newUri.toString());
+                    //todo: change group value
+                    //todo: apply sort filter by GoRoute Navigation
                     Navigator.pop(context, true);
                   },
                 );

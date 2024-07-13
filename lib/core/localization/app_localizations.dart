@@ -794,6 +794,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Joined Recently.'**
   String get joinedRecently;
+
+  /// No description provided for @degree.
+  ///
+  /// In en, this message translates to:
+  /// **'Degree'**
+  String get degree;
+
+  /// No description provided for @specialist.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialist'**
+  String get specialist;
+
+  /// No description provided for @consultant.
+  ///
+  /// In en, this message translates to:
+  /// **'Consultant'**
+  String get consultant;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

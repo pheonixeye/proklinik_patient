@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/models/sorting_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/spec_gov_px.dart';
@@ -74,22 +76,32 @@ class SortingRowXl extends StatelessWidget {
                       Icons.arrow_drop_down_circle_rounded,
                       color: Colors.green,
                     ),
+                    value: GoRouter.of(context)
+                        .routeInformationProvider
+                        .value
+                        .uri
+                        .queryParameters['so'],
                     borderRadius: BorderRadius.circular(8),
-                    items: <String, String>{
-                      "Best Match": "الاكثر تطابقا",
-                      "Price : Low To High": "الاقل سعرا",
-                      "Price : High To Low": "الاكثر سعرا",
-                      "Waiting Time": "اقل وقت انتظار",
-                      "Top Rated": "اعلي التقييمات",
-                    }.entries.map((e) {
+                    items: sortingParameters.map((e) {
                       return DropdownMenuItem<String>(
                         alignment: Alignment.center,
-                        value: e.key,
-                        child: Text(l.isEnglish ? e.key : e.value),
+                        value: e.value,
+                        child: Text(l.isEnglish ? e.en : e.ar),
                       );
                     }).toList(),
                     onChanged: (value) {
-                      //TODO: implement sorting
+                      //todo: implement sorting
+                      final currentUri = GoRouter.of(context)
+                          .routeInformationProvider
+                          .value
+                          .uri;
+                      final newUri = currentUri.replace(
+                        queryParameters: {
+                          ...currentUri.queryParameters,
+                          'so': value,
+                        },
+                      );
+                      GoRouter.of(context).go(newUri.toString());
                     },
                   ),
                 ),

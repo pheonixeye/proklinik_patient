@@ -7,22 +7,26 @@ class ServerResponseModel extends Equatable {
   final Doctor doctor;
   final Clinic clinic;
   final List<Review> reviews;
+  final int total;
 
   const ServerResponseModel({
     required this.doctor,
     required this.clinic,
     required this.reviews,
+    required this.total,
   });
 
   ServerResponseModel copyWith({
     Doctor? doctor,
     Clinic? clinic,
     List<Review>? reviews,
+    int? total,
   }) {
     return ServerResponseModel(
       doctor: doctor ?? this.doctor,
       clinic: clinic ?? this.clinic,
       reviews: reviews ?? this.reviews,
+      total: total ?? this.total,
     );
   }
 
@@ -31,6 +35,7 @@ class ServerResponseModel extends Equatable {
       'doctor': doctor.toJson(),
       'clinic': clinic.toJson(),
       'reviews': reviews.map((x) => x.toJson()).toList(),
+      'total': total,
     };
   }
 
@@ -43,6 +48,7 @@ class ServerResponseModel extends Equatable {
           (x) => Review.fromJson(x as Map<String, dynamic>),
         ),
       ),
+      total: map['total'] as int,
     );
   }
 
@@ -50,5 +56,5 @@ class ServerResponseModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [doctor, clinic, reviews];
+  List<Object> get props => [doctor, clinic, reviews, total];
 }

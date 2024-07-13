@@ -354,4 +354,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get joinedRecently => 'Joined Recently.';
+
+  @override
+  String get degree => 'Degree';
+
+  @override
+  String get specialist => 'Specialist';
+
+  @override
+  String get consultant => 'Consultant';
 }

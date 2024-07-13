@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:equatable/equatable.dart';
+import 'package:patient/functions/debug_print.dart';
 import 'package:patient/models/destination.dart';
 import 'package:patient/models/schedule.dart';
 import 'package:patient/models/schedule_object.dart';
@@ -162,5 +163,31 @@ class Clinic extends Equatable {
       schedule,
       scheduleobject
     ];
+  }
+
+  bool get hasTodayAvailable {
+    final today = DateTime.now();
+    final d_ = DateTime(today.year, today.month, today.day);
+    final sch = schedule.firstWhere((s) => s.intday == d_.weekday);
+    dprint(sch.toString());
+    bool isTodayAvailable = sch.available == true;
+    return isTodayAvailable;
+  }
+
+  bool get hasTomorrowAvailable {
+    final today = DateTime.now();
+    final d_ = DateTime(today.year, today.month, today.day + 1);
+    final sch = schedule.firstWhere((s) => s.intday == d_.weekday);
+    dprint(sch.toString());
+    bool isTomorrowAvailable = sch.available == true;
+    return isTomorrowAvailable;
+  }
+
+  bool matchGov(String gov) {
+    return destination.govEn == gov;
+  }
+
+  bool matchArea(String area) {
+    return destination.areaEn == area;
   }
 }

@@ -9,7 +9,7 @@ class QueryObject extends Equatable {
   final String page;
   final String availability;
   final String fees;
-  final String location;
+  final String degree;
   final String sort;
 
   const QueryObject({
@@ -20,7 +20,7 @@ class QueryObject extends Equatable {
     required this.page,
     required this.availability,
     required this.fees,
-    required this.location,
+    required this.degree,
     required this.sort,
   });
 
@@ -32,7 +32,7 @@ class QueryObject extends Equatable {
     String? page,
     String? availability,
     String? fees,
-    String? location,
+    String? degree,
     String? sort,
   }) {
     return QueryObject(
@@ -43,7 +43,7 @@ class QueryObject extends Equatable {
       page: page ?? this.page,
       availability: availability ?? this.availability,
       fees: fees ?? this.fees,
-      location: location ?? this.location,
+      degree: degree ?? this.degree,
       sort: sort ?? this.sort,
     );
   }
@@ -57,7 +57,7 @@ class QueryObject extends Equatable {
       'page': page,
       'av': availability,
       'fe': fees,
-      'lo': location,
+      'deg': degree,
       'so': sort,
     };
   }
@@ -69,10 +69,10 @@ class QueryObject extends Equatable {
       spec: '',
       gov: '',
       city: '',
-      page: '',
+      page: '1',
       availability: '',
       fees: '',
-      location: '',
+      degree: '',
       sort: '',
     );
   }
@@ -86,7 +86,7 @@ class QueryObject extends Equatable {
       page: '1',
       availability: 'any',
       fees: 'any',
-      location: 'any',
+      degree: 'any',
       sort: 'best-match',
     );
   }
@@ -98,13 +98,13 @@ class QueryObject extends Equatable {
     return QueryObject(
       type: map['type'] as String,
       spec: map['spec'] as String,
-      gov: map['gov'] as String,
-      city: map['city'] as String,
-      page: map['page'] as String,
-      availability: map['av'] as String,
-      fees: map['fe'] as String,
-      location: map['lo'] as String,
-      sort: map['so'] as String,
+      gov: map['gov'] ?? "",
+      city: map['city'] ?? "",
+      page: map['page'] ?? "1",
+      availability: map['av'] ?? "any",
+      fees: map['fe'] ?? "any",
+      degree: map['deg'] ?? "any",
+      sort: map['so'] ?? "best-match",
     );
   }
 
@@ -119,14 +119,49 @@ class QueryObject extends Equatable {
       gov,
       city,
       page,
+      availability,
+      fees,
+      degree,
+      sort,
     ];
   }
 
-  String toPocketbaseQuery() {
+  ({String filter, String sort}) toPocketbaseQuery() {
     //TODO:
-    final buffer = StringBuffer();
-    final _q = this;
-    _q.availability;
-    return "";
+    final filterBuffer = StringBuffer();
+    final sortingBuffer = StringBuffer();
+
+    //#spec
+    filterBuffer.write("speciality_en = '$spec'");
+    //#gov
+    if (gov.isNotEmpty) {
+      filterBuffer.write(" && ");
+      filterBuffer.write("destinations ~ '$gov'");
+    }
+    //#area
+    if (city.isNotEmpty) {
+      filterBuffer.write(" && ");
+      filterBuffer.write("destinations ~ '$city'");
+    }
+
+    //#degree
+    if (degree == "any") {
+    } else if (degree == "Specialist") {
+      filterBuffer.write(" && ");
+      filterBuffer.write("degree_en = 'Specialist'");
+    } else if (degree == "Consultant") {
+      filterBuffer.write(" && ");
+      filterBuffer.write("degree_en = 'Consultant'");
+    }
+
+    //#waiting time
+    if (sort == 'best-match') {
+    } else if (sort == 'top-rated') {
+      sortingBuffer.write("+rating");
+    }
+    return (
+      filter: filterBuffer.toString(),
+      sort: sortingBuffer.toString(),
+    );
   }
 }

@@ -354,4 +354,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get joinedRecently => 'انضم حديثا.';
+
+  @override
+  String get degree => 'الدرجة';
+
+  @override
+  String get specialist => 'اخصائي';
+
+  @override
+  String get consultant => 'استشاري';
 }

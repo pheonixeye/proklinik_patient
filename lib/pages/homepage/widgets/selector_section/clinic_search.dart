@@ -196,7 +196,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             ///symbols :
                             ///av => availability
                             ///fe => fees
-                            ///lo => location
+                            ///deg => degree
                             ///so => sort
                             queryParameters: {
                               "type": SearchType.clinic.name,
@@ -206,7 +206,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               "page": "1",
                               "av": "any",
                               "fe": "any",
-                              "lo": "any",
+                              "deg": "any",
                               "so": "best-match",
                             },
                           );

@@ -115,6 +115,9 @@
     "pageUnderConst" : "This Page is Under Construction.",
     "sryMsg" : "Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.",
     "comingSoon" : "Coming Soon...",
-    "joinedRecently" : "Joined Recently."
+    "joinedRecently" : "Joined Recently.",
+    "degree" : "Degree",
+    "specialist" : "Specialist",
+    "consultant" : "Consultant"
     
  }
