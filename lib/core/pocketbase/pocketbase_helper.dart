@@ -19,6 +19,18 @@ class PocketbaseHelper {
 
   PocketbaseHelper();
 
+  static Future<void> updateDoctorProfileViews(String id, int views) async {
+    await pb.collection("doctors").update(
+      id,
+      body: {
+        "views": views + 1,
+      },
+    );
+    if (kDebugMode) {
+      print("PocketbaseHelper().updateDoctorProfileViews($id, $views)");
+    }
+  }
+
   static String _dateBookingCollectionFormat(String date) {
     final d = DateTime.parse(date);
     return "visits_${d.month}_${d.year}";

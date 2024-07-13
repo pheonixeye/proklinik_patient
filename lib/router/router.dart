@@ -51,6 +51,8 @@ class AppRouter {
   static const String thankyou = "thankyou";
   //TODO: visit update / delete page
   static const String visit = "visit/:id";
+  //TODO: review submission page
+  static const String review = "review/:id";
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(

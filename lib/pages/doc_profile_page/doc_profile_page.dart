@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_info_card_sm/main_info_card_sm.dart';
@@ -22,6 +23,10 @@ class DocProfilePage extends StatefulWidget {
 }
 
 class _DocProfilePageState extends State<DocProfilePage> {
+  void _updateViews(String id, int views) {
+    PocketbaseHelper.updateDoctorProfileViews(id, views);
+  }
+
   static List<Widget> _desktop(ServerResponseModel model) => [
         const SizedBox(height: 20),
         Row(
@@ -69,6 +74,7 @@ class _DocProfilePageState extends State<DocProfilePage> {
         while (res == null) {
           return const CentralLoading();
         }
+        _updateViews(d.responseModel!.doctor.id, d.responseModel!.doctor.views);
         return Container(
           decoration: const BoxDecoration(
             color: AppTheme.greyBackgroundColor,
