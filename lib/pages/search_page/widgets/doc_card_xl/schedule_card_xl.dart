@@ -148,7 +148,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                             ? "${context.loc.today} - $wkDay"
                             : cardDate == NOWDAY.add(const Duration(days: 1))
                                 ? "${context.loc.tomorrow} - $wkDay"
-                                : "${cardDate.day}/${cardDate.month} - $wkDay"
+                                : "${cardDate.day.toString().padLeft(1, "0")}/${cardDate.month.toString().padLeft(1, "0")} - $wkDay"
                                     .toArabicNumber(context);
                         return Text(
                           _data,

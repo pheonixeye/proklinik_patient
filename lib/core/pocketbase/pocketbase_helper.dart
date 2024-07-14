@@ -247,9 +247,15 @@ class PocketbaseHelper {
       Clinic? clinic;
       final doctor = Doctor.fromJson(d.toJson());
       // print(d.e)
+      //#doctor didnot make a doctor profile yet
+      if (d.expand["clinic_rel"] == null || d.expand["clinic_rel"]!.isEmpty) {
+        return;
+      }
+
       final clinicList = (d.expand["clinic_rel"] as List<RecordModel>)
           .map((e) => Clinic.fromJson(e.toJson()))
           .toList();
+
       //#filtering by area && gov
       if (query.city.isEmpty && query.gov.isEmpty) {
         _whichLocQuery = _WhichLocQuery.noLocation;
