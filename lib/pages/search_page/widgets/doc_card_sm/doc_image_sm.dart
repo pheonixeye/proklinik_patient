@@ -16,7 +16,7 @@ class _DocImageSmState extends State<DocImageSm> {
 
   @override
   void initState() {
-    if (widget.doctor.avatar == null) {
+    if (widget.doctor.avatar == null || widget.doctor.avatar!.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
       image = NetworkImage("${widget.doctor.avatarUrl}");

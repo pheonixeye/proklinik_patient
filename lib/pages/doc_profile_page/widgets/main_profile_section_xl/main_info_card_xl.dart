@@ -22,7 +22,8 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
 
   @override
   void initState() {
-    if (widget.model.doctor.avatarUrl == null) {
+    if (widget.model.doctor.avatar == null ||
+        widget.model.doctor.avatar!.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
       image = NetworkImage(widget.model.doctor.avatarUrl!);

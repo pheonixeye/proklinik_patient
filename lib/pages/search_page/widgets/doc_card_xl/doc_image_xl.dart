@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/doctor.dart';
 
 class DocImageXl extends StatefulWidget {
@@ -17,11 +16,10 @@ class _DocImageXlState extends State<DocImageXl> {
 
   @override
   void initState() {
-    if (widget.doctor.avatar == null) {
+    if (widget.doctor.avatar == null || widget.doctor.avatar!.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
-      image = NetworkImage(
-          "${PocketbaseHelper.pb.baseUrl}api/files/doctors/${widget.doctor.id}/${widget.doctor.avatar}?thumb=200x200");
+      image = NetworkImage(widget.doctor.avatarUrl!);
     }
     super.initState();
   }

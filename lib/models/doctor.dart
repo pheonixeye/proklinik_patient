@@ -186,5 +186,5 @@ class Doctor extends Equatable {
 
   String? get avatarUrl => avatar == null
       ? null
-      : "${PocketbaseHelper.pb.baseUrl}api/files/doctors/$id/$avatar?thumb=200x200";
+      : "${PocketbaseHelper.pb.baseUrl}/api/files/doctors/$id/$avatar?thumb=200x200";
 }

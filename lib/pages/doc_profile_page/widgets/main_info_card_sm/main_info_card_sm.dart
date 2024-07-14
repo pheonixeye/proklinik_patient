@@ -27,7 +27,8 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
   @override
   void initState() {
     _controller = ScrollController();
-    if (widget.model.doctor.avatarUrl == null) {
+    if (widget.model.doctor.avatar == null ||
+        widget.model.doctor.avatar!.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
       image = NetworkImage(widget.model.doctor.avatarUrl!);
