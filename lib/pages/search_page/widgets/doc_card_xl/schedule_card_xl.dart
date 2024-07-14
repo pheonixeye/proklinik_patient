@@ -32,7 +32,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
   bool isHovering = false;
   bool isAvailable = true;
   //todo: change model to include available boolean
-  //TODO: change availability algorhithm
+  //todo: change availability algorhithm
 
   static final now = DateTime.now();
 

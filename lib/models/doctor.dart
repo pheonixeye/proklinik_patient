@@ -5,7 +5,7 @@ import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/destination.dart';
 
 class Doctor extends Equatable {
-  //TODO: refactor - need to add avatar
+  //todo: refactor - need to add avatar
   final String id;
   final int synd_id;
   final String joined_at;

@@ -54,7 +54,7 @@ class DocInfoCardSm extends StatelessWidget {
                             const SizedBox(width: 10),
 
                             ///image avatar
-                            //TODO: modify to recieve avatar link
+                            //todo: modify to recieve avatar link
                             DocImageSm(
                               doctor: responseModel.doctor,
                             ),

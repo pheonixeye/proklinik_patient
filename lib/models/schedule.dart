@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Schedule extends Equatable {
-  //TODO: add available
+  //todo: add available
   final String id;
   final String weekday;
   final int intday;

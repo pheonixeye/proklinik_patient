@@ -163,12 +163,12 @@ class PocketbaseHelper {
       }
       try {
         //TODO: replace in production
-        final admin = await pb.admins
-            .authWithPassword("collection@admin.com", "admin.collection");
-        // final admin = await pb.admins.authWithPassword(
-        //   _adminUserCredentials.userName,
-        //   _adminUserCredentials.password,
-        // );
+        // final admin = await pb.admins
+        //     .authWithPassword("collection@admin.com", "admin.collection");
+        final admin = await pb.admins.authWithPassword(
+          _adminUserCredentials.userName,
+          _adminUserCredentials.password,
+        );
         final adminToken = admin.token;
 
         final collectionSchema = await _bookingCollectionSchema(data.date_time);
@@ -280,7 +280,7 @@ class PocketbaseHelper {
 
       //#filter by availability
       if (query.availability != "any") {
-        //TODO: find which query was performed(noLocation, fullLocation, govOnly )
+        //todo: find which query was performed(noLocation, fullLocation, govOnly )
         switch (query.availability) {
           case "today":
             try {

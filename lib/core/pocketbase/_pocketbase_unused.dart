@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:patient/constants/dummy_clinics.dart';
 import 'package:patient/constants/dummy_doctors.dart';
 import 'package:patient/constants/dummy_reviews.dart';
+import 'package:patient/functions/debug_print.dart';
 import 'package:patient/models/clinic.dart';
 import 'package:patient/models/doctor.dart';
 import 'package:patient/models/review.dart';
@@ -28,7 +29,7 @@ class PocketbaseUnused {
     //     .map((e) => Clinic.fromJson(e.toJson()).waiting_time)
     //     .toList();
     // print(waitingTimeList);
-    print(result);
+    dprint(result);
   }
 
   static Future<void> fetchAllDoctors() async {
@@ -59,7 +60,7 @@ class PocketbaseUnused {
           filter: "destinations ~ 'Giza' && destinations ~ 'Haram'",
         );
 
-    print(result);
+    dprint(result);
   }
 
   static Future<void> addDoctors() async {
@@ -67,7 +68,7 @@ class PocketbaseUnused {
       try {
         await pb.collection('doctors').create(body: doctor.toJson());
       } catch (e) {
-        print(e.toString());
+        dprint(e.toString());
       }
     }
   }
@@ -83,7 +84,7 @@ class PocketbaseUnused {
       try {
         await pb.collection('reviews').create(body: review.toJson());
       } catch (e) {
-        print(e);
+        dprint(e);
       }
     }
   }
@@ -111,7 +112,7 @@ class PocketbaseUnused {
     final doctorsData = await pb.collection("doctors").getList();
     final doctors =
         doctorsData.items.map((d) => Doctor.fromJson(d.toJson())).toList();
-    print(doctors);
+    dprint(doctors);
     final reviewsData = await pb.collection("reviews").getFullList(
           batch: 1500,
           filter: "field = ''",
