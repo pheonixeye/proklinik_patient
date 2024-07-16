@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:patient/core/api/notifications_api.dart';
 import 'package:patient/functions/debug_print.dart';
 import 'package:patient/models/booking_data.dart';
 import 'package:patient/models/clinic.dart';
@@ -156,6 +157,8 @@ class PocketbaseHelper {
         bookResult.toJson(),
         data.model,
       );
+      //#send notification on booking
+      NotificationsApi(bookingData: bookingData).sendNotification();
       return bookingData;
     } catch (e) {
       if (kDebugMode) {
