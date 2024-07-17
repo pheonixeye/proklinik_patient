@@ -363,4 +363,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get consultant => 'استشاري';
+
+  @override
+  String get bookingDate => 'موعد الحجز';
+
+  @override
+  String get updateBooking => 'تغيير موعد الحجز';
+
+  @override
+  String get deleteBooking => 'الغاء الحجز';
+
+  @override
+  String get bookingAlreadyCanceled => 'لقد تم الغاء هذا الحجز سابقا.';
+
+  @override
+  String get confirm => 'الغاء الحجز';
+
+  @override
+  String get confirmDeleteBookingTitle => 'الغاء الحجز ؟';
+
+  @override
+  String get confirmDeleteBookingMessage => 'هل تريد الغاء هذا الحجز ؟';
+
+  @override
+  String get thankYouForUsingProklinik => 'شكرا لاستخدام بروكلينك.';
 }

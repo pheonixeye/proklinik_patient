@@ -16,9 +16,11 @@ import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
 import 'package:patient/pages/thank_you_page/thank_you_page.dart';
 import 'package:patient/pages/under_construction/under_construction_page.dart';
+import 'package:patient/pages/visit_update_page/visit_update_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
+import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +52,9 @@ class AppRouter {
   //todo: thankyou page
   static const String thankyou = "thankyou";
   //TODO: visit update / delete page
-  static const String visit = "visit/:id";
+  static const String visit = "visit/:month/:year/:visit_id";
   //TODO: review submission page
-  static const String review = "review/:id";
+  static const String review = "review/:doc_id/:clinic_id/:visit_id";
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
@@ -60,9 +62,7 @@ class AppRouter {
       [
         PxLocale(),
         PxSearchController(
-          query: QueryObject.fromJson(
-            const {},
-          ),
+          query: QueryObject.empty(),
         ),
       ],
     ),
@@ -118,11 +118,41 @@ class AppRouter {
                 name: home,
                 path: home,
                 builder: (context, state) {
+                  //#language path page
                   return HomePage(
                     key: state.pageKey,
                   );
                 },
                 routes: [
+                  GoRoute(
+                    //#visit update page
+                    name: visit,
+                    path: visit,
+                    builder: (context, state) {
+                      // ignore: non_constant_identifier_names
+                      final visit_id = state.pathParameters['visit_id'];
+                      final month = state.pathParameters['month'];
+                      final year = state.pathParameters['year'];
+                      if (visit_id == null || month == null || year == null) {
+                        return ErrorPage(
+                          key: state.pageKey,
+                        );
+                      } else {
+                        final key = ValueKey('$month$year$visit_id');
+                        return ChangeNotifierProvider(
+                          key: key,
+                          create: (context) => PxVisitUpdate(
+                            visit_id: visit_id,
+                            month: month,
+                            year: year,
+                          ),
+                          child: VisitUpdatePage(
+                            key: key,
+                          ),
+                        );
+                      }
+                    },
+                  ),
                   GoRoute(
                     name: err,
                     path: err,

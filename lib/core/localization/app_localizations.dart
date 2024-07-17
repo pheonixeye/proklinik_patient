@@ -812,6 +812,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Consultant'**
   String get consultant;
+
+  /// No description provided for @bookingDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Date'**
+  String get bookingDate;
+
+  /// No description provided for @updateBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Booking Date'**
+  String get updateBooking;
+
+  /// No description provided for @deleteBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Booking'**
+  String get deleteBooking;
+
+  /// No description provided for @bookingAlreadyCanceled.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Already Canceled.'**
+  String get bookingAlreadyCanceled;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @confirmDeleteBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Booking ?'**
+  String get confirmDeleteBookingTitle;
+
+  /// No description provided for @confirmDeleteBookingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are You Sure ?'**
+  String get confirmDeleteBookingMessage;
+
+  /// No description provided for @thankYouForUsingProklinik.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank You For Using ProKliniK.'**
+  String get thankYouForUsingProklinik;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

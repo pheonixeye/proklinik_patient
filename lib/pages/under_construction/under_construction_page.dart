@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
 
 class UnderConstructionPage extends StatelessWidget {
   const UnderConstructionPage({super.key});
@@ -63,46 +62,11 @@ class UnderConstructionPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 children: [
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: AppTheme.appBarColor,
-                            width: 0.3,
-                          ),
-                        ),
-                        backgroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        //todo: go to homepage
-                        GoRouter.of(context).goNamed(
-                          AppRouter.home,
-                          pathParameters: defaultPathParameters(context),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 24,
-                        ),
-                        child: Text(
-                          context.loc.homepage,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.mainFontColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
+                  Spacer(),
+                  HomepageBtn(),
+                  Spacer(),
                 ],
               ),
             ],

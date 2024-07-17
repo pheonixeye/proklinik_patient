@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -18,6 +20,36 @@ class PocketbaseHelper {
 
   PocketbaseHelper();
 
+  static Future<Map<String, dynamic>> fetchClinicVisit({
+    required String visit_id,
+    required String visitsCollection,
+  }) async {
+    Map<String, dynamic>? data;
+    try {
+      final result = await pb.collection(visitsCollection).getOne(
+            visit_id,
+            expand: 'doc_id, clinic_id',
+          );
+      data = result.toJson();
+      dprint('PocketbaseHelper().fetchClinicVisit(${data["id"]})');
+      return data;
+    } on ClientException catch (e) {
+      dprint('PocketbaseHelper().fetchClinicVisit(${e.response['message']})');
+      throw Exception(e.response['message']);
+    }
+  }
+
+  static Future<void> updateClinicVisit({
+    required String visit_id,
+    required String visitsCollection,
+    required Map<String, dynamic> update,
+  }) async {
+    await pb.collection(visitsCollection).update(
+          visit_id,
+          body: update,
+        );
+  }
+
   static Future<void> updateDoctorProfileViews(String id, int views) async {
     await pb.collection("doctors").update(
       id,
@@ -33,119 +65,6 @@ class PocketbaseHelper {
   static String _dateBookingCollectionFormat(String date) {
     final d = DateTime.parse(date);
     return "visits_${d.month}_${d.year}";
-  }
-
-  static ({String userName, String password}) get _adminUserCredentials {
-    return (
-      userName: const String.fromEnvironment("ADMIN_USERNAME"),
-      password: const String.fromEnvironment("ADMIN_PASSWORD")
-    );
-  }
-
-  static Future<Map<String, dynamic>> _bookingCollectionSchema(
-      String date) async {
-    // final d = DateTime.parse(date);
-    final doctors = await pb.collections.getOne("doctors");
-    final clinics = await pb.collections.getOne("clinics");
-    return {
-      'name': _dateBookingCollectionFormat(date),
-      'type': 'base',
-      'schema': [
-        {
-          'name': 'user_name',
-          'type': 'text',
-          'required': true,
-          'options': {},
-        },
-        {
-          'name': 'user_phone',
-          'type': 'text',
-          'required': true,
-          'options': {
-            'min': 11,
-          },
-        },
-        {
-          'name': 'user_email',
-          'type': 'text',
-          'required': false,
-          'options': {},
-        },
-        {
-          'name': 'date_time',
-          'type': 'text',
-          'required': true,
-          'options': {},
-        },
-        {
-          'name': 'doc_id',
-          'type': 'relation',
-          'required': true,
-          'options': {
-            'collectionId': doctors.id,
-            "maxSelect": 1,
-          },
-        },
-        {
-          'name': 'clinic_id',
-          'type': 'relation',
-          'required': true,
-          'options': {
-            'collectionId': clinics.id,
-            "maxSelect": 1,
-          },
-        },
-        {
-          'name': 'attended',
-          'type': 'bool',
-          'required': false,
-          'options': {},
-        },
-        {
-          'name': 'type',
-          'type': 'select',
-          'required': false,
-          'options': {
-            "maxSelect": 1,
-            "values": [
-              "Consultation",
-              "Followup",
-            ],
-          }
-        },
-        {
-          'name': 'year',
-          'type': 'number',
-          'required': true,
-          'options': {"noDecimal": true},
-        },
-        {
-          'name': 'month',
-          'type': 'number',
-          'required': true,
-          'options': {
-            "noDecimal": true,
-            "min": 1,
-            "max": 12,
-          },
-        },
-        {
-          'name': 'day',
-          'type': 'number',
-          'required': true,
-          'options': {
-            "noDecimal": true,
-            "min": 1,
-            "max": 31,
-          },
-        },
-      ],
-      "listRule": "",
-      "viewRule": "",
-      "createRule": "",
-      "updateRule": "",
-      "deleteRule": null,
-    };
   }
 
   static Future<BookingData?> sendBookingRequest(BookingData data) async {
@@ -164,42 +83,7 @@ class PocketbaseHelper {
       if (kDebugMode) {
         print("First Request Exception : ${e.toString()}");
       }
-      try {
-        //TODO: replace in production
-        // final admin = await pb.admins
-        //     .authWithPassword("collection@admin.com", "admin.collection");
-        final admin = await pb.admins.authWithPassword(
-          _adminUserCredentials.userName,
-          _adminUserCredentials.password,
-        );
-        final adminToken = admin.token;
-
-        final collectionSchema = await _bookingCollectionSchema(data.date_time);
-
-        await pb.collections.create(
-          headers: {
-            "Authorization": "Bearer $adminToken",
-            "Content-Type": "application/json"
-          },
-          body: collectionSchema,
-        );
-
-        final bookingResult = await pb
-            .collection(_dateBookingCollectionFormat(data.date_time))
-            .create(body: data.toPocketbaseJson());
-
-        final bookingData = BookingData.fromPocketbaseJson(
-          bookingResult.toJson(),
-          data.model,
-        );
-
-        return bookingData;
-      } catch (e) {
-        if (kDebugMode) {
-          print("Second Request Exception : ${e.toString()}");
-        }
-        return null;
-      }
+      return null;
     }
   }
 

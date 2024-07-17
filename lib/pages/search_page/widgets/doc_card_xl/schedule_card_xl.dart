@@ -20,9 +20,11 @@ class ScheduleCardXl extends StatefulWidget {
     super.key,
     required this.model,
     required this.index,
+    this.onTapReschedule,
   });
   final ServerResponseModel model;
   final int index;
+  final VoidCallback? onTapReschedule;
 
   @override
   State<ScheduleCardXl> createState() => _ScheduleCardXlState();
@@ -54,13 +56,12 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
       _schedule = null;
     }
 
-    isAvailable = _schedule != null && _schedule!.available;
+    isAvailable = _schedule != null &&
+        _schedule!.available &&
+        !widget.model.clinic.off_dates.contains(
+          cardDate.toIso8601String(),
+        );
     super.initState();
-    // if (kDebugMode) {
-    //   print(_schedule?.toJson().toString());
-    //   print(data.toString());
-    //   print(isAvailable.toString());
-    // }
   }
 
   void Function()? get _onTap {
@@ -75,6 +76,9 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                   doc_id: widget.model.doctor.id,
                   clinic_id: widget.model.clinic.id,
                   model: widget.model,
+                  day: cardDate.day,
+                  month: cardDate.month,
+                  year: cardDate.year,
                 ));
             GoRouter.of(context).goNamed(
               AppRouter.book,
@@ -112,7 +116,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
         child: Opacity(
           opacity: _opacity,
           child: InkWell(
-            onTap: _onTap,
+            onTap: widget.onTapReschedule ?? _onTap,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,

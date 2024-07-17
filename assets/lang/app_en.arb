@@ -118,6 +118,14 @@
     "joinedRecently" : "Joined Recently.",
     "degree" : "Degree",
     "specialist" : "Specialist",
-    "consultant" : "Consultant"
+    "consultant" : "Consultant",
+    "bookingDate":"Booking Date",
+    "updateBooking":"Change Booking Date",
+    "deleteBooking":"Cancel Booking",
+    "bookingAlreadyCanceled":"Booking Already Canceled.",
+    "confirm" : "Confirm",
+    "confirmDeleteBookingTitle" : "Cancel Booking ?",
+    "confirmDeleteBookingMessage" : "Are You Sure ?",
+    "thankYouForUsingProklinik" : "Thank You For Using ProKliniK."
     
  }

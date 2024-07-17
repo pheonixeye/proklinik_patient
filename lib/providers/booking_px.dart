@@ -15,9 +15,9 @@ class PxBooking extends ChangeNotifier {
   bool get isFetching => _isFetching;
 
   //todo: send booking request
-  //TODO: Send notification sms
-  //TODO: Send fcm notification
-  //TODO: formulate message (doctor, assisstant, patient)
+  //todo: Send notification sms
+  //todo: Send fcm notification
+  //todo: formulate message (doctor, assisstant, patient)
   //TODO: include a link to update or delete booking
   Future<void> createAppointment() async {
     _isFetching = true;

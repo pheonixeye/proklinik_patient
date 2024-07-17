@@ -1,4 +1,4 @@
-// ignore_for_file:  non_constant_identifier_names
+// ignore_for_file:  non_constant_identifier_names, constant_identifier_names
 
 import 'package:equatable/equatable.dart';
 import 'package:patient/models/server_response_model.dart';
@@ -17,6 +17,7 @@ class BookingData extends Equatable {
   final int year;
   final int month;
   final int day;
+  final Status? status;
 
   const BookingData({
     required this.id,
@@ -32,6 +33,7 @@ class BookingData extends Equatable {
     required this.year,
     required this.month,
     required this.day,
+    this.status,
   });
 
   factory BookingData.empty() {
@@ -49,6 +51,7 @@ class BookingData extends Equatable {
       year: DateTime.now().year,
       month: DateTime.now().month,
       day: DateTime.now().day,
+      status: Status.attended,
     );
   }
 
@@ -67,6 +70,7 @@ class BookingData extends Equatable {
       year: DateTime.now().year,
       month: DateTime.now().month,
       day: DateTime.now().day,
+      status: value.status,
     );
   }
 
@@ -81,11 +85,11 @@ class BookingData extends Equatable {
     ServerResponseModel? model,
     String? type,
     bool? attended,
+    Status? status,
+    int? day,
+    int? month,
+    int? year,
   }) {
-    final now = DateTime.now();
-    // ignore: no_leading_underscores_for_local_identifiers
-    final _d = DateTime.tryParse(this.date_time) ??
-        DateTime(now.year, now.month, now.day);
     return BookingData(
       id: id ?? this.id,
       user_name: user_name ?? this.user_name,
@@ -97,9 +101,10 @@ class BookingData extends Equatable {
       model: model ?? this.model,
       type: type ?? this.type,
       attended: attended ?? this.attended,
-      year: _d.year,
-      month: _d.month,
-      day: _d.day,
+      year: year ?? this.year,
+      month: month ?? this.month,
+      day: day ?? this.day,
+      status: status ?? this.status,
     );
   }
 
@@ -118,6 +123,7 @@ class BookingData extends Equatable {
       'year': year,
       'month': month,
       'day': day,
+      'status': status?.value,
     };
   }
 
@@ -134,6 +140,7 @@ class BookingData extends Equatable {
       'year': year,
       'month': month,
       'day': day,
+      'status': status?.value,
     };
   }
 
@@ -147,12 +154,15 @@ class BookingData extends Equatable {
       doc_id: map['doc_id'] as String,
       clinic_id: map['clinic_id'] as String,
       date_time: map['date_time'] as String,
-      model: ServerResponseModel.fromJson(map['model']) as ServerResponseModel?,
+      model: map['model'] == null
+          ? null
+          : ServerResponseModel.fromJson(map['model']) as ServerResponseModel?,
       type: map['type'] as String?,
       attended: map['attended'] as bool,
       year: map['year'] as int,
       month: map['month'] as int,
       day: map['day'] as int,
+      status: Status.fromString(map['status'] as String?),
     );
   }
 
@@ -175,6 +185,7 @@ class BookingData extends Equatable {
       year: map['year'] as int,
       month: map['month'] as int,
       day: map['day'] as int,
+      status: Status.fromString(map['status'] as String?),
     );
   }
 
@@ -197,6 +208,35 @@ class BookingData extends Equatable {
       year,
       month,
       day,
+      status,
     ];
+  }
+
+  //#visit update url(/visit_id)
+  String get visitUpdateUrl => '$month/$year/$id';
+  //#review sumbission update url(/doc_id/clinic_id/visit_id)
+  String get reviewSubmissionUrl => '$doc_id/$clinic_id/$id';
+}
+
+enum Status {
+  unknown('unknown'),
+  attended('attended'),
+  not_attended('not-attended'),
+  cancel_by_doctor('cancel-by-doctor'),
+  cancel_by_patient('cancel-by-patient');
+
+  final String value;
+
+  const Status(this.value);
+
+  static Status fromString(String? value) {
+    return switch (value) {
+      'unknown' => Status.unknown,
+      'attended' => Status.attended,
+      'not-attended' => Status.not_attended,
+      'cancel-by-doctor' => Status.cancel_by_doctor,
+      'cancel-by-patient' => Status.cancel_by_patient,
+      _ => Status.unknown,
+    };
   }
 }

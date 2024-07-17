@@ -363,4 +363,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get consultant => 'Consultant';
+
+  @override
+  String get bookingDate => 'Booking Date';
+
+  @override
+  String get updateBooking => 'Change Booking Date';
+
+  @override
+  String get deleteBooking => 'Cancel Booking';
+
+  @override
+  String get bookingAlreadyCanceled => 'Booking Already Canceled.';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get confirmDeleteBookingTitle => 'Cancel Booking ?';
+
+  @override
+  String get confirmDeleteBookingMessage => 'Are You Sure ?';
+
+  @override
+  String get thankYouForUsingProklinik => 'Thank You For Using ProKliniK.';
 }

@@ -118,6 +118,14 @@
     "joinedRecently" : "انضم حديثا.",
     "degree" : "الدرجة",
     "specialist" : "اخصائي",
-    "consultant" : "استشاري"
+    "consultant" : "استشاري",
+    "bookingDate":"موعد الحجز",
+    "updateBooking":"تغيير موعد الحجز",
+    "deleteBooking":"الغاء الحجز",
+    "bookingAlreadyCanceled":"لقد تم الغاء هذا الحجز سابقا.",
+    "confirm" : "الغاء الحجز",
+    "confirmDeleteBookingTitle" : "الغاء الحجز ؟",
+    "confirmDeleteBookingMessage" : "هل تريد الغاء هذا الحجز ؟",
+    "thankYouForUsingProklinik" : "شكرا لاستخدام بروكلينك."
    
 }

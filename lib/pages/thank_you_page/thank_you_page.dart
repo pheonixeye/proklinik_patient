@@ -13,6 +13,7 @@ import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
 import 'package:provider/provider.dart';
 
 class ThankYouPage extends StatefulWidget {
@@ -92,46 +93,11 @@ class _ThankYouPageState extends State<ThankYouPage> with AfterLayoutMixin {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
-                  Row(
+                  const Row(
                     children: [
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: BorderSide(
-                                color: AppTheme.appBarColor,
-                                width: 0.3,
-                              ),
-                            ),
-                            backgroundColor: Colors.white,
-                          ),
-                          onPressed: () {
-                            //todo: go to homepage
-                            GoRouter.of(context).goNamed(
-                              AppRouter.home,
-                              pathParameters: defaultPathParameters(context),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 24,
-                            ),
-                            child: Text(
-                              context.loc.homepage,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: AppTheme.mainFontColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
+                      Spacer(),
+                      HomepageBtn(),
+                      Spacer(),
                     ],
                   ),
                 ],
