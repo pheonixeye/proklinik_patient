@@ -126,6 +126,14 @@
     "confirm" : "Confirm",
     "confirmDeleteBookingTitle" : "Cancel Booking ?",
     "confirmDeleteBookingMessage" : "Are You Sure ?",
-    "thankYouForUsingProklinik" : "Thank You For Using ProKliniK."
-    
+    "thankYouForUsingProklinik" : "Thank You For Using ProKliniK.",
+    "visitNotFound" : "Visit Not Found.",
+    "unknownErrorHasOccured" : "Unknown Error Has Occured.",
+    "writeAReview" : "Write Your Review.",
+    "postWithNoName" : "Post With No Name.",
+    "writeYourReview" : "Write Your Review.",
+    "writeYourWaitingTime" : "Write Your Waiting Time in Minutes.",
+    "submitReview" : "Submit Review",
+    "enterWaitingTime" : "Kindly Enter Waiting Time.",
+    "yourReviewHasBeenSubmitted" : "Your Review Has Been Submitted."    
  }

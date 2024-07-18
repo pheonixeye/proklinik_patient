@@ -1,21 +1,20 @@
 // ignore_for_file:  non_constant_identifier_names
 
-import 'dart:math';
-
 import 'package:equatable/equatable.dart';
-import 'package:uuid/uuid.dart';
 // ignore: depend_on_referenced_packages
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 class Review extends Equatable {
-  //TODO: add doc_rel
-  //TODO: add clinic_rel
+  //todo: add doc_rel
+  //todo: add clinic_rel
   final String id;
   final String doc_id;
   final String user_name;
   final String body;
   final String date_time;
   final int waiting_time;
+  final String doc_rel;
+  final String clinic_rel;
+  final String? visit_id;
   final int stars;
   const Review({
     required this.id,
@@ -25,6 +24,9 @@ class Review extends Equatable {
     required this.date_time,
     required this.waiting_time,
     required this.stars,
+    required this.doc_rel,
+    required this.clinic_rel,
+    this.visit_id,
   });
 
   Review copyWith({
@@ -35,6 +37,9 @@ class Review extends Equatable {
     String? date_time,
     int? waiting_time,
     int? stars,
+    String? doc_rel,
+    String? clinic_rel,
+    String? visit_id,
   }) {
     return Review(
       id: id ?? this.id,
@@ -44,6 +49,9 @@ class Review extends Equatable {
       date_time: date_time ?? this.date_time,
       waiting_time: waiting_time ?? this.waiting_time,
       stars: stars ?? this.stars,
+      doc_rel: doc_rel ?? this.doc_rel,
+      clinic_rel: clinic_rel ?? this.clinic_rel,
+      visit_id: visit_id ?? this.visit_id,
     );
   }
 
@@ -56,7 +64,25 @@ class Review extends Equatable {
       'date_time': date_time,
       'waiting_time': waiting_time,
       'stars': stars,
+      'doc_rel': doc_rel,
+      'clinic_rel': clinic_rel,
+      'visit_id': visit_id,
     };
+  }
+
+  factory Review.initial() {
+    return const Review(
+      id: '',
+      doc_id: '',
+      user_name: '',
+      body: '',
+      date_time: '',
+      waiting_time: 0,
+      stars: 0,
+      doc_rel: '',
+      clinic_rel: '',
+      visit_id: '',
+    );
   }
 
   factory Review.fromJson(Map<String, dynamic> map) {
@@ -68,26 +94,9 @@ class Review extends Equatable {
       date_time: map['date_time'] as String,
       waiting_time: map['waiting_time'] as int,
       stars: map['stars'] as int,
-    );
-  }
-
-  static List<Review> generate() {
-    return List.generate(
-      1000,
-      (index) => Review(
-          id: index.toString(),
-          doc_id: "${Random().nextInt(10) + 1}",
-          user_name: const Uuid().v1().split("-").first,
-          body: lorem(paragraphs: 1, words: Random().nextInt(50) + 1),
-          date_time: DateTime(
-            Random().nextInt(24) + 2000,
-            Random().nextInt(11) + 1,
-            Random().nextInt(28) + 1,
-            Random().nextInt(58) + 1,
-            Random().nextInt(58) + 1,
-          ).toIso8601String(),
-          waiting_time: Random().nextInt(45),
-          stars: Random().nextInt(4) + 1),
+      doc_rel: map['doc_rel'] as String,
+      clinic_rel: map['clinic_rel'] as String,
+      visit_id: map['visit_id'] as String?,
     );
   }
 
@@ -95,7 +104,7 @@ class Review extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       doc_id,
@@ -104,6 +113,9 @@ class Review extends Equatable {
       date_time,
       waiting_time,
       stars,
+      doc_rel,
+      clinic_rel,
+      visit_id,
     ];
   }
 }

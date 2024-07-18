@@ -387,4 +387,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get thankYouForUsingProklinik => 'شكرا لاستخدام بروكلينك.';
+
+  @override
+  String get visitNotFound => 'لم يتم العثور علي الزيارة.';
+
+  @override
+  String get unknownErrorHasOccured => 'حدث خطأ، برجاء المحاولة في وقت لاحق.';
+
+  @override
+  String get writeAReview => 'اكتب تقييمك للزيارة.';
+
+  @override
+  String get postWithNoName => 'بدون اسم';
+
+  @override
+  String get writeYourReview => 'ملاحظات. . .';
+
+  @override
+  String get writeYourWaitingTime => 'وقت الانتظار بالدقيقة';
+
+  @override
+  String get submitReview => 'ارسال التقييم';
+
+  @override
+  String get enterWaitingTime => 'برجاء ادخال وقت الانتظار.';
+
+  @override
+  String get yourReviewHasBeenSubmitted => 'لقد تم اضافة تقييمك بنجاح.';
 }

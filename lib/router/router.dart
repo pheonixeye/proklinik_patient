@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +14,7 @@ import 'package:patient/pages/homepage/homepage.dart';
 import 'package:patient/pages/loading_root_page/loading_root_page.dart';
 import 'package:patient/pages/pt_login_page/pt_login_page.dart';
 import 'package:patient/pages/pt_signup_page/pt_signup_page.dart';
+import 'package:patient/pages/review_submission_page/review_sub_page.dart';
 import 'package:patient/pages/search_page/search_page.dart';
 import 'package:patient/pages/shell_page/shell_page.dart';
 import 'package:patient/pages/thank_you_page/thank_you_page.dart';
@@ -19,6 +22,7 @@ import 'package:patient/pages/under_construction/under_construction_page.dart';
 import 'package:patient/pages/visit_update_page/visit_update_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/reviews_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/utils/utils_keys.dart';
@@ -51,10 +55,10 @@ class AppRouter {
   static const String err = "404";
   //todo: thankyou page
   static const String thankyou = "thankyou";
-  //TODO: visit update / delete page
+  //todo: visit update / delete page
   static const String visit = "visit/:month/:year/:visit_id";
   //TODO: review submission page
-  static const String review = "review/:doc_id/:clinic_id/:visit_id";
+  static const String review = "review/:month/:year/:visit_id";
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
@@ -129,7 +133,6 @@ class AppRouter {
                     name: visit,
                     path: visit,
                     builder: (context, state) {
-                      // ignore: non_constant_identifier_names
                       final visit_id = state.pathParameters['visit_id'];
                       final month = state.pathParameters['month'];
                       final year = state.pathParameters['year'];
@@ -147,6 +150,33 @@ class AppRouter {
                             year: year,
                           ),
                           child: VisitUpdatePage(
+                            key: key,
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  GoRoute(
+                    name: review,
+                    path: review,
+                    builder: (context, state) {
+                      final visit_id = state.pathParameters['visit_id'];
+                      final month = state.pathParameters['month'];
+                      final year = state.pathParameters['year'];
+                      if (visit_id == null || month == null || year == null) {
+                        return ErrorPage(
+                          key: state.pageKey,
+                        );
+                      } else {
+                        final key = ValueKey('$month$year$visit_id');
+                        return ChangeNotifierProvider(
+                          key: key,
+                          create: (context) => PxReviews(
+                            month: month,
+                            year: year,
+                            visit_id: visit_id,
+                          ),
+                          child: ReviewSubmissionPage(
                             key: key,
                           ),
                         );

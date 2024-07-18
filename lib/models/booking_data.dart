@@ -213,9 +213,10 @@ class BookingData extends Equatable {
   }
 
   //#visit update url(/visit_id)
-  String get visitUpdateUrl => '$month/$year/$id';
+  String get visitUpdateUrl => 'visit/$month/$year/$id';
   //#review sumbission update url(/doc_id/clinic_id/visit_id)
-  String get reviewSubmissionUrl => '$doc_id/$clinic_id/$id';
+  String get reviewSubmissionUrl =>
+      'review/$month/$year/$doc_id/$clinic_id/$id';
 }
 
 enum Status {

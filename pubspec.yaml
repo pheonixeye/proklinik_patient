@@ -28,6 +28,7 @@ dependencies:
   gap: ^3.0.1
   # arabic_numbers: ^1.0.0
   pocketbase: ^0.18.1
+  flutter_rating_stars: ^1.1.0
 
 
 

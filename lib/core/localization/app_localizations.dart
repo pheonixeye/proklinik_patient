@@ -860,6 +860,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thank You For Using ProKliniK.'**
   String get thankYouForUsingProklinik;
+
+  /// No description provided for @visitNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit Not Found.'**
+  String get visitNotFound;
+
+  /// No description provided for @unknownErrorHasOccured.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Error Has Occured.'**
+  String get unknownErrorHasOccured;
+
+  /// No description provided for @writeAReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write Your Review.'**
+  String get writeAReview;
+
+  /// No description provided for @postWithNoName.
+  ///
+  /// In en, this message translates to:
+  /// **'Post With No Name.'**
+  String get postWithNoName;
+
+  /// No description provided for @writeYourReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write Your Review.'**
+  String get writeYourReview;
+
+  /// No description provided for @writeYourWaitingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Write Your Waiting Time in Minutes.'**
+  String get writeYourWaitingTime;
+
+  /// No description provided for @submitReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Review'**
+  String get submitReview;
+
+  /// No description provided for @enterWaitingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Kindly Enter Waiting Time.'**
+  String get enterWaitingTime;
+
+  /// No description provided for @yourReviewHasBeenSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Review Has Been Submitted.'**
+  String get yourReviewHasBeenSubmitted;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

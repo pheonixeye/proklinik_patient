@@ -126,6 +126,14 @@
     "confirm" : "الغاء الحجز",
     "confirmDeleteBookingTitle" : "الغاء الحجز ؟",
     "confirmDeleteBookingMessage" : "هل تريد الغاء هذا الحجز ؟",
-    "thankYouForUsingProklinik" : "شكرا لاستخدام بروكلينك."
-   
+    "thankYouForUsingProklinik" : "شكرا لاستخدام بروكلينك.",
+    "visitNotFound" : "لم يتم العثور علي الزيارة.",
+    "unknownErrorHasOccured" : "حدث خطأ، برجاء المحاولة في وقت لاحق.",
+    "writeAReview" : "اكتب تقييمك للزيارة.",
+    "postWithNoName" : "بدون اسم",
+    "writeYourReview" : "ملاحظات. . .",
+    "writeYourWaitingTime" : "وقت الانتظار بالدقيقة",
+    "submitReview" : "ارسال التقييم",
+    "enterWaitingTime" : "برجاء ادخال وقت الانتظار.",
+    "yourReviewHasBeenSubmitted" : "لقد تم اضافة تقييمك بنجاح."       
 }

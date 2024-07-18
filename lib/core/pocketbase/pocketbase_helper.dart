@@ -50,6 +50,24 @@ class PocketbaseHelper {
         );
   }
 
+  static Future<void> submitReview(Review review) async {
+    await pb.collection('reviews').create(
+          body: review.toJson(),
+        );
+  }
+
+  static Future<Review?> fetchReview(String visit_id) async {
+    try {
+      final result = await pb.collection('reviews').getFirstListItem(
+            "visit_id = '$visit_id'",
+          );
+      final review = Review.fromJson(result.toJson());
+      return review;
+    } catch (e) {
+      return null;
+    }
+  }
+
   static Future<void> updateDoctorProfileViews(String id, int views) async {
     await pb.collection("doctors").update(
       id,

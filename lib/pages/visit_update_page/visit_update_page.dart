@@ -24,8 +24,8 @@ class VisitUpdatePage extends StatelessWidget {
           return const CentralLoading();
         }
         if (v.hasError) {
-          return const Center(
-            child: Text('Visit Not Found.'),
+          return Center(
+            child: Text(context.loc.visitNotFound),
           );
         }
         if (v.bookingData!.status == Status.cancel_by_patient ||

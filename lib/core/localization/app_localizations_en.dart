@@ -387,4 +387,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thankYouForUsingProklinik => 'Thank You For Using ProKliniK.';
+
+  @override
+  String get visitNotFound => 'Visit Not Found.';
+
+  @override
+  String get unknownErrorHasOccured => 'Unknown Error Has Occured.';
+
+  @override
+  String get writeAReview => 'Write Your Review.';
+
+  @override
+  String get postWithNoName => 'Post With No Name.';
+
+  @override
+  String get writeYourReview => 'Write Your Review.';
+
+  @override
+  String get writeYourWaitingTime => 'Write Your Waiting Time in Minutes.';
+
+  @override
+  String get submitReview => 'Submit Review';
+
+  @override
+  String get enterWaitingTime => 'Kindly Enter Waiting Time.';
+
+  @override
+  String get yourReviewHasBeenSubmitted => 'Your Review Has Been Submitted.';
 }
