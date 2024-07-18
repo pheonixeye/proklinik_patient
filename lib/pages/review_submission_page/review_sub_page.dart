@@ -122,7 +122,7 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                   );
                                 },
                                 starCount: 5,
-                                starSize: 20,
+                                starSize: 32,
                                 valueLabelColor: const Color(0xff9b9b9b),
                                 valueLabelTextStyle: const TextStyle(
                                   color: Colors.white,
@@ -132,11 +132,11 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                 ),
                                 valueLabelRadius: 10,
                                 maxValue: 5,
-                                starSpacing: 2,
+                                starSpacing: 6,
                                 maxValueVisibility: true,
-                                valueLabelVisibility: true,
+                                valueLabelVisibility: false,
                                 animationDuration:
-                                    const Duration(milliseconds: 1000),
+                                    const Duration(milliseconds: 500),
                                 valueLabelPadding: const EdgeInsets.symmetric(
                                   vertical: 1,
                                   horizontal: 8,
@@ -144,7 +144,7 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                 valueLabelMargin:
                                     const EdgeInsets.only(right: 8),
                                 starOffColor: const Color(0xffe7e8ea),
-                                starColor: Colors.yellow,
+                                starColor: Colors.amber,
                                 angle: 12,
                               ),
                             ),
@@ -230,7 +230,18 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                     user_name: user_name,
                                   );
                                 }
-                                await r.submitReview();
+                                late BuildContext loadingContext;
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    loadingContext = context;
+                                    return const CentralLoading();
+                                  },
+                                );
+                                await r.submitReview().whenComplete(() {
+                                  Navigator.pop(loadingContext);
+                                });
+
                                 r.updateState(ReviewPageState.thankyou);
                               }
                             },

@@ -12,6 +12,7 @@ import 'package:patient/models/doctor.dart';
 import 'package:patient/models/query_object.dart';
 import 'package:patient/models/review.dart';
 import 'package:patient/models/server_response_model.dart';
+import 'package:patient/models/sorting_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class PocketbaseHelper {
@@ -25,6 +26,8 @@ class PocketbaseHelper {
     await pb.collection('contact_us').create(
           body: formModel.toJson(),
         );
+    //TODO: Send server notification to client who sent the message
+    //TODO: Send server notification to admin with sent message
   }
 
   static Future<Map<String, dynamic>> fetchClinicVisit({
@@ -58,9 +61,48 @@ class PocketbaseHelper {
   }
 
   static Future<void> submitReview(Review review) async {
-    await pb.collection('reviews').create(
+    //# submit review
+    final result = await pb.collection('reviews').create(
           body: review.toJson(),
         );
+    //# fetch doctor model after submitting the review
+    final modelPreReviewRelation = await doctorProfileQuery(review.doc_id);
+
+    final reviews = modelPreReviewRelation.reviews;
+    final newReviewsRel = [...reviews.map((e) => e.id), result.id];
+
+    await pb.collection('doctors').update(
+      review.doc_id,
+      body: {
+        'review_rel': newReviewsRel,
+      },
+    );
+
+    final modelPostReviewRelation = await doctorProfileQuery(review.doc_id);
+    final reviewsPostRel = modelPostReviewRelation.reviews;
+
+    //# update doctor model (rating) after adding the review
+    final ratingList = reviewsPostRel.map<int>((e) => e.stars).toList();
+    final averageRating =
+        ratingList.fold<int>(0, (a, b) => a + b) / ratingList.length;
+    await pb.collection('doctors').update(
+      review.doc_id,
+      body: {
+        'rating': averageRating,
+      },
+    );
+    //# update clinic model (waiting time) after adding the review
+    final waitingTimeList =
+        reviewsPostRel.map<int>((e) => e.waiting_time).toList();
+    final averageWaitingTime =
+        waitingTimeList.fold<int>(0, (a, b) => a + b) ~/ waitingTimeList.length;
+    await pb.collection('clinics').update(
+      review.clinic_rel,
+      body: {
+        'waiting_time': averageWaitingTime,
+      },
+    );
+    //TODO: Send notification mail to doctor by the review
   }
 
   static Future<Review?> fetchReview(String visit_id) async {
@@ -127,6 +169,11 @@ class PocketbaseHelper {
         : doctorData.expand["review_rel"]!
             .map((r) => Review.fromJson(r.toJson()))
             .toList();
+    reviews.sort(
+      (a, b) => DateTime.parse(b.date_time).compareTo(
+        DateTime.parse(a.date_time),
+      ),
+    );
     return ServerResponseModel(
       doctor: doctor,
       clinic: clinic,
@@ -136,9 +183,9 @@ class PocketbaseHelper {
   }
 
   static Future<List<ServerResponseModel>> mainQuery(QueryObject query) async {
-    //TODO: missing sorting && filter params
-    //TODO: filter by price(l300, m300), sort by price(l->h, h->l)
-    //TODO: sort by waiting time
+    //todo: missing sorting && filter params
+    //todo: filter by price(l300, m300), sort by price(l->h, h->l)
+    //todo: sort by waiting time
     final List<ServerResponseModel> models = [];
 
     final queryString = query.toPocketbaseQuery();
@@ -153,12 +200,12 @@ class PocketbaseHelper {
           sort: queryString.sort,
         );
 
-    late final _WhichLocQuery _whichLocQuery;
+    late final _WhichLocQuery whichLocQuery;
 
     doctorsData.items.map((d) {
       Clinic? clinic;
       final doctor = Doctor.fromJson(d.toJson());
-      // print(d.e)
+
       //#doctor didnot make a doctor profile yet
       if (d.expand["clinic_rel"] == null || d.expand["clinic_rel"]!.isEmpty) {
         return;
@@ -170,19 +217,19 @@ class PocketbaseHelper {
 
       //#filtering by area && gov
       if (query.city.isEmpty && query.gov.isEmpty) {
-        _whichLocQuery = _WhichLocQuery.noLocation;
+        whichLocQuery = _WhichLocQuery.noLocation;
 
         dprint("city & gov => empty");
-
+        //TODO:
         clinic = clinicList.first;
       } else if (query.gov.isNotEmpty && query.city.isEmpty) {
-        _whichLocQuery = _WhichLocQuery.govOnly;
+        whichLocQuery = _WhichLocQuery.govOnly;
 
         dprint("gov => not Empty, city => empty");
 
         clinic = clinicList.firstWhere((cl) => cl.matchGov(query.gov));
       } else if (query.gov.isNotEmpty && query.city.isNotEmpty) {
-        _whichLocQuery = _WhichLocQuery.fullLocation;
+        whichLocQuery = _WhichLocQuery.fullLocation;
 
         dprint("gov & city => not Empty");
 
@@ -202,7 +249,7 @@ class PocketbaseHelper {
         switch (query.availability) {
           case "today":
             try {
-              switch (_whichLocQuery) {
+              switch (whichLocQuery) {
                 case _WhichLocQuery.noLocation:
                   clinic = clinicList
                       .firstWhere((cl) => cl.hasTodayAvailable == true);
@@ -226,7 +273,7 @@ class PocketbaseHelper {
             break;
           case "tomorrow":
             try {
-              switch (_whichLocQuery) {
+              switch (whichLocQuery) {
                 case _WhichLocQuery.noLocation:
                   clinic = clinicList
                       .firstWhere((cl) => cl.hasTomorrowAvailable == true);
@@ -260,6 +307,33 @@ class PocketbaseHelper {
         models.add(model);
       }
     }).toList();
+
+    //todo: Clinic sorting(limitation: only the 10 results that came)
+    //TODO: test it
+
+    switch (SortingModelEnum.fromString(query.sort)) {
+      //# sort by price
+      case SortingModelEnum.priceHighToLow:
+        models.sort((a, b) =>
+            a.clinic.consultation_fees.compareTo(b.clinic.consultation_fees));
+        break;
+      //# sort by price
+      case SortingModelEnum.priceLowToHigh:
+        models.sort((a, b) =>
+            b.clinic.consultation_fees.compareTo(a.clinic.consultation_fees));
+
+        break;
+      //# sort by waiting time
+      case SortingModelEnum.waitingTime:
+        models.sort(
+            (a, b) => a.clinic.waiting_time.compareTo(b.clinic.waiting_time));
+
+        break;
+      case SortingModelEnum.empty:
+        break;
+    }
+
+    //# sort by rating
 
     return models;
   }

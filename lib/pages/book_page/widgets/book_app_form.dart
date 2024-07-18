@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
@@ -134,6 +135,9 @@ class _BookAppFormState extends State<BookAppForm> {
                           child: TextFormField(
                             controller: _phoneController,
                             validator: _phoneNumberValidator,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             decoration: InputDecoration(
                               hintText: context.loc.mobileNumber,
                               icon: const Icon(Icons.phone),

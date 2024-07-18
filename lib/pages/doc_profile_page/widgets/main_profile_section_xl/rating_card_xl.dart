@@ -66,17 +66,17 @@ class RatingCardXl extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: ListTile(
-                    title: Text(
-                      review.user_name,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.mainFontColor,
-                      ),
-                    ),
-                    subtitle: Consumer<PxLocale>(
-                      builder: (context, l, _) {
-                        return Text(
+                  child: Consumer<PxLocale>(
+                    builder: (context, l, _) {
+                      return ListTile(
+                        title: Text(
+                          review.parseUserName(l.isEnglish, context),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppTheme.mainFontColor,
+                          ),
+                        ),
+                        subtitle: Text(
                           //todo: modify date format
                           DateFormat("dd/MM/yyyy", l.lang)
                               .format(DateTime.parse(review.date_time)),
@@ -85,9 +85,9 @@ class RatingCardXl extends StatelessWidget {
                             color: AppTheme.mainFontColor,
                             fontWeight: FontWeight.w600,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -135,5 +135,18 @@ class RatingCardXl extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+extension ParsedUserName on Review {
+  String parseUserName(bool isEnglish, BuildContext context) {
+    if (user_name.contains("Guest")) {
+      final split = user_name.split('-');
+      final name = isEnglish ? split[0] : 'زائر';
+      final number = isEnglish ? split[1] : split[1].toArabicNumber(context);
+      return '$name-$number';
+    } else {
+      return user_name;
+    }
   }
 }

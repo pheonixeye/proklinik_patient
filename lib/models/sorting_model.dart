@@ -69,3 +69,22 @@ List<SortingModel> sortingParameters = [
   SortingModel.waitingTime(),
   SortingModel.topRated(),
 ];
+
+enum SortingModelEnum {
+  priceHighToLow('high-low'),
+  priceLowToHigh('low-high'),
+  waitingTime('waiting-time'),
+  empty('');
+
+  final String value;
+  const SortingModelEnum(this.value);
+
+  factory SortingModelEnum.fromString(String value) {
+    return switch (value) {
+      'high-low' => SortingModelEnum.priceHighToLow,
+      'low-high' => SortingModelEnum.priceLowToHigh,
+      'waiting-time' => SortingModelEnum.waitingTime,
+      _ => SortingModelEnum.empty,
+    };
+  }
+}

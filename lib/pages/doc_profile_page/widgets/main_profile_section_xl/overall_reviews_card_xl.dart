@@ -77,7 +77,7 @@ class OverallReviewsCardXl extends StatelessWidget {
                         child: Text(
                           model.doctor.rating == 0
                               ? "../.."
-                              : "${model.doctor.rating.toString().toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
+                              : "${model.doctor.rating.toStringAsFixed(1).toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
                           style: const TextStyle(
                             color: Colors.white,
                           ),

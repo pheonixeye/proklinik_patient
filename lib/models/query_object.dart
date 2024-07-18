@@ -154,7 +154,7 @@ class QueryObject extends Equatable {
       filterBuffer.write("degree_en = 'Consultant'");
     }
 
-    //#waiting time
+    //#sorting(best-match / top-rated)
     if (sort == 'best-match') {
     } else if (sort == 'top-rated') {
       sortingBuffer.write("+rating");
