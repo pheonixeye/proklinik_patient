@@ -1,8 +1,12 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/contact_us_model.dart';
+import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:patient/theme/app_theme.dart';
 
@@ -23,6 +27,36 @@ class _ContactUsPageState extends State<ContactUsPage> {
       }
       return null;
     };
+  }
+
+  late final TextEditingController _name;
+  late final TextEditingController _phone;
+  late final TextEditingController _email;
+  late final TextEditingController _message;
+
+  @override
+  void initState() {
+    _name = TextEditingController();
+    _phone = TextEditingController();
+    _email = TextEditingController();
+    _message = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _phone.dispose();
+    _email.dispose();
+    _message.dispose();
+    super.dispose();
+  }
+
+  void _clearForm() {
+    _name.clear();
+    _phone.clear();
+    _email.clear();
+    _message.clear();
   }
 
   final formKey = GlobalKey<FormState>();
@@ -88,6 +122,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                             Expanded(
                               flex: _textFieldExpandedRatio,
                               child: TextFormField(
+                                controller: _name,
                                 validator: _messagedValidator(
                                     context.loc.validateName),
                                 decoration: InputDecoration(
@@ -112,8 +147,15 @@ class _ContactUsPageState extends State<ContactUsPage> {
                             Expanded(
                               flex: _textFieldExpandedRatio,
                               child: TextFormField(
-                                validator: _messagedValidator(
-                                    context.loc.validateNumber),
+                                controller: _phone,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length < 11) {
+                                    return context.loc.validateNumber;
+                                  }
+                                  return null;
+                                },
                                 decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   hintText: context.loc.mobileNumber,
@@ -136,8 +178,14 @@ class _ContactUsPageState extends State<ContactUsPage> {
                             Expanded(
                               flex: _textFieldExpandedRatio,
                               child: TextFormField(
-                                validator: _messagedValidator(
-                                    context.loc.validateEmail),
+                                controller: _email,
+                                validator: (value) {
+                                  if (value == null ||
+                                      !EmailValidator.validate(value)) {
+                                    return context.loc.validateEmail;
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: "example@domain.com",
@@ -160,6 +208,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                             Expanded(
                               flex: _textFieldExpandedRatio,
                               child: TextFormField(
+                                controller: _message,
                                 validator: _messagedValidator(
                                     context.loc.validateMessage),
                                 decoration: const InputDecoration(
@@ -182,9 +231,47 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                   foregroundColor: Colors.white,
                                   backgroundColor: Colors.orange.shade500,
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (formKey.currentState!.validate()) {
-                                    //TODO: validate && send feedback
+                                    //todo: validate && send feedback
+                                    final model = ContactUsModel(
+                                      name: _name.text,
+                                      email: _email.text,
+                                      phone: _phone.text,
+                                      message: _message.text,
+                                    );
+                                    late BuildContext loadingContext;
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          loadingContext = context;
+                                          return const CentralLoading();
+                                        });
+                                    await PocketbaseHelper.submitContactUsForm(
+                                            model)
+                                        .whenComplete(() {
+                                      Navigator.pop(loadingContext);
+                                    });
+                                    if (context.mounted) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                context.loc.formSubmitted,
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    _clearForm();
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(context.loc.ok),
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    }
                                   }
                                 },
                                 label: Text(context.loc.send),

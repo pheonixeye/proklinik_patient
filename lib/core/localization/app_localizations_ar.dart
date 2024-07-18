@@ -414,4 +414,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get yourReviewHasBeenSubmitted => 'لقد تم اضافة تقييمك بنجاح.';
+
+  @override
+  String get formSubmitted => 'وصلتنا رسالتك بنجاح';
+
+  @override
+  String get ok => 'حسنا';
 }

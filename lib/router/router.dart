@@ -57,7 +57,7 @@ class AppRouter {
   static const String thankyou = "thankyou";
   //todo: visit update / delete page
   static const String visit = "visit/:month/:year/:visit_id";
-  //TODO: review submission page
+  //todo: review submission page
   static const String review = "review/:month/:year/:visit_id";
   static const String underconstruction = "underconstruction";
 

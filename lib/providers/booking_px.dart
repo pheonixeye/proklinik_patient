@@ -18,7 +18,7 @@ class PxBooking extends ChangeNotifier {
   //todo: Send notification sms
   //todo: Send fcm notification
   //todo: formulate message (doctor, assisstant, patient)
-  //TODO: include a link to update or delete booking
+  //todo: include a link to update or delete booking
   Future<void> createAppointment() async {
     _isFetching = true;
     notifyListeners();

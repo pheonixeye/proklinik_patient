@@ -127,7 +127,7 @@ class QueryObject extends Equatable {
   }
 
   ({String filter, String sort}) toPocketbaseQuery() {
-    //TODO:
+    //TODO: finish implementation
     final filterBuffer = StringBuffer();
     final sortingBuffer = StringBuffer();
 

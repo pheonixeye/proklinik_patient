@@ -135,5 +135,7 @@
     "writeYourWaitingTime" : "وقت الانتظار بالدقيقة",
     "submitReview" : "ارسال التقييم",
     "enterWaitingTime" : "برجاء ادخال وقت الانتظار.",
-    "yourReviewHasBeenSubmitted" : "لقد تم اضافة تقييمك بنجاح."       
+    "yourReviewHasBeenSubmitted" : "لقد تم اضافة تقييمك بنجاح." ,
+    "formSubmitted" : "وصلتنا رسالتك بنجاح",
+    "ok" : "حسنا"          
 }

@@ -914,6 +914,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Review Has Been Submitted.'**
   String get yourReviewHasBeenSubmitted;
+
+  /// No description provided for @formSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Message Got Through.'**
+  String get formSubmitted;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

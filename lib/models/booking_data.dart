@@ -65,7 +65,7 @@ class BookingData extends Equatable {
       date_time: value.date_time,
       user_email: value.user_email,
       model: null,
-      type: '',
+      type: value.type,
       attended: true,
       year: DateTime.now().year,
       month: DateTime.now().month,

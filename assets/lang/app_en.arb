@@ -135,5 +135,7 @@
     "writeYourWaitingTime" : "Write Your Waiting Time in Minutes.",
     "submitReview" : "Submit Review",
     "enterWaitingTime" : "Kindly Enter Waiting Time.",
-    "yourReviewHasBeenSubmitted" : "Your Review Has Been Submitted."    
+    "yourReviewHasBeenSubmitted" : "Your Review Has Been Submitted.",
+    "formSubmitted" : "Your Message Got Through.",
+    "ok" : "Ok"    
  }

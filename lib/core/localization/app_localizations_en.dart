@@ -414,4 +414,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourReviewHasBeenSubmitted => 'Your Review Has Been Submitted.';
+
+  @override
+  String get formSubmitted => 'Your Message Got Through.';
+
+  @override
+  String get ok => 'Ok';
 }

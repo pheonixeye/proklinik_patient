@@ -7,6 +7,7 @@ import 'package:patient/core/api/notifications_api.dart';
 import 'package:patient/functions/debug_print.dart';
 import 'package:patient/models/booking_data.dart';
 import 'package:patient/models/clinic.dart';
+import 'package:patient/models/contact_us_model.dart';
 import 'package:patient/models/doctor.dart';
 import 'package:patient/models/query_object.dart';
 import 'package:patient/models/review.dart';
@@ -19,6 +20,12 @@ class PocketbaseHelper {
       : const String.fromEnvironment("PB_SERVER"));
 
   PocketbaseHelper();
+
+  static Future<void> submitContactUsForm(ContactUsModel formModel) async {
+    await pb.collection('contact_us').create(
+          body: formModel.toJson(),
+        );
+  }
 
   static Future<Map<String, dynamic>> fetchClinicVisit({
     required String visit_id,

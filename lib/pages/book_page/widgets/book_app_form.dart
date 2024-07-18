@@ -299,7 +299,7 @@ class _BookAppFormState extends State<BookAppForm> {
                                       defaultPathParameters(context),
                                 );
                                 //todo: nullify booking data
-                                context.read<PxBooking>().setBookingData(null);
+                                b.setBookingData(null);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
