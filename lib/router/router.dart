@@ -3,8 +3,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/models/doctor.dart';
-import 'package:patient/models/query_object.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
@@ -27,6 +25,8 @@ import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_models/models/doctor.dart';
+import 'package:proklinik_models/models/query_object.dart';
 import 'package:provider/provider.dart';
 
 const _langs = ["en", "ar"];

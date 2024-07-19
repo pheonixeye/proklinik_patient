@@ -5,19 +5,19 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:patient/core/api/notifications_api.dart';
 import 'package:patient/functions/debug_print.dart';
-import 'package:patient/models/booking_data.dart';
-import 'package:patient/models/clinic.dart';
-import 'package:patient/models/contact_us_model.dart';
-import 'package:patient/models/doctor.dart';
-import 'package:patient/models/query_object.dart';
-import 'package:patient/models/review.dart';
-import 'package:patient/models/server_response_model.dart';
-import 'package:patient/models/sorting_model.dart';
 import 'package:pocketbase/pocketbase.dart';
+import 'package:proklinik_models/models/booking_data.dart';
+import 'package:proklinik_models/models/clinic.dart';
+import 'package:proklinik_models/models/doctor.dart';
+import 'package:proklinik_models/models/query_object.dart';
+import 'package:proklinik_models/models/review.dart';
+import 'package:proklinik_models/models/contact_us_model.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
+import 'package:proklinik_models/models/sorting_model.dart';
 
 class PocketbaseHelper {
   static final pb = PocketBase(const String.fromEnvironment("PB_SERVER").isEmpty
-      ? "http://127.0.0.1:8090/"
+      ? "http://127.0.0.1:8090"
       : const String.fromEnvironment("PB_SERVER"));
 
   PocketbaseHelper();

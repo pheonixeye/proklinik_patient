@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:patient/assets/assets.dart';
-import 'package:patient/models/city.dart';
-import 'package:patient/models/governorate.dart';
-import 'package:patient/models/speciality.dart';
+import 'package:proklinik_models/models/city.dart';
+import 'package:proklinik_models/models/governorate.dart';
+import 'package:proklinik_models/models/speciality.dart';
 
 class PxSpecGov extends ChangeNotifier {
   PxSpecGov() {

@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart';
-// import 'package:patient/constants/dummy_clinics.dart';
-// import 'package:patient/constants/dummy_doctors.dart';
-// import 'package:patient/constants/dummy_reviews.dart';
 import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/server_response_model.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 
 class PxDocProfile extends ChangeNotifier {
   final String docId;

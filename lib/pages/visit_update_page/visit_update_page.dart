@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/booking_data.dart';
 import 'package:patient/pages/visit_update_page/widgets/booking_info_card.dart';
 import 'package:patient/pages/visit_update_page/widgets/confirm_delete_dialog.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -10,6 +10,7 @@ import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
+import 'package:proklinik_models/models/booking_status.dart';
 import 'package:provider/provider.dart';
 
 class VisitUpdatePage extends StatelessWidget {

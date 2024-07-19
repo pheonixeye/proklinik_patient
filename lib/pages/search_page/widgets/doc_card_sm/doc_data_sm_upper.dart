@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_double.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class DocDataSmUpper extends StatelessWidget {

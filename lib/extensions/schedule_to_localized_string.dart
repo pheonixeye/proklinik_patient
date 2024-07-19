@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/am_pm.dart';
-import 'package:patient/models/schedule.dart';
+import 'package:proklinik_models/models/schedule.dart';
 
 extension ScheduleToLocalizedString on Schedule {
   String toLocalizedString(BuildContext context) {

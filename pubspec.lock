@@ -301,6 +301,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.18.1"
+  proklinik_models:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: bb99a00dfdaecd9ed706beccb2bd3be91beef4a6
+      url: "https://github.com/pheonixeye/proklinik_models.git"
+    source: git
+    version: "1.0.0"
   provider:
     dependency: "direct main"
     description:
@@ -443,5 +452,5 @@ packages:
     source: hosted
     version: "6.5.0"
 sdks:
-  dart: ">=3.3.0 <4.0.0"
+  dart: ">=3.4.3 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"

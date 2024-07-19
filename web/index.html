@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -34,7 +35,7 @@
   <meta name="apple-mobile-web-app-title" content="ProKlinik Portal">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/ico" href="favicon.ico"/>
+  <link rel="icon" type="image/ico" href="favicon.ico" />
 
   <title>ProKlinik Patient</title>
   <link rel="manifest" href="manifest.json">
@@ -43,10 +44,14 @@
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
+  <script>
+    /*! (c) Andrea Giammarchi - ISC */
+    var self = this || {}; try { self.WeakRef = WeakRef, self.FinalizationGroup = FinalizationGroup } catch (e) { !function (e, t) { var i = new e; function n(e) { i.set(this, e) } t(n.prototype, { deref: { value: function () { return i.get(this) } } }); var a = new e; function r(e) { a.set(this, []) } t(r.prototype, { register: { value: function (e, t) { var i = a.get(this); i.indexOf(t) < 0 && i.push(t) } }, unregister: { value: function (e, t) { var i = a.get(this), n = i.indexOf(t); return -1 < n && i.splice(n, 1), -1 < n } }, cleanupSome: { value: function (e) { e(a.get(this)) } } }), self.WeakRef = n, self.FinalizationGroup = r }(WeakMap, Object.defineProperties) }
+  </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
- 
+
 
 <!-- Loading indicator -->
 <div id="loading">
@@ -104,23 +109,24 @@
   </style>
   <img src="icons/android-chrome-192x192.png" alt="Loading indicator..." />
 </div>
+
 <body>
   <script>
-    window.addEventListener('load', function(ev) {
-      var loading = document.querySelector('#loading');      
+    window.addEventListener('load', function (ev) {
+      var loading = document.querySelector('#loading');
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
+        onEntrypointLoaded: function (engineInitializer) {
           loading.classList.add('main_done');
 
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
             loading.classList.add('init_done');
 
             appRunner.runApp();
-          }).then(function(app){
+          }).then(function (app) {
             window.setTimeout(function () {
               loading.remove();
             }, 200);
@@ -130,4 +136,5 @@
     });
   </script>
 </body>
+
 </html>

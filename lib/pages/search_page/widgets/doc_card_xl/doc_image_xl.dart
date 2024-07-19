@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
-import 'package:patient/models/doctor.dart';
+import 'package:patient/extensions/avatar_url_doctor_ext.dart';
+import 'package:proklinik_models/models/doctor.dart';
 
 class DocImageXl extends StatefulWidget {
   const DocImageXl({super.key, required this.doctor});

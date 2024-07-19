@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/sorting_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/spec_gov_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/sorting_model.dart';
 import 'package:provider/provider.dart';
 
 class SortingRowXl extends StatelessWidget {

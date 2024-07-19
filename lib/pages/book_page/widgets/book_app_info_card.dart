@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/constants/weekdays.dart';
+import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/schedule_to_localized_string.dart';
-import 'package:patient/models/doctor.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_models/models/doctor.dart';
 import 'package:provider/provider.dart';
 
 class BookAppInfoCard extends StatefulWidget {

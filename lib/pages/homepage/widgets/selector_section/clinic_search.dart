@@ -4,15 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/city.dart';
-import 'package:patient/models/governorate.dart';
-import 'package:patient/models/search_type.dart';
-import 'package:patient/models/speciality.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/spec_gov_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/city.dart';
+import 'package:proklinik_models/models/governorate.dart';
+import 'package:proklinik_models/models/speciality.dart';
 import 'package:provider/provider.dart';
+import 'package:proklinik_models/models/search_type.dart';
 
 class ClinicSearchSection extends StatefulWidget {
   const ClinicSearchSection({super.key});

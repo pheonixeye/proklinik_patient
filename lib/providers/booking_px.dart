@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/booking_data.dart';
+import 'package:proklinik_models/models/booking_data.dart';
 
 class PxBooking extends ChangeNotifier {
   BookingData? _data;

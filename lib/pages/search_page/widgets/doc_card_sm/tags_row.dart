@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:patient/models/doctor.dart';
-import 'package:patient/models/tags.dart';
+import 'package:patient/constants/tags.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/doctor.dart';
 import 'package:provider/provider.dart';
 
 class TagsRowXlSm extends StatelessWidget {

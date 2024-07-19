@@ -5,10 +5,10 @@ import 'package:gap/gap.dart';
 import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/contact_us_model.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/contact_us_model.dart';
 
 class ContactUsPage extends StatefulWidget {
   const ContactUsPage({super.key});
@@ -234,6 +234,9 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                 onPressed: () async {
                                   if (formKey.currentState!.validate()) {
                                     //todo: validate && send feedback
+                                    //TODO: send mail confirmation to user that
+                                    // his message got through
+
                                     final model = ContactUsModel(
                                       name: _name.text,
                                       email: _email.text,

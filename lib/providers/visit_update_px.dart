@@ -2,9 +2,9 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/booking_data.dart';
-import 'package:patient/models/clinic.dart';
-import 'package:patient/models/doctor.dart';
+import 'package:proklinik_models/models/booking_data.dart';
+import 'package:proklinik_models/models/clinic.dart';
+import 'package:proklinik_models/models/doctor.dart';
 
 class PxVisitUpdate extends ChangeNotifier {
   PxVisitUpdate({

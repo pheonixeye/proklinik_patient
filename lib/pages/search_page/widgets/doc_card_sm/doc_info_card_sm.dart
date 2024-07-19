@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_lower.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_upper.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_image_sm.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/router/router.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 
 class DocInfoCardSm extends StatelessWidget {
   const DocInfoCardSm({

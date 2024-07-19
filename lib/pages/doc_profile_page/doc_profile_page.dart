@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/core/pocketbase/pocketbase_helper.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_info_card_sm/main_info_card_sm.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
@@ -13,6 +12,7 @@ import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class DocProfilePage extends StatefulWidget {

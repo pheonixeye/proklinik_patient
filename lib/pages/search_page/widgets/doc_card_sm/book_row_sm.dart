@@ -4,13 +4,13 @@ import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/am_pm.dart';
-import 'package:patient/models/booking_data.dart';
-import 'package:patient/models/schedule.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_models/models/booking_data.dart';
+import 'package:proklinik_models/models/schedule.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 

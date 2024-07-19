@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/functions/debug_print.dart';
-import 'package:patient/models/booking_data.dart';
-import 'package:patient/models/clinic.dart';
-import 'package:patient/models/doctor.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
+import 'package:proklinik_models/models/booking_data.dart';
+import 'package:proklinik_models/models/clinic.dart';
+import 'package:proklinik_models/models/doctor.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class BookingInfoCard extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/server_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/book_row_sm.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class DocDataSmLower extends StatelessWidget {

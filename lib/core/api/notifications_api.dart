@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:patient/functions/debug_print.dart';
-import 'package:patient/models/booking_data.dart';
+import 'package:proklinik_models/models/booking_data.dart';
 
 class NotificationsApi {
   final BookingData bookingData;

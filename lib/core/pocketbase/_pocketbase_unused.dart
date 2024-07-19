@@ -1,12 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:patient/constants/dummy_clinics.dart';
-import 'package:patient/constants/dummy_doctors.dart';
-import 'package:patient/constants/dummy_reviews.dart';
 import 'package:patient/functions/debug_print.dart';
-import 'package:patient/models/clinic.dart';
-import 'package:patient/models/doctor.dart';
-import 'package:patient/models/review.dart';
 import 'package:pocketbase/pocketbase.dart';
+import 'package:proklinik_models/models/clinic.dart';
+import 'package:proklinik_models/models/doctor.dart';
+import 'package:proklinik_models/models/review.dart';
 
 class PocketbaseUnused {
   const PocketbaseUnused();
@@ -63,31 +60,31 @@ class PocketbaseUnused {
     dprint(result);
   }
 
-  static Future<void> addDoctors() async {
-    for (Doctor doctor in DOCTORS) {
-      try {
-        await pb.collection('doctors').create(body: doctor.toJson());
-      } catch (e) {
-        dprint(e.toString());
-      }
-    }
-  }
+  // static Future<void> addDoctors() async {
+  //   for (Doctor doctor in DOCTORS) {
+  //     try {
+  //       await pb.collection('doctors').create(body: doctor.toJson());
+  //     } catch (e) {
+  //       dprint(e.toString());
+  //     }
+  //   }
+  // }
 
-  static Future<void> addClinics() async {
-    for (final clinic in CLINICS) {
-      await pb.collection('clinics').create(body: clinic.toJson());
-    }
-  }
+  // static Future<void> addClinics() async {
+  //   for (final clinic in CLINICS) {
+  //     await pb.collection('clinics').create(body: clinic.toJson());
+  //   }
+  // }
 
-  static Future<void> addReviews() async {
-    for (final review in REVIEWS) {
-      try {
-        await pb.collection('reviews').create(body: review.toJson());
-      } catch (e) {
-        dprint(e);
-      }
-    }
-  }
+  // static Future<void> addReviews() async {
+  //   for (final review in REVIEWS) {
+  //     try {
+  //       await pb.collection('reviews').create(body: review.toJson());
+  //     } catch (e) {
+  //       dprint(e);
+  //     }
+  //   }
+  // }
 
   Future<void> updateClinicDoctorRelation() async {
     final doctorsData = await pb.collection("doctors").getList();
