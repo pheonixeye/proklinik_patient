@@ -144,7 +144,9 @@ class PocketbaseHelper {
         data.model,
       );
       //#send notification on booking
-      NotificationsApi(bookingData: bookingData).sendNotification();
+      NotificationsApi(bookingData: bookingData)
+        ..sendSmsNotification()
+        ..sendMailAndFcmNotification();
       return bookingData;
     } catch (e) {
       if (kDebugMode) {
