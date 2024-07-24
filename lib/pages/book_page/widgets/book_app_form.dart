@@ -252,7 +252,7 @@ class _BookAppFormState extends State<BookAppForm> {
                                   if (kDebugMode) {
                                     print(b.data);
                                   }
-                                  late final BuildContext dialogContext;
+                                  BuildContext? dialogContext;
                                   showDialog(
                                       context: context,
                                       useRootNavigator: false,
@@ -263,7 +263,7 @@ class _BookAppFormState extends State<BookAppForm> {
 
                                   //todo: send booking request
                                   await b.createAppointment().whenComplete(() {
-                                    Navigator.pop(dialogContext);
+                                    Navigator.pop(dialogContext!);
                                   });
                                   //todo: navigate to post booking info page
                                   if (context.mounted) {

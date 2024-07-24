@@ -14,7 +14,7 @@ class NotificationsApi {
   }
 
   //TODO: Change on deployment
-  static const baseUrl = 'https://server-proklinik.fly.dev/api/v1'; //prod
+  static const baseUrl = 'https://notification-server.fly.dev/api/v1'; //prod
   // static const baseUrl = 'http://localhost:3500/api/v1'; //dev
   static const notifySms = '/notify-sms';
   static const notifyDoctor = '/notify-doctor';
@@ -26,14 +26,14 @@ class NotificationsApi {
   Future<void> sendSmsNotification() async {
     try {
       final body = jsonEncode(bookingData.toPocketbaseJson());
-      await http.post(
+      final response = await http.post(
         Uri.parse('$baseUrl$notifySms'),
         body: body,
         headers: {'Content-Type': 'application/json'},
       );
       // dprint('NotificationsApi().sendSmsNotification(request body : $body)');
-      // dprint(
-      //     'NotificationsApi().sendSmsNotification(response body : ${response.body})');
+      dprint(
+          'NotificationsApi().sendSmsNotification(response body : ${response.body})');
     } catch (e) {
       dprint('NotificationsApi().sendSmsNotification($e)');
     }
@@ -48,15 +48,15 @@ class NotificationsApi {
         ...bookingData.toPocketbaseJson(),
         notification_type: notificationType.value,
       });
-      await http.post(
+      final response = await http.post(
         Uri.parse('$baseUrl$notifyDoctor'),
         body: body,
         headers: {'Content-Type': 'application/json'},
       );
       // dprint(
       //     'NotificationsApi().sendMainAndFcmNotification(request body : $body)');
-      // dprint(
-      //     'NotificationsApi().sendMainAndFcmNotification(response body : ${response.body})');
+      dprint(
+          'NotificationsApi().sendMainAndFcmNotification(response body : ${response.body})');
     } catch (e) {
       dprint('NotificationsApi().sendMainAndFcmNotification($e)');
     }
