@@ -25,7 +25,7 @@ class NotificationsApi {
   ///body => booking data (only)
   Future<void> sendSmsNotification() async {
     try {
-      final body = jsonEncode(bookingData.toPocketbaseJson());
+      final body = jsonEncode(bookingData.toJson());
       final response = await http.post(
         Uri.parse('$baseUrl$notifySms'),
         body: body,
@@ -45,7 +45,7 @@ class NotificationsApi {
   Future<void> sendMailAndFcmNotification() async {
     try {
       final body = jsonEncode({
-        ...bookingData.toPocketbaseJson(),
+        ...bookingData.toJson(),
         notification_type: notificationType.value,
       });
       final response = await http.post(

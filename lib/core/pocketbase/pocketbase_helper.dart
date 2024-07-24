@@ -136,6 +136,7 @@ class PocketbaseHelper {
       final bookResult = await pb
           .collection(_dateBookingCollectionFormat(data.date_time))
           .create(body: data.toPocketbaseJson());
+      // dprint(bookResult.toJson());
       final bookingData = BookingData.fromPocketbaseJson(
         bookResult.toJson(),
         data.model,
