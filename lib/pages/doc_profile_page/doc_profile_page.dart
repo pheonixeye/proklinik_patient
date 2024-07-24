@@ -23,7 +23,7 @@ class DocProfilePage extends StatefulWidget {
 }
 
 class _DocProfilePageState extends State<DocProfilePage> {
-  void _updateViews(String id, int views) {
+  void _updateViews(String id, num views) {
     PocketbaseHelper.updateDoctorProfileViews(id, views);
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/functions/stars_from_num.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:proklinik_models/models/server_response_model.dart';
 

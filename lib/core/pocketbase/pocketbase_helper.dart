@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:patient/core/api/notifications_api.dart';
 import 'package:patient/functions/debug_print.dart';
 import 'package:pocketbase/pocketbase.dart';
@@ -26,8 +25,8 @@ class PocketbaseHelper {
     await pb.collection('contact_us').create(
           body: formModel.toJson(),
         );
-    //TODO: Send server notification to client who sent the message
-    //TODO: Send server notification to admin with sent message
+    //todo: Send server notification to client who sent the message
+    //todo: Send server notification to admin with sent message
   }
 
   static Future<Map<String, dynamic>> fetchClinicVisit({
@@ -117,16 +116,14 @@ class PocketbaseHelper {
     }
   }
 
-  static Future<void> updateDoctorProfileViews(String id, int views) async {
+  static Future<void> updateDoctorProfileViews(String id, num views) async {
     await pb.collection("doctors").update(
       id,
       body: {
         "views": views + 1,
       },
     );
-    if (kDebugMode) {
-      print("PocketbaseHelper().updateDoctorProfileViews($id, $views)");
-    }
+    dprint("PocketbaseHelper().updateDoctorProfileViews($id, $views)");
   }
 
   static String _dateBookingCollectionFormat(String date) {
@@ -149,9 +146,7 @@ class PocketbaseHelper {
         ..sendMailAndFcmNotification();
       return bookingData;
     } catch (e) {
-      if (kDebugMode) {
-        print("First Request Exception : ${e.toString()}");
-      }
+      dprint("PocketbaseHelper().sendBookingRequest($e)");
       return null;
     }
   }

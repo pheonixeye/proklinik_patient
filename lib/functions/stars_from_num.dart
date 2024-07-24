@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension StarsFromDouble on double {
+extension StarsFromDouble on num {
   List<Widget> toStars({
     double? size,
     EdgeInsets padding = const EdgeInsets.all(0),

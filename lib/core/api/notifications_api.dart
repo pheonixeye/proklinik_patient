@@ -13,24 +13,29 @@ class NotificationsApi {
     notificationType = NotificationType.newBooking;
   }
 
-  static const baseUrl = 'https://server-proklinik.fly.dev/api/v1';
+  //TODO: Change on deployment
+  static const baseUrl = 'https://server-proklinik.fly.dev/api/v1'; //prod
+  // static const baseUrl = 'http://localhost:3500/api/v1'; //dev
   static const notifySms = '/notify-sms';
   static const notifyDoctor = '/notify-doctor';
-  static const notificationtype = 'notification_type';
+  // ignore: constant_identifier_names
+  static const notification_type = 'notification_type';
 
   ///send sms notification messages to doctor-assisstant-patient
   ///body => booking data (only)
   Future<void> sendSmsNotification() async {
     try {
+      final body = jsonEncode(bookingData.toPocketbaseJson());
       await http.post(
         Uri.parse('$baseUrl$notifySms'),
-        body: jsonEncode(bookingData.toPocketbaseJson()),
+        body: body,
         headers: {'Content-Type': 'application/json'},
       );
-      dprint(
-          'NotificationsApi().sendSmsNotification(${bookingData.user_phone})');
+      // dprint('NotificationsApi().sendSmsNotification(request body : $body)');
+      // dprint(
+      //     'NotificationsApi().sendSmsNotification(response body : ${response.body})');
     } catch (e) {
-      dprint(e);
+      dprint('NotificationsApi().sendSmsNotification($e)');
     }
   }
 
@@ -39,18 +44,21 @@ class NotificationsApi {
   ///ensure to add notification_type to the request
   Future<void> sendMailAndFcmNotification() async {
     try {
+      final body = jsonEncode({
+        ...bookingData.toPocketbaseJson(),
+        notification_type: notificationType.value,
+      });
       await http.post(
         Uri.parse('$baseUrl$notifyDoctor'),
-        body: jsonEncode({
-          ...bookingData.toPocketbaseJson(),
-          notificationType: notificationType.value,
-        }),
+        body: body,
         headers: {'Content-Type': 'application/json'},
       );
-      dprint(
-          'NotificationsApi().sendMainAndFcmNotification(${bookingData.user_phone})');
+      // dprint(
+      //     'NotificationsApi().sendMainAndFcmNotification(request body : $body)');
+      // dprint(
+      //     'NotificationsApi().sendMainAndFcmNotification(response body : ${response.body})');
     } catch (e) {
-      dprint(e);
+      dprint('NotificationsApi().sendMainAndFcmNotification($e)');
     }
   }
 }

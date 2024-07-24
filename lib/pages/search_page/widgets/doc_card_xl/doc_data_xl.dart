@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/stars_from_double.dart';
+import 'package:patient/functions/stars_from_num.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
