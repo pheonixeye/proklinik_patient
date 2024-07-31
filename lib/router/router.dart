@@ -23,6 +23,7 @@ import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/reviews_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
+import 'package:patient/router/meta_seo.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:proklinik_models/models/doctor.dart';
@@ -122,6 +123,12 @@ class AppRouter {
                 name: home,
                 path: home,
                 builder: (context, state) {
+                  final lang = state.pathParameters["lang"]!;
+                  MetaTags tags = MetaTags(
+                    lang: lang,
+                    page: home,
+                  );
+                  tags.getTags();
                   //#language path page
                   return HomePage(
                     key: state.pageKey,

@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:meta_seo/meta_seo.dart';
 // ignore: depend_on_referenced_packages
 // import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:patient/core/localization/app_localizations.dart';
@@ -12,6 +14,9 @@ import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // usePathUrlStrategy();
+  if (kIsWeb) {
+    MetaSEO().config();
+  }
   runApp(const AppProvider());
 }
 

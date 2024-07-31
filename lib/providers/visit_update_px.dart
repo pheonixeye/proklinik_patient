@@ -40,6 +40,9 @@ class PxVisitUpdate extends ChangeNotifier {
   BookingData? _bookingData;
   BookingData? get bookingData => _bookingData;
 
+  BookingData? _newBookingData;
+  BookingData? get newBookingData => _newBookingData;
+
   Doctor? _doctor;
   Doctor? get doctor => _doctor;
 
@@ -56,6 +59,11 @@ class PxVisitUpdate extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNewBookingDataState(BookingData value) {
+    _newBookingData = value;
+    notifyListeners();
+  }
+
   Future<void> fetchBookingData() async {
     try {
       final result = await PocketbaseHelper.fetchClinicVisit(
@@ -64,6 +72,7 @@ class PxVisitUpdate extends ChangeNotifier {
       );
       _data = result;
       _bookingData = BookingData.fromJson(result);
+      _newBookingData = BookingData.fromJson(result);
       _doctor = Doctor.fromJson(result['expand']['doc_id']);
       _clinic = Clinic.fromJson(result['expand']['clinic_id']);
       _hasError = false;
@@ -72,6 +81,7 @@ class PxVisitUpdate extends ChangeNotifier {
       _hasError = true;
       _data = null;
       _bookingData = null;
+      _newBookingData = null;
       _doctor = null;
       _clinic = null;
       notifyListeners();

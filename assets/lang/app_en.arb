@@ -137,5 +137,6 @@
     "enterWaitingTime" : "Kindly Enter Waiting Time.",
     "yourReviewHasBeenSubmitted" : "Your Review Has Been Submitted.",
     "formSubmitted" : "Your Message Got Through.",
-    "ok" : "Ok"    
+    "ok" : "Ok",
+    "bookingTime" : "Booking Time"    
  }

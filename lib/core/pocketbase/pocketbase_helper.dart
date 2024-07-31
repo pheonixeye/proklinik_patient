@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:patient/core/api/notifications_api.dart';
 import 'package:patient/functions/debug_print.dart';
@@ -11,8 +12,10 @@ import 'package:proklinik_models/models/doctor.dart';
 import 'package:proklinik_models/models/query_object.dart';
 import 'package:proklinik_models/models/review.dart';
 import 'package:proklinik_models/models/contact_us_model.dart';
+import 'package:proklinik_models/models/server_notification.dart';
 import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:proklinik_models/models/sorting_model.dart';
+import 'package:http/http.dart' as http;
 
 class PocketbaseHelper {
   static final pb = PocketBase(const String.fromEnvironment("PB_SERVER").isEmpty
@@ -101,7 +104,15 @@ class PocketbaseHelper {
         'waiting_time': averageWaitingTime,
       },
     );
-    //TODO: Send notification mail to doctor by the review
+    //todo: Send notification mail to doctor by the review
+    //TODO: Modify notifications api
+    await http.post(
+      Uri.parse('https://prkln.app/api/v1/notify-doctor'),
+      body: jsonEncode({
+        ...result.toJson(),
+        'notification_type': NotificationType.newReview.value,
+      }),
+    );
   }
 
   static Future<Review?> fetchReview(String visit_id) async {

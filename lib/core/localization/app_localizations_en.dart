@@ -420,4 +420,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'Ok';
+
+  @override
+  String get bookingTime => 'Booking Time';
 }

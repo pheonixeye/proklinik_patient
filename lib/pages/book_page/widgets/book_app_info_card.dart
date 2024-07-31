@@ -5,7 +5,7 @@ import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/schedule_to_localized_string.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -119,20 +119,22 @@ class _BookAppInfoCardState extends State<BookAppInfoCard> {
                           child: Center(
                             child: Builder(
                               builder: (context) {
-                                final scheduleList =
-                                    data!.model!.clinic.schedule;
                                 final date = DateTime.parse(b.data!.date_time);
-                                final schedule = scheduleList.firstWhere(
-                                    (x) => x.intday == date.weekday);
-                                final bookingTime =
-                                    schedule.toLocalizedString(context);
+                                final bookingTimeStart = TimeOfDay(
+                                  hour: data!.startH.toInt(),
+                                  minute: data.startM.toInt(),
+                                ).format(context);
+                                final bookingTimeEnd = TimeOfDay(
+                                  hour: data.endH.toInt(),
+                                  minute: data.endM.toInt(),
+                                ).format(context);
                                 final bookingDate =
                                     DateFormat("dd/MM/yyyy", l.lang);
                                 final wkday = l.isEnglish
                                     ? WEEKDAYS[date.weekday]!.en
                                     : WEEKDAYS[date.weekday]!.ar;
                                 return Text(
-                                    "$wkday - (${bookingDate.format(date)})  - $bookingTime\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
+                                    "$wkday - (${bookingDate.format(date)})  - ${bookingTimeStart.toArabicNumber(context)} - ${bookingTimeEnd.toArabicNumber(context)}\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
                               },
                             ),
                           ),

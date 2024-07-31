@@ -926,6 +926,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ok'**
   String get ok;
+
+  /// No description provided for @bookingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking Time'**
+  String get bookingTime;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

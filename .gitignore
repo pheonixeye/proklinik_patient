@@ -45,3 +45,4 @@ app.*.map.json
 
 # cloudflare deployment command
 .cloudflare
+makefile

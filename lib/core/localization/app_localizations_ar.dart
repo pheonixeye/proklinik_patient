@@ -420,4 +420,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ok => 'حسنا';
+
+  @override
+  String get bookingTime => 'وقت الحجز';
 }

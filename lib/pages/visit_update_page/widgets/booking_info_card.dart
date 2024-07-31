@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/debug_print.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
+import 'package:patient/pages/visit_update_page/widgets/reschedule_card.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:proklinik_models/models/booking_data.dart';
@@ -28,11 +29,11 @@ class BookingInfoCard extends StatefulWidget {
 }
 
 class _BookingInfoCardState extends State<BookingInfoCard> {
-  late BookingData _state;
+  // late BookingData _state;
 
   @override
   void initState() {
-    _state = widget.bookingData;
+    // _state = widget.bookingData;
     super.initState();
   }
 
@@ -123,25 +124,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: 365,
                                   itemBuilder: (context, index) {
-                                    return ScheduleCardXl(
-                                      onTapReschedule: () {
-                                        final now = DateTime.now();
-                                        final d = DateTime(
-                                            now.year, now.month, now.day);
-                                        final newDate = d.copyWith(
-                                          day: d.day + index,
-                                        );
-                                        setState(() {
-                                          _state = _state.copyWith(
-                                            date_time:
-                                                newDate.toIso8601String(),
-                                            day: newDate.day,
-                                            month: newDate.month,
-                                            year: newDate.year,
-                                          );
-                                        });
-                                        v.changeState(BookingCardState.confirm);
-                                      },
+                                    return RescheduleCard(
                                       model: ServerResponseModel(
                                         doctor: widget.doctor,
                                         clinic: widget.clinic,
@@ -191,7 +174,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                       child: Text(context.loc.yourName),
                                     ),
                                     const SizedBox(width: 10),
-                                    Text(_state.user_name),
+                                    Text(v.bookingData!.user_name),
                                   ],
                                 ),
                               ),
@@ -200,7 +183,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                 child: Row(
                                   children: [
                                     const SizedBox(width: 10),
-                                    const Icon(Icons.timer),
+                                    const Icon(Icons.calendar_month),
                                     const SizedBox(width: 10),
                                     SizedBox(
                                       width: context.isMobile ? 100 : 200,
@@ -213,9 +196,31 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                         context.loc.localeName,
                                       ).format(
                                         DateTime.parse(
-                                          _state.date_time,
+                                          v.newBookingData!.date_time,
                                         ),
                                       ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    const SizedBox(width: 10),
+                                    const Icon(Icons.timer),
+                                    const SizedBox(width: 10),
+                                    SizedBox(
+                                      width: context.isMobile ? 100 : 200,
+                                      child: Text(context.loc.bookingTime),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      TimeOfDay(
+                                        hour: v.newBookingData!.startH.toInt(),
+                                        minute:
+                                            v.newBookingData!.startM.toInt(),
+                                      ).format(context).toArabicNumber(context),
                                     ),
                                   ],
                                 ),
@@ -227,7 +232,8 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                     onPressed: () async {
                                       try {
                                         await v.updateBookingData(
-                                          update: _state.toPocketbaseJson(),
+                                          update: v.newBookingData!
+                                              .toPocketbaseJson(),
                                         );
                                         v.updateShowThankYou();
                                       } catch (e) {

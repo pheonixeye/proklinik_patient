@@ -6,6 +6,8 @@ import 'package:proklinik_models/models/booking_data.dart';
 import 'package:proklinik_models/models/server_notification.dart';
 
 class NotificationsApi {
+  //TODO: Modify notifications api
+
   final BookingData bookingData;
   late final NotificationType notificationType;
 

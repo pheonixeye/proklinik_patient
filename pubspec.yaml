@@ -33,6 +33,7 @@ dependencies:
     git:
       url: https://github.com/pheonixeye/proklinik_models.git
       ref: master
+  meta_seo: ^3.0.9
   # proklinik_models:
   #   path: ../proklinik_models
       

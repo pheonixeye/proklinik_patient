@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/constants/now.dart';
 import 'package:patient/constants/weekdays.dart';
+import 'package:patient/extensions/concat_on_clinic_shift.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/am_pm.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
@@ -13,18 +13,15 @@ import 'package:proklinik_models/models/booking_data.dart';
 import 'package:proklinik_models/models/schedule.dart';
 import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 
 class ScheduleCardXl extends StatefulWidget {
   const ScheduleCardXl({
     super.key,
     required this.model,
     required this.index,
-    this.onTapReschedule,
   });
   final ServerResponseModel model;
   final int index;
-  final VoidCallback? onTapReschedule;
 
   @override
   State<ScheduleCardXl> createState() => _ScheduleCardXlState();
@@ -61,31 +58,41 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
         !widget.model.clinic.off_dates.contains(
           cardDate.toIso8601String(),
         );
+    _smallCardHoverState = !isAvailable
+        ? {}
+        : Map.fromEntries(
+            _schedule!.shifts.map((e) => MapEntry(e.concat, false)));
     super.initState();
   }
+
+  late final Map<String, bool> _smallCardHoverState;
 
   void Function()? get _onTap {
     return isAvailable
         ? () {
             //todo: nav to book app page directly
-            context
-                .read<PxBooking>()
-                .setBookingData(BookingData.empty().copyWith(
-                  id: const Uuid().v4(),
-                  date_time: cardDate.toIso8601String(),
-                  doc_id: widget.model.doctor.id,
-                  clinic_id: widget.model.clinic.id,
-                  model: widget.model,
-                  day: cardDate.day,
-                  month: cardDate.month,
-                  year: cardDate.year,
-                ));
-            GoRouter.of(context).goNamed(
-              AppRouter.book,
-              pathParameters: defaultPathParameters(context),
-              //HACK:
-              extra: widget.model.doctor,
-            );
+            if (_schedule?.shifts.length == 1) {
+              context
+                  .read<PxBooking>()
+                  .setBookingData(BookingData.empty().copyWith(
+                    date_time: cardDate.toIso8601String(),
+                    doc_id: widget.model.doctor.id,
+                    clinic_id: widget.model.clinic.id,
+                    model: widget.model,
+                    day: cardDate.day,
+                    month: cardDate.month,
+                    year: cardDate.year,
+                    startH: _schedule?.shifts.first.startH,
+                    startM: _schedule?.shifts.first.startM,
+                    endH: _schedule?.shifts.first.endH,
+                    endM: _schedule?.shifts.first.endM,
+                  ));
+              GoRouter.of(context).goNamed(
+                AppRouter.book,
+                pathParameters: defaultPathParameters(context),
+                extra: widget.model.doctor,
+              );
+            }
           }
         : null;
   }
@@ -95,6 +102,10 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
       : isHovering
           ? 0.7
           : 1.0;
+  TextStyle get _shiftTextStyle => TextStyle(
+        color: Theme.of(context).appBarTheme.backgroundColor,
+        fontSize: 10,
+      );
 
   //todo: accept clinic schedule object
   @override
@@ -116,7 +127,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
         child: Opacity(
           opacity: _opacity,
           child: InkWell(
-            onTap: widget.onTapReschedule ?? _onTap,
+            onTap: _onTap,
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -171,22 +182,106 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: isAvailable
                           ? [
-                              Text(
-                                "${context.loc.from} ${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)}:${_schedule?.startMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.startHour.amPm(context)}",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: AppTheme.appBarColor,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                "${context.loc.to} ${_schedule?.endHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)}:${_schedule?.endMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.endHour.amPm(context)}",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: AppTheme.appBarColor,
-                                ),
-                                textAlign: TextAlign.center,
+                              ..._schedule!.shifts.map(
+                                (shift) {
+                                  return MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (event) {
+                                      setState(() {
+                                        _smallCardHoverState[shift.concat] =
+                                            true;
+                                      });
+                                    },
+                                    onExit: (event) {
+                                      setState(() {
+                                        _smallCardHoverState[shift.concat] =
+                                            false;
+                                      });
+                                    },
+                                    child: InkWell(
+                                      onTap: () {
+                                        context
+                                            .read<PxBooking>()
+                                            .setBookingData(
+                                                BookingData.empty().copyWith(
+                                              // id: const Uuid().v4(),
+                                              date_time:
+                                                  cardDate.toIso8601String(),
+                                              doc_id: widget.model.doctor.id,
+                                              clinic_id: widget.model.clinic.id,
+                                              model: widget.model,
+                                              day: cardDate.day,
+                                              month: cardDate.month,
+                                              year: cardDate.year,
+                                              startH: shift.startH,
+                                              startM: shift.startM,
+                                              endH: shift.endH,
+                                              endM: shift.endM,
+                                            ));
+                                        GoRouter.of(context).goNamed(
+                                          AppRouter.book,
+                                          pathParameters:
+                                              defaultPathParameters(context),
+                                          extra: widget.model.doctor,
+                                        );
+                                      },
+                                      child: Card.outlined(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          side: BorderSide(
+                                            color: Theme.of(context)
+                                                .appBarTheme
+                                                .backgroundColor!,
+                                            width: 0.2,
+                                          ),
+                                        ),
+                                        elevation: _smallCardHoverState[
+                                                    shift.concat] ==
+                                                true
+                                            ? 8
+                                            : 0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Text.rich(
+                                            TextSpan(
+                                              text: context.loc.from,
+                                              style: _shiftTextStyle,
+                                              children: [
+                                                const TextSpan(text: ' '),
+                                                TextSpan(
+                                                  text: TimeOfDay(
+                                                    hour: shift.startH.toInt(),
+                                                    minute:
+                                                        shift.startM.toInt(),
+                                                  ).format(context),
+                                                ),
+                                                if (_schedule?.shifts.length ==
+                                                    1)
+                                                  TextSpan(
+                                                    text: '\n',
+                                                    children: [
+                                                      TextSpan(
+                                                          text: context.loc.to),
+                                                      const TextSpan(text: ' '),
+                                                      TextSpan(
+                                                        text: TimeOfDay(
+                                                          hour: shift.endH
+                                                              .toInt(),
+                                                          minute: shift.endM
+                                                              .toInt(),
+                                                        ).format(context),
+                                                      ),
+                                                    ],
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ]
                           : [

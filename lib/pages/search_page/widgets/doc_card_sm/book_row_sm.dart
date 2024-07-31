@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/am_pm.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
@@ -13,8 +12,6 @@ import 'package:proklinik_models/models/schedule.dart';
 import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
-
-const twoWeeks = <int>[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
 
 class BookRowSm extends StatefulWidget {
   const BookRowSm({
@@ -64,81 +61,98 @@ class _BookRowSmState extends State<BookRowSm> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Card(
-              color: AppTheme.greyBackgroundColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                //todo: fetch from clinic
-                //todo: calculate first available date
-                child: Consumer<PxLocale>(
-                  builder: (context, l, _) {
-                    final time =
-                        "${_schedule?.startHour.normalizeHour.toString().padLeft(1, "0").toArabicNumber(context)} : ${_schedule?.startMin.toString().padLeft(1, "0").toArabicNumber(context)} ${_schedule?.startHour.amPm(context)}";
-                    String? day;
-                    if (firstAvailableDate ==
-                        DateTime(now.year, now.month, now.day)) {
-                      day = context.loc.today;
-                    } else if (firstAvailableDate ==
-                        DateTime(now.year, now.month, now.day + 1)) {
-                      day = context.loc.tomorrow;
-                    } else {
-                      day =
-                          "${l.isEnglish ? WEEKDAYS[firstAvailableDate?.weekday]?.en : WEEKDAYS[firstAvailableDate?.weekday]?.ar} - ${firstAvailableDate?.day.toString().toArabicNumber(context)}/${firstAvailableDate?.month.toString().toArabicNumber(context)}";
-                    }
-                    return Text(
-                      "${context.loc.available} ${context.loc.from} $day - $time",
-                      style: const TextStyle(
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.center,
-                    );
-                  },
+      child: Consumer<PxLocale>(
+        builder: (context, l, _) {
+          final shifts = _schedule!.shifts;
+          shifts.sort((a, b) => a.startH.compareTo(b.startH));
+          final timeStart = TimeOfDay(
+            hour: shifts.first.startH.toInt(),
+            minute: shifts.first.startM.toInt(),
+          );
+          final timeStartString = timeStart.format(context);
+          final timeEnd = TimeOfDay(
+            hour: shifts.first.endH.toInt(),
+            minute: shifts.first.endM.toInt(),
+          );
+          // final timeEndString = timeEnd.format(context);
+          String? day;
+          if (firstAvailableDate == DateTime(now.year, now.month, now.day)) {
+            day = context.loc.today;
+          } else if (firstAvailableDate ==
+              DateTime(now.year, now.month, now.day + 1)) {
+            day = context.loc.tomorrow;
+          } else {
+            day =
+                "${l.isEnglish ? WEEKDAYS[firstAvailableDate?.weekday]?.en : WEEKDAYS[firstAvailableDate?.weekday]?.ar} - ${firstAvailableDate?.day.toString().toArabicNumber(context)}/${firstAvailableDate?.month.toString().toArabicNumber(context)}";
+          }
+          return Row(
+            children: [
+              Expanded(
+                child: Card(
+                  color: AppTheme.greyBackgroundColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    //todo: fetch from clinic
+                    //todo: calculate first available date
+                    child: Builder(
+                      builder: (context) {
+                        return Text(
+                          "${context.loc.available} ${context.loc.from} $day - ${timeStartString.toArabicNumber(context)}",
+                          style: const TextStyle(
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
+              const SizedBox(width: 5),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  backgroundColor: AppTheme.secondaryOrangeColor,
+                ),
+                onPressed: () {
+                  //todo: nav to book page
+                  context
+                      .read<PxBooking>()
+                      .setBookingData(BookingData.empty().copyWith(
+                        id: const Uuid().v4(),
+                        model: widget.responseModel,
+                        doc_id: widget.responseModel.doctor.id,
+                        clinic_id: widget.responseModel.clinic.id,
+                        date_time: firstAvailableDate!.toIso8601String(),
+                        startH: timeStart.hour,
+                        startM: timeStart.minute,
+                        endH: timeEnd.hour,
+                        endM: timeEnd.minute,
+                      ));
+                  GoRouter.of(context).goNamed(
+                    AppRouter.book,
+                    pathParameters: defaultPathParameters(context),
+                    extra: widget.responseModel.doctor,
+                  );
+                },
+                child: Text(
+                  context.loc.book,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-              backgroundColor: AppTheme.secondaryOrangeColor,
-            ),
-            onPressed: () {
-              //todo: nav to book page
-              context
-                  .read<PxBooking>()
-                  .setBookingData(BookingData.empty().copyWith(
-                    id: const Uuid().v4(),
-                    model: widget.responseModel,
-                    doc_id: widget.responseModel.doctor.id,
-                    clinic_id: widget.responseModel.clinic.id,
-                    date_time: firstAvailableDate!.toIso8601String(),
-                  ));
-              GoRouter.of(context).goNamed(
-                AppRouter.book,
-                pathParameters: defaultPathParameters(context),
-                extra: widget.responseModel.doctor,
-              );
-            },
-            child: Text(
-              context.loc.book,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-        ],
+              const SizedBox(width: 5),
+            ],
+          );
+        },
       ),
     );
   }
