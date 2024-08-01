@@ -250,7 +250,7 @@ class _BookAppFormState extends State<BookAppForm> {
                                     user_email: _emailController.text.trim(),
                                   ));
                                   if (kDebugMode) {
-                                    print(b.data);
+                                    print(b.data?.toJson());
                                   }
                                   BuildContext? dialogContext;
                                   showDialog(

@@ -41,16 +41,12 @@ class MyApp extends StatelessWidget {
       builder: (context, l, _) {
         return MaterialApp.router(
           scaffoldMessengerKey: UtilsKeys.scaffoldMessengerKey,
-          title: "ProKliniK Patients",
+          title: "ProKliniK | بروكلينيك",
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
           locale: l.locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          // builder: (context, child) {
-          //   child = EasyLoading.init()(context, child);
-          //   return child;
-          // },
           theme: AppTheme.theme,
         );
       },

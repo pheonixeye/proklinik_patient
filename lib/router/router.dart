@@ -23,7 +23,8 @@ import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/reviews_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
-import 'package:patient/router/meta_seo.dart';
+import 'package:patient/router/meta_seo_helper.dart';
+import 'package:patient/router/schema_org.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:proklinik_models/models/doctor.dart';
@@ -110,6 +111,10 @@ class AppRouter {
           ShellRoute(
             pageBuilder: (context, state, child) {
               final lang = state.pathParameters["lang"]!;
+
+              ///schema-org tag injector
+              final schemaOrg = SchemaOrgHelper(context);
+              schemaOrg.init(lang);
               final key = ValueKey((lang, state.pageKey));
               return MaterialPage(
                 child: ShellPage(
@@ -124,11 +129,11 @@ class AppRouter {
                 path: home,
                 builder: (context, state) {
                   final lang = state.pathParameters["lang"]!;
-                  MetaTags tags = MetaTags(
+                  MetaTagsHelper tags = MetaTagsHelper(
                     lang: lang,
                     page: home,
                   );
-                  tags.getTags();
+                  tags.getTagsHomepage();
                   //#language path page
                   return HomePage(
                     key: state.pageKey,
