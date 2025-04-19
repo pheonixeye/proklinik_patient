@@ -71,16 +71,17 @@ class _PaginationRowState extends State<PaginationRow> {
                         ...List.generate(
                             (sc.responseModel == null ||
                                     sc.responseModel!.isEmpty ||
-                                    sc.responseModel!.first.total / 10 < 1)
+                                    sc.responseModel!.first.total_count / 10 <
+                                        1)
                                 ? 1
-                                : (sc.responseModel!.first.total ~/ 10),
+                                : (sc.responseModel!.first.total_count ~/ 10),
                             (index) => (index + 1).toString()).map((x) {
                           return SizedBox(
                             width: 40,
                             child: ClickablePageNumber(
                               pageNumber: x,
-                              isSelected:
-                                  int.parse(x) == int.parse(sc.query.page),
+                              isSelected: int.parse(x) ==
+                                  int.parse(sc.service.query.page),
                             ),
                           );
                         }),
@@ -140,7 +141,7 @@ class _ClickablePageNumberState extends State<ClickablePageNumber> {
               GoRouter.of(context).goNamed(
                 AppRouter.src,
                 pathParameters: {"lang": l.lang},
-                queryParameters: sc.query
+                queryParameters: sc.service.query
                     .copyWith(
                       page: widget.pageNumber,
                     )

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/functions/scroll_direction.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_image_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class DocInfoCardXl extends StatefulWidget {
   const DocInfoCardXl({super.key, required this.responseModel});
-  final ServerResponseModel responseModel;
+  final SearchResponseModel responseModel;
 
   //todo: accept doctor info
   //todo: translate component
@@ -145,12 +145,15 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                           children: [
                             const SizedBox(height: 10),
                             //todo: accept reservation type
-                            Builder(
-                              builder: (context) {
+                            Consumer<PxLocale>(
+                              builder: (context, l, _) {
                                 final attendence =
-                                    widget.responseModel.clinic.attendance;
+                                    widget.responseModel.clinic.attendance_type;
                                 return Text(
-                                    attendanceFromBool(context, attendence));
+                                  l.isEnglish
+                                      ? attendence.name_en
+                                      : attendence.name_ar,
+                                );
                               },
                             ),
                           ],

@@ -1,27 +1,19 @@
 import 'package:flutter/foundation.dart';
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:proklinik_models/models/query_object.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
+import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 
 class PxSearchController extends ChangeNotifier {
-  final QueryObject query;
+  final HxSearchClinics service;
 
-  PxSearchController({
-    required this.query,
-  }) {
+  PxSearchController({required this.service}) {
     init();
   }
 
-  List<ServerResponseModel>? _responseModel;
-  List<ServerResponseModel>? get responseModel => _responseModel;
+  List<SearchResponseModel>? _responseModel;
+  List<SearchResponseModel>? get responseModel => _responseModel;
 
   Future<void> init() async {
-    //todo: perform base search query
-    if (kDebugMode) {
-      print("PxSearchController().init($query)");
-    }
-
-    _responseModel = await PocketbaseHelper.mainQuery(query);
+    _responseModel = await service.search();
     notifyListeners();
   }
 }

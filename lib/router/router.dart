@@ -3,6 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
+import 'package:patient/models/query_model/query.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
@@ -28,7 +30,6 @@ import 'package:patient/router/schema_org.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:proklinik_models/models/doctor.dart';
-import 'package:proklinik_models/models/query_object.dart';
 import 'package:provider/provider.dart';
 
 const _langs = ["en", "ar"];
@@ -64,14 +65,7 @@ class AppRouter {
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
-    refreshListenable: Listenable.merge(
-      [
-        PxLocale(),
-        PxSearchController(
-          query: QueryObject.empty(),
-        ),
-      ],
-    ),
+    refreshListenable: PxLocale(),
     navigatorKey: UtilsKeys.navigatorKey,
     initialLocation: loading,
     redirect: (context, state) {
@@ -321,16 +315,15 @@ class AppRouter {
                     name: src,
                     path: src,
                     builder: (context, state) {
-                      final query = state.uri.queryParameters;
-                      final obj = QueryObject.fromJson(query);
-                      final key = ValueKey((obj, state.pageKey));
+                      final query = Query.fromJson(state.uri.queryParameters);
+                      final key = ValueKey((query, state.pageKey));
                       if (kDebugMode) {
                         print("GoRoute($src)=$key");
                       }
                       return ChangeNotifierProvider(
                         key: key,
                         create: (context) => PxSearchController(
-                          query: QueryObject.fromJson(query),
+                          service: HxSearchClinics(query),
                         ),
                         builder: (context, child) {
                           return SearchPage(

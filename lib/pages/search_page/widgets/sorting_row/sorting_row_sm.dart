@@ -23,12 +23,12 @@ class SortingRowSm extends StatelessWidget {
               return const LinearProgressIndicator();
             }
             final searchSpec = l.isEnglish
-                ? sc.query.spec
-                : sg.specialities!.firstWhere((e) => e.en == sc.query.spec).ar;
+                ? sc.responseModel?.first.clinic.speciality.name_en
+                : sc.responseModel?.first.clinic.speciality.name_ar;
             return Row(
               children: [
                 Text(
-                  searchSpec,
+                  searchSpec ?? '',
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                     fontSize: 16,

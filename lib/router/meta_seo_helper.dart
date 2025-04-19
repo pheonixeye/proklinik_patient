@@ -65,7 +65,7 @@ class MetaTagsHelper {
 
         _metaSEO.robots(robotsName: RobotsName.robots, content: 'index,follow');
         return _metaSEO;
-      case 'ar':
+      default:
         _metaSEO.propertyContent(
           property: 'title',
           content:
@@ -104,8 +104,6 @@ class MetaTagsHelper {
         _metaSEO.robots(robotsName: RobotsName.robots, content: 'index,follow');
 
         return _metaSEO;
-      default:
-        throw UnimplementedError('Language Not Found.');
     }
   }
 }

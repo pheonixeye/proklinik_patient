@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/widgets.dart' show ChangeNotifier, Locale;
 
 class PxLocale extends ChangeNotifier {
-  Locale _locale = const Locale("en");
+  static Locale _locale = const Locale("en");
   Locale get locale => _locale;
 
   void setLocale() {
