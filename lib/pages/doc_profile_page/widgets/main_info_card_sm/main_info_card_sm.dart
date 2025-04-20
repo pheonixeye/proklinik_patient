@@ -1,7 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/assets/assets.dart';
-import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
@@ -24,17 +22,13 @@ class MainInfoCardSm extends StatefulWidget {
 
 class _MainInfoCardSmState extends State<MainInfoCardSm> {
   late final ScrollController _controller;
-  late final ImageProvider image;
+  late final Future<ImageProvider<Object>> _imageFuture;
 
   @override
   void initState() {
-    _controller = ScrollController();
-    if (widget.model.doctor.avatar.isEmpty) {
-      image = AssetImage(Assets.doctorEmptyAvatar());
-    } else {
-      image = NetworkImage(widget.model.doctor.avatarUrl);
-    }
     super.initState();
+    _controller = ScrollController();
+    _imageFuture = widget.model.doctor.widgetImageProvider();
   }
 
   @override
@@ -77,17 +71,36 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                     flex: 70,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 12.0),
-                      child: Container(
-                        width: 70,
-                        height: 70,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: image,
-                          ),
-                        ),
-                      ),
+                      child: FutureBuilder<ImageProvider<Object>>(
+                          future: _imageFuture,
+                          builder: (context, snapshot) {
+                            while (!snapshot.hasData) {
+                              return Container(
+                                width: 70,
+                                height: 70,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    padding: EdgeInsets.all(0),
+                                  ),
+                                ),
+                              );
+                            }
+                            return Container(
+                              width: 70,
+                              height: 70,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: snapshot.data!,
+                                ),
+                              ),
+                            );
+                          }),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -234,7 +247,7 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: 100,
+                height: 120,
                 child: Column(
                   children: [
                     Expanded(
@@ -302,16 +315,21 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                     //followup_fees && duration
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(width: 10),
                         const Icon(
                           Icons.info_outlined,
                           color: Colors.green,
                         ),
                         const SizedBox(width: 10),
-                        Text(
-                          widget.model.clinic.followupInfo(context),
-                          style: TextStyle(
-                            color: AppTheme.mainFontColor,
+                        Expanded(
+                          child: Text(
+                            widget.model.clinic.followupInfo(context),
+                            style: TextStyle(
+                              color: AppTheme.mainFontColor,
+                            ),
+                            maxLines: 2,
                           ),
                         ),
                       ],

@@ -91,60 +91,60 @@ class _FilterItemsState extends State<FilterItems> {
           ],
         ),
         const Divider(),
-        ExpansionTile(
-          initiallyExpanded: widget.isForMobile,
-          title: Row(
-            children: [
-              const Icon(FontAwesomeIcons.dollarSign),
-              const SizedBox(width: 10),
-              Text(
-                context.loc.fees,
-                style: _filterTitleStyle,
-              ),
-            ],
-          ),
-          children: [
-            RadioListTile(
-              title: Text(context.loc.all),
-              value: "any",
-              groupValue: GoRouter.of(context)
-                  .routeInformationProvider
-                  .value
-                  .uri
-                  .queryParameters['fe'],
-              onChanged: (value) {
-                //TODO: implement filtering
-                _navigateAndFilter("fe", value);
-              },
-            ),
-            RadioListTile(
-              title: Text(context.loc.lessThan300),
-              value: "l300",
-              groupValue: GoRouter.of(context)
-                  .routeInformationProvider
-                  .value
-                  .uri
-                  .queryParameters['fe'],
-              onChanged: (value) {
-                //TODO: implement filtering
-                _navigateAndFilter("fe", value);
-              },
-            ),
-            RadioListTile(
-              title: Text(context.loc.moreThan300),
-              value: "m300",
-              groupValue: GoRouter.of(context)
-                  .routeInformationProvider
-                  .value
-                  .uri
-                  .queryParameters['fe'],
-              onChanged: (value) {
-                //TODO: implement filtering
-                _navigateAndFilter("fe", value);
-              },
-            ),
-          ],
-        ),
+        // ExpansionTile(
+        //   initiallyExpanded: widget.isForMobile,
+        //   title: Row(
+        //     children: [
+        //       const Icon(FontAwesomeIcons.dollarSign),
+        //       const SizedBox(width: 10),
+        //       Text(
+        //         context.loc.fees,
+        //         style: _filterTitleStyle,
+        //       ),
+        //     ],
+        //   ),
+        //   children: [
+        //     RadioListTile(
+        //       title: Text(context.loc.all),
+        //       value: "any",
+        //       groupValue: GoRouter.of(context)
+        //           .routeInformationProvider
+        //           .value
+        //           .uri
+        //           .queryParameters['fe'],
+        //       onChanged: (value) {
+        //         //TODO: implement filtering
+        //         _navigateAndFilter("fe", value);
+        //       },
+        //     ),
+        //     RadioListTile(
+        //       title: Text(context.loc.lessThan300),
+        //       value: "l300",
+        //       groupValue: GoRouter.of(context)
+        //           .routeInformationProvider
+        //           .value
+        //           .uri
+        //           .queryParameters['fe'],
+        //       onChanged: (value) {
+        //         //TODO: implement filtering
+        //         _navigateAndFilter("fe", value);
+        //       },
+        //     ),
+        //     RadioListTile(
+        //       title: Text(context.loc.moreThan300),
+        //       value: "m300",
+        //       groupValue: GoRouter.of(context)
+        //           .routeInformationProvider
+        //           .value
+        //           .uri
+        //           .queryParameters['fe'],
+        //       onChanged: (value) {
+        //         //TODO: implement filtering
+        //         _navigateAndFilter("fe", value);
+        //       },
+        //     ),
+        //   ],
+        // ),
         const Divider(),
         ExpansionTile(
           initiallyExpanded: widget.isForMobile,

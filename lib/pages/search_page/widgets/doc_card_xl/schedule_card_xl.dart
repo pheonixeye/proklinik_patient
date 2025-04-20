@@ -66,6 +66,8 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
   late final Map<String, bool> _smallCardHoverState;
 
   void Function()? get _onTap {
+    //TODO
+
     // return isAvailable
     //     ? () {
     //         //todo: nav to book app page directly
@@ -196,6 +198,8 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                                     },
                                     child: InkWell(
                                       onTap: () {
+                                        //TODO
+
                                         // context
                                         //     .read<PxBooking>()
                                         //     .setBookingData(

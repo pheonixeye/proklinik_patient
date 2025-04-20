@@ -118,6 +118,19 @@ class Query extends Equatable {
 
   int get pageNumber => int.parse(page);
 
+  String get availabilityQuery {
+    final _today = DateTime.now();
+    final _availableToday =
+        '&& schedule.available = true && schedule.intday = ${_today.weekday}';
+    final _availableTommorow =
+        '&& schedule.available = true && schedule.intday = ${_today.weekday == 7 ? 1 : _today.weekday + 1}';
+    return switch (availability) {
+      'today' => _availableToday,
+      'tomorrow' => _availableTommorow,
+      _ => '',
+    };
+  }
+
   @override
   bool get stringify => true;
 

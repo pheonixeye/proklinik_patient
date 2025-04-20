@@ -1,5 +1,4 @@
 import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/functions/pretty_print.dart';
 import 'package:patient/models/query_model/query.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
@@ -22,7 +21,8 @@ class HxSearchClinics {
     final _response = await PocketbaseHelper.pb.collection(collection).getList(
           page: query.pageNumber,
           perPage: _perPage,
-          filter: "${query.baseQueryFilter} $_publishFilter",
+          filter:
+              "${query.baseQueryFilter} $_publishFilter ${query.availabilityQuery}",
           expand: _expand,
           sort: '-created',
         );

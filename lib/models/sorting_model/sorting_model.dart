@@ -64,15 +64,15 @@ class SortingModel extends Equatable {
 
 List<SortingModel> sortingParameters = [
   SortingModel.bestMatch(),
-  SortingModel.priceLowToHigh(),
-  SortingModel.priceHighToLow(),
+  // SortingModel.priceLowToHigh(),
+  // SortingModel.priceHighToLow(),
   SortingModel.waitingTime(),
   SortingModel.topRated(),
 ];
 
 enum SortingModelEnum {
-  priceHighToLow('high-low'),
-  priceLowToHigh('low-high'),
+  // priceHighToLow('high-low'),
+  // priceLowToHigh('low-high'),
   waitingTime('waiting-time'),
   empty('');
 
@@ -81,8 +81,8 @@ enum SortingModelEnum {
 
   factory SortingModelEnum.fromString(String value) {
     return switch (value) {
-      'high-low' => SortingModelEnum.priceHighToLow,
-      'low-high' => SortingModelEnum.priceLowToHigh,
+      // 'high-low' => SortingModelEnum.priceHighToLow,
+      // 'low-high' => SortingModelEnum.priceLowToHigh,
       'waiting-time' => SortingModelEnum.waitingTime,
       _ => SortingModelEnum.empty,
     };
