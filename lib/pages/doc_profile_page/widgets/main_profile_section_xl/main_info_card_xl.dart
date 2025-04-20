@@ -5,14 +5,14 @@ import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_num.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class MainInfoCardXl extends StatefulWidget {
   const MainInfoCardXl({super.key, required this.model});
-  final ServerResponseModel model;
+  final SearchResponseModel model;
 
   @override
   State<MainInfoCardXl> createState() => _MainInfoCardXlState();
@@ -23,11 +23,10 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
 
   @override
   void initState() {
-    if (widget.model.doctor.avatar == null ||
-        widget.model.doctor.avatar!.isEmpty) {
+    if (widget.model.doctor.avatar.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
-      image = NetworkImage(widget.model.doctor.avatarUrl!);
+      image = NetworkImage(widget.model.doctor.avatarUrl);
     }
     super.initState();
   }
@@ -111,7 +110,7 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                               ),
                               const Spacer(),
                               Text(
-                                "${widget.model.doctor.views.toString().toArabicNumber(context)} ${context.loc.views}",
+                                "${widget.model.doctor_website_info.views_count.toString().toArabicNumber(context)} ${context.loc.views}",
                                 style: TextStyle(
                                   color: AppTheme.mainFontColor,
                                   fontSize: 14,
@@ -150,8 +149,8 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                           child: Text.rich(
                             TextSpan(
                               text: l.isEnglish
-                                  ? widget.model.doctor.speciality_en
-                                  : widget.model.doctor.speciality_ar,
+                                  ? widget.model.doctor.speciality.name_en
+                                  : widget.model.doctor.speciality.name_ar,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -161,8 +160,8 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                                 const TextSpan(text: " - "),
                                 TextSpan(
                                   text: l.isEnglish
-                                      ? widget.model.doctor.degree_en
-                                      : widget.model.doctor.degree_ar,
+                                      ? widget.model.doctor.degree.name_en
+                                      : widget.model.doctor.degree.name_ar,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -177,18 +176,24 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              if (widget.model.doctor.rating == 0)
+                              if (widget.model.doctor_website_info
+                                      .average_rating ==
+                                  0)
                                 ...5.0.toStars(
                                     size: 32,
                                     padding: const EdgeInsets.only(left: 5))
                               else
-                                ...widget.model.doctor.rating.toStars(
-                                    size: 32,
-                                    padding: const EdgeInsets.only(left: 5)),
+                                ...widget
+                                    .model.doctor_website_info.average_rating
+                                    .toStars(
+                                        size: 32,
+                                        padding:
+                                            const EdgeInsets.only(left: 5)),
                               const SizedBox(width: 10),
-                              widget.model.reviews.isNotEmpty
+                              widget.model.doctor_website_info.reviews_count !=
+                                      0
                                   ? Text(
-                                      "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                                      "${context.loc.overallRating} ${context.loc.from} ${widget.model.doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
                                       style: TextStyle(
                                         color: AppTheme.mainFontColor,
                                         fontSize: 10,

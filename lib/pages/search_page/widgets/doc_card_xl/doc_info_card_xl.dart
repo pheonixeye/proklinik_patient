@@ -70,6 +70,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                 ...defaultPathParameters(context),
                 "docid": widget.responseModel.doctor.id.toString(),
               },
+              extra: widget.responseModel,
             );
           },
           child: Container(
@@ -169,14 +170,4 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
       ),
     );
   }
-}
-
-String attendanceFromBool(BuildContext context, bool attendance) {
-  final isEnglish = context.read<PxLocale>().isEnglish;
-  return switch ((isEnglish, attendance)) {
-    (true, true) => "Reservation required, first-come, first-served.",
-    (false, true) => "الدكتور يتطلب الحجز، الدخول باسبقية الحضور.",
-    (true, false) => "Reservation required, On Appointment.",
-    (false, false) => "الدكتور يتطلب الحجز، الدخول بموعد مسبق.",
-  };
 }

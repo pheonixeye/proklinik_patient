@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/scroll_direction.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class SideProfileSectionXl extends StatefulWidget {
   const SideProfileSectionXl({super.key, required this.model});
-  final ServerResponseModel model;
+  final SearchResponseModel model;
 
   @override
   State<SideProfileSectionXl> createState() => _SideProfileSectionXlState();
@@ -151,7 +152,7 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                                     const TextSpan(text: " : "),
                                     TextSpan(
                                       text:
-                                          "${widget.model.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
+                                          "${widget.model.clinic_waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -181,12 +182,12 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                         title: Consumer<PxLocale>(
                           builder: (context, l, _) {
                             final area = l.isEnglish
-                                ? widget.model.clinic.destination.areaEn
-                                : widget.model.clinic.destination.areaAr;
+                                ? widget.model.clinic.city.name_en
+                                : widget.model.clinic.city.name_ar;
 
                             final address = l.isEnglish
-                                ? widget.model.clinic.destination.addressEn
-                                : widget.model.clinic.destination.addressAr;
+                                ? widget.model.clinic.address_en
+                                : widget.model.clinic.address_ar;
 
                             return Text(
                               "$area : $address",
@@ -269,12 +270,16 @@ class _SideProfileSectionXlState extends State<SideProfileSectionXl> {
                     SizedBox(
                       height: 50,
                       child: Center(
-                        child: Text(
-                          attendanceFromBool(
-                              context, widget.model.clinic.attendance),
-                          style: TextStyle(
-                            color: AppTheme.mainFontColor,
-                          ),
+                        child: Consumer<PxLocale>(
+                          builder: (context, l, _) {
+                            return Text(
+                              widget.model.clinic.attendance_type
+                                  .formattedAttendanceType(l.isEnglish),
+                              style: TextStyle(
+                                color: AppTheme.mainFontColor,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/model_widgets_ext.dart';
+import 'package:patient/models/app_constants_model/_models/city.dart';
+import 'package:patient/models/app_constants_model/_models/governorate.dart';
+import 'package:patient/models/app_constants_model/_models/speciality.dart';
 import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/spec_gov_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/city.dart';
-import 'package:proklinik_models/models/governorate.dart';
-import 'package:proklinik_models/models/speciality.dart';
 import 'package:provider/provider.dart';
 import 'package:proklinik_models/models/search_type.dart';
 
@@ -35,13 +35,24 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
     };
   }
 
+  Speciality? _speciality;
+  Governorate? _governorate;
+  City? _city;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       decoration: AppTheme.searchContainerDecoration,
-      child: Consumer2<PxSpecGov, PxLocale>(
-        builder: (context, sg, l, _) {
+      child: Consumer2<PxAppConstants, PxLocale>(
+        builder: (context, a, l, _) {
+          while (a.model == null) {
+            return Center(
+              child: context.isMobile
+                  ? CircularProgressIndicator()
+                  : LinearProgressIndicator(),
+            );
+          }
           return Form(
             key: formKey,
             child: Flex(
@@ -67,7 +78,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               _specValidator(context.loc.selectSpecValidator),
                           hint: Text(context.loc.pickSpec),
                           isExpanded: true,
-                          items: sg.specialities?.map((e) {
+                          items: a.model?.specialities.map((e) {
                             return DropdownMenuItem<Speciality>(
                               alignment: Alignment.center,
                               value: e,
@@ -76,22 +87,24 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                                 children: [
                                   if (context.isMobile) const Spacer(),
                                   const SizedBox(width: 5),
-                                  SvgPicture.asset(
-                                    Assets.specialityImage(e.en),
+                                  SvgPicture.network(
+                                    e.svgUrl,
                                     width: 35,
                                     height: 35,
                                   ),
                                   const SizedBox(width: 10),
-                                  Text(l.isEnglish ? e.en : e.ar),
+                                  Text(l.isEnglish ? e.name_en : e.name_ar),
                                   if (context.isMobile) const Spacer(),
                                 ],
                               ),
                             );
                           }).toList(),
-                          value: sg.speciality,
+                          value: _speciality,
                           onChanged: (val) {
                             if (val != null) {
-                              sg.selectSpeciality(val);
+                              setState(() {
+                                _speciality = val;
+                              });
                             }
                           },
                         ),
@@ -115,19 +128,20 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                           alignment: Alignment.center,
                           hint: Text(context.loc.pickGov),
                           isExpanded: true,
-                          items: sg.governorates?.map((e) {
+                          items: a.model?.governorates.map((e) {
                             return DropdownMenuItem<Governorate>(
                               alignment: Alignment.center,
                               value: e,
-                              child: Text(l.isEnglish
-                                  ? e.governorate_name_en
-                                  : e.governorate_name_ar),
+                              child: Text(l.isEnglish ? e.name_en : e.name_ar),
                             );
                           }).toList(),
-                          value: sg.governorate,
+                          value: _governorate,
                           onChanged: (val) {
                             if (val != null) {
-                              sg.selectGovernorate(val);
+                              setState(() {
+                                _governorate = val;
+                                _city = null;
+                              });
                             }
                           },
                         ),
@@ -151,19 +165,22 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             color: Colors.green.shade500,
                           ),
                           alignment: Alignment.center,
-                          items: sg.cities?.map((e) {
+                          items: a.model?.cities
+                              .where(
+                                  (c) => c.governorate_id == _governorate?.id)
+                              .map((e) {
                             return DropdownMenuItem<City>(
                               alignment: Alignment.center,
                               value: e,
-                              child: Text(l.isEnglish
-                                  ? e.city_name_en
-                                  : e.city_name_ar),
+                              child: Text(l.isEnglish ? e.name_en : e.name_ar),
                             );
                           }).toList(),
-                          value: sg.city,
+                          value: _city,
                           onChanged: (val) {
                             if (val != null) {
-                              sg.selectCity(val);
+                              setState(() {
+                                _city = val;
+                              });
                             }
                           },
                         ),
@@ -200,9 +217,9 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             ///so => sort
                             queryParameters: {
                               "type": SearchType.clinic.name,
-                              "spec": sg.speciality?.en,
-                              "gov": sg.governorate?.governorate_name_en,
-                              "city": sg.city?.city_name_en,
+                              "spec": _speciality?.id,
+                              "gov": _governorate?.id,
+                              "city": _city?.id,
                               "page": "1",
                               "av": "any",
                               "fe": "any",

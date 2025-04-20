@@ -1,43 +1,37 @@
 import 'package:flutter/foundation.dart';
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
+import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 
 class PxDocProfile extends ChangeNotifier {
-  final String docId;
+  final DoctorProfileApi service;
 
-  PxDocProfile({required this.docId}) {
+  PxDocProfile({
+    required this.service,
+  }) {
     _init();
   }
 
-  ServerResponseModel? _responseModel;
-  ServerResponseModel? get responseModel => _responseModel;
+  static SearchResponseModel? _responseModel;
+  SearchResponseModel? get responseModel => _responseModel;
 
   Future<void> _init() async {
-    _responseModel = await PocketbaseHelper.doctorProfileQuery(docId);
+    _responseModel = await service.fetch();
     notifyListeners();
-    // await Future.delayed(
-    //   const Duration(seconds: 1),
-    //   () {
-    //     final doctor =
-    //         DOCTORS.firstWhere((doc) => doc.synd_id == int.parse(docId));
-    //     final clinic = CLINICS.firstWhere(
-    //         (clinic) => doctor.destinations.contains(clinic.destination));
-    //     final reviews = REVIEWS
-    //         .where((review) => review.doc_id == doctor.synd_id.toString())
-    //         .toList();
-    //     _responseModel = ServerResponseModel(
-    //       doctor: doctor,
-    //       clinic: clinic,
-    //       reviews: reviews,
-    //     );
-    //     notifyListeners();
-    //     if (kDebugMode) {
-    //       print("PxDocProfile().init(${_responseModel?.doctor.name_en})");
-    //     }
-    //   },
-    // );
+
     if (kDebugMode) {
       print("PxDocProfile().init(${_responseModel?.doctor.name_en})");
+    }
+    await _updateDoctorProfileViews();
+  }
+
+  Future<void> _updateDoctorProfileViews() async {
+    if (_responseModel != null) {
+      await service.updateDoctorProfileViews(
+        _responseModel!.doctor_website_info.id,
+        {
+          'views_count': _responseModel!.doctor_website_info.views_count + 1,
+        },
+      );
     }
   }
 }

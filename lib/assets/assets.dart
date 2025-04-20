@@ -25,7 +25,7 @@ class Assets {
   // }
 
   static String doctorEmptyAvatar() {
-    final randomInt = Random().nextInt(0) + 1;
+    final randomInt = Random().nextInt(9) + 1;
     return "assets/images/doc_avatars/av${randomInt}_.jpeg";
   }
 

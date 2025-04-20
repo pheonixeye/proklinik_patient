@@ -4,8 +4,8 @@ import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/pages/search_page/widgets/filter_column/filter_column_sm.dart';
 import 'package:patient/pages/search_page/widgets/sorting_modal.dart/sorting_modal_sm.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
 import 'package:patient/providers/search_px.dart';
-import 'package:patient/providers/spec_gov_px.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +17,9 @@ class SortingRowSm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
-        title: Consumer3<PxSearchController, PxSpecGov, PxLocale>(
-          builder: (context, sc, sg, l, _) {
-            while (sg.specialities == null) {
+        title: Consumer3<PxSearchController, PxAppConstants, PxLocale>(
+          builder: (context, sc, a, l, _) {
+            while (a.model == null) {
               return const LinearProgressIndicator();
             }
             final searchSpec = l.isEnglish

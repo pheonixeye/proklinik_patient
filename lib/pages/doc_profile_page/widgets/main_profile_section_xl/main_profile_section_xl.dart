@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_info_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 
 class MainProfileSectionXl extends StatelessWidget {
   const MainProfileSectionXl({
     super.key,
     required this.model,
   });
-  final ServerResponseModel model;
+  final SearchResponseModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,11 @@ class MainProfileSectionXl extends StatelessWidget {
           OverallReviewsCardXl(model: model),
 
           ///rating cards
-          ...model.reviews.map((review) => RatingCardXl(
-                review: review,
-              )),
+          //TODO:
+
+          // ...model.reviews.map((review) => RatingCardXl(
+          //       review: review,
+          //     )),
 
           ///load more button
           // const Divider(),

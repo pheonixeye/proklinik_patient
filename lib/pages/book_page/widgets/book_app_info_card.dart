@@ -30,7 +30,8 @@ class _BookAppInfoCardState extends State<BookAppInfoCard> {
     if (widget.doctor.avatar == null) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
-      image = NetworkImage("${widget.doctor.avatarUrl}");
+      //TODO:
+      image = NetworkImage("${widget.doctor.avatar}");
     }
     super.initState();
   }
@@ -107,39 +108,41 @@ class _BookAppInfoCardState extends State<BookAppInfoCard> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: AppTheme.greyBackgroundColor,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0,
-                            vertical: 36,
-                          ),
-                          child: Center(
-                            child: Builder(
-                              builder: (context) {
-                                final date = DateTime.parse(b.data!.date_time);
-                                final bookingTimeStart = TimeOfDay(
-                                  hour: data!.startH.toInt(),
-                                  minute: data.startM.toInt(),
-                                ).format(context);
-                                final bookingTimeEnd = TimeOfDay(
-                                  hour: data.endH.toInt(),
-                                  minute: data.endM.toInt(),
-                                ).format(context);
-                                final bookingDate =
-                                    DateFormat("dd/MM/yyyy", l.lang);
-                                final wkday = l.isEnglish
-                                    ? WEEKDAYS[date.weekday]!.en
-                                    : WEEKDAYS[date.weekday]!.ar;
-                                return Text(
-                                    "$wkday - (${bookingDate.format(date)})  - ${bookingTimeStart.toArabicNumber(context)} - ${bookingTimeEnd.toArabicNumber(context)}\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
+                      //TODO:
+
+                      // Container(
+                      //   decoration: const BoxDecoration(
+                      //     color: AppTheme.greyBackgroundColor,
+                      //   ),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(
+                      //       horizontal: 24.0,
+                      //       vertical: 36,
+                      //     ),
+                      //     child: Center(
+                      //       child: Builder(
+                      //         builder: (context) {
+                      //           final date = DateTime.parse(b.data!.date_time);
+                      //           final bookingTimeStart = TimeOfDay(
+                      //             hour: data!.startH.toInt(),
+                      //             minute: data.startM.toInt(),
+                      //           ).format(context);
+                      //           final bookingTimeEnd = TimeOfDay(
+                      //             hour: data.endH.toInt(),
+                      //             minute: data.endM.toInt(),
+                      //           ).format(context);
+                      //           final bookingDate =
+                      //               DateFormat("dd/MM/yyyy", l.lang);
+                      //           final wkday = l.isEnglish
+                      //               ? WEEKDAYS[date.weekday]!.en
+                      //               : WEEKDAYS[date.weekday]!.ar;
+                      //           return Text(
+                      //               "$wkday - (${bookingDate.format(date)})  - ${bookingTimeStart.toArabicNumber(context)} - ${bookingTimeEnd.toArabicNumber(context)}\n${attendanceFromBool(context, b.data!.model!.clinic.attendance)}");
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(height: 20),
                     ],
                   ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class AboutCardXl extends StatelessWidget {
   const AboutCardXl({super.key, required this.model});
-  final ServerResponseModel model;
+  final SearchResponseModel model;
 
   @override
   Widget build(BuildContext context) {

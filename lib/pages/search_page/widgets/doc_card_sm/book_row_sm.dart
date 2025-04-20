@@ -3,13 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/models/clinic/schedule.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/booking_data.dart';
-import 'package:proklinik_models/models/schedule.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,7 +17,7 @@ class BookRowSm extends StatefulWidget {
     super.key,
     required this.responseModel,
   });
-  final ServerResponseModel responseModel;
+  final SearchResponseModel responseModel;
 
   @override
   State<BookRowSm> createState() => _BookRowSmState();
@@ -120,20 +119,21 @@ class _BookRowSmState extends State<BookRowSm> {
                   backgroundColor: AppTheme.secondaryOrangeColor,
                 ),
                 onPressed: () {
-                  //todo: nav to book page
-                  context
-                      .read<PxBooking>()
-                      .setBookingData(BookingData.empty().copyWith(
-                        id: const Uuid().v4(),
-                        model: widget.responseModel,
-                        doc_id: widget.responseModel.doctor.id,
-                        clinic_id: widget.responseModel.clinic.id,
-                        date_time: firstAvailableDate!.toIso8601String(),
-                        startH: timeStart.hour,
-                        startM: timeStart.minute,
-                        endH: timeEnd.hour,
-                        endM: timeEnd.minute,
-                      ));
+                  //TODO: nav to book page
+
+                  // context
+                  //     .read<PxBooking>()
+                  //     .setBookingData(BookingData.empty().copyWith(
+                  //       id: const Uuid().v4(),
+                  //       model: widget.responseModel,
+                  //       doc_id: widget.responseModel.doctor.id,
+                  //       clinic_id: widget.responseModel.clinic.id,
+                  //       date_time: firstAvailableDate!.toIso8601String(),
+                  //       startH: timeStart.hour,
+                  //       startM: timeStart.minute,
+                  //       endH: timeEnd.hour,
+                  //       endM: timeEnd.minute,
+                  //     ));
                   GoRouter.of(context).goNamed(
                     AppRouter.book,
                     pathParameters: defaultPathParameters(context),

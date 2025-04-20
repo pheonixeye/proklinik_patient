@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_num.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class DocDataXl extends StatelessWidget {
   const DocDataXl({super.key, required this.responseModel});
-  final ServerResponseModel responseModel;
+  final SearchResponseModel responseModel;
 
   //todo: accept doctor data and rating overall
 
@@ -64,16 +64,17 @@ class DocDataXl extends StatelessWidget {
                   children: [
                     //todo: generate star row from double rating
 
-                    if (responseModel.doctor.rating == 0)
+                    if (responseModel.doctor_website_info.average_rating == 0)
                       ...5.0.toStars()
                     else
-                      ...responseModel.doctor.rating.toStars(),
+                      ...responseModel.doctor_website_info.average_rating
+                          .toStars(),
                   ],
                 ),
                 //todo: fetch from ratings
-                subtitle: responseModel.reviews.isNotEmpty
+                subtitle: responseModel.doctor_website_info.reviews_count != 0
                     ? Text(
-                        "${context.loc.overallRating} ${context.loc.from} ${responseModel.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                        "${context.loc.overallRating} ${context.loc.from} ${responseModel.doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
                         style: TextStyle(
                           fontSize: 10,
                           color: AppTheme.mainFontColor,
@@ -92,18 +93,18 @@ class DocDataXl extends StatelessWidget {
                 iconData: Icons.medical_services,
                 title: context.loc.specTitle,
                 data: l.isEnglish
-                    ? responseModel.doctor.speciality_en
-                    : responseModel.doctor.speciality_ar,
+                    ? responseModel.doctor.speciality.name_en
+                    : responseModel.doctor.speciality.name_ar,
               ),
               //todo: fetch from selected clinic
               SecondaryDataItemXl(
                 iconData: Icons.pin_drop,
                 title: l.isEnglish
-                    ? "${responseModel.clinic.destination.areaEn} : "
-                    : "${responseModel.clinic.destination.areaAr} : ",
+                    ? "${responseModel.clinic.city.name_en} : "
+                    : "${responseModel.clinic.city.name_ar} : ",
                 data: l.isEnglish
-                    ? responseModel.clinic.destination.addressEn
-                    : responseModel.clinic.destination.addressAr,
+                    ? responseModel.clinic.address_en
+                    : responseModel.clinic.address_ar,
               ),
               //todo: fetch fees from selected clinic
               SecondaryDataItemXl(
@@ -117,7 +118,7 @@ class DocDataXl extends StatelessWidget {
                 iconData: Icons.timer,
                 title: context.loc.waitingTimeTitle,
                 data:
-                    "${responseModel.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
+                    "${responseModel.clinic_waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
               ),
               SecondaryDataItemXl(
                 iconData: Icons.phone,
@@ -125,7 +126,7 @@ class DocDataXl extends StatelessWidget {
                 data: context.loc.costRegularSubtitle,
               ),
               TagsRowXlSm(
-                doctor: responseModel.doctor,
+                tags: responseModel.doctor_website_info.tags,
               ),
             ],
           );

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:patient/constants/tags.dart';
+import 'package:patient/models/doctor/doctor_tag.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/doctor.dart';
 import 'package:provider/provider.dart';
 
 class TagsRowXlSm extends StatelessWidget {
-  const TagsRowXlSm({super.key, required this.doctor});
-  final Doctor doctor;
+  const TagsRowXlSm({super.key, required this.tags});
+  final List<DoctorTag> tags;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,9 @@ class TagsRowXlSm extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: Row(
           children: [
-            ...doctor.tags.map(
-              (e) => TagRowCard(data: tagFromString(e)),
+            ...tags.map(
+              (e) => TagRowCard(
+                  data: ALLTAGS.firstWhere((t) => t.titleEn == e.name_en)),
             ),
           ],
         ),

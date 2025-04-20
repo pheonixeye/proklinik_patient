@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/avatar_url_doctor_ext.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/scroll_direction.dart';
 import 'package:patient/functions/stars_from_num.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class MainInfoCardSm extends StatefulWidget {
   const MainInfoCardSm({super.key, required this.model});
-  final ServerResponseModel model;
+  final SearchResponseModel model;
 
   @override
   State<MainInfoCardSm> createState() => _MainInfoCardSmState();
@@ -28,11 +28,10 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
   @override
   void initState() {
     _controller = ScrollController();
-    if (widget.model.doctor.avatar == null ||
-        widget.model.doctor.avatar!.isEmpty) {
+    if (widget.model.doctor.avatar.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
-      image = NetworkImage(widget.model.doctor.avatarUrl!);
+      image = NetworkImage(widget.model.doctor.avatarUrl);
     }
     super.initState();
   }
@@ -139,13 +138,17 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                         children: [
                           Row(
                             children: [
-                              if (widget.model.doctor.rating == 0)
+                              if (widget.model.doctor_website_info
+                                      .average_rating ==
+                                  0)
                                 ...5.0.toStars(
                                   size: 18,
                                   padding: const EdgeInsets.all(4),
                                 )
                               else
-                                ...widget.model.doctor.rating.toStars(
+                                ...widget
+                                    .model.doctor_website_info.average_rating
+                                    .toStars(
                                   size: 18,
                                   padding: const EdgeInsets.all(4),
                                 ),
@@ -153,11 +156,12 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                           ),
                           Row(
                             children: [
-                              widget.model.reviews.isNotEmpty
+                              widget.model.doctor_website_info.reviews_count !=
+                                      0
                                   ? Text.rich(
                                       TextSpan(
                                         text:
-                                            "${context.loc.overallRating} ${context.loc.from} ${widget.model.reviews.length.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                                            "${context.loc.overallRating} ${context.loc.from} ${widget.model.doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             //TODO: Scroll to ratings
@@ -270,7 +274,7 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                               const TextSpan(text: " : "),
                               TextSpan(
                                 text:
-                                    "${widget.model.clinic.waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
+                                    "${widget.model.clinic_waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -351,7 +355,8 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                 height: 50,
                 child: Center(
                   child: Text(
-                    attendanceFromBool(context, widget.model.clinic.attendance),
+                    widget.model.clinic.attendance_type
+                        .formattedAttendanceType(l.isEnglish),
                     style: TextStyle(
                       color: AppTheme.mainFontColor,
                     ),

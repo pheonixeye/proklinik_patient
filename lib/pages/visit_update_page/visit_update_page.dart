@@ -111,10 +111,11 @@ class VisitUpdatePage extends StatelessWidget {
                         height: avatarDimensions,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
+                          //TODO:
                           image: v.doctor == null
                               ? null
                               : DecorationImage(
-                                  image: NetworkImage(v.doctor!.avatarUrl!),
+                                  image: NetworkImage(v.doctor!.avatar!),
                                 ),
                         ),
                         child: v.doctor == null

@@ -5,13 +5,12 @@ import 'package:patient/constants/weekdays.dart';
 import 'package:patient/extensions/concat_on_clinic_shift.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/models/clinic/schedule.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/booking_data.dart';
-import 'package:proklinik_models/models/schedule.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleCardXl extends StatefulWidget {
@@ -20,7 +19,7 @@ class ScheduleCardXl extends StatefulWidget {
     required this.model,
     required this.index,
   });
-  final ServerResponseModel model;
+  final SearchResponseModel model;
   final int index;
 
   @override
@@ -60,41 +59,40 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
         );
     _smallCardHoverState = !isAvailable
         ? {}
-        : Map.fromEntries(
-            _schedule!.shifts.map((e) => MapEntry(e.concat, false)));
+        : Map.fromEntries(_schedule!.shifts.map((e) => MapEntry(e.id, false)));
     super.initState();
   }
 
   late final Map<String, bool> _smallCardHoverState;
 
   void Function()? get _onTap {
-    return isAvailable
-        ? () {
-            //todo: nav to book app page directly
-            if (_schedule?.shifts.length == 1) {
-              context
-                  .read<PxBooking>()
-                  .setBookingData(BookingData.empty().copyWith(
-                    date_time: cardDate.toIso8601String(),
-                    doc_id: widget.model.doctor.id,
-                    clinic_id: widget.model.clinic.id,
-                    model: widget.model,
-                    day: cardDate.day,
-                    month: cardDate.month,
-                    year: cardDate.year,
-                    startH: _schedule?.shifts.first.startH,
-                    startM: _schedule?.shifts.first.startM,
-                    endH: _schedule?.shifts.first.endH,
-                    endM: _schedule?.shifts.first.endM,
-                  ));
-              GoRouter.of(context).goNamed(
-                AppRouter.book,
-                pathParameters: defaultPathParameters(context),
-                extra: widget.model.doctor,
-              );
-            }
-          }
-        : null;
+    // return isAvailable
+    //     ? () {
+    //         //todo: nav to book app page directly
+    //         if (_schedule?.shifts.length == 1) {
+    //           context
+    //               .read<PxBooking>()
+    //               .setBookingData(BookingData.empty().copyWith(
+    //                 date_time: cardDate.toIso8601String(),
+    //                 doc_id: widget.model.doctor.id,
+    //                 clinic_id: widget.model.clinic.id,
+    //                 model: widget.model,
+    //                 day: cardDate.day,
+    //                 month: cardDate.month,
+    //                 year: cardDate.year,
+    //                 startH: _schedule?.shifts.first.startH,
+    //                 startM: _schedule?.shifts.first.startM,
+    //                 endH: _schedule?.shifts.first.endH,
+    //                 endM: _schedule?.shifts.first.endM,
+    //               ));
+    //           GoRouter.of(context).goNamed(
+    //             AppRouter.book,
+    //             pathParameters: defaultPathParameters(context),
+    //             extra: widget.model.doctor,
+    //           );
+    //         }
+    //       }
+    //     : null;
   }
 
   double get _opacity => !isAvailable
@@ -146,7 +144,7 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                     decoration: BoxDecoration(
                       color: isAvailable
                           ? AppTheme.appBarColor
-                          : AppTheme.appBarColor.withOpacity(0.3),
+                          : AppTheme.appBarColor.withValues(alpha: 0.3),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8),
                         topRight: Radius.circular(8),
@@ -188,36 +186,34 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (event) {
                                       setState(() {
-                                        _smallCardHoverState[shift.concat] =
-                                            true;
+                                        _smallCardHoverState[shift.id] = true;
                                       });
                                     },
                                     onExit: (event) {
                                       setState(() {
-                                        _smallCardHoverState[shift.concat] =
-                                            false;
+                                        _smallCardHoverState[shift.id] = false;
                                       });
                                     },
                                     child: InkWell(
                                       onTap: () {
-                                        context
-                                            .read<PxBooking>()
-                                            .setBookingData(
-                                                BookingData.empty().copyWith(
-                                              // id: const Uuid().v4(),
-                                              date_time:
-                                                  cardDate.toIso8601String(),
-                                              doc_id: widget.model.doctor.id,
-                                              clinic_id: widget.model.clinic.id,
-                                              model: widget.model,
-                                              day: cardDate.day,
-                                              month: cardDate.month,
-                                              year: cardDate.year,
-                                              startH: shift.startH,
-                                              startM: shift.startM,
-                                              endH: shift.endH,
-                                              endM: shift.endM,
-                                            ));
+                                        // context
+                                        //     .read<PxBooking>()
+                                        //     .setBookingData(
+                                        //         BookingData.empty().copyWith(
+                                        //       // id: const Uuid().v4(),
+                                        //       date_time:
+                                        //           cardDate.toIso8601String(),
+                                        //       doc_id: widget.model.doctor.id,
+                                        //       clinic_id: widget.model.clinic.id,
+                                        //       model: widget.model,
+                                        //       day: cardDate.day,
+                                        //       month: cardDate.month,
+                                        //       year: cardDate.year,
+                                        //       startH: shift.startH,
+                                        //       startM: shift.startM,
+                                        //       endH: shift.endH,
+                                        //       endM: shift.endM,
+                                        //     ));
                                         GoRouter.of(context).goNamed(
                                           AppRouter.book,
                                           pathParameters:
@@ -236,11 +232,11 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                                             width: 0.2,
                                           ),
                                         ),
-                                        elevation: _smallCardHoverState[
-                                                    shift.concat] ==
-                                                true
-                                            ? 8
-                                            : 0,
+                                        elevation:
+                                            _smallCardHoverState[shift.id] ==
+                                                    true
+                                                ? 8
+                                                : 0,
                                         child: Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: Text.rich(

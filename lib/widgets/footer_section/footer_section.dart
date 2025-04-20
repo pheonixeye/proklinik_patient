@@ -9,32 +9,30 @@ import 'package:patient/widgets/footer_section/footer_btn.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
-class _FlexibleWrapContainer extends StatelessWidget {
+class FlexibleWrapContainer extends StatelessWidget {
   // ignore: unused_element
-  const _FlexibleWrapContainer({super.key, required this.children});
+  const FlexibleWrapContainer({super.key, required this.children});
   final List<Widget> children;
   @override
   Widget build(BuildContext context) {
-    if (context.isMobile) {
-      return GridView(
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.9,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        children: children,
-      );
-    } else {
-      return Row(
-        children: [
-          ...children.map((x) {
-            return Flexible(child: x);
-          })
-        ],
-      );
-    }
+    return context.isMobile
+        ? GridView(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.9,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            children: children,
+          )
+        : Row(
+            children: [
+              ...children.map((x) {
+                return Flexible(child: x);
+              })
+            ],
+          );
   }
 }
 
@@ -56,7 +54,7 @@ class FooterSection extends StatelessWidget {
       ),
       child: Consumer<PxLocale>(
         builder: (context, l, _) {
-          return _FlexibleWrapContainer(
+          return FlexibleWrapContainer(
             children: [
               ListTile(
                 contentPadding: const EdgeInsets.all(0),

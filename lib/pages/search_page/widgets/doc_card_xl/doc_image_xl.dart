@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/avatar_url_doctor_ext.dart';
-import 'package:proklinik_models/models/doctor.dart';
+import 'package:patient/models/doctor/doctor.dart';
 
 class DocImageXl extends StatefulWidget {
   const DocImageXl({super.key, required this.doctor});
@@ -17,10 +17,10 @@ class _DocImageXlState extends State<DocImageXl> {
 
   @override
   void initState() {
-    if (widget.doctor.avatar == null || widget.doctor.avatar!.isEmpty) {
+    if (widget.doctor.avatar.isEmpty) {
       image = AssetImage(Assets.doctorEmptyAvatar());
     } else {
-      image = NetworkImage(widget.doctor.avatarUrl!);
+      image = NetworkImage(widget.doctor.avatarUrl);
     }
     super.initState();
   }

@@ -27,6 +27,7 @@ class DocInfoCardSm extends StatelessWidget {
               ...defaultPathParameters(context),
               "docid": responseModel.doctor.id.toString(),
             },
+            extra: responseModel,
           );
         },
         child: Container(
@@ -39,7 +40,7 @@ class DocInfoCardSm extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                flex: 160,
+                flex: 16,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.green.shade100,
@@ -47,7 +48,7 @@ class DocInfoCardSm extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
-                      Expanded(
+                      Flexible(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -71,14 +72,14 @@ class DocInfoCardSm extends StatelessWidget {
 
                       ///tag filer chips
                       TagsRowXlSm(
-                        doctor: responseModel.doctor,
+                        tags: responseModel.doctor_website_info.tags,
                       ),
                     ],
                   ),
                 ),
               ),
               Expanded(
-                flex: 220,
+                flex: 22,
                 child: DocDataSmLower(
                   responseModel: responseModel,
                 ),

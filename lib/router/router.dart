@@ -3,8 +3,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
 import 'package:patient/models/query_model/query.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
@@ -293,22 +295,34 @@ class AppRouter {
                   ),
                   GoRoute(
                     name: docquery,
-                    path: docquery,
+                    path: docquery, //doc/:docid
                     builder: (context, state) {
                       final query = state.pathParameters;
-                      final docId = query["docid"];
-                      if (docId == null || docId.isEmpty) {
+                      final docid = query["docid"];
+                      final _searchModel = state.extra as SearchResponseModel?;
+                      if (docid == null || docid.isEmpty) {
                         throw Exception(
                             "Invalid Doctor Id.(from docquery route)");
                       }
-                      final key = ValueKey((docId, state.pageKey));
-                      return ChangeNotifierProvider(
-                        key: key,
-                        create: (context) => PxDocProfile(docId: docId),
-                        child: DocProfilePage(
+                      final key = ValueKey((docid, state.pageKey));
+                      if (_searchModel == null) {
+                        return DocProfilePage(
                           key: key,
-                        ),
-                      );
+                          searchResponseModel: _searchModel,
+                        );
+                      } else {
+                        return ChangeNotifierProvider(
+                          create: (context) => PxDocProfile(
+                            service: DoctorProfileApi(
+                              doc_id: docid,
+                            ),
+                          ),
+                          child: DocProfilePage(
+                            key: key,
+                            searchResponseModel: null,
+                          ),
+                        );
+                      }
                     },
                   ),
                   GoRoute(

@@ -24,7 +24,7 @@ class ErrorPage extends StatelessWidget {
               image: const AssetImage(Assets.bg),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.5),
+                Colors.white.withValues(alpha: 0.5),
                 BlendMode.modulate,
               ),
             ),

@@ -29,9 +29,9 @@ class _SearchPageState extends State<SearchPage> {
         while (sc.responseModel == null) {
           return const CentralLoading();
         }
-        // while (sc.doctors != null && sc.doctors!.isEmpty) {
-        //   return const NoResultsFound();
-        // }
+        while (sc.responseModel != null && sc.responseModel!.isEmpty) {
+          return const NoResultsFound();
+        }
 
         return Container(
           decoration: const BoxDecoration(

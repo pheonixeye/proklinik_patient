@@ -45,23 +45,3 @@ class _ShellPageState extends State<ShellPage> with AfterLayoutMixin {
     );
   }
 }
-///
-///ListView(
-///  controller: _controller,
-///  shrinkWrap: true,
-///  children: [
-///    FutureBuilder<Widget>(
-///      future: _buildWidgetChild(),
-///      builder: (context, snapshot) {
-///        while (!snapshot.hasData || snapshot.data == null) {
-///          return const Center(
-///            child: CircularProgressIndicator.adaptive(),
-///          );
-///        }
-///        return snapshot.data!;
-///      },
-///    ),
-///    const FooterSection(),
-///  ],
-///)
-///

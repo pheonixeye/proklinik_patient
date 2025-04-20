@@ -107,9 +107,11 @@ class Query extends Equatable {
     );
   }
 
-  String get specialityQuery => "&& speciality_id = '$spec'";
+  String get specialityQuery => "speciality_id = '$spec'";
+
   String get governorateQuery =>
       gov.isNotEmpty ? "&& governorate_id = '$gov'" : '';
+
   String get cityQuery => city.isNotEmpty ? "&& city_id = '$city'" : '';
 
   String get baseQueryFilter => '$specialityQuery $governorateQuery $cityQuery';
