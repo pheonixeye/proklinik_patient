@@ -7,12 +7,24 @@ import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_image_sm.dart'
 import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
 import 'package:patient/router/router.dart';
 
-class DocInfoCardSm extends StatelessWidget {
+class DocInfoCardSm extends StatefulWidget {
   const DocInfoCardSm({
     super.key,
     required this.responseModel,
   });
   final SearchResponseModel responseModel;
+
+  @override
+  State<DocInfoCardSm> createState() => _DocInfoCardSmState();
+}
+
+class _DocInfoCardSmState extends State<DocInfoCardSm> {
+  late final bool _toBuildTags;
+  @override
+  void initState() {
+    super.initState();
+    _toBuildTags = widget.responseModel.doctor_website_info.tags.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +37,13 @@ class DocInfoCardSm extends StatelessWidget {
             AppRouter.docquery,
             pathParameters: {
               ...defaultPathParameters(context),
-              "docid": responseModel.doctor.id.toString(),
+              "docid": widget.responseModel.doctor.id.toString(),
             },
-            extra: responseModel,
+            extra: widget.responseModel,
           );
         },
         child: Container(
-          height: 450,
+          height: _toBuildTags ? 450 : 370,
           decoration: const BoxDecoration(
             color: Colors.white,
           ),
@@ -57,13 +69,13 @@ class DocInfoCardSm extends StatelessWidget {
                             ///image avatar
                             //todo: modify to recieve avatar link
                             DocImageSm(
-                              doctor: responseModel.doctor,
+                              doctor: widget.responseModel.doctor,
                             ),
                             const SizedBox(width: 10),
 
                             ///doctor data
                             DocDataSmUpper(
-                              responseModel: responseModel,
+                              responseModel: widget.responseModel,
                             ),
                             const SizedBox(width: 10),
                           ],
@@ -71,9 +83,10 @@ class DocInfoCardSm extends StatelessWidget {
                       ),
 
                       ///tag filer chips
-                      TagsRowXlSm(
-                        tags: responseModel.doctor_website_info.tags,
-                      ),
+                      if (_toBuildTags)
+                        TagsRowXlSm(
+                          tags: widget.responseModel.doctor_website_info.tags,
+                        ),
                     ],
                   ),
                 ),
@@ -81,7 +94,7 @@ class DocInfoCardSm extends StatelessWidget {
               Expanded(
                 flex: 22,
                 child: DocDataSmLower(
-                  responseModel: responseModel,
+                  responseModel: widget.responseModel,
                 ),
               ),
             ],

@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_num.dart';
+import 'package:patient/models/review/review.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/review.dart';
 import 'package:provider/provider.dart';
 
 class RatingCardXl extends StatelessWidget {
@@ -52,7 +52,7 @@ class RatingCardXl extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            review.body,
+                            review.review,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: const TextStyle(
@@ -70,7 +70,7 @@ class RatingCardXl extends StatelessWidget {
                     builder: (context, l, _) {
                       return ListTile(
                         title: Text(
-                          review.parseUserName(l.isEnglish, context),
+                          review.exposedPatientName,
                           style: TextStyle(
                             fontSize: 14,
                             color: AppTheme.mainFontColor,
@@ -78,8 +78,8 @@ class RatingCardXl extends StatelessWidget {
                         ),
                         subtitle: Text(
                           //todo: modify date format
-                          DateFormat("dd/MM/yyyy", l.lang)
-                              .format(DateTime.parse(review.date_time)),
+                          DateFormat("dd / MM / yyyy", l.lang)
+                              .format(DateTime.parse(review.created)),
                           style: TextStyle(
                             fontSize: 10,
                             color: AppTheme.mainFontColor,
@@ -135,18 +135,5 @@ class RatingCardXl extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-extension ParsedUserName on Review {
-  String parseUserName(bool isEnglish, BuildContext context) {
-    if (user_name.contains("Guest")) {
-      final split = user_name.split('-');
-      final name = isEnglish ? split[0] : 'زائر';
-      final number = isEnglish ? split[1] : split[1].toArabicNumber(context);
-      return '$name-$number';
-    } else {
-      return user_name;
-    }
   }
 }

@@ -5,6 +5,8 @@ import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/l
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_info_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
 import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
+import 'package:patient/providers/px_doctor_reviews.dart';
+import 'package:provider/provider.dart';
 
 class MainProfileSectionXl extends StatelessWidget {
   const MainProfileSectionXl({
@@ -17,27 +19,30 @@ class MainProfileSectionXl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 690,
-      child: Column(
-        children: [
-          MainInfoCardXl(model: model),
+      child: Consumer<PxDocReviews>(
+        builder: (context, r, _) {
+          final _reviews = r.reviews;
+          return Column(
+            children: [
+              MainInfoCardXl(model: model),
 
-          ///doctor profile about card
-          AboutCardXl(model: model),
+              ///doctor profile about card
+              AboutCardXl(model: model),
 
-          ///doctor overall reviews card
-          OverallReviewsCardXl(model: model),
+              ///doctor overall reviews card
+              OverallReviewsCardXl(model: model),
 
-          ///rating cards
-          //TODO:
+              ///rating cards
+              //todo:
+              if (_reviews != null)
+                ..._reviews.map((review) => RatingCardXl(review: review)),
 
-          // ...model.reviews.map((review) => RatingCardXl(
-          //       review: review,
-          //     )),
-
-          ///load more button
-          // const Divider(),
-          const LoadMoreReviewsCardXl(),
-        ],
+              ///load more button
+              // const Divider(),
+              const LoadMoreReviewsCardXl(),
+            ],
+          );
+        },
       ),
     );
   }

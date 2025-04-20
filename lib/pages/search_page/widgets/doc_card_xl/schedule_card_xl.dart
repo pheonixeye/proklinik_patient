@@ -302,7 +302,8 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                     decoration: BoxDecoration(
                       color: isAvailable
                           ? AppTheme.secondaryOrangeColor
-                          : AppTheme.secondaryOrangeColor.withOpacity(0.3),
+                          : AppTheme.secondaryOrangeColor
+                              .withValues(alpha: 0.3),
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(8),
                         bottomRight: Radius.circular(8),

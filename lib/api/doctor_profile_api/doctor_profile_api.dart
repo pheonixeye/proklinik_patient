@@ -16,14 +16,11 @@ class DoctorProfileApi {
 
   static const String clinicsCollection = 'clinics';
 
-  // static const String _expand =
-  //     'doc_id, doc_id.degree_id, doc_id.speciality_id, speciality_id, city_id, governorate_id, attendance_type_id, venue_id, doctor_website_info_via_doc_id, clinic_waiting_time_via_clinic_id';
-
   static const String _doctorExpand =
       'degree_id, speciality_id, doctor_website_info_via_doc_id';
 
   static const String _clinicExpand =
-      'city_id, governorate_id, attendance_type_id, venue_id, clinic_waiting_time_via_clinic_id';
+      'city_id, governorate_id, attendance_type_id, venue_id, speciality_id, clinic_waiting_time_via_clinic_id';
 
   Future<SearchResponseModel> fetch() async {
     final _fetchDoctorResponse =
@@ -31,14 +28,16 @@ class DoctorProfileApi {
               doc_id,
               expand: _doctorExpand,
             );
-
+    // prettyPrint('DoctorProfileApi()._fetchDoctorResponse');
+    // prettyPrint(_fetchDoctorResponse);
     final _fetchClinicResponse = await PocketbaseHelper.pb
         .collection(clinicsCollection)
         .getFirstListItem(
           "doc_id = '$doc_id'",
           expand: _clinicExpand,
         );
-
+    // prettyPrint('DoctorProfileApi()._fetchClinicResponse');
+    // prettyPrint(_fetchClinicResponse);
     final _model = SearchResponseModel(
       doctor: Doctor.fromJson({
         ..._fetchDoctorResponse.toJson(),
@@ -66,13 +65,11 @@ class DoctorProfileApi {
       }),
       total_count: 1,
       total_pages: 1,
-      clinic_waiting_time: _fetchClinicResponse
-          .get<RecordModel>('expand.clinic_waiting_time')
-          .getIntValue('waiting_time'),
+      clinic_waiting_time: _fetchClinicResponse.get<List<dynamic>>(
+          'expand.clinic_waiting_time_via_clinic_id')[0]['waiting_time'],
       doctor_website_info: DoctorWebsiteInfo.fromJson({
         ..._fetchDoctorResponse
-            .get<RecordModel>('expand.doctor_website_info')
-            .toJson(),
+            .get<List<dynamic>>('expand.doctor_website_info_via_doc_id')[0],
       }),
     );
 

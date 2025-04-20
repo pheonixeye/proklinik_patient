@@ -4,6 +4,7 @@ import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/stars_from_num.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:patient/utils/utils_keys.dart';
 
 class OverallReviewsCardXl extends StatelessWidget {
   const OverallReviewsCardXl({super.key, required this.model});
@@ -23,6 +24,7 @@ class OverallReviewsCardXl extends StatelessWidget {
           ),
         ),
         child: ListTile(
+          key: UtilsKeys.showReviewsScrollKey,
           isThreeLine: true,
           title: Text(
             context.loc.patientReviews,
@@ -48,8 +50,6 @@ class OverallReviewsCardXl extends StatelessWidget {
                     else
                       ...model.doctor_website_info.average_rating
                           .toStars(size: 32, padding: const EdgeInsets.all(4)),
-                    // ...model.doctor.rating
-                    //     .toStars(size: 32, padding: const EdgeInsets.all(4)),
                   ],
                 ),
               ),
@@ -77,7 +77,7 @@ class OverallReviewsCardXl extends StatelessWidget {
                         child: Text(
                           model.doctor_website_info.average_rating == 0
                               ? "../.."
-                              : "${model..doctor_website_info.average_rating.toStringAsFixed(1).toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
+                              : "${model.doctor_website_info.average_rating.toStringAsFixed(1).toArabicNumber(context)} / ${5.toString().toArabicNumber(context)}",
                           style: const TextStyle(
                             color: Colors.white,
                           ),
@@ -90,7 +90,7 @@ class OverallReviewsCardXl extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "${context.loc.from} ${model..doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
+                  "${context.loc.from} ${model.doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
                   style: TextStyle(
                     color: AppTheme.mainFontColor,
                     fontSize: 14,

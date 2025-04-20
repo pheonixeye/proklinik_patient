@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
+import 'package:patient/api/reviews_api/reviews_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
 import 'package:patient/models/query_model/query.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
@@ -24,6 +24,7 @@ import 'package:patient/pages/under_construction/under_construction_page.dart';
 import 'package:patient/pages/visit_update_page/visit_update_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/px_doctor_reviews.dart';
 import 'package:patient/providers/reviews_px.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
@@ -71,8 +72,12 @@ class AppRouter {
     navigatorKey: UtilsKeys.navigatorKey,
     initialLocation: loading,
     redirect: (context, state) {
+      if (state.fullPath != null && state.fullPath! == '/') {
+        context.read<PxLocale>().setLang("en");
+        return "/en";
+      }
       if (kDebugMode) {
-        print(state.fullPath);
+        print('state.fullPath: (${state.fullPath})');
       }
       final lang = state.pathParameters['lang'];
       if (lang == null) {
@@ -299,30 +304,31 @@ class AppRouter {
                     builder: (context, state) {
                       final query = state.pathParameters;
                       final docid = query["docid"];
-                      final _searchModel = state.extra as SearchResponseModel?;
                       if (docid == null || docid.isEmpty) {
                         throw Exception(
                             "Invalid Doctor Id.(from docquery route)");
                       }
                       final key = ValueKey((docid, state.pageKey));
-                      if (_searchModel == null) {
-                        return DocProfilePage(
-                          key: key,
-                          searchResponseModel: _searchModel,
-                        );
-                      } else {
-                        return ChangeNotifierProvider(
-                          create: (context) => PxDocProfile(
-                            service: DoctorProfileApi(
-                              doc_id: docid,
+
+                      return MultiProvider(
+                        providers: [
+                          ChangeNotifierProvider(
+                            create: (context) => PxDocProfile(
+                              service: DoctorProfileApi(
+                                doc_id: docid,
+                              ),
                             ),
                           ),
-                          child: DocProfilePage(
-                            key: key,
-                            searchResponseModel: null,
+                          ChangeNotifierProvider(
+                            create: (context) => PxDocReviews(
+                              service: ReviewsApi(
+                                doc_id: docid,
+                              ),
+                            ),
                           ),
-                        );
-                      }
+                        ],
+                        child: DocProfilePage(key: key),
+                      );
                     },
                   ),
                   GoRoute(

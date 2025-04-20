@@ -11,6 +11,7 @@ import 'package:patient/models/search_response_model/search_response_model.dart'
 import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:patient/utils/utils_keys.dart';
 import 'package:provider/provider.dart';
 
 class MainInfoCardSm extends StatefulWidget {
@@ -164,7 +165,14 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
                                             "${context.loc.overallRating} ${context.loc.from} ${widget.model.doctor_website_info.reviews_count.toString().toArabicNumber(context)} ${context.loc.visitors}",
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            //TODO: Scroll to ratings
+                                            //todo: Scroll to ratings
+                                            Scrollable.ensureVisible(
+                                              UtilsKeys.showReviewsScrollKey
+                                                  .currentContext!,
+                                              curve: Curves.easeIn,
+                                              duration:
+                                                  const Duration(seconds: 1),
+                                            );
                                           },
                                       ),
                                       style: TextStyle(
@@ -226,65 +234,89 @@ class _MainInfoCardSmState extends State<MainInfoCardSm> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                height: 100,
+                child: Column(
                   children: [
                     Expanded(
-                      child: ListTile(
-                        title: const Icon(
-                          Icons.monetization_on,
-                          color: Colors.green,
-                        ),
-                        subtitle: Text.rich(
-                          TextSpan(
-                            text: context.loc.fees,
-                            style: TextStyle(
-                              color: AppTheme.mainFontColor,
-                            ),
-                            children: [
-                              const TextSpan(text: " : "),
-                              TextSpan(
-                                text:
-                                    "${widget.model.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              title: const Icon(
+                                Icons.monetization_on,
+                                color: Colors.green,
                               ),
-                            ],
+                              subtitle: Text.rich(
+                                TextSpan(
+                                  text: context.loc.fees,
+                                  style: TextStyle(
+                                    color: AppTheme.mainFontColor,
+                                  ),
+                                  children: [
+                                    const TextSpan(text: " : "),
+                                    TextSpan(
+                                      text:
+                                          "${widget.model.clinic.consultation_fees.toString().toArabicNumber(context)} ${context.loc.pound}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          Expanded(
+                            child: ListTile(
+                              title: const Icon(
+                                Icons.timer,
+                                color: Colors.green,
+                              ),
+                              subtitle: Text.rich(
+                                TextSpan(
+                                  text: context.loc.waitingTime,
+                                  style: TextStyle(
+                                    color: AppTheme.mainFontColor,
+                                  ),
+                                  children: [
+                                    const TextSpan(text: " : "),
+                                    TextSpan(
+                                      text:
+                                          "${widget.model.clinic_waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        title: const Icon(
-                          Icons.timer,
+                    //followup_fees && duration
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.info_outlined,
                           color: Colors.green,
                         ),
-                        subtitle: Text.rich(
-                          TextSpan(
-                            text: context.loc.waitingTime,
-                            style: TextStyle(
-                              color: AppTheme.mainFontColor,
-                            ),
-                            children: [
-                              const TextSpan(text: " : "),
-                              TextSpan(
-                                text:
-                                    "${widget.model.clinic_waiting_time.toString().toArabicNumber(context)} ${context.loc.minutes}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                        const SizedBox(width: 10),
+                        Text(
+                          widget.model.clinic.followupInfo(context),
+                          style: TextStyle(
+                            color: AppTheme.mainFontColor,
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                      ),
+                      ],
                     ),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),

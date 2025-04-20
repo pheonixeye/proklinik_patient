@@ -30,8 +30,8 @@ class HxSearchClinics {
     // prettyPrint(_response);
 
     final _searchResults = _response.items.map((item) {
-      prettyPrint(
-          item.get<RecordModel>('expand.doc_id.expand.speciality_id').toJson());
+      // prettyPrint(
+      //     item.get<RecordModel>('expand.doc_id.expand.speciality_id').toJson());
       return SearchResponseModel.fromJson({
         'clinic_waiting_time': item.get<List<dynamic>>(
             'expand.clinic_waiting_time_via_clinic_id')[0]['waiting_time'],

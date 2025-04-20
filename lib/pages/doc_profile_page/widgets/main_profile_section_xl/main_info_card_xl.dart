@@ -8,6 +8,7 @@ import 'package:patient/functions/stars_from_num.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/theme/app_theme.dart';
+import 'package:patient/utils/utils_keys.dart';
 import 'package:provider/provider.dart';
 
 class MainInfoCardXl extends StatefulWidget {
@@ -213,7 +214,14 @@ class _MainInfoCardXlState extends State<MainInfoCardXl> {
                                       text: context.loc.showAllReviews,
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          //TODO: Scroll to reviews
+                                          //todo: Scroll to reviews
+                                          Scrollable.ensureVisible(
+                                            UtilsKeys.showReviewsScrollKey
+                                                .currentContext!,
+                                            curve: Curves.easeIn,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                          );
                                         }),
                                   style: TextStyle(
                                     color: AppTheme.appBarColor,

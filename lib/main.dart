@@ -13,10 +13,11 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // usePathUrlStrategy();
+
   if (kIsWeb) {
     MetaSEO().config();
   }
+
   runApp(const AppProvider());
 }
 

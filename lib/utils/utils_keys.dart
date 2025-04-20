@@ -6,4 +6,6 @@ class UtilsKeys {
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   static final navigatorKey = GlobalKey<NavigatorState>();
+
+  static final showReviewsScrollKey = GlobalKey();
 }

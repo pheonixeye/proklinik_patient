@@ -5,9 +5,7 @@ import 'package:patient/models/search_response_model/search_response_model.dart'
 class PxDocProfile extends ChangeNotifier {
   final DoctorProfileApi service;
 
-  PxDocProfile({
-    required this.service,
-  }) {
+  PxDocProfile({required this.service}) {
     _init();
   }
 

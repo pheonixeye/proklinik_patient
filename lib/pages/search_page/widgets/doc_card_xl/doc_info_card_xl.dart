@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/functions/scroll_direction.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
@@ -68,7 +69,7 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
               AppRouter.docquery,
               pathParameters: {
                 ...defaultPathParameters(context),
-                "docid": widget.responseModel.doctor.id.toString(),
+                "docid": widget.responseModel.doctor.id,
               },
               extra: widget.responseModel,
             );
@@ -148,12 +149,11 @@ class _DocInfoCardXlState extends State<DocInfoCardXl> {
                             //todo: accept reservation type
                             Consumer<PxLocale>(
                               builder: (context, l, _) {
-                                final attendence =
+                                final attendance =
                                     widget.responseModel.clinic.attendance_type;
                                 return Text(
-                                  l.isEnglish
-                                      ? attendence.name_en
-                                      : attendence.name_ar,
+                                  attendance
+                                      .formattedAttendanceType(l.isEnglish),
                                 );
                               },
                             ),
