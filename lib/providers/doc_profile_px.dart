@@ -9,7 +9,7 @@ class PxDocProfile extends ChangeNotifier {
     _init();
   }
 
-  static SearchResponseModel? _responseModel;
+  SearchResponseModel? _responseModel;
   SearchResponseModel? get responseModel => _responseModel;
 
   Future<void> _init() async {

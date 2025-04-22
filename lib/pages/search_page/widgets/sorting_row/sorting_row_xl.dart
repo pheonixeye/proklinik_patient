@@ -21,14 +21,14 @@ class SortingRowXl extends StatelessWidget {
           while (a.model == null) {
             return const LinearProgressIndicator();
           }
-          final searchSpec = l.isEnglish
-              ? sc.responseModel?.first.clinic.speciality.name_en
-              : sc.responseModel?.first.clinic.speciality.name_ar;
+          final _spec = a.model!.specialities
+              .firstWhere((spec) => spec.id == sc.service.query.spec);
+          final searchSpec = l.isEnglish ? _spec.name_en : _spec.name_ar;
           return Row(
             children: [
               //todo: search speciality
               Text(
-                searchSpec ?? '',
+                searchSpec,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -37,12 +37,19 @@ class SortingRowXl extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               //todo: number of results
-              Text(
-                "(${"${sc.responseModel?.length.toString().toArabicNumber(context)}"} ${context.loc.doctor})",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppTheme.mainFontColor,
-                ),
+              Builder(
+                builder: (context) {
+                  final _docCount = sc.responseModel == null
+                      ? '0'
+                      : '${sc.responseModel!.length}';
+                  return Text(
+                    "(${_docCount.toArabicNumber(context)} ${context.loc.doctor})",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppTheme.mainFontColor,
+                    ),
+                  );
+                },
               ),
               const Spacer(flex: 3),
               Text(

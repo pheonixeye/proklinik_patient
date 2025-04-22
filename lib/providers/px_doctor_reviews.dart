@@ -13,8 +13,10 @@ class PxDocReviews extends ChangeNotifier {
 
   static const int _perPage = 5;
 
-  static List<Review>? _reviews;
+  List<Review>? _reviews;
   List<Review>? get reviews => _reviews;
+
+  List<Review> _lastFetchResult = [];
 
   static int _page = 1;
   int get page => _page;
@@ -30,6 +32,7 @@ class PxDocReviews extends ChangeNotifier {
       perPage: _perPage,
     );
     _reviews ??= [];
+    _lastFetchResult = _result;
     _reviews?.addAll(_result);
     notifyListeners();
     _isLoading = false;
@@ -42,6 +45,9 @@ class PxDocReviews extends ChangeNotifier {
       await _fetchDoctorReviews();
       return;
     }
+    if (_lastFetchResult.length < 5 && _reviews != null) {
+      return;
+    }
     _isLoading = true;
     notifyListeners();
     _page++;
@@ -49,6 +55,7 @@ class PxDocReviews extends ChangeNotifier {
       page: _page,
       perPage: _perPage,
     );
+    _lastFetchResult = _result;
     _reviews?.addAll(_result);
     notifyListeners();
     _isLoading = false;

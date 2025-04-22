@@ -26,18 +26,19 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Consumer2<PxSearchController, PxLocale>(
       builder: (context, sc, l, _) {
-        while (sc.responseModel == null) {
-          return const CentralLoading();
-        }
-        while (sc.responseModel != null && sc.responseModel!.isEmpty) {
-          return const NoResultsFound();
-        }
+        // while (sc.responseModel == null) {
+        //   return const CentralLoading();
+        // }
+        // while (sc.responseModel != null && sc.responseModel!.isEmpty) {
+        //   return const NoResultsFound();
+        // }
 
         return Container(
           decoration: const BoxDecoration(
             color: AppTheme.greyBackgroundColor,
           ),
           child: ListView(
+            cacheExtent: 3000,
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -58,10 +59,19 @@ class _SearchPageState extends State<SearchPage> {
                           context.isMobile
                               ? const SortingRowSm()
                               : const SortingRowXl(),
-                          if (sc.responseModel!.isEmpty)
+                          if (sc.responseModel == null)
                             Padding(
                               padding: EdgeInsets.only(
-                                  top: context.isMobile ? 0 : 50.0),
+                                top: context.isMobile ? 0 : 200.0,
+                              ),
+                              child: const CentralLoading(),
+                            )
+                          else if (sc.responseModel != null &&
+                              sc.responseModel!.isEmpty)
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: context.isMobile ? 0 : 100.0,
+                              ),
                               child: const NoResultsFound(),
                             )
                           else

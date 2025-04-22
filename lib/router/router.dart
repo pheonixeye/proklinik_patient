@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
 import 'package:patient/api/reviews_api/reviews_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
+import 'package:patient/models/doctor/doctor.dart';
 import 'package:patient/models/query_model/query.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
@@ -32,7 +33,6 @@ import 'package:patient/router/meta_seo_helper.dart';
 import 'package:patient/router/schema_org.dart';
 import 'package:patient/utils/utils_keys.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
-import 'package:proklinik_models/models/doctor.dart';
 import 'package:provider/provider.dart';
 
 const _langs = ["en", "ar"];
@@ -62,9 +62,9 @@ class AppRouter {
   //todo: thankyou page
   static const String thankyou = "thankyou";
   //todo: visit update / delete page
-  static const String visit = "visit/:month/:year/:visit_id";
+  static const String visit = "visit/:month/:year/:visit_id"; //TODO:
   //todo: review submission page
-  static const String review = "review/:month/:year/:visit_id";
+  static const String review = "review/:month/:year/:visit_id"; //TODO:
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
@@ -127,7 +127,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 name: home,
-                path: home,
+                path: home, // /:lang
                 builder: (context, state) {
                   final lang = state.pathParameters["lang"]!;
                   MetaTagsHelper tags = MetaTagsHelper(
@@ -198,7 +198,7 @@ class AppRouter {
                   ),
                   GoRoute(
                     name: err,
-                    path: err,
+                    path: err, // :lang/404
                     builder: (context, state) {
                       return ErrorPage(
                         key: state.pageKey,
@@ -313,6 +313,7 @@ class AppRouter {
                       return MultiProvider(
                         providers: [
                           ChangeNotifierProvider(
+                            key: key,
                             create: (context) => PxDocProfile(
                               service: DoctorProfileApi(
                                 doc_id: docid,
@@ -320,6 +321,7 @@ class AppRouter {
                             ),
                           ),
                           ChangeNotifierProvider(
+                            key: key,
                             create: (context) => PxDocReviews(
                               service: ReviewsApi(
                                 doc_id: docid,
