@@ -22,9 +22,9 @@ class HxSearchClinics {
           page: query.pageNumber,
           perPage: _perPage,
           filter:
-              "${query.baseQueryFilter} $_publishFilter ${query.availabilityQuery}",
+              "${query.baseFilter} $_publishFilter ${query.availabilityFilter} ${query.degreeFilter} ${query.distanceFilter}",
           expand: _expand,
-          sort: '-created',
+          sort: query.sortingQuery,
         );
 
     // prettyPrint(_response);

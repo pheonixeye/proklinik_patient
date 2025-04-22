@@ -243,6 +243,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get location => 'الموقع';
 
   @override
+  String get distance => 'المسافة';
+
+  @override
   String get any => 'كل المواقع';
 
   @override

@@ -7,6 +7,7 @@ import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/models/app_constants_model/_models/city.dart';
 import 'package:patient/models/app_constants_model/_models/governorate.dart';
 import 'package:patient/models/app_constants_model/_models/speciality.dart';
+import 'package:patient/models/sorting_model/sorting_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/px_app_constants.dart';
 import 'package:patient/router/router.dart';
@@ -211,10 +212,13 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                             },
 
                             ///symbols :
-                            ///av => availability
+                            ///av => availabilityFilter
                             ///fe => fees
-                            ///deg => degree
+                            ///deg => degreeFilter
                             ///so => sort
+                            ///lo => locationFilter
+                            ///lon => user.lon
+                            ///lat => user.lat
                             queryParameters: {
                               "type": SearchType.clinic.name,
                               "spec": _speciality?.id,
@@ -224,7 +228,10 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               "av": "any",
                               "fe": "any",
                               "deg": "any",
-                              "so": "best-match",
+                              "lo": "any",
+                              "lon": '0',
+                              "lat": '0',
+                              "so": SortingModel.best_match,
                             },
                           );
                         }

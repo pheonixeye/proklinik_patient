@@ -243,6 +243,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get location => 'Location';
 
   @override
+  String get distance => 'Distance';
+
+  @override
   String get any => 'Any';
 
   @override

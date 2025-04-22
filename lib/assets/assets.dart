@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart' show debugPrint;
+
 class Assets {
   const Assets();
 
@@ -24,8 +26,10 @@ class Assets {
   //   return "assets/images/doc_avatars/av${syndId}_.jpeg";
   // }
 
+  static final randomInt = Random().nextInt(9) + 1;
   static String doctorEmptyAvatar() {
-    final randomInt = Random().nextInt(9) + 1;
+    debugPrint('Assets().doctorEmptyAvatar($randomInt)');
+    //TODO: too much function calls
     return "assets/images/doc_avatars/av${randomInt}_.jpeg";
   }
 

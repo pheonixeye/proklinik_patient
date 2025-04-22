@@ -1,7 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
 import 'package:equatable/equatable.dart';
 
 class SortingModel extends Equatable {
+  static const String best_match = 'best_match';
+  static const String waiting_time = 'waiting_time';
+  static const String top_rated = 'top_rated';
+
   final String id;
   final String en;
   final String ar;
@@ -21,25 +25,7 @@ class SortingModel extends Equatable {
       id: "1",
       en: "Best Match",
       ar: "الاكثر تطابقا",
-      value: "best-match",
-    );
-  }
-
-  factory SortingModel.priceLowToHigh() {
-    return const SortingModel(
-      id: "2",
-      en: "Price : Low To High",
-      ar: "الاقل سعرا",
-      value: "low-high",
-    );
-  }
-
-  factory SortingModel.priceHighToLow() {
-    return const SortingModel(
-      id: "3",
-      en: "Price : High To Low",
-      ar: "الاكثر سعرا",
-      value: "high-low",
+      value: SortingModel.best_match,
     );
   }
 
@@ -48,7 +34,7 @@ class SortingModel extends Equatable {
       id: "4",
       en: "Waiting Time",
       ar: "اقل وقت انتظار",
-      value: "waiting-time",
+      value: SortingModel.waiting_time,
     );
   }
 
@@ -57,34 +43,32 @@ class SortingModel extends Equatable {
       id: "5",
       en: "Top Rated",
       ar: "اعلي التقييمات",
-      value: "top-rated",
+      value: SortingModel.top_rated,
     );
   }
 }
 
 List<SortingModel> sortingParameters = [
   SortingModel.bestMatch(),
-  // SortingModel.priceLowToHigh(),
-  // SortingModel.priceHighToLow(),
   SortingModel.waitingTime(),
   SortingModel.topRated(),
 ];
 
 enum SortingModelEnum {
-  // priceHighToLow('high-low'),
-  // priceLowToHigh('low-high'),
-  waitingTime('waiting-time'),
-  empty('');
+  bestMatch(SortingModel.best_match),
+  waitingTime(SortingModel.waiting_time),
+  topRated(SortingModel.top_rated),
+  any(SortingModel.best_match);
 
   final String value;
   const SortingModelEnum(this.value);
 
   factory SortingModelEnum.fromString(String value) {
     return switch (value) {
-      // 'high-low' => SortingModelEnum.priceHighToLow,
-      // 'low-high' => SortingModelEnum.priceLowToHigh,
-      'waiting-time' => SortingModelEnum.waitingTime,
-      _ => SortingModelEnum.empty,
+      SortingModel.best_match => SortingModelEnum.bestMatch,
+      SortingModel.waiting_time => SortingModelEnum.waitingTime,
+      SortingModel.top_rated => SortingModelEnum.topRated,
+      _ => SortingModelEnum.any,
     };
   }
 }

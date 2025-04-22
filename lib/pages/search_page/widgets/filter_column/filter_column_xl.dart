@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/search_page/widgets/filter_column/filter_items.dart';
+import 'package:patient/pages/search_page/widgets/filter_column/column_filter_items.dart';
 import 'package:patient/theme/app_theme.dart';
 
 class FilterColumnXl extends StatefulWidget {
@@ -59,7 +59,7 @@ class _FilterColumnXlState extends State<FilterColumnXl> {
                   ],
                 ),
               ),
-              const FilterItems(),
+              const FilterColumnItems(),
             ],
           ),
         ),

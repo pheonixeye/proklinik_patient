@@ -33,6 +33,7 @@ dependencies:
   meta_seo: ^3.0.9
   flutter_schema_org: ^1.0.0
   cached_network_image: ^3.4.1
+  geolocator: ^14.0.0
       
 
 

@@ -563,6 +563,12 @@ abstract class AppLocalizations {
   /// **'Location'**
   String get location;
 
+  /// No description provided for @distance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get distance;
+
   /// No description provided for @any.
   ///
   /// In en, this message translates to:

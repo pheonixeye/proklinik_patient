@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:patient/models/filter_model.dart/filter_model.dart';
+import 'package:patient/models/sorting_model/sorting_model.dart';
 
 class Query extends Equatable {
   final String type;
@@ -10,6 +12,9 @@ class Query extends Equatable {
   final String fees;
   final String degree;
   final String sort;
+  final String lo;
+  final String lon;
+  final String lat;
 
   const Query({
     required this.type,
@@ -21,6 +26,9 @@ class Query extends Equatable {
     required this.fees,
     required this.degree,
     required this.sort,
+    required this.lo,
+    required this.lon,
+    required this.lat,
   });
 
   Query copyWith({
@@ -33,6 +41,9 @@ class Query extends Equatable {
     String? fees,
     String? degree,
     String? sort,
+    String? lo,
+    String? lon,
+    String? lat,
   }) {
     return Query(
       type: type ?? this.type,
@@ -44,6 +55,9 @@ class Query extends Equatable {
       fees: fees ?? this.fees,
       degree: degree ?? this.degree,
       sort: sort ?? this.sort,
+      lo: lo ?? this.lo,
+      lon: lon ?? this.lon,
+      lat: lat ?? this.lat,
     );
   }
 
@@ -58,6 +72,9 @@ class Query extends Equatable {
       'fe': fees,
       'deg': degree,
       'so': sort,
+      'lo': lo,
+      'lon': lon,
+      'lat': lat,
     };
   }
 
@@ -73,6 +90,9 @@ class Query extends Equatable {
       fees: '',
       degree: '',
       sort: '',
+      lo: '',
+      lon: '0',
+      lat: '0',
     );
   }
 
@@ -87,6 +107,9 @@ class Query extends Equatable {
       fees: 'any',
       degree: 'any',
       sort: 'best-match',
+      lo: 'any',
+      lon: '0',
+      lat: '0',
     );
   }
 
@@ -103,33 +126,60 @@ class Query extends Equatable {
       availability: map['av'] ?? "any",
       fees: map['fe'] ?? "any",
       degree: map['deg'] ?? "any",
-      sort: map['so'] ?? "best-match",
+      sort: map['so'] ?? "best_match",
+      lo: map['lo'] ?? 'any',
+      lon: map['lon'] ?? '0',
+      lat: map['lat'] ?? '0',
     );
   }
 
-  String get specialityQuery => "speciality_id = '$spec'";
+  String get specialityFilter => "speciality_id = '$spec'";
 
-  String get governorateQuery =>
+  String get governorateFilter =>
       gov.isNotEmpty ? "&& governorate_id = '$gov'" : '';
 
-  String get cityQuery => city.isNotEmpty ? "&& city_id = '$city'" : '';
+  String get cityFilter => city.isNotEmpty ? "&& city_id = '$city'" : '';
 
-  String get baseQueryFilter => '$specialityQuery $governorateQuery $cityQuery';
+  String get baseFilter => '$specialityFilter $governorateFilter $cityFilter';
 
   int get pageNumber => int.parse(page);
 
-  String get availabilityQuery {
+  String get availabilityFilter {
     final _today = DateTime.now();
-    final _availableToday =
-        '&& schedule.available = true && schedule.intday = ${_today.weekday}';
-    final _availableTommorow =
-        '&& schedule.available = true && schedule.intday = ${_today.weekday == 7 ? 1 : _today.weekday + 1}';
-    return switch (availability) {
-      'today' => _availableToday,
-      'tomorrow' => _availableTommorow,
+    final String _searchIndex = switch (availability) {
+      'today' => '${_today.weekday - 1}', //(index = intday-1)
+      'tommorow' => _today.weekday == 7 ? '0' : '${_today.weekday}',
+      _ => '',
+    };
+
+    final _availableToday = '&& schedule.$_searchIndex.available = true';
+    final _availableTommorow = '&& schedule.$_searchIndex.available = true';
+
+    return switch (AvailabilityFilterEnum.fromString(availability)) {
+      AvailabilityFilterEnum.today => _availableToday,
+      AvailabilityFilterEnum.tommorow => _availableTommorow,
       _ => '',
     };
   }
+
+  String get degreeFilter => switch (degree) {
+        'any' || '' => '',
+        _ => "&& doc_id.degree_id = '$degree'",
+      };
+
+  String get distanceFilter => switch (lo) {
+        'any' || '' => '',
+        _ => "&& geoDistance(location.lon, location.lat, $lon, $lat) <= '$lo'",
+      };
+
+  String get sortingQuery => switch (SortingModelEnum.fromString(sort)) {
+        SortingModelEnum.bestMatch => '-created',
+        SortingModelEnum.waitingTime =>
+          '+clinic_waiting_time_via_clinic_id.waiting_time',
+        SortingModelEnum.topRated =>
+          '-doc_id.doctor_website_info_via_doc_id.average_rating',
+        SortingModelEnum.any => '-created',
+      };
 
   @override
   bool get stringify => true;
@@ -146,6 +196,9 @@ class Query extends Equatable {
       fees,
       degree,
       sort,
+      lo,
+      lon,
+      lat,
     ];
   }
 }
