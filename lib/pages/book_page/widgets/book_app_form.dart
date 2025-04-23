@@ -1,21 +1,17 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/providers/booking_px.dart';
+import 'package:patient/models/app_constants_model/_models/visit_type.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
+import 'package:patient/providers/px_visits.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
-
-const _visitTypes = {
-  "C": (en: "Consultation", ar: "كشف"),
-  "F": (en: "Followup", ar: "استشارة"),
-};
 
 class BookAppForm extends StatefulWidget {
   const BookAppForm({super.key});
@@ -73,14 +69,14 @@ class _BookAppFormState extends State<BookAppForm> {
     return null;
   }
 
-  String? _type;
+  VisitType? _type;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 545,
-      child: Consumer2<PxBooking, PxLocale>(
-        builder: (context, b, l, _) {
+      child: Consumer3<PxVisits, PxAppConstants, PxLocale>(
+        builder: (context, v, a, l, _) {
           return Form(
             key: formKey,
             child: Column(
@@ -166,49 +162,60 @@ class _BookAppFormState extends State<BookAppForm> {
                               const SizedBox(width: 5),
                               Expanded(
                                 flex: 2,
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButtonFormField<String>(
-                                    borderRadius: BorderRadius.circular(8),
-                                    isExpanded: true,
-                                    value: _type,
-                                    elevation: 6,
-                                    alignment: Alignment.center,
-                                    icon: Icon(
-                                      Icons.arrow_drop_down_circle,
-                                      color: AppTheme.appBarColor,
-                                    ),
-                                    hint: Text(
-                                      l.isEnglish
-                                          ? "Visit Type."
-                                          : "نوع الزيارة",
-                                      style: TextStyle(
-                                        fontSize: context.isMobile ? 10 : 14,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0))),
-                                    ),
-                                    items: _visitTypes.entries.map((e) {
-                                      return DropdownMenuItem<String>(
-                                        value: e.value.en,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          l.isEnglish ? e.value.en : e.value.ar,
+                                child: a.model == null
+                                    ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : DropdownButtonHideUnderline(
+                                        child:
+                                            DropdownButtonFormField<VisitType>(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          isExpanded: true,
+                                          value: _type,
+                                          elevation: 6,
+                                          alignment: Alignment.center,
+                                          icon: Icon(
+                                            Icons.arrow_drop_down_circle,
+                                            color: AppTheme.appBarColor,
+                                          ),
+                                          hint: Text(
+                                            l.isEnglish
+                                                ? "Visit Type."
+                                                : "نوع الزيارة",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  context.isMobile ? 10 : 14,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(8.0))),
+                                          ),
+                                          items: a.model?.visit_type.map((e) {
+                                            return DropdownMenuItem<VisitType>(
+                                              value: e,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                l.isEnglish
+                                                    ? e.name_en
+                                                    : e.name_ar,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (value) {
+                                            if (value != null) {
+                                              v.setVisitModel(v
+                                                  .visitResponseModel
+                                                  ?.copyWith(
+                                                visit_type_id: value.id,
+                                              ));
+                                            }
+                                          },
                                         ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      if (value != null) {
-                                        b.setBookingData(b.data?.copyWith(
-                                          type: value,
-                                        ));
-                                      }
-                                    },
-                                  ),
-                                ),
+                                      ),
                               ),
                             ],
                           ),
@@ -228,7 +235,7 @@ class _BookAppFormState extends State<BookAppForm> {
                         Divider(
                           thickness: 1,
                           height: 1,
-                          color: AppTheme.mainFontColor.withOpacity(0.5),
+                          color: AppTheme.mainFontColor.withValues(alpha: 0.5),
                         ),
                         const SizedBox(height: 20),
                         Row(
@@ -244,14 +251,13 @@ class _BookAppFormState extends State<BookAppForm> {
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
                                   //todo: validate form
-                                  b.setBookingData(b.data?.copyWith(
-                                    user_name: _nameController.text.trim(),
-                                    user_phone: _phoneController.text.trim(),
-                                    user_email: _emailController.text.trim(),
+                                  v.setVisitModel(
+                                      v.visitResponseModel!.copyWith(
+                                    patient_name: _nameController.text.trim(),
+                                    patient_phone: _phoneController.text.trim(),
+                                    patient_email: _emailController.text.trim(),
                                   ));
-                                  if (kDebugMode) {
-                                    print(b.data?.toJson());
-                                  }
+
                                   BuildContext? dialogContext;
                                   showDialog(
                                       context: context,
@@ -262,9 +268,11 @@ class _BookAppFormState extends State<BookAppForm> {
                                       });
 
                                   //todo: send booking request
-                                  await b.createAppointment().whenComplete(() {
+                                  await v.createVisit();
+                                  if (dialogContext != null &&
+                                      dialogContext!.mounted) {
                                     Navigator.pop(dialogContext!);
-                                  });
+                                  }
                                   //todo: navigate to post booking info page
                                   if (context.mounted) {
                                     GoRouter.of(context).goNamed(
@@ -305,7 +313,7 @@ class _BookAppFormState extends State<BookAppForm> {
                                       defaultPathParameters(context),
                                 );
                                 //todo: nullify booking data
-                                b.setBookingData(null);
+                                v.setVisitModel(null);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -326,7 +334,7 @@ class _BookAppFormState extends State<BookAppForm> {
                         Divider(
                           thickness: 1,
                           height: 1,
-                          color: AppTheme.mainFontColor.withOpacity(0.5),
+                          color: AppTheme.mainFontColor.withValues(alpha: 0.5),
                         ),
                       ],
                     ),

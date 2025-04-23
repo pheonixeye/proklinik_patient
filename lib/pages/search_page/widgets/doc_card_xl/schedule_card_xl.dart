@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/constants/now.dart';
 import 'package:patient/constants/weekdays.dart';
-import 'package:patient/extensions/concat_on_clinic_shift.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/models/clinic/schedule.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/providers/booking_px.dart';
+import 'package:patient/models/visit/visit_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
+import 'package:patient/providers/px_visits.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -66,35 +67,49 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
   late final Map<String, bool> _smallCardHoverState;
 
   void Function()? get _onTap {
-    //TODO
+    //todo
 
-    // return isAvailable
-    //     ? () {
-    //         //todo: nav to book app page directly
-    //         if (_schedule?.shifts.length == 1) {
-    //           context
-    //               .read<PxBooking>()
-    //               .setBookingData(BookingData.empty().copyWith(
-    //                 date_time: cardDate.toIso8601String(),
-    //                 doc_id: widget.model.doctor.id,
-    //                 clinic_id: widget.model.clinic.id,
-    //                 model: widget.model,
-    //                 day: cardDate.day,
-    //                 month: cardDate.month,
-    //                 year: cardDate.year,
-    //                 startH: _schedule?.shifts.first.startH,
-    //                 startM: _schedule?.shifts.first.startM,
-    //                 endH: _schedule?.shifts.first.endH,
-    //                 endM: _schedule?.shifts.first.endM,
-    //               ));
-    //           GoRouter.of(context).goNamed(
-    //             AppRouter.book,
-    //             pathParameters: defaultPathParameters(context),
-    //             extra: widget.model.doctor,
-    //           );
-    //         }
-    //       }
-    //     : null;
+    return isAvailable
+        ? () {
+            //todo: nav to book app page directly
+            if (_schedule?.shifts.length == 1) {
+              final shift = _schedule?.shifts.first;
+              context.read<PxVisits>().setVisitModel(VisitResponseModel(
+                    id: '',
+                    visit_date: cardDate.toIso8601String(),
+                    doc_id: widget.model.doctor.id,
+                    clinic_id: widget.model.clinic.id,
+                    day: cardDate.day,
+                    month: cardDate.month,
+                    year: cardDate.year,
+                    created: '',
+                    visit_shift: {
+                      'id': shift?.id,
+                      'start_hour': shift?.startH,
+                      'start_minute': shift?.startM,
+                      'end_hour': shift?.endH,
+                      'end_minute': shift?.endM,
+                    },
+                    patient_name: '',
+                    patient_phone: '',
+                    patient_email: '',
+                    patient_id: '',
+                    visit_status_id: context
+                            .read<PxAppConstants>()
+                            .model
+                            ?.initialVisitStatus
+                            .id ??
+                        '',
+                    visit_type_id: '',
+                  ));
+              GoRouter.of(context).goNamed(
+                AppRouter.book,
+                pathParameters: defaultPathParameters(context),
+                extra: widget.model,
+              );
+            }
+          }
+        : null;
   }
 
   double get _opacity => !isAvailable
@@ -198,31 +213,42 @@ class _ScheduleCardXlState extends State<ScheduleCardXl> {
                                     },
                                     child: InkWell(
                                       onTap: () {
-                                        //TODO
-
-                                        // context
-                                        //     .read<PxBooking>()
-                                        //     .setBookingData(
-                                        //         BookingData.empty().copyWith(
-                                        //       // id: const Uuid().v4(),
-                                        //       date_time:
-                                        //           cardDate.toIso8601String(),
-                                        //       doc_id: widget.model.doctor.id,
-                                        //       clinic_id: widget.model.clinic.id,
-                                        //       model: widget.model,
-                                        //       day: cardDate.day,
-                                        //       month: cardDate.month,
-                                        //       year: cardDate.year,
-                                        //       startH: shift.startH,
-                                        //       startM: shift.startM,
-                                        //       endH: shift.endH,
-                                        //       endM: shift.endM,
-                                        //     ));
+                                        context
+                                            .read<PxVisits>()
+                                            .setVisitModel(VisitResponseModel(
+                                              id: '',
+                                              visit_date:
+                                                  cardDate.toIso8601String(),
+                                              doc_id: widget.model.doctor.id,
+                                              clinic_id: widget.model.clinic.id,
+                                              day: cardDate.day,
+                                              month: cardDate.month,
+                                              year: cardDate.year,
+                                              created: '',
+                                              visit_shift: {
+                                                'id': shift.id,
+                                                'start_hour': shift.startH,
+                                                'start_minute': shift.startM,
+                                                'end_hour': shift.endH,
+                                                'end_minute': shift.endM,
+                                              },
+                                              patient_name: '',
+                                              patient_phone: '',
+                                              patient_email: '',
+                                              patient_id: '',
+                                              visit_status_id: context
+                                                      .read<PxAppConstants>()
+                                                      .model
+                                                      ?.initialVisitStatus
+                                                      .id ??
+                                                  '',
+                                              visit_type_id: '',
+                                            ));
                                         GoRouter.of(context).goNamed(
                                           AppRouter.book,
                                           pathParameters:
                                               defaultPathParameters(context),
-                                          extra: widget.model.doctor,
+                                          extra: widget.model,
                                         );
                                       },
                                       child: Card.outlined(

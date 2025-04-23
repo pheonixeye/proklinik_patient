@@ -61,7 +61,7 @@ class DocDataSmLower extends StatelessWidget {
 
               ///reserve now row
               BookRowSm(
-                responseModel: responseModel,
+                model: responseModel,
               ),
               const SizedBox(height: 10),
             ],

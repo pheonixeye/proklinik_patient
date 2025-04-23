@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
 import 'package:patient/api/reviews_api/reviews_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
-import 'package:patient/models/doctor/doctor.dart';
 import 'package:patient/models/query_model/query.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/book_page/book_page.dart';
 import 'package:patient/pages/contact_us_page/contact_us_page.dart';
 import 'package:patient/pages/doc_profile_page/doc_profile_page.dart';
@@ -144,7 +144,7 @@ class AppRouter {
                   GoRoute(
                     //#visit update page
                     name: visit,
-                    path: visit,
+                    path: visit, //:lang/visit/:visit_id
                     builder: (context, state) {
                       final visit_id = state.pathParameters['visit_id'];
                       final month = state.pathParameters['month'];
@@ -264,14 +264,15 @@ class AppRouter {
                   ),
                   GoRoute(
                     name: book,
-                    path: book,
+                    path: book, // :lang/book
                     builder: (context, state) {
+                      //TODO: think about adding a direct booking link
                       try {
                         //HACK:
-                        final doctor = state.extra as Doctor?;
+                        final model = state.extra as SearchResponseModel?;
                         return BookPage(
                           key: state.pageKey,
-                          doctor: doctor!,
+                          model: model!,
                         );
                       } catch (e) {
                         return const ErrorPage();
@@ -345,6 +346,7 @@ class AppRouter {
                       return ChangeNotifierProvider(
                         key: key,
                         create: (context) => PxSearchController(
+                          url: state.uri.toString(),
                           service: HxSearchClinics(query),
                         ),
                         builder: (context, child) {

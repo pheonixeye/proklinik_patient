@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/models/doctor/doctor.dart';
+import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/book_page/widgets/book_app_form.dart';
 import 'package:patient/pages/book_page/widgets/book_app_info_card.dart';
 import 'package:patient/pages/book_page/widgets/page_error_card.dart';
-import 'package:patient/providers/booking_px.dart';
+import 'package:patient/providers/px_visits.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class BookPage extends StatelessWidget {
   const BookPage({
     super.key,
-    required this.doctor,
+    required this.model,
   });
-  final Doctor doctor;
+  final SearchResponseModel model;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
       children: [
-        Consumer<PxBooking>(
-          builder: (context, b, _) {
-            if (b.data == null) {
+        Consumer<PxVisits>(
+          builder: (context, v, _) {
+            if (v.visitResponseModel == null) {
               ///if booking data is null && to prevent errors from non provided navigation
               return const BookingPageErrorCard();
             }
@@ -41,7 +41,8 @@ class BookPage extends StatelessWidget {
 
                         ///doctor identification card && booking date and time.
                         BookAppInfoCard(
-                          doctor: doctor,
+                          doctor: model.doctor,
+                          clinic: model.clinic,
                         ),
                         const Gap(30),
 

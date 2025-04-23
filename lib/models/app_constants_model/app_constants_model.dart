@@ -36,6 +36,9 @@ class AppConstantsResponseModel extends Equatable {
     required this.site_services,
   });
 
+  VisitStatus get initialVisitStatus =>
+      visit_status.firstWhere((status) => status.name_en == 'attended');
+
   @override
   List<Object> get props {
     return [

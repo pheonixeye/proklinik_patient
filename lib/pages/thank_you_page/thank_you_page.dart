@@ -1,17 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:patient/assets/assets.dart';
-import 'package:patient/extensions/after_layout.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/providers/booking_px.dart';
 import 'package:patient/providers/locale_px.dart';
-import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
 import 'package:provider/provider.dart';
@@ -23,26 +16,11 @@ class ThankYouPage extends StatefulWidget {
   State<ThankYouPage> createState() => _ThankYouPageState();
 }
 
-class _ThankYouPageState extends State<ThankYouPage> with AfterLayoutMixin {
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 3), () {
-      if (context.read<PxBooking>().data == null) {
-        GoRouter.of(context).goNamed(
-          AppRouter.err,
-          pathParameters: defaultPathParameters(context),
-        );
-      }
-    });
-  }
-
+class _ThankYouPageState extends State<ThankYouPage> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<PxBooking, PxLocale>(
-      builder: (context, b, l, _) {
-        while (b.isFetching) {
-          return const CentralLoading();
-        }
+    return Consumer<PxLocale>(
+      builder: (context, l, _) {
         return ListView(
           children: [
             Container(
@@ -53,7 +31,7 @@ class _ThankYouPageState extends State<ThankYouPage> with AfterLayoutMixin {
                   image: const AssetImage(Assets.bg),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.5),
+                    Colors.white.withValues(alpha: 0.5),
                     BlendMode.modulate,
                   ),
                 ),

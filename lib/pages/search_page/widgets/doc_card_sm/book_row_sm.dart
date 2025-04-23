@@ -5,19 +5,20 @@ import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/models/clinic/schedule.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/providers/booking_px.dart';
+import 'package:patient/models/visit/visit_response_model.dart';
 import 'package:patient/providers/locale_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
+import 'package:patient/providers/px_visits.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 
 class BookRowSm extends StatefulWidget {
   const BookRowSm({
     super.key,
-    required this.responseModel,
+    required this.model,
   });
-  final SearchResponseModel responseModel;
+  final SearchResponseModel model;
 
   @override
   State<BookRowSm> createState() => _BookRowSmState();
@@ -35,7 +36,7 @@ class _BookRowSmState extends State<BookRowSm> {
 
   @override
   void initState() {
-    _sorted.addAll(widget.responseModel.clinic.schedule);
+    _sorted.addAll(widget.model.clinic.schedule);
 
     _sorted.sort((a, b) {
       return a.intday.compareTo(b.intday);
@@ -60,8 +61,11 @@ class _BookRowSmState extends State<BookRowSm> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: Consumer<PxLocale>(
-        builder: (context, l, _) {
+      child: Consumer2<PxAppConstants, PxLocale>(
+        builder: (context, a, l, _) {
+          while (a.model == null) {
+            return const SizedBox();
+          }
           final shifts = _schedule!.shifts;
           shifts.sort((a, b) => a.startH.compareTo(b.startH));
           final timeStart = TimeOfDay(
@@ -73,7 +77,7 @@ class _BookRowSmState extends State<BookRowSm> {
             hour: shifts.first.endH.toInt(),
             minute: shifts.first.endM.toInt(),
           );
-          // final timeEndString = timeEnd.format(context);
+          final shift_id = shifts.first.id;
           String? day;
           if (firstAvailableDate == DateTime(now.year, now.month, now.day)) {
             day = context.loc.today;
@@ -119,25 +123,35 @@ class _BookRowSmState extends State<BookRowSm> {
                   backgroundColor: AppTheme.secondaryOrangeColor,
                 ),
                 onPressed: () {
-                  //TODO: nav to book page
+                  //todo: nav to book page
 
-                  // context
-                  //     .read<PxBooking>()
-                  //     .setBookingData(BookingData.empty().copyWith(
-                  //       id: const Uuid().v4(),
-                  //       model: widget.responseModel,
-                  //       doc_id: widget.responseModel.doctor.id,
-                  //       clinic_id: widget.responseModel.clinic.id,
-                  //       date_time: firstAvailableDate!.toIso8601String(),
-                  //       startH: timeStart.hour,
-                  //       startM: timeStart.minute,
-                  //       endH: timeEnd.hour,
-                  //       endM: timeEnd.minute,
-                  //     ));
+                  context.read<PxVisits>().setVisitModel(VisitResponseModel(
+                        id: '',
+                        visit_date: firstAvailableDate!.toIso8601String(),
+                        doc_id: widget.model.doctor.id,
+                        clinic_id: widget.model.clinic.id,
+                        day: firstAvailableDate!.day,
+                        month: firstAvailableDate!.month,
+                        year: firstAvailableDate!.year,
+                        created: '',
+                        visit_shift: {
+                          'id': shift_id,
+                          'start_hour': timeStart.hour,
+                          'start_minute': timeStart.minute,
+                          'end_hour': timeEnd.hour,
+                          'end_minute': timeEnd.minute,
+                        },
+                        patient_name: '',
+                        patient_phone: '',
+                        patient_email: '',
+                        patient_id: '',
+                        visit_status_id: a.model?.initialVisitStatus.id ?? '',
+                        visit_type_id: '',
+                      ));
                   GoRouter.of(context).goNamed(
                     AppRouter.book,
                     pathParameters: defaultPathParameters(context),
-                    extra: widget.responseModel.doctor,
+                    extra: widget.model,
                   );
                 },
                 child: Text(

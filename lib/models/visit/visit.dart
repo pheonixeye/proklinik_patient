@@ -1,5 +1,7 @@
 import 'package:patient/models/app_constants_model/_models/visit_status.dart';
 import 'package:patient/models/app_constants_model/_models/visit_type.dart';
+import 'package:patient/models/clinic/clinic.dart';
+import 'package:patient/models/doctor/doctor.dart';
 import 'package:patient/models/visit/visit_shift.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,8 +10,8 @@ class Visit extends Equatable {
   final String patient_name;
   final String patient_phone;
   final String patient_email;
-  final String doc_id;
-  final String clinic_id;
+  final Doctor doctor;
+  final Clinic clinic;
   final String patient_id;
   final VisitType visit_type;
   final VisitStatus visit_status;
@@ -25,8 +27,8 @@ class Visit extends Equatable {
     required this.patient_name,
     required this.patient_phone,
     required this.patient_email,
-    required this.doc_id,
-    required this.clinic_id,
+    required this.doctor,
+    required this.clinic,
     required this.patient_id,
     required this.visit_type,
     required this.visit_status,
@@ -38,41 +40,41 @@ class Visit extends Equatable {
     required this.created,
   });
 
-  Visit copyWith({
-    String? id,
-    String? patient_name,
-    String? patient_phone,
-    String? patient_email,
-    String? doc_id,
-    String? clinic_id,
-    String? patient_id,
-    VisitType? visit_type,
-    VisitStatus? visit_status,
-    VisitShift? visit_shift,
-    int? day,
-    int? month,
-    int? year,
-    DateTime? visit_date,
-    DateTime? created,
-  }) {
-    return Visit(
-      id: id ?? this.id,
-      patient_name: patient_name ?? this.patient_name,
-      patient_phone: patient_phone ?? this.patient_phone,
-      patient_email: patient_email ?? this.patient_email,
-      doc_id: doc_id ?? this.doc_id,
-      clinic_id: clinic_id ?? this.clinic_id,
-      patient_id: patient_id ?? this.patient_id,
-      visit_type: visit_type ?? this.visit_type,
-      visit_status: visit_status ?? this.visit_status,
-      visit_shift: visit_shift ?? this.visit_shift,
-      day: day ?? this.day,
-      month: month ?? this.month,
-      year: year ?? this.year,
-      visit_date: visit_date ?? this.visit_date,
-      created: created ?? this.created,
-    );
-  }
+  // Visit copyWith({
+  //   String? id,
+  //   String? patient_name,
+  //   String? patient_phone,
+  //   String? patient_email,
+  //   String? doc_id,
+  //   String? clinic_id,
+  //   String? patient_id,
+  //   VisitType? visit_type,
+  //   VisitStatus? visit_status,
+  //   VisitShift? visit_shift,
+  //   int? day,
+  //   int? month,
+  //   int? year,
+  //   DateTime? visit_date,
+  //   DateTime? created,
+  // }) {
+  //   return Visit(
+  //     id: id ?? this.id,
+  //     patient_name: patient_name ?? this.patient_name,
+  //     patient_phone: patient_phone ?? this.patient_phone,
+  //     patient_email: patient_email ?? this.patient_email,
+  //     doc_id: doc_id ?? this.doc_id,
+  //     clinic_id: clinic_id ?? this.clinic_id,
+  //     patient_id: patient_id ?? this.patient_id,
+  //     visit_type: visit_type ?? this.visit_type,
+  //     visit_status: visit_status ?? this.visit_status,
+  //     visit_shift: visit_shift ?? this.visit_shift,
+  //     day: day ?? this.day,
+  //     month: month ?? this.month,
+  //     year: year ?? this.year,
+  //     visit_date: visit_date ?? this.visit_date,
+  //     created: created ?? this.created,
+  //   );
+  // }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -80,8 +82,8 @@ class Visit extends Equatable {
       'patient_name': patient_name,
       'patient_phone': patient_phone,
       'patient_email': patient_email,
-      'doc_id': doc_id,
-      'clinic_id': clinic_id,
+      'doctor': doctor.toJson(),
+      'clinic': clinic.toJson(),
       'patient_id': patient_id,
       'visit_type': visit_type.toJson(),
       'visit_status': visit_status.toJson(),
@@ -100,8 +102,8 @@ class Visit extends Equatable {
       patient_name: map['patient_name'] as String,
       patient_phone: map['patient_phone'] as String,
       patient_email: map['patient_email'] as String,
-      doc_id: map['doc_id'] as String,
-      clinic_id: map['clinic_id'] as String,
+      doctor: Doctor.fromJson(map['doctor'] as Map<String, dynamic>),
+      clinic: Clinic.fromJson(map['clinic'] as Map<String, dynamic>),
       patient_id: map['patient_id'] as String,
       visit_type: VisitType.fromJson(map['visit_type'] as Map<String, dynamic>),
       visit_status:
@@ -126,8 +128,8 @@ class Visit extends Equatable {
       patient_name,
       patient_phone,
       patient_email,
-      doc_id,
-      clinic_id,
+      doctor,
+      clinic,
       patient_id,
       visit_type,
       visit_status,
