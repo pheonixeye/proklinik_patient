@@ -12,7 +12,7 @@ class EndDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       width: MediaQuery.sizeOf(context).width * 0.65,
-      backgroundColor: Colors.green.shade500.withOpacity(0.9),
+      backgroundColor: Colors.green.shade500.withValues(alpha: 0.9),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
 import 'package:patient/api/reviews_api/reviews_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
+import 'package:patient/api/visits_api/visits_api.dart';
 import 'package:patient/models/query_model/query.dart';
 import 'package:patient/models/search_response_model/search_response_model.dart';
 import 'package:patient/pages/book_page/book_page.dart';
@@ -62,7 +63,7 @@ class AppRouter {
   //todo: thankyou page
   static const String thankyou = "thankyou";
   //todo: visit update / delete page
-  static const String visit = "visit/:month/:year/:visit_id"; //TODO:
+  static const String visit = "visit/:visit_id"; //todo:
   //todo: review submission page
   static const String review = "review/:month/:year/:visit_id"; //TODO:
   static const String underconstruction = "underconstruction";
@@ -147,20 +148,17 @@ class AppRouter {
                     path: visit, //:lang/visit/:visit_id
                     builder: (context, state) {
                       final visit_id = state.pathParameters['visit_id'];
-                      final month = state.pathParameters['month'];
-                      final year = state.pathParameters['year'];
-                      if (visit_id == null || month == null || year == null) {
+                      if (visit_id == null) {
                         return ErrorPage(
                           key: state.pageKey,
                         );
                       } else {
-                        final key = ValueKey('$month$year$visit_id');
+                        final key = ValueKey(visit_id);
                         return ChangeNotifierProvider(
                           key: key,
                           create: (context) => PxVisitUpdate(
                             visit_id: visit_id,
-                            month: month,
-                            year: year,
+                            service: const VisitsApi(),
                           ),
                           child: VisitUpdatePage(
                             key: key,

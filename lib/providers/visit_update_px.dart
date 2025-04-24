@@ -1,32 +1,19 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
-import 'package:proklinik_models/models/booking_data.dart';
-import 'package:proklinik_models/models/clinic.dart';
-import 'package:proklinik_models/models/doctor.dart';
+import 'package:patient/api/visits_api/visits_api.dart';
+import 'package:patient/models/visit/visit.dart';
 
 class PxVisitUpdate extends ChangeNotifier {
   PxVisitUpdate({
     required this.visit_id,
-    required this.month,
-    required this.year,
+    required this.service,
   }) {
-    date = DateTime(int.parse(year), int.parse(month));
-    visitsCollection = 'visits_${date.month}_${date.year}';
-    fetchBookingData();
+    _fetchBookingData();
   }
 
   final String visit_id;
-  final String month;
-  final String year;
-
-  late final DateTime date;
-
-  late final String visitsCollection;
-
-  Map<String, dynamic>? _data;
-  Map<String, dynamic>? get data => _data;
+  final VisitsApi service;
 
   bool _hasError = false;
   bool get hasError => _hasError;
@@ -37,55 +24,30 @@ class PxVisitUpdate extends ChangeNotifier {
   BookingCardState _state = BookingCardState.data;
   BookingCardState get state => _state;
 
-  BookingData? _bookingData;
-  BookingData? get bookingData => _bookingData;
-
-  BookingData? _newBookingData;
-  BookingData? get newBookingData => _newBookingData;
-
-  Doctor? _doctor;
-  Doctor? get doctor => _doctor;
-
-  Clinic? _clinic;
-  Clinic? get clinic => _clinic;
+  Visit? _visit;
+  Visit? get visit => _visit;
 
   void changeState(BookingCardState state) {
     _state = state;
     notifyListeners();
   }
 
-  void updateBookingDataState(BookingData value) {
-    _bookingData = value;
+  void updateBookingDataState(Visit value) {
+    _visit = value;
     notifyListeners();
   }
 
-  void setNewBookingDataState(BookingData value) {
-    _newBookingData = value;
+  Future<void> _fetchBookingData() async {
+    _visit = await service.fetchVisitById(visit_id);
+    _hasError = false;
     notifyListeners();
-  }
-
-  Future<void> fetchBookingData() async {
-    try {
-      final result = await PocketbaseHelper.fetchClinicVisit(
-        visit_id: visit_id,
-        visitsCollection: visitsCollection,
-      );
-      _data = result;
-      _bookingData = BookingData.fromJson(result);
-      _newBookingData = BookingData.fromJson(result);
-      _doctor = Doctor.fromJson(result['expand']['doc_id']);
-      _clinic = Clinic.fromJson(result['expand']['clinic_id']);
-      _hasError = false;
-      notifyListeners();
-    } catch (e) {
+    try {} catch (e) {
+      debugPrint(e.toString());
+      _visit = null;
       _hasError = true;
-      _data = null;
-      _bookingData = null;
-      _newBookingData = null;
-      _doctor = null;
-      _clinic = null;
       notifyListeners();
     }
+    debugPrint('PxVisitUpdate()._fetchBookingData($visit_id)');
   }
 
   void updateShowThankYou() {
@@ -96,10 +58,9 @@ class PxVisitUpdate extends ChangeNotifier {
   Future<void> updateBookingData({
     required Map<String, dynamic> update,
   }) async {
-    await PocketbaseHelper.updateClinicVisit(
-      visit_id: visit_id,
-      visitsCollection: visitsCollection,
-      update: update,
+    await service.updateVisit(
+      visit_id,
+      update,
     );
   }
 }

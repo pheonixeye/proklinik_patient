@@ -193,7 +193,7 @@ class _FilterColumnItemsState extends State<FilterColumnItems> {
                     value: lo.value,
                     onChanged: (value) async {
                       //todo: implement filtering by location
-                      //TODO: check if implementation is correct
+                      //TODO: check if location search implementation is correct
 
                       try {
                         final _userPositionData =

@@ -65,7 +65,7 @@ class SpecialityRow extends StatelessWidget {
                             child: InkWell(
                               mouseCursor: SystemMouseCursors.click,
                               onTap: () {
-                                //TODO: search by spec
+                                //TODO: search by spec id
                                 GoRouter.of(context).goNamed(
                                   AppRouter.src,
                                   pathParameters:

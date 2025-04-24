@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:patient/constants/now.dart';
 import 'package:patient/constants/weekdays.dart';
-import 'package:patient/extensions/concat_on_clinic_shift.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
+import 'package:patient/models/clinic/clinic.dart';
+import 'package:patient/models/clinic/schedule.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/schedule.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
 class RescheduleCard extends StatefulWidget {
   const RescheduleCard({
     super.key,
-    required this.model,
     required this.index,
+    required this.clinic,
   });
 
-  final ServerResponseModel model;
   final int index;
-
+  final Clinic clinic;
   @override
   State<RescheduleCard> createState() => _RescheduleCardState();
 }
@@ -45,7 +43,7 @@ class _RescheduleCardState extends State<RescheduleCard> {
 
     cardDate = today.add(Duration(days: widget.index));
     try {
-      _schedule = widget.model.clinic.schedule
+      _schedule = widget.clinic.schedule
           .singleWhere((sch) => sch.intday == cardDate.weekday);
     } catch (e) {
       _schedule = null;
@@ -53,13 +51,12 @@ class _RescheduleCardState extends State<RescheduleCard> {
 
     isAvailable = _schedule != null &&
         _schedule!.available &&
-        !widget.model.clinic.off_dates.contains(
+        !widget.clinic.off_dates.contains(
           cardDate.toIso8601String(),
         );
     _smallCardHoverState = !isAvailable
         ? {}
-        : Map.fromEntries(
-            _schedule!.shifts.map((e) => MapEntry(e.concat, false)));
+        : Map.fromEntries(_schedule!.shifts.map((e) => MapEntry(e.id, false)));
     super.initState();
   }
 
@@ -104,16 +101,18 @@ class _RescheduleCardState extends State<RescheduleCard> {
                     final newDate = d.copyWith(
                       day: d.day + widget.index,
                     );
-                    v.setNewBookingDataState(v.newBookingData!.copyWith(
-                      date_time: newDate.toIso8601String(),
-                      day: newDate.day,
-                      month: newDate.month,
-                      year: newDate.year,
-                      startH: _schedule!.shifts.first.startH,
-                      startM: _schedule!.shifts.first.startM,
-                      endH: _schedule!.shifts.first.endH,
-                      endM: _schedule!.shifts.first.endM,
-                    ));
+                    //TODO:
+
+                    // v.setNewBookingDataState(v.newBookingData!.copyWith(
+                    //   date_time: newDate.toIso8601String(),
+                    //   day: newDate.day,
+                    //   month: newDate.month,
+                    //   year: newDate.year,
+                    //   startH: _schedule!.shifts.first.startH,
+                    //   startM: _schedule!.shifts.first.startM,
+                    //   endH: _schedule!.shifts.first.endH,
+                    //   endM: _schedule!.shifts.first.endM,
+                    // ));
                     v.changeState(BookingCardState.confirm);
                   }
                 },
@@ -135,7 +134,7 @@ class _RescheduleCardState extends State<RescheduleCard> {
                         decoration: BoxDecoration(
                           color: isAvailable
                               ? AppTheme.appBarColor
-                              : AppTheme.appBarColor.withOpacity(0.3),
+                              : AppTheme.appBarColor.withValues(alpha: 0.3),
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(8),
                             topRight: Radius.circular(8),
@@ -178,13 +177,13 @@ class _RescheduleCardState extends State<RescheduleCard> {
                                         cursor: SystemMouseCursors.click,
                                         onEnter: (event) {
                                           setState(() {
-                                            _smallCardHoverState[shift.concat] =
+                                            _smallCardHoverState[shift.id] =
                                                 true;
                                           });
                                         },
                                         onExit: (event) {
                                           setState(() {
-                                            _smallCardHoverState[shift.concat] =
+                                            _smallCardHoverState[shift.id] =
                                                 false;
                                           });
                                         },
@@ -196,18 +195,20 @@ class _RescheduleCardState extends State<RescheduleCard> {
                                             final newDate = d.copyWith(
                                               day: d.day + widget.index,
                                             );
-                                            v.setNewBookingDataState(
-                                                v.newBookingData!.copyWith(
-                                              date_time:
-                                                  newDate.toIso8601String(),
-                                              day: newDate.day,
-                                              month: newDate.month,
-                                              year: newDate.year,
-                                              startH: shift.startH,
-                                              startM: shift.startM,
-                                              endH: shift.endH,
-                                              endM: shift.endM,
-                                            ));
+                                            //TODO:
+
+                                            // v.setNewBookingDataState(
+                                            //     v.newBookingData!.copyWith(
+                                            //   date_time:
+                                            //       newDate.toIso8601String(),
+                                            //   day: newDate.day,
+                                            //   month: newDate.month,
+                                            //   year: newDate.year,
+                                            //   startH: shift.startH,
+                                            //   startM: shift.startM,
+                                            //   endH: shift.endH,
+                                            //   endM: shift.endM,
+                                            // ));
                                             v.changeState(
                                                 BookingCardState.confirm);
                                           },
@@ -223,7 +224,7 @@ class _RescheduleCardState extends State<RescheduleCard> {
                                               ),
                                             ),
                                             elevation: _smallCardHoverState[
-                                                        shift.concat] ==
+                                                        shift.id] ==
                                                     true
                                                 ? 8
                                                 : 0,
@@ -297,7 +298,8 @@ class _RescheduleCardState extends State<RescheduleCard> {
                         decoration: BoxDecoration(
                           color: isAvailable
                               ? AppTheme.secondaryOrangeColor
-                              : AppTheme.secondaryOrangeColor.withOpacity(0.3),
+                              : AppTheme.secondaryOrangeColor
+                                  .withValues(alpha: 0.3),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(8),
                             bottomRight: Radius.circular(8),

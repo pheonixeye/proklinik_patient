@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 class AppTheme {
   const AppTheme();
 
-  static final appBarColor = Colors.green.shade500.withOpacity(0.9);
-  static final secondaryOrangeColor = Colors.orange.shade500.withOpacity(0.9);
+  static final appBarColor = Colors.green.shade500.withValues(alpha: 0.9);
+  static final secondaryOrangeColor =
+      Colors.orange.shade500.withValues(alpha: 0.9);
 
   static final _theme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),

@@ -4,45 +4,27 @@ import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/functions/debug_print.dart';
+import 'package:patient/models/visit/visit.dart';
 import 'package:patient/pages/visit_update_page/widgets/reschedule_card.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
-import 'package:proklinik_models/models/booking_data.dart';
-import 'package:proklinik_models/models/clinic.dart';
-import 'package:proklinik_models/models/doctor.dart';
-import 'package:proklinik_models/models/server_response_model.dart';
 import 'package:provider/provider.dart';
 
-class BookingInfoCard extends StatefulWidget {
+class BookingInfoCard extends StatelessWidget {
   const BookingInfoCard({
     super.key,
-    required this.bookingData,
-    required this.clinic,
-    required this.doctor,
+    required this.visit,
   });
-  final BookingData bookingData;
-  final Clinic clinic;
-  final Doctor doctor;
-
-  @override
-  State<BookingInfoCard> createState() => _BookingInfoCardState();
-}
-
-class _BookingInfoCardState extends State<BookingInfoCard> {
-  // late BookingData _state;
-
-  @override
-  void initState() {
-    // _state = widget.bookingData;
-    super.initState();
-  }
-
+  final Visit visit;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: context.isMobile ? 12 : 36),
       child: Consumer2<PxLocale, PxVisitUpdate>(
         builder: (context, l, v, _) {
+          while (v.visit == null) {
+            return SizedBox();
+          }
           return Card.outlined(
             color: Colors.white,
             elevation: 2,
@@ -76,7 +58,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                       child: Text(context.loc.yourName),
                                     ),
                                     const SizedBox(width: 10),
-                                    Text(v.bookingData!.user_name),
+                                    Text(visit.patient_name),
                                   ],
                                 ),
                               ),
@@ -95,12 +77,8 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                     Text(
                                       DateFormat(
                                         'dd/MM/yyyy',
-                                        context.loc.localeName,
-                                      ).format(
-                                        DateTime.parse(
-                                          v.bookingData!.date_time,
-                                        ),
-                                      ),
+                                        l.locale.languageCode,
+                                      ).format(visit.visit_date),
                                     ),
                                   ],
                                 ),
@@ -125,12 +103,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                   itemCount: 365,
                                   itemBuilder: (context, index) {
                                     return RescheduleCard(
-                                      model: ServerResponseModel(
-                                        doctor: widget.doctor,
-                                        clinic: widget.clinic,
-                                        reviews: const [],
-                                        total: 1,
-                                      ),
+                                      clinic: visit.clinic,
                                       index: index,
                                     );
                                   },
@@ -174,7 +147,7 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                       child: Text(context.loc.yourName),
                                     ),
                                     const SizedBox(width: 10),
-                                    Text(v.bookingData!.user_name),
+                                    Text(visit.patient_name),
                                   ],
                                 ),
                               ),
@@ -193,12 +166,8 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                     Text(
                                       DateFormat(
                                         'dd/MM/yyyy',
-                                        context.loc.localeName,
-                                      ).format(
-                                        DateTime.parse(
-                                          v.newBookingData!.date_time,
-                                        ),
-                                      ),
+                                        l.locale.languageCode,
+                                      ).format(visit.visit_date),
                                     ),
                                   ],
                                 ),
@@ -217,9 +186,11 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                     const SizedBox(width: 10),
                                     Text(
                                       TimeOfDay(
-                                        hour: v.newBookingData!.startH.toInt(),
+                                        hour: v.visit?.visit_shift.start_hour ??
+                                            0,
                                         minute:
-                                            v.newBookingData!.startM.toInt(),
+                                            v.visit?.visit_shift.start_minute ??
+                                                0,
                                       ).format(context).toArabicNumber(context),
                                     ),
                                   ],
@@ -232,8 +203,9 @@ class _BookingInfoCardState extends State<BookingInfoCard> {
                                     onPressed: () async {
                                       try {
                                         await v.updateBookingData(
-                                          update: v.newBookingData!
-                                              .toPocketbaseJson(),
+                                          update: {
+                                            //TODO
+                                          },
                                         );
                                         v.updateShowThankYou();
                                       } catch (e) {
