@@ -26,10 +26,6 @@ dependencies:
   gap: ^3.0.1
   pocketbase: ^0.22.0
   flutter_rating_stars: ^1.1.0
-  proklinik_models:
-    git:
-      url: https://github.com/pheonixeye/proklinik_models.git
-      ref: master
   meta_seo: ^3.0.9
   flutter_schema_org: ^1.0.0
   cached_network_image: ^3.4.1

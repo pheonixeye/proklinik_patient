@@ -46,3 +46,5 @@ app.*.map.json
 # cloudflare deployment command
 .cloudflare
 makefile
+.env
+.env.dev

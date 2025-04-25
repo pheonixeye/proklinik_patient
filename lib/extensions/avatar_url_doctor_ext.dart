@@ -1,4 +1,4 @@
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
+import 'package:patient/api/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/doctor/doctor.dart';
 
 extension AvatarUrl on Doctor {

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart' show debugPrint;
+import 'package:patient/api/notifications_api/notifications_api.dart';
 import 'package:patient/api/pocketbase/pocketbase_helper.dart';
 import 'package:patient/models/review/review_response_model.dart';
+import 'package:patient/models/server_notification/server_notification.dart';
 import 'package:patient/models/visit/visit_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
@@ -46,8 +48,14 @@ class PatientReviewApi {
   }
 
   Future<void> submitReview(ReviewResponseModel model) async {
-    await PocketbaseHelper.pb.collection(collection).create(
+    final _result = await PocketbaseHelper.pb.collection(collection).create(
           body: model.toJson(),
         );
+    final _notification = ServerNotification(
+      type: NotificationType.new_review,
+      id: _result.id,
+    );
+
+    await NotificationsApi(_notification).notify();
   }
 }

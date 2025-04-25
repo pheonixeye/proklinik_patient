@@ -2,13 +2,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:patient/core/pocketbase/pocketbase_helper.dart';
+import 'package:patient/api/contact_us_api/contact_us_api.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/contact_us_model.dart';
+import 'package:patient/models/contact_us_model/contact_us_model.dart';
 
 class ContactUsPage extends StatefulWidget {
   const ContactUsPage({super.key});
@@ -250,11 +250,11 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                           loadingContext = context;
                                           return const CentralLoading();
                                         });
-                                    await PocketbaseHelper.submitContactUsForm(
-                                            model)
-                                        .whenComplete(() {
+                                    await ContactUsApi()
+                                        .submitContactUsForm(model);
+                                    if (context.mounted) {
                                       Navigator.pop(loadingContext);
-                                    });
+                                    }
                                     if (context.mounted) {
                                       showDialog(
                                           context: context,

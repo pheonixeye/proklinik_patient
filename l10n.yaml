@@ -2,5 +2,5 @@ arb-dir: assets/lang
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 nullable-getter: false
-output-dir: lib/core/localization
+output-dir: lib/localization
 synthetic-package: false
