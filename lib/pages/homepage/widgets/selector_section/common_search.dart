@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:patient/assets/assets.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
+import 'package:patient/models/search_type/search_type.dart';
 import 'package:patient/theme/app_theme.dart';
-import 'package:proklinik_models/models/search_type.dart';
 
 class CommonSearchSection extends StatefulWidget {
-  const CommonSearchSection(
-      {super.key, required this.type, this.isComingSoon = true});
+  const CommonSearchSection({
+    super.key,
+    required this.type,
+    this.isComingSoon = true,
+  });
   final SearchType type;
   final bool isComingSoon;
 

@@ -234,7 +234,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                 onPressed: () async {
                                   if (formKey.currentState!.validate()) {
                                     //todo: validate && send feedback
-                                    //TODO: send mail confirmation to user that
+                                    //todo: send mail confirmation to user that
                                     // his message got through
 
                                     final model = ContactUsModel(

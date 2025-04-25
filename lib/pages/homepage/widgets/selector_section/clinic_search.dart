@@ -7,13 +7,13 @@ import 'package:patient/extensions/model_widgets_ext.dart';
 import 'package:patient/models/app_constants_model/_models/city.dart';
 import 'package:patient/models/app_constants_model/_models/governorate.dart';
 import 'package:patient/models/app_constants_model/_models/speciality.dart';
+import 'package:patient/models/search_type/search_type.dart';
 import 'package:patient/models/sorting_model/sorting_model.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/px_app_constants.dart';
 import 'package:patient/router/router.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:proklinik_models/models/search_type.dart';
 
 class ClinicSearchSection extends StatefulWidget {
   const ClinicSearchSection({super.key});

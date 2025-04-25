@@ -102,7 +102,7 @@ class _RescheduleCardState extends State<RescheduleCard> {
                     final newDate = d.copyWith(
                       day: d.day + widget.index,
                     );
-                    //TODO:
+                    //todo:
 
                     v.updateBookingDataState(v.visit!.copyWith(
                       visit_date: newDate,
@@ -199,7 +199,7 @@ class _RescheduleCardState extends State<RescheduleCard> {
                                             final newDate = d.copyWith(
                                               day: d.day + widget.index,
                                             );
-                                            //TODO:
+                                            //todo:
                                             v.updateBookingDataState(
                                                 v.visit!.copyWith(
                                               visit_date: newDate,
