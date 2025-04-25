@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/theme/app_theme.dart';
 import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ThankYouReview extends StatelessWidget {
-  const ThankYouReview({super.key});
+class ThankyouCard extends StatelessWidget {
+  const ThankyouCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class ThankYouReview extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          context.loc.yourReviewHasBeenSubmitted,
+                          context.loc.bookingInformationUpdated,
                           style: TextStyle(
                             color: AppTheme.mainFontColor,
                             fontSize: context.isMobile ? 18 : 36,

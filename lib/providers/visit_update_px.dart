@@ -27,21 +27,29 @@ class PxVisitUpdate extends ChangeNotifier {
   Visit? _visit;
   Visit? get visit => _visit;
 
+  Visit? _updatedVisit;
+  Visit? get updatedVisit => _updatedVisit;
+
+  bool? get visitDatePassed =>
+      (_visit != null && DateTime.now().isAfter(_visit!.visit_date));
+
   void changeState(BookingCardState state) {
     _state = state;
     notifyListeners();
   }
 
   void updateBookingDataState(Visit value) {
-    _visit = value;
+    _updatedVisit = value;
     notifyListeners();
   }
 
   Future<void> _fetchBookingData() async {
-    _visit = await service.fetchVisitById(visit_id);
-    _hasError = false;
-    notifyListeners();
-    try {} catch (e) {
+    try {
+      _visit = await service.fetchVisitById(visit_id);
+      _updatedVisit = _visit;
+      _hasError = false;
+      notifyListeners();
+    } catch (e) {
       debugPrint(e.toString());
       _visit = null;
       _hasError = true;
@@ -55,12 +63,25 @@ class PxVisitUpdate extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateBookingData({
-    required Map<String, dynamic> update,
-  }) async {
+  Future<void> updateVisitStatus(String? visit_status_id) async {
     await service.updateVisit(
       visit_id,
-      update,
+      {
+        'visit_status_id': visit_status_id,
+      },
+    );
+  }
+
+  Future<void> updateVisitBookingData() async {
+    await service.updateVisit(
+      visit_id,
+      {
+        'visit_date': _updatedVisit?.visit_date.toIso8601String(),
+        'day': _updatedVisit?.visit_date.day,
+        'month': _updatedVisit?.visit_date.month,
+        'year': _updatedVisit?.visit_date.year,
+        'visit_shift': _updatedVisit?.visit_shift.toJson(),
+      },
     );
   }
 }

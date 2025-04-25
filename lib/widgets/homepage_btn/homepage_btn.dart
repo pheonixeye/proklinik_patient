@@ -34,13 +34,23 @@ class HomepageBtn extends StatelessWidget {
             vertical: 8.0,
             horizontal: 24,
           ),
-          child: Text(
-            context.loc.homepage,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.mainFontColor,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.home_rounded,
+                color: AppTheme.mainFontColor,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                context.loc.homepage,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.mainFontColor,
+                ),
+              ),
+            ],
           ),
         ),
       ),

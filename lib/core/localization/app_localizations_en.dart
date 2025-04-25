@@ -381,7 +381,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteBooking => 'Cancel Booking';
 
   @override
-  String get bookingAlreadyCanceled => 'Booking Already Canceled.';
+  String get bookingAlreadyCanceled => 'Sorry, your appointment has already been Canceled, Please book a new appointment';
 
   @override
   String get confirm => 'Confirm';
@@ -430,4 +430,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bookingTime => 'Booking Time';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get visitDatePassed => 'Sorry, your appointment time has already passed, Please book a new appointment';
+
+  @override
+  String get newBookingInformation => 'New Booking Information';
+
+  @override
+  String get confirmUpdateBooking => 'Confirm New Booking';
+
+  @override
+  String get bookingInformationUpdated => 'Success, your booking information has been updated';
 }

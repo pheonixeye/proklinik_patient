@@ -123,7 +123,7 @@
     "bookingDate":"Booking Date",
     "updateBooking":"Change Booking Date",
     "deleteBooking":"Cancel Booking",
-    "bookingAlreadyCanceled":"Booking Already Canceled.",
+    "bookingAlreadyCanceled":"Sorry, your appointment has already been Canceled, Please book a new appointment",
     "confirm" : "Confirm",
     "confirmDeleteBookingTitle" : "Cancel Booking ?",
     "confirmDeleteBookingMessage" : "Are You Sure ?",
@@ -139,5 +139,13 @@
     "yourReviewHasBeenSubmitted" : "Your Review Has Been Submitted.",
     "formSubmitted" : "Your Message Got Through.",
     "ok" : "Ok",
-    "bookingTime" : "Booking Time"    
+    "bookingTime" : "Booking Time",    
+    "back" : "Back",
+    "yes" : "Yes",
+    "no" : "No",
+    "visitDatePassed" : "Sorry, your appointment time has already passed, Please book a new appointment",
+    "newBookingInformation" : "New Booking Information",
+    "confirmUpdateBooking" : "Confirm New Booking",
+    "bookingInformationUpdated" : "Success, your booking information has been updated"
+
  }

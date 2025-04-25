@@ -123,7 +123,7 @@
     "bookingDate":"موعد الحجز",
     "updateBooking":"تغيير موعد الحجز",
     "deleteBooking":"الغاء الحجز",
-    "bookingAlreadyCanceled":"لقد تم الغاء هذا الحجز سابقا.",
+    "bookingAlreadyCanceled": "عفوا لقد تم الغاء هذا الحجز مسبقا, برجاء حجز موعد جديد",
     "confirm" : "الغاء الحجز",
     "confirmDeleteBookingTitle" : "الغاء الحجز ؟",
     "confirmDeleteBookingMessage" : "هل تريد الغاء هذا الحجز ؟",
@@ -139,5 +139,12 @@
     "yourReviewHasBeenSubmitted" : "لقد تم اضافة تقييمك بنجاح." ,
     "formSubmitted" : "وصلتنا رسالتك بنجاح",
     "ok" : "حسنا",
-    "bookingTime" : "وقت الحجز"    
+    "bookingTime" : "وقت الحجز",    
+    "back" : "عودة",
+    "yes" : "نعم",
+    "no" : "لا",
+    "visitDatePassed" : "عفوا,لا يمكن تغيير ميعاد الحجز بعد مرور الميعاد, برجاء حجز ميعاد جديد",
+    "newBookingInformation" : "معلومات تعديل الحجز",
+    "confirmUpdateBooking" : "تأكيد موعد الحجز الجديد",
+    "bookingInformationUpdated" : "تم تغيير بيانات الحجز الحالي"
 }

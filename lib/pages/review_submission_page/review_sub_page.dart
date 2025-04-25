@@ -1,7 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
@@ -9,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/pages/review_submission_page/widgets/thank_you_review.dart';
 import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/reviews_px.dart';
+import 'package:patient/providers/px_app_constants.dart';
+import 'package:patient/providers/px_patient_reviews.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
@@ -27,17 +26,14 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<PxLocale, PxReviews>(
-      builder: (context, l, r, _) {
-        while (r.data == null) {
+    return Consumer3<PxLocale, PxPatientReviews, PxAppConstants>(
+      builder: (context, l, r, a, _) {
+        while (r.visitModel == null || a.model == null) {
           return const CentralLoading();
         }
-        while (r.hasError) {
-          return Center(
-            child: Text(context.loc.unknownErrorHasOccured),
-          );
-        }
+
         return ListView(
+          cacheExtent: 3000,
           children: [
             switch (r.state) {
               ReviewPageState.editing => Form(
@@ -76,7 +72,7 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 children: [
-                                  Text(r.bookingData!.user_name),
+                                  Text('${r.review?.patient_name}'),
                                   const Spacer(),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 28.0),
@@ -88,8 +84,10 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                             subtitle: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                DateFormat('dd/MM/yyyy', l.lang).format(
-                                  DateTime.parse(r.bookingData!.date_time),
+                                DateFormat(
+                                        'dd / MM / yyyy', l.locale.languageCode)
+                                    .format(
+                                  DateTime.parse(r.visitModel!.visit_date),
                                 ),
                               ),
                             ),
@@ -100,6 +98,22 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                 setState(() {
                                   _anonymous = val;
                                 });
+                                final _status_id = _anonymous
+                                    ? a.model?.review_status
+                                        .firstWhere(
+                                          (status) =>
+                                              status.name_en == 'Anonymous',
+                                        )
+                                        .id
+                                    : a.model?.review_status
+                                        .firstWhere(
+                                          (status) =>
+                                              status.name_en != 'Anonymous',
+                                        )
+                                        .id;
+                                r.updateReview(
+                                  review_status_id: _status_id,
+                                );
                               }
                             },
                           ),
@@ -115,7 +129,9 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: RatingStars(
                                 axis: Axis.horizontal,
-                                value: r.review.stars.toDouble(),
+                                value: r.review != null
+                                    ? r.review!.stars.toDouble()
+                                    : 0,
                                 onValueChanged: (v) {
                                   r.updateReview(
                                     stars: v.toInt(),
@@ -166,7 +182,7 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                 ),
                                 onChanged: (value) {
                                   r.updateReview(
-                                    body: value,
+                                    review: value,
                                   );
                                 },
                                 minLines: null,
@@ -220,16 +236,8 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                               backgroundColor: Colors.green,
                             ),
                             onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                if (_anonymous) {
-                                  final random = Random.secure().nextInt(99999);
-                                  final user_name = (_anonymous)
-                                      ? 'Guest-$random'
-                                      : r.bookingData!.user_name;
-                                  r.updateReview(
-                                    user_name: user_name,
-                                  );
-                                }
+                              if (formKey.currentState!.validate() &&
+                                  r.review!.isModelValid) {
                                 late BuildContext loadingContext;
                                 showDialog(
                                   context: context,
@@ -238,9 +246,10 @@ class _ReviewSubmissionPageState extends State<ReviewSubmissionPage> {
                                     return const CentralLoading();
                                   },
                                 );
-                                await r.submitReview().whenComplete(() {
+                                await r.submitReview();
+                                if (context.mounted) {
                                   Navigator.pop(loadingContext);
-                                });
+                                }
 
                                 r.updateState(ReviewPageState.thankyou);
                               }

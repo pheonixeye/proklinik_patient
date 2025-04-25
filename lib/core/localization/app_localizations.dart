@@ -842,7 +842,7 @@ abstract class AppLocalizations {
   /// No description provided for @bookingAlreadyCanceled.
   ///
   /// In en, this message translates to:
-  /// **'Booking Already Canceled.'**
+  /// **'Sorry, your appointment has already been Canceled, Please book a new appointment'**
   String get bookingAlreadyCanceled;
 
   /// No description provided for @confirm.
@@ -940,6 +940,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Booking Time'**
   String get bookingTime;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @visitDatePassed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, your appointment time has already passed, Please book a new appointment'**
+  String get visitDatePassed;
+
+  /// No description provided for @newBookingInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'New Booking Information'**
+  String get newBookingInformation;
+
+  /// No description provided for @confirmUpdateBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm New Booking'**
+  String get confirmUpdateBooking;
+
+  /// No description provided for @bookingInformationUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Success, your booking information has been updated'**
+  String get bookingInformationUpdated;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

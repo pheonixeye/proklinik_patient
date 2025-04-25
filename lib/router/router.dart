@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
+import 'package:patient/api/patient_review_api/patient_review_api.dart';
 import 'package:patient/api/reviews_api/reviews_api.dart';
 import 'package:patient/api/search_clinics_api/search_clinics_api.dart';
 import 'package:patient/api/visits_api/visits_api.dart';
@@ -27,7 +28,7 @@ import 'package:patient/pages/visit_update_page/visit_update_page.dart';
 import 'package:patient/providers/doc_profile_px.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/px_doctor_reviews.dart';
-import 'package:patient/providers/reviews_px.dart';
+import 'package:patient/providers/px_patient_reviews.dart';
 import 'package:patient/providers/search_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/router/meta_seo_helper.dart';
@@ -65,7 +66,7 @@ class AppRouter {
   //todo: visit update / delete page
   static const String visit = "visit/:visit_id"; //todo:
   //todo: review submission page
-  static const String review = "review/:month/:year/:visit_id"; //TODO:
+  static const String review = "review/:visit_id"; //todo:
   static const String underconstruction = "underconstruction";
 
   static final router = GoRouter(
@@ -169,23 +170,20 @@ class AppRouter {
                   ),
                   GoRoute(
                     name: review,
-                    path: review,
+                    path: review, //:lang/review/:visit_id
                     builder: (context, state) {
                       final visit_id = state.pathParameters['visit_id'];
-                      final month = state.pathParameters['month'];
-                      final year = state.pathParameters['year'];
-                      if (visit_id == null || month == null || year == null) {
+                      if (visit_id == null) {
                         return ErrorPage(
                           key: state.pageKey,
                         );
                       } else {
-                        final key = ValueKey('$month$year$visit_id');
+                        final key = ValueKey(visit_id);
                         return ChangeNotifierProvider(
                           key: key,
-                          create: (context) => PxReviews(
-                            month: month,
-                            year: year,
+                          create: (context) => PxPatientReviews(
                             visit_id: visit_id,
+                            service: const PatientReviewApi(),
                           ),
                           child: ReviewSubmissionPage(
                             key: key,

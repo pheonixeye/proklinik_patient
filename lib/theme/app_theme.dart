@@ -11,6 +11,7 @@ class AppTheme {
 
   static final _theme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+    primaryColor: Colors.green,
     useMaterial3: true,
     fontFamily: "IBM",
     textButtonTheme: TextButtonThemeData(

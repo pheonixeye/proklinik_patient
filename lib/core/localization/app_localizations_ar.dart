@@ -381,7 +381,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteBooking => 'الغاء الحجز';
 
   @override
-  String get bookingAlreadyCanceled => 'لقد تم الغاء هذا الحجز سابقا.';
+  String get bookingAlreadyCanceled => 'عفوا لقد تم الغاء هذا الحجز مسبقا, برجاء حجز موعد جديد';
 
   @override
   String get confirm => 'الغاء الحجز';
@@ -430,4 +430,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bookingTime => 'وقت الحجز';
+
+  @override
+  String get back => 'عودة';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get visitDatePassed => 'عفوا,لا يمكن تغيير ميعاد الحجز بعد مرور الميعاد, برجاء حجز ميعاد جديد';
+
+  @override
+  String get newBookingInformation => 'معلومات تعديل الحجز';
+
+  @override
+  String get confirmUpdateBooking => 'تأكيد موعد الحجز الجديد';
+
+  @override
+  String get bookingInformationUpdated => 'تم تغيير بيانات الحجز الحالي';
 }

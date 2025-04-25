@@ -5,6 +5,7 @@ import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/number_translator.dart';
 import 'package:patient/models/clinic/clinic.dart';
 import 'package:patient/models/clinic/schedule.dart';
+import 'package:patient/models/visit/visit_shift.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/theme/app_theme.dart';
@@ -103,16 +104,19 @@ class _RescheduleCardState extends State<RescheduleCard> {
                     );
                     //TODO:
 
-                    // v.setNewBookingDataState(v.newBookingData!.copyWith(
-                    //   date_time: newDate.toIso8601String(),
-                    //   day: newDate.day,
-                    //   month: newDate.month,
-                    //   year: newDate.year,
-                    //   startH: _schedule!.shifts.first.startH,
-                    //   startM: _schedule!.shifts.first.startM,
-                    //   endH: _schedule!.shifts.first.endH,
-                    //   endM: _schedule!.shifts.first.endM,
-                    // ));
+                    v.updateBookingDataState(v.visit!.copyWith(
+                      visit_date: newDate,
+                      day: newDate.day,
+                      month: newDate.month,
+                      year: newDate.year,
+                      visit_shift: VisitShift(
+                        id: _schedule!.shifts.first.id,
+                        start_hour: _schedule!.shifts.first.startH.toInt(),
+                        start_minute: _schedule!.shifts.first.startM.toInt(),
+                        end_hour: _schedule!.shifts.first.endH.toInt(),
+                        end_minute: _schedule!.shifts.first.endM.toInt(),
+                      ),
+                    ));
                     v.changeState(BookingCardState.confirm);
                   }
                 },
@@ -196,19 +200,23 @@ class _RescheduleCardState extends State<RescheduleCard> {
                                               day: d.day + widget.index,
                                             );
                                             //TODO:
+                                            v.updateBookingDataState(
+                                                v.visit!.copyWith(
+                                              visit_date: newDate,
+                                              day: newDate.day,
+                                              month: newDate.month,
+                                              year: newDate.year,
+                                              visit_shift: VisitShift(
+                                                id: shift.id,
+                                                start_hour:
+                                                    shift.startH.toInt(),
+                                                start_minute:
+                                                    shift.startM.toInt(),
+                                                end_hour: shift.endH.toInt(),
+                                                end_minute: shift.endM.toInt(),
+                                              ),
+                                            ));
 
-                                            // v.setNewBookingDataState(
-                                            //     v.newBookingData!.copyWith(
-                                            //   date_time:
-                                            //       newDate.toIso8601String(),
-                                            //   day: newDate.day,
-                                            //   month: newDate.month,
-                                            //   year: newDate.year,
-                                            //   startH: shift.startH,
-                                            //   startM: shift.startM,
-                                            //   endH: shift.endH,
-                                            //   endM: shift.endM,
-                                            // ));
                                             v.changeState(
                                                 BookingCardState.confirm);
                                           },

@@ -25,6 +25,18 @@ class BookingInfoCard extends StatelessWidget {
           while (v.visit == null) {
             return SizedBox();
           }
+          TextStyle? _newBookingDateTextStyle() =>
+              v.visit!.visit_date == v.updatedVisit!.visit_date
+                  ? null
+                  : TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    );
+          TextStyle? _newBookingShiftTextStyle() =>
+              v.visit!.visit_shift == v.updatedVisit!.visit_shift
+                  ? null
+                  : TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    );
           return Card.outlined(
             color: Colors.white,
             elevation: 2,
@@ -39,7 +51,7 @@ class BookingInfoCard extends StatelessWidget {
                             const SizedBox(width: 10),
                             const Icon(Icons.calendar_month),
                             const SizedBox(width: 10),
-                            Text(context.loc.bookingInformation),
+                            Text(context.loc.newBookingInformation),
                           ],
                         ),
                         subtitle: Padding(
@@ -51,14 +63,20 @@ class BookingInfoCard extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     const SizedBox(width: 10),
-                                    const Icon(Icons.person),
+                                    const Icon(Icons.edit_calendar_outlined),
                                     const SizedBox(width: 10),
                                     SizedBox(
                                       width: context.isMobile ? 100 : 200,
-                                      child: Text(context.loc.yourName),
+                                      child: Text(context.loc.bookingDate),
                                     ),
                                     const SizedBox(width: 10),
-                                    Text(visit.patient_name),
+                                    Text(
+                                      DateFormat(
+                                        'dd / MM / yyyy',
+                                        l.locale.languageCode,
+                                      ).format(visit.visit_date),
+                                      style: _newBookingDateTextStyle(),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -71,14 +89,15 @@ class BookingInfoCard extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     SizedBox(
                                       width: context.isMobile ? 100 : 200,
-                                      child: Text(context.loc.bookingDate),
+                                      child: Text(context.loc.bookingTime),
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      DateFormat(
-                                        'dd/MM/yyyy',
-                                        l.locale.languageCode,
-                                      ).format(visit.visit_date),
+                                      TimeOfDay(
+                                        hour: visit.visit_shift.start_hour,
+                                        minute: visit.visit_shift.start_minute,
+                                      ).format(context).toArabicNumber(context),
+                                      style: _newBookingShiftTextStyle(),
                                     ),
                                   ],
                                 ),
@@ -115,7 +134,7 @@ class BookingInfoCard extends StatelessWidget {
                                   onPressed: () {
                                     v.changeState(BookingCardState.data);
                                   },
-                                  child: Text(context.loc.cancel),
+                                  child: Text(context.loc.back),
                                 ),
                               ),
                             ],
@@ -128,7 +147,7 @@ class BookingInfoCard extends StatelessWidget {
                             const SizedBox(width: 10),
                             const Icon(Icons.calendar_month),
                             const SizedBox(width: 10),
-                            Text(context.loc.bookingInformation),
+                            Text(context.loc.newBookingInformation),
                           ],
                         ),
                         subtitle: Padding(
@@ -140,23 +159,7 @@ class BookingInfoCard extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     const SizedBox(width: 10),
-                                    const Icon(Icons.person),
-                                    const SizedBox(width: 10),
-                                    SizedBox(
-                                      width: context.isMobile ? 100 : 200,
-                                      child: Text(context.loc.yourName),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(visit.patient_name),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    const SizedBox(width: 10),
-                                    const Icon(Icons.calendar_month),
+                                    const Icon(Icons.edit_calendar_outlined),
                                     const SizedBox(width: 10),
                                     SizedBox(
                                       width: context.isMobile ? 100 : 200,
@@ -165,9 +168,10 @@ class BookingInfoCard extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Text(
                                       DateFormat(
-                                        'dd/MM/yyyy',
+                                        'dd / MM / yyyy',
                                         l.locale.languageCode,
                                       ).format(visit.visit_date),
+                                      style: _newBookingDateTextStyle(),
                                     ),
                                   ],
                                 ),
@@ -186,42 +190,33 @@ class BookingInfoCard extends StatelessWidget {
                                     const SizedBox(width: 10),
                                     Text(
                                       TimeOfDay(
-                                        hour: v.visit?.visit_shift.start_hour ??
-                                            0,
-                                        minute:
-                                            v.visit?.visit_shift.start_minute ??
-                                                0,
+                                        hour: visit.visit_shift.start_hour,
+                                        minute: visit.visit_shift.start_minute,
                                       ).format(context).toArabicNumber(context),
+                                      style: _newBookingShiftTextStyle(),
                                     ),
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      try {
-                                        await v.updateBookingData(
-                                          update: {
-                                            //TODO
-                                          },
-                                        );
-                                        v.updateShowThankYou();
-                                      } catch (e) {
-                                        dprint(e);
-                                      }
-                                    },
-                                    child: Text(context.loc.updateBooking),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      v.changeState(BookingCardState.data);
-                                    },
-                                    child: Text(context.loc.cancel),
-                                  ),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          await v.updateVisitBookingData();
+                                          v.updateShowThankYou();
+                                        } catch (e) {
+                                          dprint(e);
+                                        }
+                                      },
+                                      child: Text(
+                                          context.loc.confirmUpdateBooking),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

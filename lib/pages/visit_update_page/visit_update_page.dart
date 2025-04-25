@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/extensions/is_mobile_context.dart';
 import 'package:patient/extensions/loc_ext.dart';
 import 'package:patient/extensions/model_widgets_ext.dart';
+import 'package:patient/pages/error_page/error_page.dart';
 import 'package:patient/pages/visit_update_page/widgets/booking_info_card.dart';
 import 'package:patient/pages/visit_update_page/widgets/confirm_delete_dialog.dart';
+import 'package:patient/pages/visit_update_page/widgets/original_booking_info_card.dart';
+import 'package:patient/pages/visit_update_page/widgets/thankyou_card.dart';
+import 'package:patient/pages/visit_update_page/widgets/visit_already_canceled_card.dart';
+import 'package:patient/pages/visit_update_page/widgets/visit_date_passed_card.dart';
 import 'package:patient/providers/locale_px.dart';
 import 'package:patient/providers/px_app_constants.dart';
 import 'package:patient/providers/visit_update_px.dart';
 import 'package:patient/widgets/central_loading/central_loading.dart';
 import 'package:patient/widgets/footer_section/footer_section.dart';
-import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
-import 'package:proklinik_models/models/booking_status.dart';
 import 'package:provider/provider.dart';
 
 class VisitUpdatePage extends StatelessWidget {
@@ -27,54 +29,25 @@ class VisitUpdatePage extends StatelessWidget {
             return const CentralLoading();
           }
 
-          // while (v.hasError) {
-          //   return Center(
-          //     child: Text(context.loc.visitNotFound),
-          //   );
-          // }
+          final _canceledByPatientVisitStatusId = a.model?.visit_status
+              .firstWhere((status) => status.name_en == 'canceled by patient')
+              .id;
 
-          // while (v.showThankYou) {
-          //   return Center(
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(16.0),
-          //       child: Card.outlined(
-          //         elevation: 2,
-          //         color: Colors.white,
-          //         child: Padding(
-          //           padding: const EdgeInsets.all(6.0),
-          //           child: Column(
-          //             mainAxisSize: MainAxisSize.min,
-          //             children: [
-          //               const Icon(
-          //                 FontAwesomeIcons.handsPraying,
-          //                 size: 32,
-          //                 color: Colors.green,
-          //               ),
-          //               const SizedBox(height: 10),
-          //               Padding(
-          //                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          //                 child: Row(
-          //                   mainAxisAlignment: MainAxisAlignment.center,
-          //                   children: [
-          //                     Text(
-          //                       context.loc.thankYouForUsingProklinik,
-          //                       textAlign: TextAlign.center,
-          //                       style: const TextStyle(
-          //                         fontSize: 18,
-          //                       ),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ),
-          //               const SizedBox(height: 10),
-          //               const HomepageBtn(),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   );
-          // }
+          while (v.hasError) {
+            return const ErrorPage();
+          }
+
+          while (v.visitDatePassed == true) {
+            return const VisitDatePassedCard();
+          }
+
+          while (v.visit!.visit_status.id == _canceledByPatientVisitStatusId) {
+            return const VisitAlreadyCanceledCard();
+          }
+
+          while (v.showThankYou) {
+            return const ThankyouCard();
+          }
           return ListView(
             cacheExtent: 3000,
             children: [
@@ -91,7 +64,7 @@ class VisitUpdatePage extends StatelessWidget {
                     children: [
                       const SizedBox(width: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.all(8.0),
                         //todo:
                         child: FutureBuilder<ImageProvider<Object>>(
                           future: v.visit?.doctor.widgetImageProvider(),
@@ -147,8 +120,12 @@ class VisitUpdatePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              BookingInfoCard(
+              OriginalBookingInfoCard(
                 visit: v.visit!,
+              ),
+              const SizedBox(height: 10),
+              BookingInfoCard(
+                visit: v.updatedVisit!,
               ),
               const SizedBox(height: 10),
               Padding(
@@ -198,11 +175,8 @@ class VisitUpdatePage extends StatelessWidget {
                           return;
                         }
                         if (result) {
-                          await v.updateBookingData(
-                            update: {
-                              'attended': false,
-                              'status': Status.cancel_by_patient.value,
-                            },
+                          await v.updateVisitStatus(
+                            _canceledByPatientVisitStatusId,
                           );
                           v.updateShowThankYou();
                         }
