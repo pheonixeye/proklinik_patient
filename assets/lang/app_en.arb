@@ -1,4 +1,4 @@
-{
+{   "@@locale" : "en",
     "homepage" : "HomePage",
     "srcPage" : "Search Results Page",
     "bookPage" : "Book Appointment Page",

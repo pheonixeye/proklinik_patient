@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/debug_print.dart';
-import 'package:patient/models/visit/visit.dart';
-import 'package:patient/pages/visit_update_page/widgets/reschedule_card.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/visit_update_px.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/functions/debug_print.dart';
+import 'package:proklinik_patient/models/visit/visit.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/reschedule_card.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/visit_update_px.dart';
 import 'package:provider/provider.dart';
 
 class BookingInfoCard extends StatelessWidget {

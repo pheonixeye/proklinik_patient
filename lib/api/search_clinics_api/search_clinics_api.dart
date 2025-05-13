@@ -1,6 +1,6 @@
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/query_model/query.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/query_model/query.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class HxSearchClinics {

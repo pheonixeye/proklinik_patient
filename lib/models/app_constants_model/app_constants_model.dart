@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:patient/models/app_constants_model/_models/attendance_type.dart';
-import 'package:patient/models/app_constants_model/_models/city.dart';
-import 'package:patient/models/app_constants_model/_models/degree.dart';
-import 'package:patient/models/app_constants_model/_models/governorate.dart';
-import 'package:patient/models/app_constants_model/_models/invoice_status.dart';
-import 'package:patient/models/app_constants_model/_models/review_status.dart';
-import 'package:patient/models/app_constants_model/_models/site_service.dart';
-import 'package:patient/models/app_constants_model/_models/speciality.dart';
-import 'package:patient/models/app_constants_model/_models/visit_status.dart';
-import 'package:patient/models/app_constants_model/_models/visit_type.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/attendance_type.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/city.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/degree.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/governorate.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/invoice_status.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/review_status.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/site_service.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/speciality.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/visit_status.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/visit_type.dart';
 import 'package:equatable/equatable.dart';
 
 class AppConstantsResponseModel extends Equatable {

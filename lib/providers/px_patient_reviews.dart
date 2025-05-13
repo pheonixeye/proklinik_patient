@@ -1,9 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
-import 'package:patient/api/patient_review_api/patient_review_api.dart';
-import 'package:patient/models/review/review_response_model.dart';
-import 'package:patient/models/visit/visit_response_model.dart';
+import 'package:proklinik_patient/api/patient_review_api/patient_review_api.dart';
+import 'package:proklinik_patient/models/review/review_response_model.dart';
+import 'package:proklinik_patient/models/visit/visit_response_model.dart';
 
 class PxPatientReviews extends ChangeNotifier {
   final String visit_id;

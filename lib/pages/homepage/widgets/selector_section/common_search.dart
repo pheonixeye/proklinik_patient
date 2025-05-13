@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:patient/assets/assets.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/search_type/search_type.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/assets/assets.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/models/search_type/search_type.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 
 class CommonSearchSection extends StatefulWidget {
   const CommonSearchSection({

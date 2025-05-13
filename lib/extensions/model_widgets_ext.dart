@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/assets/assets.dart';
-import 'package:patient/extensions/avatar_url_doctor_ext.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/app_constants_model/_models/attendance_type.dart';
-import 'package:patient/models/app_constants_model/_models/speciality.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/doctor/doctor.dart';
-import 'package:patient/providers/locale_px.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/assets/assets.dart';
+import 'package:proklinik_patient/extensions/avatar_url_doctor_ext.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/attendance_type.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/speciality.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 

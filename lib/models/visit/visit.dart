@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:patient/models/app_constants_model/_models/visit_status.dart';
-import 'package:patient/models/app_constants_model/_models/visit_type.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/doctor/doctor.dart';
-import 'package:patient/models/visit/visit_shift.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/visit_status.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/visit_type.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/models/visit/visit_shift.dart';
 
 class Visit extends Equatable {
   final String id;

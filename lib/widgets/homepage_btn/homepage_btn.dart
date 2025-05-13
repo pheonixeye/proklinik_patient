@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/router/router.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/router/router.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 
 class HomepageBtn extends StatelessWidget {
   const HomepageBtn({super.key});

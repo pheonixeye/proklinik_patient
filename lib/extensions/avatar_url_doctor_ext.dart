@@ -1,5 +1,5 @@
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
 
 extension AvatarUrl on Doctor {
   String get avatarUrl => avatar.isEmpty

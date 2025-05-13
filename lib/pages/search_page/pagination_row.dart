@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/scroll_direction.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/search_px.dart';
-import 'package:patient/router/router.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/functions/scroll_direction.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/search_px.dart';
+import 'package:proklinik_patient/router/router.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class PaginationRow extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:patient/api/doctor_profile_api/doctor_profile_api.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/api/doctor_profile_api/doctor_profile_api.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
 
 class PxDocProfile extends ChangeNotifier {
   final DoctorProfileApi service;

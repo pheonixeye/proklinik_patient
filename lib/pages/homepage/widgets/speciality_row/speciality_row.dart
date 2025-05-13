@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/search_type/search_type.dart';
-import 'package:patient/models/sorting_model/sorting_model.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
-import 'package:patient/router/router.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/models/search_type/search_type.dart';
+import 'package:proklinik_patient/models/sorting_model/sorting_model.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/router/router.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 const _specialities = [
@@ -19,7 +19,7 @@ const _specialities = [
   {"en": "Neurology", "ar": "مخ و اعصاب"},
   {"en": "Orthopedics", "ar": "العظام"},
   {"en": "Gynaecology", "ar": "نسا و توليد"},
-  {"en": "Ear, Nose and Throat", "ar": "انف و اذن و حنجرة"},
+  {"en": "Otolaryngology", "ar": "انف و اذن و حنجرة"},
 ];
 
 class SpecialityRow extends StatelessWidget {

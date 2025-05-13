@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/first_where_or_null.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/filter_model.dart/filter_model.dart';
-import 'package:patient/models/user_location_data_model/user_location_data_model.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/extensions/first_where_or_null.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/models/filter_model.dart/filter_model.dart';
+import 'package:proklinik_patient/models/user_location_data_model/user_location_data_model.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
 import 'package:provider/provider.dart';
 
 /// Determine the current position of the device.

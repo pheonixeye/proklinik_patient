@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_info_card_sm/main_info_card_sm.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_profile_section_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/side_profile_section_xl/side_profile_section_xl.dart';
-import 'package:patient/providers/doc_profile_px.dart';
-import 'package:patient/providers/px_doctor_reviews.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_info_card_sm/main_info_card_sm.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_profile_section_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/side_profile_section_xl/side_profile_section_xl.dart';
+import 'package:proklinik_patient/providers/doc_profile_px.dart';
+import 'package:proklinik_patient/providers/px_doctor_reviews.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class DocProfilePage extends StatefulWidget {

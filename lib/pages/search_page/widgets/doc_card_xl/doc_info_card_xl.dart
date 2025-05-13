@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/model_widgets_ext.dart';
-import 'package:patient/functions/scroll_direction.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_image_xl.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/router/router.dart';
+import 'package:proklinik_patient/extensions/model_widgets_ext.dart';
+import 'package:proklinik_patient/functions/scroll_direction.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_xl/doc_data_xl.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_xl/doc_image_xl.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_xl/schedule_card_xl.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/router/router.dart';
 import 'package:provider/provider.dart';
 
 class DocInfoCardXl extends StatefulWidget {

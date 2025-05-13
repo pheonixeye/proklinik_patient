@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/pages/search_page/widgets/filter_column/filter_column_sm.dart';
-import 'package:patient/pages/search_page/widgets/sorting_modal.dart/sorting_modal_sm.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
-import 'package:patient/providers/search_px.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/filter_column/filter_column_sm.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/sorting_modal.dart/sorting_modal_sm.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/providers/search_px.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class SortingRowSm extends StatelessWidget {

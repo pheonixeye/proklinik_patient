@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:patient/models/doctor/doctor_tag.dart';
+import 'package:proklinik_patient/models/doctor/doctor_tag.dart';
 
 class DoctorWebsiteInfo extends Equatable {
   final String id;

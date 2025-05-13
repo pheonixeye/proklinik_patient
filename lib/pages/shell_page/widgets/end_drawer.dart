@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/shell_page/widgets/drawer_nav_btn.dart';
-import 'package:patient/pages/shell_page/widgets/thin_divider.dart';
-import 'package:patient/router/router.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/pages/shell_page/widgets/drawer_nav_btn.dart';
+import 'package:proklinik_patient/pages/shell_page/widgets/thin_divider.dart';
+import 'package:proklinik_patient/router/router.dart';
 
 class EndDrawer extends StatelessWidget {
   const EndDrawer({super.key});

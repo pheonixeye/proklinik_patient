@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 
 class SelectorTab extends StatelessWidget {
   const SelectorTab({

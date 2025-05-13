@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/after_layout.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/pages/shell_page/widgets/end_drawer.dart';
-import 'package:patient/pages/shell_page/widgets/language_btn.dart';
-import 'package:patient/pages/shell_page/widgets/nav_bar.dart';
-import 'package:patient/providers/locale_px.dart';
+import 'package:proklinik_patient/extensions/after_layout.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/pages/shell_page/widgets/end_drawer.dart';
+import 'package:proklinik_patient/pages/shell_page/widgets/language_btn.dart';
+import 'package:proklinik_patient/pages/shell_page/widgets/nav_bar.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
 class ShellPage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
-import 'package:patient/models/app_constants_model/_models/review_status.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/review_status.dart';
 
 const String _anonymous = 'Anonymous';
 

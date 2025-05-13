@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/lang_ext.dart';
-import 'package:patient/providers/locale_px.dart';
+import 'package:proklinik_patient/extensions/lang_ext.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
 extension SwitchLanguage on BuildContext {

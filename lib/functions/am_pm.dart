@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
 
 extension AmPm on int {
   String amPm(BuildContext context) {

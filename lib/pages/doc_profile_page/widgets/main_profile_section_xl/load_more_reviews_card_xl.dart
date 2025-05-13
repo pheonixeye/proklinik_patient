@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/providers/px_doctor_reviews.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/providers/px_doctor_reviews.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class LoadMoreReviewsCardXl extends StatelessWidget {

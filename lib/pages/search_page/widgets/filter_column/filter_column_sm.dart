@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/search_page/widgets/filter_column/column_filter_items.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/filter_column/column_filter_items.dart';
 
 class FilterColumnSm extends StatefulWidget {
   const FilterColumnSm({super.key});

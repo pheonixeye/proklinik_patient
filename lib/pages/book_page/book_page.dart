@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/pages/book_page/widgets/book_app_form.dart';
-import 'package:patient/pages/book_page/widgets/book_app_info_card.dart';
-import 'package:patient/pages/book_page/widgets/page_error_card.dart';
-import 'package:patient/providers/px_visits.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/pages/book_page/widgets/book_app_form.dart';
+import 'package:proklinik_patient/pages/book_page/widgets/book_app_info_card.dart';
+import 'package:proklinik_patient/pages/book_page/widgets/page_error_card.dart';
+import 'package:proklinik_patient/providers/px_visits.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class BookPage extends StatelessWidget {

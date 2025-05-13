@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
 
 class BookingPageErrorCard extends StatelessWidget {
   const BookingPageErrorCard({super.key});
