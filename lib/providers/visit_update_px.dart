@@ -1,14 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
-<<<<<<< HEAD
-import 'package:patient/api/visits_api/visits_api.dart';
-import 'package:patient/models/server_notification/server_notification.dart';
-import 'package:patient/models/visit/visit.dart';
-=======
+import 'package:proklinik_patient/models/server_notification/server_notification.dart';
 import 'package:proklinik_patient/api/visits_api/visits_api.dart';
 import 'package:proklinik_patient/models/visit/visit.dart';
->>>>>>> 1bdab840cf185852d41d640ce033bc4dcb823cb1
 
 class PxVisitUpdate extends ChangeNotifier {
   PxVisitUpdate({
