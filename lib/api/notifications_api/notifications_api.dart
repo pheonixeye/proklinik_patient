@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:patient/models/server_notification/server_notification.dart';
 
@@ -13,7 +15,7 @@ class NotificationsApi {
 
     await http.post(
       uri,
-      body: notification.toJson(),
+      body: jsonEncode(notification.toJson()),
     );
   }
 }

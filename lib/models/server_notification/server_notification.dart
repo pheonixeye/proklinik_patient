@@ -4,9 +4,10 @@ import 'package:equatable/equatable.dart';
 
 enum NotificationType {
   new_booking,
+  updated_booking,
+  canceled_booking,
   new_review,
   new_contact_us,
-  updated_booking;
 }
 
 class ServerNotification extends Equatable {

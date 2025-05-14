@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:patient/api/visits_api/visits_api.dart';
+import 'package:patient/models/server_notification/server_notification.dart';
 import 'package:patient/models/visit/visit.dart';
 
 class PxVisitUpdate extends ChangeNotifier {
@@ -69,6 +70,7 @@ class PxVisitUpdate extends ChangeNotifier {
       {
         'visit_status_id': visit_status_id,
       },
+      notification_type: NotificationType.canceled_booking,
     );
   }
 
@@ -82,6 +84,7 @@ class PxVisitUpdate extends ChangeNotifier {
         'year': _updatedVisit?.visit_date.year,
         'visit_shift': _updatedVisit?.visit_shift.toJson(),
       },
+      notification_type: NotificationType.updated_booking,
     );
   }
 }

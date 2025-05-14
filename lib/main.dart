@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:meta_seo/meta_seo.dart';
-// ignore: depend_on_referenced_packages
-// import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 import 'package:patient/localization/app_localizations.dart';
 import 'package:patient/providers/_main.dart';
 import 'package:patient/providers/locale_px.dart';
@@ -16,9 +15,13 @@ void main() {
 
   if (kIsWeb) {
     MetaSEO().config();
+    SemanticsBinding.instance.ensureSemantics();
   }
 
   runApp(const AppProvider());
+  //TODO: add semantics
+  //TODO: add robots.txt
+  //TODO: add sitemap.xml
 }
 
 class AppProvider extends StatelessWidget {

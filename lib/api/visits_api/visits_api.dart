@@ -78,14 +78,18 @@ class VisitsApi {
     return _visit;
   }
 
-  Future<void> updateVisit(String visit_id, Map<String, dynamic> update) async {
+  Future<void> updateVisit(
+    String visit_id,
+    Map<String, dynamic> update, {
+    required NotificationType notification_type,
+  }) async {
     final _result = await PocketbaseHelper.pb.collection(collection).update(
           visit_id,
           body: update,
         );
 
     final _notification = ServerNotification(
-      type: NotificationType.updated_booking,
+      type: notification_type,
       id: _result.id,
     );
 

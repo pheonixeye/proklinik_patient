@@ -13,7 +13,7 @@ class PatientReviewApi {
 
   static const String visitsCollection = 'visits';
 
-  // static const String _expand = 'review_status_id';
+  static const String doctorWebsiteInfoCollection = 'doctor_website_info';
 
   Future<VisitResponseModel?> fetchVisit(String visit_id) async {
     try {
@@ -51,6 +51,17 @@ class PatientReviewApi {
     final _result = await PocketbaseHelper.pb.collection(collection).create(
           body: model.toJson(),
         );
+
+    final _doctor_website_info = await PocketbaseHelper.pb
+        .collection(doctorWebsiteInfoCollection)
+        .getFirstListItem("doc_id = '${model.doc_id}'");
+    await PocketbaseHelper.pb.collection(doctorWebsiteInfoCollection).update(
+      _doctor_website_info.id,
+      body: {
+        'reviews_count': _doctor_website_info.getIntValue('reviews_count') + 1,
+      },
+    );
+    //TODO: find a way to update average rating
     final _notification = ServerNotification(
       type: NotificationType.new_review,
       id: _result.id,
