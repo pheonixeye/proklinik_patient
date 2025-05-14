@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:patient/models/filter_model.dart/filter_model.dart';
-import 'package:patient/models/sorting_model/sorting_model.dart';
+import 'package:proklinik_patient/models/filter_model.dart/filter_model.dart';
+import 'package:proklinik_patient/models/sorting_model/sorting_model.dart';
 
 class Query extends Equatable {
   final String type;

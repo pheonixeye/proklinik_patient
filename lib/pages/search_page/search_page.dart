@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/pages/search_page/pagination_row.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_info_card_sm.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
-import 'package:patient/pages/search_page/widgets/filter_column/filter_column_xl.dart';
-import 'package:patient/pages/search_page/widgets/sorting_row/sorting_row_sm.dart';
-import 'package:patient/pages/search_page/widgets/sorting_row/sorting_row_xl.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/search_px.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
-import 'package:patient/widgets/no_results_found/no_results_found.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/pages/search_page/pagination_row.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_sm/doc_info_card_sm.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_xl/doc_info_card_xl.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/filter_column/filter_column_xl.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/sorting_row/sorting_row_sm.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/sorting_row/sorting_row_xl.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/search_px.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/widgets/no_results_found/no_results_found.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {

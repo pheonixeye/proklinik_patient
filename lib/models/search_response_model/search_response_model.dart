@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/doctor/doctor.dart';
-import 'package:patient/models/doctor/doctor_website_info.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/models/doctor/doctor_website_info.dart';
 
 class SearchResponseModel extends Equatable {
   final Doctor doctor;

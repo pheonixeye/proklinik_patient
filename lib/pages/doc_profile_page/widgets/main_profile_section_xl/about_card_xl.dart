@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class AboutCardXl extends StatelessWidget {

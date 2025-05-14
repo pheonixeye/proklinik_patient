@@ -1,5 +1,5 @@
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/review/review.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/review/review.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class ReviewsApi {

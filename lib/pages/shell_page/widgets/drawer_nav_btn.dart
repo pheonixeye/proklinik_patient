@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
 
 class DrawerNavBtn extends StatelessWidget {

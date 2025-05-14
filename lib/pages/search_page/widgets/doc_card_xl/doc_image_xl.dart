@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/model_widgets_ext.dart';
-import 'package:patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/extensions/model_widgets_ext.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
 
 class DocImageXl extends StatelessWidget {
   const DocImageXl({super.key, required this.doctor});

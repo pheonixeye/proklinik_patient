@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_lower.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_upper.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_sm/doc_image_sm.dart';
-import 'package:patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
-import 'package:patient/router/router.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_lower.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_sm/doc_data_sm_upper.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_sm/doc_image_sm.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/doc_card_sm/tags_row.dart';
+import 'package:proklinik_patient/router/router.dart';
 
 class DocInfoCardSm extends StatefulWidget {
   const DocInfoCardSm({

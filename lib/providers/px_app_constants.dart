@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient/api/app_constants_api/app_constants_api.dart';
-import 'package:patient/models/app_constants_model/app_constants_model.dart';
+import 'package:proklinik_patient/api/app_constants_api/app_constants_api.dart';
+import 'package:proklinik_patient/models/app_constants_model/app_constants_model.dart';
 
 class PxAppConstants extends ChangeNotifier {
   final AppConstantsApi service;

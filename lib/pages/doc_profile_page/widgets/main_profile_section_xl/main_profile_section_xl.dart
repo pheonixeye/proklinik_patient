@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_info_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
-import 'package:patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
-import 'package:patient/providers/px_doctor_reviews.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/about_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/load_more_reviews_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/main_info_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/overall_reviews_card_xl.dart';
+import 'package:proklinik_patient/pages/doc_profile_page/widgets/main_profile_section_xl/rating_card_xl.dart';
+import 'package:proklinik_patient/providers/px_doctor_reviews.dart';
 import 'package:provider/provider.dart';
 
 class MainProfileSectionXl extends StatelessWidget {

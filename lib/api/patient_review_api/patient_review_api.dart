@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart' show debugPrint;
-import 'package:patient/api/notifications_api/notifications_api.dart';
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/review/review_response_model.dart';
-import 'package:patient/models/server_notification/server_notification.dart';
-import 'package:patient/models/visit/visit_response_model.dart';
+import 'package:proklinik_patient/api/notifications_api/notifications_api.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/review/review_response_model.dart';
+import 'package:proklinik_patient/models/server_notification/server_notification.dart';
+import 'package:proklinik_patient/models/visit/visit_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class PatientReviewApi {

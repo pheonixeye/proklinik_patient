@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:meta_seo/meta_seo.dart';
-import 'package:patient/localization/app_localizations.dart';
-import 'package:patient/providers/_main.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/router/router.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/utils/utils_keys.dart';
+// ignore: depend_on_referenced_packages
+// import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
+import 'package:proklinik_patient/localization/app_localizations.dart';
+import 'package:proklinik_patient/providers/_main.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/router/router.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/utils/utils_keys.dart';
 import 'package:provider/provider.dart';
 
 void main() {

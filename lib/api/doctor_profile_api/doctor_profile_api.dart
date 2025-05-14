@@ -1,8 +1,8 @@
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/doctor/doctor.dart';
-import 'package:patient/models/doctor/doctor_website_info.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/models/doctor/doctor_website_info.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class DoctorProfileApi {

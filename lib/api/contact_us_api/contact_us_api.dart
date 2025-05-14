@@ -1,7 +1,7 @@
-import 'package:patient/api/notifications_api/notifications_api.dart';
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/models/contact_us_model/contact_us_model.dart';
-import 'package:patient/models/server_notification/server_notification.dart';
+import 'package:proklinik_patient/api/notifications_api/notifications_api.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/models/contact_us_model/contact_us_model.dart';
+import 'package:proklinik_patient/models/server_notification/server_notification.dart';
 
 class ContactUsApi {
   const ContactUsApi();

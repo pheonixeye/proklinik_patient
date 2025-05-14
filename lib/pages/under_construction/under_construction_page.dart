@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:patient/assets/assets.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
-import 'package:patient/widgets/homepage_btn/homepage_btn.dart';
+import 'package:proklinik_patient/assets/assets.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/widgets/homepage_btn/homepage_btn.dart';
 
 class UnderConstructionPage extends StatelessWidget {
   const UnderConstructionPage({super.key});

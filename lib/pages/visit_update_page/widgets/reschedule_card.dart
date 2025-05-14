@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:patient/constants/now.dart';
-import 'package:patient/constants/weekdays.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/clinic/schedule.dart';
-import 'package:patient/models/visit/visit_shift.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/visit_update_px.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/constants/now.dart';
+import 'package:proklinik_patient/constants/weekdays.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/clinic/schedule.dart';
+import 'package:proklinik_patient/models/visit/visit_shift.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/visit_update_px.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 class RescheduleCard extends StatefulWidget {

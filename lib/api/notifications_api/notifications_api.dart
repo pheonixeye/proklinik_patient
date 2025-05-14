@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:patient/models/server_notification/server_notification.dart';
+import 'package:proklinik_patient/models/server_notification/server_notification.dart';
 
 class NotificationsApi {
   final ServerNotification notification;

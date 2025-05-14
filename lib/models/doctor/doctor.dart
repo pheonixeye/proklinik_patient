@@ -1,5 +1,5 @@
-import 'package:patient/models/app_constants_model/_models/degree.dart';
-import 'package:patient/models/app_constants_model/_models/speciality.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/degree.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/speciality.dart';
 import 'package:equatable/equatable.dart';
 
 class Doctor extends Equatable {

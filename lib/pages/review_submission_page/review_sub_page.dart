@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:intl/intl.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/review_submission_page/widgets/thank_you_review.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
-import 'package:patient/providers/px_patient_reviews.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/pages/review_submission_page/widgets/thank_you_review.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/providers/px_patient_reviews.dart';
+import 'package:proklinik_patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class ReviewSubmissionPage extends StatefulWidget {

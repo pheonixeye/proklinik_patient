@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
 
 class PatientLoginPage extends StatelessWidget {
   const PatientLoginPage({super.key});

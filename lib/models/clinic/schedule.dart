@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:patient/models/clinic/clinic_shift.dart';
-// import 'package:patient/models/clinic/weekdays.dart';
+import 'package:proklinik_patient/models/clinic/clinic_shift.dart';
+// import 'package:proklinik_patient/models/clinic/weekdays.dart';
 import 'package:equatable/equatable.dart';
 
 class Schedule extends Equatable {

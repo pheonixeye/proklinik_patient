@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/pages/search_page/widgets/filter_column/column_filter_items.dart';
-import 'package:patient/theme/app_theme.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/pages/search_page/widgets/filter_column/column_filter_items.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
 
 class FilterColumnXl extends StatefulWidget {
   const FilterColumnXl({super.key});

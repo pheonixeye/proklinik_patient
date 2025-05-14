@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/model_widgets_ext.dart';
-import 'package:patient/pages/error_page/error_page.dart';
-import 'package:patient/pages/visit_update_page/widgets/booking_info_card.dart';
-import 'package:patient/pages/visit_update_page/widgets/confirm_delete_dialog.dart';
-import 'package:patient/pages/visit_update_page/widgets/original_booking_info_card.dart';
-import 'package:patient/pages/visit_update_page/widgets/thankyou_card.dart';
-import 'package:patient/pages/visit_update_page/widgets/visit_already_canceled_card.dart';
-import 'package:patient/pages/visit_update_page/widgets/visit_date_passed_card.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
-import 'package:patient/providers/visit_update_px.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
-import 'package:patient/widgets/footer_section/footer_section.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/model_widgets_ext.dart';
+import 'package:proklinik_patient/pages/error_page/error_page.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/booking_info_card.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/confirm_delete_dialog.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/original_booking_info_card.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/thankyou_card.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/visit_already_canceled_card.dart';
+import 'package:proklinik_patient/pages/visit_update_page/widgets/visit_date_passed_card.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/providers/visit_update_px.dart';
+import 'package:proklinik_patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_patient/widgets/footer_section/footer_section.dart';
 import 'package:provider/provider.dart';
 
 class VisitUpdatePage extends StatelessWidget {

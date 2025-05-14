@@ -1,4 +1,4 @@
-import 'package:patient/models/app_constants_model/_models/app_constant.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/app_constant.dart';
 
 class Degree extends AppConstant {
   const Degree({

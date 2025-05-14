@@ -1,4 +1,4 @@
-name: patient
+name: proklinik_patient
 description: "patient web reservation portal"
 publish_to: 'none' 
 

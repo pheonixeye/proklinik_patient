@@ -2,15 +2,15 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patient/extensions/is_mobile_context.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/models/app_constants_model/_models/visit_type.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/providers/px_app_constants.dart';
-import 'package:patient/providers/px_visits.dart';
-import 'package:patient/router/router.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/widgets/central_loading/central_loading.dart';
+import 'package:proklinik_patient/extensions/is_mobile_context.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/visit_type.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/providers/px_app_constants.dart';
+import 'package:proklinik_patient/providers/px_visits.dart';
+import 'package:proklinik_patient/router/router.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/widgets/central_loading/central_loading.dart';
 import 'package:provider/provider.dart';
 
 class BookAppForm extends StatefulWidget {

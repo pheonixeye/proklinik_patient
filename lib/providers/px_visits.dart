@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:patient/api/visits_api/visits_api.dart';
-import 'package:patient/functions/pretty_print.dart';
-import 'package:patient/models/visit/visit_response_model.dart';
+import 'package:proklinik_patient/api/visits_api/visits_api.dart';
+import 'package:proklinik_patient/functions/pretty_print.dart';
+import 'package:proklinik_patient/models/visit/visit_response_model.dart';
 
 class PxVisits extends ChangeNotifier {
   final VisitsApi service;

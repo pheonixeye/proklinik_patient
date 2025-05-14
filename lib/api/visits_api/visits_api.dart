@@ -1,11 +1,11 @@
-import 'package:patient/api/notifications_api/notifications_api.dart';
-import 'package:patient/api/pocketbase/pocketbase_helper.dart';
-import 'package:patient/functions/pretty_print.dart';
-import 'package:patient/models/clinic/clinic.dart';
-import 'package:patient/models/doctor/doctor.dart';
-import 'package:patient/models/server_notification/server_notification.dart';
-import 'package:patient/models/visit/visit.dart';
-import 'package:patient/models/visit/visit_response_model.dart';
+import 'package:proklinik_patient/api/notifications_api/notifications_api.dart';
+import 'package:proklinik_patient/api/pocketbase/pocketbase_helper.dart';
+import 'package:proklinik_patient/functions/pretty_print.dart';
+import 'package:proklinik_patient/models/clinic/clinic.dart';
+import 'package:proklinik_patient/models/doctor/doctor.dart';
+import 'package:proklinik_patient/models/server_notification/server_notification.dart';
+import 'package:proklinik_patient/models/visit/visit.dart';
+import 'package:proklinik_patient/models/visit/visit_response_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class VisitsApi {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patient/api/reviews_api/reviews_api.dart';
-import 'package:patient/models/review/review.dart';
+import 'package:proklinik_patient/api/reviews_api/reviews_api.dart';
+import 'package:proklinik_patient/models/review/review.dart';
 
 class PxDocReviews extends ChangeNotifier {
   final ReviewsApi service;

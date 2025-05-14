@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/extensions/loc_ext.dart';
-import 'package:patient/extensions/model_widgets_ext.dart';
-import 'package:patient/extensions/number_translator.dart';
-import 'package:patient/functions/stars_from_num.dart';
-import 'package:patient/models/search_response_model/search_response_model.dart';
-import 'package:patient/providers/locale_px.dart';
-import 'package:patient/theme/app_theme.dart';
-import 'package:patient/utils/utils_keys.dart';
+import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/extensions/model_widgets_ext.dart';
+import 'package:proklinik_patient/extensions/number_translator.dart';
+import 'package:proklinik_patient/functions/stars_from_num.dart';
+import 'package:proklinik_patient/models/search_response_model/search_response_model.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
+import 'package:proklinik_patient/theme/app_theme.dart';
+import 'package:proklinik_patient/utils/utils_keys.dart';
 import 'package:provider/provider.dart';
 
 class MainInfoCardXl extends StatelessWidget {

@@ -1,10 +1,10 @@
-import 'package:patient/models/app_constants_model/_models/attendance_type.dart';
-import 'package:patient/models/app_constants_model/_models/city.dart';
-import 'package:patient/models/app_constants_model/_models/governorate.dart';
-import 'package:patient/models/app_constants_model/_models/speciality.dart';
-import 'package:patient/models/app_constants_model/_models/venue.dart';
-import 'package:patient/models/clinic/clinic_location.dart';
-import 'package:patient/models/clinic/schedule.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/attendance_type.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/city.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/governorate.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/speciality.dart';
+import 'package:proklinik_patient/models/app_constants_model/_models/venue.dart';
+import 'package:proklinik_patient/models/clinic/clinic_location.dart';
+import 'package:proklinik_patient/models/clinic/schedule.dart';
 import 'package:equatable/equatable.dart';
 
 class Clinic extends Equatable {
