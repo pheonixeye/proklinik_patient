@@ -252,7 +252,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nearestFirst => 'من الاقرب للابعد';
 
   @override
-  String get noResults => 'لم يتم العثور على نتائج مطابقة لمعايير البحث، يرجى تعديل البحث والمحاولة مرة أخرى.';
+  String get noResults =>
+      'لم يتم العثور على نتائج مطابقة لمعايير البحث، يرجى تعديل البحث والمحاولة مرة أخرى.';
 
   @override
   String get overallRating => 'التقييم العام';
@@ -312,7 +313,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get examination => 'كشف طبي';
 
   @override
-  String get bookToRecieveInfo => 'احجز الان وسيتم ارسال تفاصيل العنوان بالكامل ورقم العيادة';
+  String get bookToRecieveInfo =>
+      'احجز الان وسيتم ارسال تفاصيل العنوان بالكامل ورقم العيادة';
 
   @override
   String get cancel => 'الغاء';
@@ -330,13 +332,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get somethingWentWrong => 'حدث خطأ اثناء البحث';
 
   @override
-  String get errorText => 'يبدو أن هذه الصفحة قد تم نقلها أو أنها غير متوفرة في الوقت الحالي، يرجى المحاولة مرة أخرى لاحقًا.';
+  String get errorText =>
+      'يبدو أن هذه الصفحة قد تم نقلها أو أنها غير متوفرة في الوقت الحالي، يرجى المحاولة مرة أخرى لاحقًا.';
 
   @override
   String get available => 'متاح';
 
   @override
-  String get validateEmailOrLeaveEmpty => 'يرجى إدخال عنوان بريد إلكتروني صحيح أو ترك حقل البريد الإلكتروني فارغًا.';
+  String get validateEmailOrLeaveEmpty =>
+      'يرجى إدخال عنوان بريد إلكتروني صحيح أو ترك حقل البريد الإلكتروني فارغًا.';
 
   @override
   String get validateMobileDigits => 'يرجى إدخال رقم جوال صحيح مكون من ۱۱ رقم.';
@@ -348,13 +352,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appConfirmed => 'تم تأكيد موعد زيارة العيادة.';
 
   @override
-  String get willBeNotified => 'سيتم ارسال بيانات الحجز و عنوان و موقع العيادة عن طريق رسالة نصية.';
+  String get willBeNotified =>
+      'سيتم ارسال بيانات الحجز و عنوان و موقع العيادة عن طريق رسالة نصية.';
 
   @override
   String get pageUnderConst => 'هذه الصفحة تحت الإنشاء.';
 
   @override
-  String get sryMsg => 'نأسف على أي إزعاج، ولكن هذه الصفحة لا تزال قيد الإنشاء والاختبار. وفي هذه الأثناء، لا يزال بإمكانك تصفح الصفحات الأخرى.';
+  String get sryMsg =>
+      'نأسف على أي إزعاج، ولكن هذه الصفحة لا تزال قيد الإنشاء والاختبار. وفي هذه الأثناء، لا يزال بإمكانك تصفح الصفحات الأخرى.';
 
   @override
   String get comingSoon => 'قريبا . . .';
@@ -381,7 +387,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteBooking => 'الغاء الحجز';
 
   @override
-  String get bookingAlreadyCanceled => 'عفوا لقد تم الغاء هذا الحجز مسبقا, برجاء حجز موعد جديد';
+  String get bookingAlreadyCanceled =>
+      'عفوا لقد تم الغاء هذا الحجز مسبقا, برجاء حجز موعد جديد';
 
   @override
   String get confirm => 'الغاء الحجز';
@@ -441,7 +448,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get no => 'لا';
 
   @override
-  String get visitDatePassed => 'عفوا,لا يمكن تغيير ميعاد الحجز بعد مرور الميعاد, برجاء حجز ميعاد جديد';
+  String get visitDatePassed =>
+      'عفوا,لا يمكن تغيير ميعاد الحجز بعد مرور الميعاد, برجاء حجز ميعاد جديد';
 
   @override
   String get newBookingInformation => 'معلومات تعديل الحجز';

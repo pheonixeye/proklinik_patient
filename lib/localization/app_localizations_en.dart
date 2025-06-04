@@ -117,7 +117,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicyDoctors => 'Privacy Policy For Doctors';
 
   @override
-  String get weHappySuggestions => 'We will be happy to receive your inquiries and suggestions.';
+  String get weHappySuggestions =>
+      'We will be happy to receive your inquiries and suggestions.';
 
   @override
   String get yourName => 'Your Name';
@@ -252,7 +253,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nearestFirst => 'From Near To Far';
 
   @override
-  String get noResults => 'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.';
+  String get noResults =>
+      'No Results Found Matching Search Criteria, Kindly Refine Your Search And Try Again.';
 
   @override
   String get overallRating => 'Overall Rating';
@@ -312,7 +314,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get examination => 'Examination';
 
   @override
-  String get bookToRecieveInfo => 'Book now to receive the clinic’s address details and phone number.';
+  String get bookToRecieveInfo =>
+      'Book now to receive the clinic’s address details and phone number.';
 
   @override
   String get cancel => 'Cancel';
@@ -330,16 +333,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get somethingWentWrong => 'Something Went Wrong';
 
   @override
-  String get errorText => 'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.';
+  String get errorText =>
+      'This Page Seems To Be Moved Or Not Available At The Moment, Kindly Try Again Later.';
 
   @override
   String get available => 'Availabile';
 
   @override
-  String get validateEmailOrLeaveEmpty => 'Kindly Enter A Valid Email Address Or Leave The Email Field Empty.';
+  String get validateEmailOrLeaveEmpty =>
+      'Kindly Enter A Valid Email Address Or Leave The Email Field Empty.';
 
   @override
-  String get validateMobileDigits => 'Kindly Enter A Valid Mobile Number Consisting of 11 Digits.';
+  String get validateMobileDigits =>
+      'Kindly Enter A Valid Mobile Number Consisting of 11 Digits.';
 
   @override
   String get thankYouForBooking => 'Thank You For Using ProKliniK.';
@@ -348,13 +354,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appConfirmed => 'Your Appointment Has Been Confirmed.';
 
   @override
-  String get willBeNotified => 'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.';
+  String get willBeNotified =>
+      'You Will Be Notified Via SMS By The Booking Details, Clinic Address & Location.';
 
   @override
   String get pageUnderConst => 'This Page is Under Construction.';
 
   @override
-  String get sryMsg => 'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.';
+  String get sryMsg =>
+      'Sorry For Any Inconvenience, But This Page is Still Being Built And Tested. In The Mean Time, You Can Still Browse Other Pages.';
 
   @override
   String get comingSoon => 'Coming Soon...';
@@ -381,7 +389,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteBooking => 'Cancel Booking';
 
   @override
-  String get bookingAlreadyCanceled => 'Sorry, your appointment has already been Canceled, Please book a new appointment';
+  String get bookingAlreadyCanceled =>
+      'Sorry, your appointment has already been Canceled, Please book a new appointment';
 
   @override
   String get confirm => 'Confirm';
@@ -441,7 +450,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get no => 'No';
 
   @override
-  String get visitDatePassed => 'Sorry, your appointment time has already passed, Please book a new appointment';
+  String get visitDatePassed =>
+      'Sorry, your appointment time has already passed, Please book a new appointment';
 
   @override
   String get newBookingInformation => 'New Booking Information';
@@ -450,5 +460,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmUpdateBooking => 'Confirm New Booking';
 
   @override
-  String get bookingInformationUpdated => 'Success, your booking information has been updated';
+  String get bookingInformationUpdated =>
+      'Success, your booking information has been updated';
 }
