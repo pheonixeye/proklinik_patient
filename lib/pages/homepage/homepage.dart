@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/features_section/features_section.dart';
-import 'package:proklinik_patient/pages/homepage/widgets/offers_section/offers_section.dart';
+// import 'package:proklinik_patient/pages/homepage/widgets/offers_section/offers_section.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/selector_section/main_selector.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/slogan/slogan.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/speciality_row/speciality_row.dart';
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         const MainAppSelector(),
         const SpecialityRow(),
         const FeaturesSection(),
-        const OffersSection(),
+        // const OffersSection(),
         const FooterSection(),
       ],
     );

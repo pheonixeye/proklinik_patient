@@ -31,10 +31,10 @@ class NoResultsFound extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(
-                FontAwesomeIcons.faceSurprise,
+                FontAwesomeIcons.faceSurprise.data,
                 size: 48,
                 color: Colors.green,
               ),

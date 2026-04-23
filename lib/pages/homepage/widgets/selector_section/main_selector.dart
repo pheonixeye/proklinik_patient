@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 import 'package:proklinik_patient/extensions/loc_ext.dart';
-import 'package:proklinik_patient/models/search_type/search_type.dart';
+// import 'package:proklinik_patient/models/search_type/search_type.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/selector_section/clinic_search.dart';
-import 'package:proklinik_patient/pages/homepage/widgets/selector_section/common_search.dart';
+// import 'package:proklinik_patient/pages/homepage/widgets/selector_section/common_search.dart';
 import 'package:proklinik_patient/pages/homepage/widgets/selector_section/selector_tab.dart';
 
 class MainAppSelector extends StatefulWidget {
@@ -22,7 +22,7 @@ class _MainAppSelectorState extends State<MainAppSelector>
   @override
   void initState() {
     _controller = TabController(
-      length: 4,
+      length: 1,
       vsync: this,
       initialIndex: _selectedIndex,
     );
@@ -47,6 +47,7 @@ class _MainAppSelectorState extends State<MainAppSelector>
             borderRadius: BorderRadius.circular(8),
           ),
           child: Scaffold(
+            backgroundColor: Colors.transparent,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(100),
               child: TabBar(
@@ -71,23 +72,8 @@ class _MainAppSelectorState extends State<MainAppSelector>
                 tabs: [
                   SelectorTab(
                     title: context.loc.clinic,
-                    iconData: FontAwesomeIcons.houseMedical,
+                    iconData: FontAwesomeIcons.houseMedical.data,
                     selected: _selectedIndex == 0,
-                  ),
-                  SelectorTab(
-                    title: context.loc.lab,
-                    iconData: FontAwesomeIcons.fileMedical,
-                    selected: _selectedIndex == 1,
-                  ),
-                  SelectorTab(
-                    title: context.loc.rad,
-                    iconData: FontAwesomeIcons.laptopMedical,
-                    selected: _selectedIndex == 2,
-                  ),
-                  SelectorTab(
-                    title: context.loc.pharma,
-                    iconData: FontAwesomeIcons.prescriptionBottleMedical,
-                    selected: _selectedIndex == 3,
                   ),
                 ],
               ),
@@ -97,15 +83,6 @@ class _MainAppSelectorState extends State<MainAppSelector>
               physics: const NeverScrollableScrollPhysics(),
               children: const [
                 ClinicSearchSection(),
-                CommonSearchSection(
-                  type: SearchType.lab,
-                ),
-                CommonSearchSection(
-                  type: SearchType.rad,
-                ),
-                CommonSearchSection(
-                  type: SearchType.pharm,
-                ),
               ],
             ),
           ),

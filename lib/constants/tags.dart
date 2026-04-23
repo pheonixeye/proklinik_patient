@@ -14,7 +14,7 @@ class TagRowData {
 }
 
 // ignore: constant_identifier_names
-const List<TagRowData> ALLTAGS = [
+List<TagRowData> ALLTAGS = [
   TagRowData(
     titleEn: "Friendly",
     titleAr: "ودود",
@@ -23,7 +23,7 @@ const List<TagRowData> ALLTAGS = [
   TagRowData(
     titleEn: "Good Listener",
     titleAr: "مستمع جيد",
-    iconData: FontAwesomeIcons.earListen,
+    iconData: FontAwesomeIcons.earListen.data,
   ),
   TagRowData(
     titleEn: "Informative",

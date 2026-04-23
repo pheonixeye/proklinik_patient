@@ -42,9 +42,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
 # cloudflare deployment command
 .cloudflare
 makefile
 .env
 .env.dev
+
+# FVM Version Cache
+.fvm/

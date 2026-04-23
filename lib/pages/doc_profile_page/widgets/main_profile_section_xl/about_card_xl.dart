@@ -41,8 +41,8 @@ class AboutCardXl extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          leading: const Icon(
-            FontAwesomeIcons.userDoctor,
+          leading: Icon(
+            FontAwesomeIcons.userDoctor.data,
             color: Colors.green,
             size: 16,
           ),

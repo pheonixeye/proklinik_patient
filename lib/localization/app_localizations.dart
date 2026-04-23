@@ -146,16 +146,22 @@ abstract class AppLocalizations {
   /// **'Clinic, Lab, Radiology & Pharmacy.'**
   String get slogan;
 
+  /// No description provided for @sloganOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap. Book. Done.'**
+  String get sloganOne;
+
   /// No description provided for @subSlogan.
   ///
   /// In en, this message translates to:
-  /// **'Book Online Or Call Us'**
+  /// **'Or Call Us'**
   String get subSlogan;
 
   /// No description provided for @hotline.
   ///
   /// In en, this message translates to:
-  /// **'18888'**
+  /// **'01555905768'**
   String get hotline;
 
   /// No description provided for @clinic.

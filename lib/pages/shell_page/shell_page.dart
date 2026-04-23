@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proklinik_patient/extensions/after_layout.dart';
 import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 import 'package:proklinik_patient/pages/shell_page/widgets/end_drawer.dart';
-import 'package:proklinik_patient/pages/shell_page/widgets/language_btn.dart';
+// import 'package:proklinik_patient/pages/shell_page/widgets/language_btn.dart';
 import 'package:proklinik_patient/pages/shell_page/widgets/nav_bar.dart';
 import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class _ShellPageState extends State<ShellPage> with AfterLayoutMixin {
       appBar: const Navbar(),
       body: widget.child,
       endDrawer: context.isMobile ? const EndDrawer() : null,
-      floatingActionButton: context.isMobile ? const LanguageBtn() : null,
+      // floatingActionButton: context.isMobile ? const LanguageBtn() : null,
     );
   }
 }

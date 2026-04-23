@@ -30,7 +30,7 @@ class VisitAlreadyCanceledCard extends StatelessWidget {
                       children: [
                         SizedBox(height: context.isMobile ? 30 : 60),
                         Icon(
-                          FontAwesomeIcons.faceSurprise,
+                          FontAwesomeIcons.faceSurprise.data,
                           size: context.isMobile ? 36 : 72,
                           color: Theme.of(context).primaryColor,
                         ),

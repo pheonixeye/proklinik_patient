@@ -22,7 +22,7 @@ class Slogan extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                context.loc.slogan,
+                context.loc.sloganOne,
                 style: TextStyle(
                   fontSize: context.isMobile ? 24 : 42,
                   fontWeight: FontWeight.bold,
@@ -44,7 +44,8 @@ class Slogan extends StatelessWidget {
                   TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        html.window.open("tel:+2018888", "Call Us", "_blank");
+                        html.window
+                            .open("tel:+201555905768", "Call Us", "_blank");
                       },
                     //todo: Check style
                     text: context.loc.hotline.toArabicNumber(context),

@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:proklinik_patient/extensions/loc_ext.dart';
 import 'package:proklinik_patient/pages/shell_page/widgets/drawer_nav_btn.dart';
 import 'package:proklinik_patient/pages/shell_page/widgets/thin_divider.dart';
+import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:proklinik_patient/router/router.dart';
+import 'package:provider/provider.dart';
 
 class EndDrawer extends StatelessWidget {
   const EndDrawer({super.key});
@@ -41,24 +43,12 @@ class EndDrawer extends StatelessWidget {
           const ThinDivider(),
           DrawerNavBtn(
             title: context.loc.homepage,
-            icondata: FontAwesomeIcons.house,
-          ),
-          const ThinDivider(),
-          DrawerNavBtn(
-            title: context.loc.signup,
-            icondata: Icons.person_add,
-            routePath: AppRouter.signup,
-          ),
-          const ThinDivider(),
-          DrawerNavBtn(
-            title: context.loc.login,
-            icondata: FontAwesomeIcons.arrowRightToBracket,
-            routePath: AppRouter.login,
+            icondata: FontAwesomeIcons.house.data,
           ),
           const ThinDivider(),
           DrawerNavBtn(
             title: context.loc.forProviders,
-            icondata: FontAwesomeIcons.handHoldingMedical,
+            icondata: FontAwesomeIcons.handHoldingMedical.data,
             routePath: AppRouter.forproviders,
           ),
           const ThinDivider(),
@@ -67,6 +57,15 @@ class EndDrawer extends StatelessWidget {
             icondata: Icons.phone,
             routePath: AppRouter.contactus,
           ),
+          const ThinDivider(),
+          Consumer<PxLocale>(builder: (context, l, _) {
+            return DrawerNavBtn(
+              title: l.lang == "en" ? "عربي" : "English",
+              icondata: Icons.language,
+              routePath: '',
+              isForLanguage: true,
+            );
+          }),
           const ThinDivider(),
         ],
       ),

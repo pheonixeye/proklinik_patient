@@ -375,7 +375,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(
-                                  FontAwesomeIcons.facebookF,
+                                  FontAwesomeIcons.facebookF.data,
                                   color: AppTheme.mainFontColor,
                                 ),
                               ),
@@ -383,7 +383,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(
-                                  FontAwesomeIcons.linkedinIn,
+                                  FontAwesomeIcons.linkedinIn.data,
                                   color: AppTheme.mainFontColor,
                                 ),
                               ),
@@ -391,7 +391,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(
-                                  FontAwesomeIcons.squareYoutube,
+                                  FontAwesomeIcons.squareYoutube.data,
                                   color: AppTheme.mainFontColor,
                                 ),
                               ),

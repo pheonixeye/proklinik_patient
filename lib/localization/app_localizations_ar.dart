@@ -33,10 +33,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get slogan => 'عيادة و معمل و اشعة و صيدلية.';
 
   @override
-  String get subSlogan => 'احجز اونلاين او كلمنا';
+  String get sloganOne => 'اضغط. احجز. تم.';
 
   @override
-  String get hotline => '18888';
+  String get subSlogan => ' او كلمنا';
+
+  @override
+  String get hotline => '01555905768';
 
   @override
   String get clinic => 'احجز عيادة';

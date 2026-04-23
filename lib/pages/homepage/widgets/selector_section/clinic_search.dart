@@ -51,7 +51,10 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
             return Center(
               child: context.isMobile
                   ? CircularProgressIndicator()
-                  : LinearProgressIndicator(),
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: LinearProgressIndicator(),
+                    ),
             );
           }
           return Form(
@@ -89,7 +92,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                                   if (context.isMobile) const Spacer(),
                                   const SizedBox(width: 5),
                                   CachedNetworkImage(
-                                    imageUrl:e.svgUrl,
+                                    imageUrl: e.svgUrl,
                                     width: 35,
                                     height: 35,
                                   ),

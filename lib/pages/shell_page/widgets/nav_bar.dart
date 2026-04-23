@@ -63,33 +63,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                   const SizedBox(width: 20),
                 ]
               : [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      onPressed: () {
-                        context.go("/${l.lang}/${AppRouter.signup}");
-                      },
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          side: const BorderSide(
-                            color: Colors.white,
-                            width: 1.5,
-                          ),
-                        ),
-                      ),
-                      child: Text(context.loc.signup),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      onPressed: () {
-                        context.go("/${l.lang}/${AppRouter.login}");
-                      },
-                      child: Text(context.loc.login),
-                    ),
-                  ),
                   const VerticalDivider(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

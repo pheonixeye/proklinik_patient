@@ -1,6 +1,7 @@
 {
-    "arb-editor.suppressedWarnings" : [
-        "metadata_for_missing_key",
-        "missing_metadata_for_key",
-    ],
+  "arb-editor.suppressedWarnings": [
+    "metadata_for_missing_key",
+    "missing_metadata_for_key"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.38.7"
 }

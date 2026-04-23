@@ -1,8 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proklinik_patient/assets/assets.dart';
 import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 import 'package:proklinik_patient/extensions/loc_ext.dart';
 import 'package:proklinik_patient/widgets/footer_section/footer_btn.dart';
@@ -57,56 +57,39 @@ class FooterSection extends StatelessWidget {
           return FlexibleWrapContainer(
             children: [
               ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                title: InkWell(
-                  mouseCursor:
-                      context.isMobile ? null : SystemMouseCursors.click,
-                  onTap: context.isMobile
-                      ? null
-                      : () {
-                          GoRouter.of(context).go("/${l.lang}");
-                        },
-                  child: Row(
-                    children: [
-                      SizedBox(width: context.isMobile ? 16 : 50),
-                      Image.asset(
-                        Assets.icon,
-                        width: 40,
-                        height: 40,
-                      ),
-                      SizedBox(width: context.isMobile ? 10 : 20),
-                      Text(
-                        "ProKliniK",
-                        style: _titleStyle,
-                      ),
-                    ],
+                title: Text.rich(
+                  TextSpan(
+                    text: "ProKliniK",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = context.isMobile
+                          ? null
+                          : () {
+                              GoRouter.of(context).go("/${l.lang}");
+                            },
                   ),
+                  style: _titleStyle,
                 ),
-                subtitle: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.isMobile ? 16 : 50),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Gap(10),
-                      FooterBtn(
-                        title: context.loc.aboutUs,
-                        onTap: () {},
-                      ),
-                      FooterBtn(
-                        title: context.loc.ourTeam,
-                        onTap: () {},
-                      ),
-                      FooterBtn(
-                        title: context.loc.careers,
-                        onTap: () {},
-                      ),
-                      FooterBtn(
-                        title: context.loc.press,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(10),
+                    FooterBtn(
+                      title: context.loc.aboutUs,
+                      onTap: () {},
+                    ),
+                    FooterBtn(
+                      title: context.loc.termsOfUse,
+                      onTap: () {},
+                    ),
+                    FooterBtn(
+                      title: context.loc.privacyPolicy,
+                      onTap: () {},
+                    ),
+                    FooterBtn(
+                      title: context.loc.privacyPolicyDoctors,
+                      onTap: () {},
+                    ),
+                  ],
                 ),
               ),
               ListTile(
@@ -122,18 +105,18 @@ class FooterSection extends StatelessWidget {
                       title: context.loc.clinic,
                       onTap: () {},
                     ),
-                    FooterBtn(
-                      title: context.loc.lab,
-                      onTap: () {},
-                    ),
-                    FooterBtn(
-                      title: context.loc.rad,
-                      onTap: () {},
-                    ),
-                    FooterBtn(
-                      title: context.loc.pharma,
-                      onTap: () {},
-                    ),
+                    // FooterBtn(
+                    //   title: context.loc.lab,
+                    //   onTap: () {},
+                    // ),
+                    // FooterBtn(
+                    //   title: context.loc.rad,
+                    //   onTap: () {},
+                    // ),
+                    // FooterBtn(
+                    //   title: context.loc.pharma,
+                    //   onTap: () {},
+                    // ),
                   ],
                 ),
               ),
@@ -166,18 +149,6 @@ class FooterSection extends StatelessWidget {
                       title: context.loc.contactUs,
                       onTap: () {},
                     ),
-                    FooterBtn(
-                      title: context.loc.termsOfUse,
-                      onTap: () {},
-                    ),
-                    FooterBtn(
-                      title: context.loc.privacyPolicy,
-                      onTap: () {},
-                    ),
-                    FooterBtn(
-                      title: context.loc.privacyPolicyDoctors,
-                      onTap: () {},
-                    ),
                   ],
                 ),
               ),
@@ -192,24 +163,24 @@ class FooterSection extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        FontAwesomeIcons.facebookF,
+                      icon: Icon(
+                        FontAwesomeIcons.facebookF.data,
                         color: Colors.white,
                       ),
                     ),
                     const Gap(5),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        FontAwesomeIcons.linkedinIn,
+                      icon: Icon(
+                        FontAwesomeIcons.linkedinIn.data,
                         color: Colors.white,
                       ),
                     ),
                     const Gap(5),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        FontAwesomeIcons.squareYoutube,
+                      icon: Icon(
+                        FontAwesomeIcons.squareYoutube.data,
                         color: Colors.white,
                       ),
                     ),

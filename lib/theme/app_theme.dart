@@ -106,6 +106,7 @@ class AppTheme {
       width: 3,
       color: Colors.green.shade800,
     ),
+    borderRadius: BorderRadius.circular(12),
   );
 
   static Color mainFontColor = Colors.blueGrey.shade500;

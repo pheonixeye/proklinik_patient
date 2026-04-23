@@ -33,10 +33,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get slogan => 'Clinic, Lab, Radiology & Pharmacy.';
 
   @override
-  String get subSlogan => 'Book Online Or Call Us';
+  String get sloganOne => 'Tap. Book. Done.';
 
   @override
-  String get hotline => '18888';
+  String get subSlogan => 'Or Call Us';
+
+  @override
+  String get hotline => '01555905768';
 
   @override
   String get clinic => 'Book Appointment';

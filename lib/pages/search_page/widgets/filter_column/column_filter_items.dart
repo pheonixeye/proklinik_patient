@@ -138,7 +138,7 @@ class _FilterColumnItemsState extends State<FilterColumnItems> {
               initiallyExpanded: true,
               title: Row(
                 children: [
-                  const Icon(FontAwesomeIcons.userDoctor),
+                  Icon(FontAwesomeIcons.userDoctor.data),
                   const SizedBox(width: 10),
                   Text(
                     context.loc.degree,
