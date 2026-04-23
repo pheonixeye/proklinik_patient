@@ -5,9 +5,11 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proklinik_patient/extensions/is_mobile_context.dart';
 import 'package:proklinik_patient/extensions/loc_ext.dart';
+import 'package:proklinik_patient/router/router.dart';
 import 'package:proklinik_patient/widgets/footer_section/footer_btn.dart';
 import 'package:proklinik_patient/providers/locale_px.dart';
 import 'package:provider/provider.dart';
+import 'package:web/web.dart' as web;
 
 class FlexibleWrapContainer extends StatelessWidget {
   // ignore: unused_element
@@ -103,20 +105,10 @@ class FooterSection extends StatelessWidget {
                     const Gap(10),
                     FooterBtn(
                       title: context.loc.clinic,
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).go("/${l.lang}");
+                      },
                     ),
-                    // FooterBtn(
-                    //   title: context.loc.lab,
-                    //   onTap: () {},
-                    // ),
-                    // FooterBtn(
-                    //   title: context.loc.rad,
-                    //   onTap: () {},
-                    // ),
-                    // FooterBtn(
-                    //   title: context.loc.pharma,
-                    //   onTap: () {},
-                    // ),
                   ],
                 ),
               ),
@@ -131,7 +123,13 @@ class FooterSection extends StatelessWidget {
                     const Gap(10),
                     FooterBtn(
                       title: context.loc.joinNetwork,
-                      onTap: () {},
+                      onTap: () {
+                        //TODO
+                        GoRouter.of(context).goNamed(
+                          AppRouter.underconstruction,
+                          pathParameters: defaultPathParameters(context),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -147,7 +145,12 @@ class FooterSection extends StatelessWidget {
                     const Gap(10),
                     FooterBtn(
                       title: context.loc.contactUs,
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).goNamed(
+                          AppRouter.contactus,
+                          pathParameters: defaultPathParameters(context),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -162,7 +165,10 @@ class FooterSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //TODO
+                        web.window.open('https://', 'Facebook', '_blank');
+                      },
                       icon: Icon(
                         FontAwesomeIcons.facebookF.data,
                         color: Colors.white,
@@ -170,7 +176,10 @@ class FooterSection extends StatelessWidget {
                     ),
                     const Gap(5),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //TODO
+                        web.window.open('https://', 'LinkedIn', '_blank');
+                      },
                       icon: Icon(
                         FontAwesomeIcons.linkedinIn.data,
                         color: Colors.white,
@@ -178,7 +187,10 @@ class FooterSection extends StatelessWidget {
                     ),
                     const Gap(5),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        //TODO
+                        web.window.open('https://', 'YouTube', '_blank');
+                      },
                       icon: Icon(
                         FontAwesomeIcons.squareYoutube.data,
                         color: Colors.white,
