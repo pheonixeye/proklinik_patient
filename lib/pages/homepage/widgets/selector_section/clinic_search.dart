@@ -210,9 +210,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                         if (formKey.currentState!.validate()) {
                           GoRouter.of(context).goNamed(
                             AppRouter.src,
-                            pathParameters: {
-                              "lang": l.lang,
-                            },
+                            pathParameters: defaultPathParameters(context),
 
                             ///symbols :
                             ///av => availabilityFilter

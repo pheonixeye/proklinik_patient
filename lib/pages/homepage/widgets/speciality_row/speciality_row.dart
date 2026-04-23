@@ -84,16 +84,17 @@ class SpecialityRow extends StatelessWidget {
                                     mouseCursor: SystemMouseCursors.click,
                                     onTap: () {
                                       //todo: search by spec id
-                                      final _spec_id = a.model!.specialities
+                                      final _spec = a.model!.specialities
                                           .firstWhere((spec) =>
                                               spec.name_en == x['en']);
+
                                       GoRouter.of(context).goNamed(
                                         AppRouter.src,
                                         pathParameters:
                                             defaultPathParameters(context),
                                         queryParameters: {
                                           "type": SearchType.clinic.name,
-                                          "spec": _spec_id,
+                                          "spec": _spec.id,
                                           "gov": '',
                                           "city": '',
                                           "page": "1",
