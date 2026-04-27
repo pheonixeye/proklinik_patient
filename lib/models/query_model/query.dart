@@ -133,7 +133,8 @@ class Query extends Equatable {
     );
   }
 
-  String get specialityFilter => "speciality_id = '$spec'";
+  String get specialityFilter =>
+      spec.isNotEmpty ? "speciality_id = '$spec'" : "";
 
   String get governorateFilter =>
       gov.isNotEmpty ? "&& governorate_id = '$gov'" : '';
@@ -141,6 +142,9 @@ class Query extends Equatable {
   String get cityFilter => city.isNotEmpty ? "&& city_id = '$city'" : '';
 
   String get baseFilter => '$specialityFilter $governorateFilter $cityFilter';
+
+  String get publishFilter =>
+      baseFilter.trim().isEmpty ? "published = true" : "&& published = true";
 
   int get pageNumber => int.parse(page);
 
@@ -152,12 +156,14 @@ class Query extends Equatable {
       _ => '',
     };
 
-    final _availableToday = '&& schedule.$_searchIndex.available = true';
-    final _availableTommorow = '&& schedule.$_searchIndex.available = true';
+    final _availableToday = 'schedule.$_searchIndex.available = true';
+    final _availableTommorow = 'schedule.$_searchIndex.available = true';
 
     return switch (AvailabilityFilterEnum.fromString(availability)) {
-      AvailabilityFilterEnum.today => _availableToday,
-      AvailabilityFilterEnum.tommorow => _availableTommorow,
+      AvailabilityFilterEnum.today =>
+        baseFilter.isEmpty ? _availableToday : '&& $_availableToday',
+      AvailabilityFilterEnum.tommorow =>
+        baseFilter.isEmpty ? _availableTommorow : '&& $_availableTommorow',
       _ => '',
     };
   }

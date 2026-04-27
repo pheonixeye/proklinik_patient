@@ -13,8 +13,6 @@ class HxSearchClinics {
   static const String _expand =
       'doc_id, doc_id.degree_id, doc_id.speciality_id, speciality_id, city_id, governorate_id, attendance_type_id, venue_id, doc_id.doctor_website_info_via_doc_id, clinic_waiting_time_via_clinic_id';
 
-  static const String _publishFilter = "&& published = true";
-
   static const _perPage = 5;
 
   Future<List<SearchResponseModel>?> search() async {
@@ -22,7 +20,8 @@ class HxSearchClinics {
           page: query.pageNumber,
           perPage: _perPage,
           filter:
-              "${query.baseFilter} $_publishFilter ${query.availabilityFilter} ${query.degreeFilter} ${query.distanceFilter}",
+              "${query.baseFilter} ${query.publishFilter} ${query.availabilityFilter} ${query.degreeFilter} ${query.distanceFilter}"
+                  .replaceAll(' ', ''),
           expand: _expand,
           sort: query.sortingQuery,
         );

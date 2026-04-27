@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proklinik_patient/extensions/first_where_or_null.dart';
 import 'package:proklinik_patient/extensions/loc_ext.dart';
 import 'package:proklinik_patient/extensions/number_translator.dart';
 import 'package:proklinik_patient/models/sorting_model/sorting_model.dart';
@@ -22,8 +23,14 @@ class SortingRowXl extends StatelessWidget {
             return const LinearProgressIndicator();
           }
           final _spec = a.model!.specialities
-              .firstWhere((spec) => spec.id == sc.service.query.spec);
-          final searchSpec = l.isEnglish ? _spec.name_en : _spec.name_ar;
+              .firstWhereOrNull((spec) => spec.id == sc.service.query.spec);
+          final searchSpec = _spec == null
+              ? l.isEnglish
+                  ? 'All'
+                  : 'الكل'
+              : l.isEnglish
+                  ? _spec.name_en
+                  : _spec.name_ar;
           return Row(
             children: [
               //todo: search speciality
@@ -83,7 +90,7 @@ class SortingRowXl extends StatelessWidget {
                       Icons.arrow_drop_down_circle_rounded,
                       color: Colors.green,
                     ),
-                    value: GoRouter.of(context)
+                    initialValue: GoRouter.of(context)
                         .routeInformationProvider
                         .value
                         .uri

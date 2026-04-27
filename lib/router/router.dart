@@ -342,7 +342,6 @@ class AppRouter {
                       return ChangeNotifierProvider(
                         key: key,
                         create: (context) => PxSearchController(
-                          url: state.uri.toString(),
                           service: HxSearchClinics(query),
                         ),
                         builder: (context, child) {

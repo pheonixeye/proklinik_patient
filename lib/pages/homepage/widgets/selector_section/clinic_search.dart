@@ -78,8 +78,8 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                           ),
                           alignment: Alignment.center,
                           padding: const EdgeInsets.symmetric(horizontal: 0),
-                          validator:
-                              _specValidator(context.loc.selectSpecValidator),
+                          // validator:
+                          //     _specValidator(context.loc.selectSpecValidator),
                           hint: Text(context.loc.pickSpec),
                           isExpanded: true,
                           items: a.model?.specialities.map((e) {
@@ -87,7 +87,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               alignment: Alignment.center,
                               value: e,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   if (context.isMobile) const Spacer(),
                                   const SizedBox(width: 5),
@@ -103,7 +103,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               ),
                             );
                           }).toList(),
-                          value: _speciality,
+                          initialValue: _speciality,
                           onChanged: (val) {
                             if (val != null) {
                               setState(() {
@@ -139,7 +139,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               child: Text(l.isEnglish ? e.name_en : e.name_ar),
                             );
                           }).toList(),
-                          value: _governorate,
+                          initialValue: _governorate,
                           onChanged: (val) {
                             if (val != null) {
                               setState(() {
@@ -179,7 +179,7 @@ class _ClinicSearchSectionState extends State<ClinicSearchSection> {
                               child: Text(l.isEnglish ? e.name_en : e.name_ar),
                             );
                           }).toList(),
-                          value: _city,
+                          initialValue: _city,
                           onChanged: (val) {
                             if (val != null) {
                               setState(() {
