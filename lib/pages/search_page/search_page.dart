@@ -26,13 +26,6 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Consumer2<PxSearchController, PxLocale>(
       builder: (context, sc, l, _) {
-        // while (sc.responseModel == null) {
-        //   return const CentralLoading();
-        // }
-        // while (sc.responseModel != null && sc.responseModel!.isEmpty) {
-        //   return const NoResultsFound();
-        // }
-
         return Container(
           decoration: const BoxDecoration(
             color: AppTheme.greyBackgroundColor,

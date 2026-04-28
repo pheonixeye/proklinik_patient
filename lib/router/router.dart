@@ -17,8 +17,6 @@ import 'package:proklinik_patient/pages/error_page/error_page.dart';
 import 'package:proklinik_patient/pages/for_provider_page/for_provider_page.dart';
 import 'package:proklinik_patient/pages/homepage/homepage.dart';
 import 'package:proklinik_patient/pages/loading_root_page/loading_root_page.dart';
-import 'package:proklinik_patient/pages/pt_login_page/pt_login_page.dart';
-import 'package:proklinik_patient/pages/pt_signup_page/pt_signup_page.dart';
 import 'package:proklinik_patient/pages/review_submission_page/review_sub_page.dart';
 import 'package:proklinik_patient/pages/search_page/search_page.dart';
 import 'package:proklinik_patient/pages/shell_page/shell_page.dart';
@@ -54,8 +52,6 @@ class AppRouter {
   static const String home = ":lang";
   static const String src = "src";
   static const String book = "book";
-  static const String signup = "signup";
-  static const String login = "login";
   static const String forproviders = "forproviders";
   static const String contactus = "contactus";
   static const String docquery = "doc/:docid";
@@ -208,32 +204,6 @@ class AppRouter {
                       return UnderConstructionPage(
                         key: state.pageKey,
                       );
-                    },
-                  ),
-                  GoRoute(
-                    path: signup,
-                    name: signup,
-                    builder: (context, state) {
-                      return PatientSignUpPage(
-                        key: state.pageKey,
-                      );
-                    },
-                    redirect: (context, state) {
-                      final lang = state.pathParameters["lang"];
-                      return "/$lang/$underconstruction";
-                    },
-                  ),
-                  GoRoute(
-                    path: login,
-                    name: login,
-                    builder: (context, state) {
-                      return PatientLoginPage(
-                        key: state.pageKey,
-                      );
-                    },
-                    redirect: (context, state) {
-                      final lang = state.pathParameters["lang"];
-                      return "/$lang/$underconstruction";
                     },
                   ),
                   GoRoute(
